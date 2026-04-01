@@ -1,7 +1,5 @@
-"use client";
-
 import React, { useMemo, useState } from "react";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import {
   Calculator,
   MapPin,
@@ -197,10 +195,10 @@ export default function EasyBattPreventivatorePrototype() {
               <div className="flex flex-col gap-5">
                 <div className="flex flex-wrap items-center gap-3">
                   <Badge className="rounded-full border border-teal-500/30 bg-teal-500/15 text-teal-200 hover:bg-teal-500/15">
-                    Versione 1 · focus su struttura ed esperienza
+                    Preventivo online EasyBatt
                   </Badge>
                   <Badge className="rounded-full border border-yellow-500/30 bg-yellow-500/10 text-yellow-200 hover:bg-yellow-500/10">
-                    stima completa con fornitura inclusa
+                    Meno polvere • posa più veloce
                   </Badge>
                 </div>
 
@@ -210,10 +208,9 @@ export default function EasyBattPreventivatorePrototype() {
 
                 <div className="grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
                   <div>
-                    <h1 className="text-3xl font-bold tracking-tight text-white">Preventivo rapido EasyBatt</h1>
+                    <h1 className="text-3xl font-bold tracking-tight text-white">Il battiscopa pronto, con meno stress in casa</h1>
                     <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-300">
-                      Questa versione deve parlare al cliente privato in modo diretto ed emozionale. EasyBatt deve far percepire subito un vantaggio concreto nella vita di casa:{" "}
-                      <span className="font-semibold text-white">meno polvere, meno disagio, posa più veloce</span> e un servizio organizzato che ti evita problemi e perdite di tempo.
+                      EasyBatt è pensato per chi vuole un lavoro più pulito, più veloce e più semplice da gestire. Tu scegli il battiscopa, ricevi una stima chiara e hai un unico referente che segue il flusso fino alla posa.
                     </p>
                   </div>
 
@@ -221,15 +218,15 @@ export default function EasyBattPreventivatorePrototype() {
                     <div className="flex items-start gap-3">
                       <Sparkles className="mt-0.5 h-4 w-4 text-yellow-300" />
                       <div>
-                        <div className="font-semibold text-white">Messaggio da far passare</div>
-                        <div className="text-slate-400">Per il cliente il vantaggio è reale: casa più pulita, posa più rapida e meno preoccupazioni.</div>
+                        <div className="font-semibold text-white">Perché piace al cliente privato</div>
+                        <div className="text-slate-400">Meno polvere in casa, meno confusione durante i lavori e una posa più rapida.</div>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
                       <BadgeCheck className="mt-0.5 h-4 w-4 text-teal-300" />
                       <div>
-                        <div className="font-semibold text-white">Esperienza utente</div>
-                        <div className="text-slate-400">Il cliente deve sentire che non sta comprando solo battiscopa, ma tranquillità e semplicità.</div>
+                        <div className="font-semibold text-white">Cosa percepisce subito</div>
+                        <div className="text-slate-400">Non un semplice battiscopa, ma un servizio organizzato che ti fa risparmiare tempo e pensieri.</div>
                       </div>
                     </div>
                   </div>
@@ -240,9 +237,7 @@ export default function EasyBattPreventivatorePrototype() {
 
           <Card className="rounded-3xl border border-slate-800 bg-slate-900 shadow-sm">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-lg text-white">
-                <ShieldCheck className="h-5 w-5 text-teal-400" /> Come EasyBatt ti semplifica la casa
-              </CardTitle>
+              <CardTitle className="flex items-center gap-2 text-lg text-white"><ShieldCheck className="h-5 w-5 text-teal-400" /> Come EasyBatt ti semplifica la casa</CardTitle>
               <CardDescription className="text-slate-400">
                 Qui l’app deve far sentire il beneficio. Prima ancora del prezzo, il cliente deve capire perché questa soluzione gli conviene davvero.
               </CardDescription>
@@ -268,9 +263,7 @@ export default function EasyBattPreventivatorePrototype() {
 
           <Card className="rounded-3xl border border-slate-800 bg-slate-900 shadow-sm">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-lg text-white">
-                <BadgeCheck className="h-5 w-5 text-yellow-400" /> Vantaggi per te
-              </CardTitle>
+              <CardTitle className="flex items-center gap-2 text-lg text-white"><BadgeCheck className="h-5 w-5 text-yellow-400" /> Vantaggi per te</CardTitle>
               <CardDescription className="text-slate-400">
                 Questa sezione deve essere molto chiara: il vantaggio non è per il posatore, ma per chi vive la casa.
               </CardDescription>
@@ -287,9 +280,7 @@ export default function EasyBattPreventivatorePrototype() {
 
           <Card className="rounded-3xl border border-slate-800 bg-slate-900 shadow-sm">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-lg text-white">
-                <Layers3 className="h-5 w-5 text-teal-400" /> 1. Scegli il battiscopa
-              </CardTitle>
+              <CardTitle className="flex items-center gap-2 text-lg text-white"><Layers3 className="h-5 w-5 text-teal-400" /> 1. Scegli il battiscopa</CardTitle>
               <CardDescription className="text-slate-400">
                 Il cliente non deve perdersi nei codici. Prima filtra, poi confronta, poi seleziona.
               </CardDescription>
@@ -299,15 +290,11 @@ export default function EasyBattPreventivatorePrototype() {
                 <div className="grid gap-2">
                   <Label className="text-slate-300">Materiale</Label>
                   <Select value={materialFilter} onValueChange={setMaterialFilter}>
-                    <SelectTrigger className="rounded-2xl border-slate-700 bg-slate-950 text-slate-100">
-                      <SelectValue placeholder="Tutti" />
-                    </SelectTrigger>
+                    <SelectTrigger className="rounded-2xl border-slate-700 bg-slate-950 text-slate-100"><SelectValue placeholder="Tutti" /></SelectTrigger>
                     <SelectContent>
                       <SelectItem value="all">Tutti</SelectItem>
                       {materials.map((item) => (
-                        <SelectItem key={item} value={item}>
-                          {item}
-                        </SelectItem>
+                        <SelectItem key={item} value={item}>{item}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
@@ -315,15 +302,11 @@ export default function EasyBattPreventivatorePrototype() {
                 <div className="grid gap-2">
                   <Label className="text-slate-300">Altezza</Label>
                   <Select value={heightFilter} onValueChange={setHeightFilter}>
-                    <SelectTrigger className="rounded-2xl border-slate-700 bg-slate-950 text-slate-100">
-                      <SelectValue placeholder="Tutte" />
-                    </SelectTrigger>
+                    <SelectTrigger className="rounded-2xl border-slate-700 bg-slate-950 text-slate-100"><SelectValue placeholder="Tutte" /></SelectTrigger>
                     <SelectContent>
                       <SelectItem value="all">Tutte</SelectItem>
                       {heights.map((item) => (
-                        <SelectItem key={item} value={item}>
-                          {item} mm
-                        </SelectItem>
+                        <SelectItem key={item} value={item}>{item} mm</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
@@ -331,15 +314,11 @@ export default function EasyBattPreventivatorePrototype() {
                 <div className="grid gap-2">
                   <Label className="text-slate-300">Finitura</Label>
                   <Select value={finishFilter} onValueChange={setFinishFilter}>
-                    <SelectTrigger className="rounded-2xl border-slate-700 bg-slate-950 text-slate-100">
-                      <SelectValue placeholder="Tutte" />
-                    </SelectTrigger>
+                    <SelectTrigger className="rounded-2xl border-slate-700 bg-slate-950 text-slate-100"><SelectValue placeholder="Tutte" /></SelectTrigger>
                     <SelectContent>
                       <SelectItem value="all">Tutte</SelectItem>
                       {finishes.map((item) => (
-                        <SelectItem key={item} value={item}>
-                          {item}
-                        </SelectItem>
+                        <SelectItem key={item} value={item}>{item}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
@@ -349,9 +328,7 @@ export default function EasyBattPreventivatorePrototype() {
               <div className="grid gap-3">
                 <Label className="text-slate-300">Modello</Label>
                 <Select value={effectiveSelectedCode} onValueChange={setSelectedCode}>
-                  <SelectTrigger className="rounded-2xl border-slate-700 bg-slate-950 text-slate-100">
-                    <SelectValue placeholder="Scegli un modello" />
-                  </SelectTrigger>
+                  <SelectTrigger className="rounded-2xl border-slate-700 bg-slate-950 text-slate-100"><SelectValue placeholder="Scegli un modello" /></SelectTrigger>
                   <SelectContent>
                     {filteredModels.map((model) => (
                       <SelectItem key={model.code} value={model.code}>
@@ -374,9 +351,7 @@ export default function EasyBattPreventivatorePrototype() {
                   </div>
                   <div className="rounded-2xl border border-slate-800 bg-slate-900 p-3 shadow-sm">
                     <div className="text-xs text-slate-500">Sezione</div>
-                    <div className="mt-1 font-semibold text-white">
-                      {selectedModel.height} × {selectedModel.thickness} mm
-                    </div>
+                    <div className="mt-1 font-semibold text-white">{selectedModel.height} × {selectedModel.thickness} mm</div>
                   </div>
                   <div className="rounded-2xl border border-slate-800 bg-slate-900 p-3 shadow-sm">
                     <div className="text-xs text-slate-500">Finitura</div>
@@ -389,11 +364,9 @@ export default function EasyBattPreventivatorePrototype() {
 
           <Card className="rounded-3xl border border-slate-800 bg-slate-900 shadow-sm">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-lg text-white">
-                <Calculator className="h-5 w-5 text-yellow-400" /> 2. Inserisci i dati della richiesta
-              </CardTitle>
+              <CardTitle className="flex items-center gap-2 text-lg text-white"><Calculator className="h-5 w-5 text-yellow-400" /> 2. Ricevi una stima indicativa</CardTitle>
               <CardDescription className="text-slate-400">
-                Qui il cliente compila pochi campi chiari. La logica deve sembrare semplice, non pesante.
+                Pochi dati essenziali, una stima immediata e nessun linguaggio tecnico complicato.
               </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-4 sm:grid-cols-2">
@@ -462,9 +435,9 @@ export default function EasyBattPreventivatorePrototype() {
         >
           <Card className="sticky top-4 rounded-3xl border border-slate-800 bg-slate-900 shadow-2xl">
             <CardHeader className="pb-3">
-              <CardTitle className="text-xl text-white">Stima cliente completa</CardTitle>
+              <CardTitle className="text-xl text-white">La tua stima indicativa</CardTitle>
               <CardDescription className="text-slate-400">
-                Qui il cliente deve percepire subito il vantaggio: meno polvere, meno confusione e tempi più rapidi di posa.
+                Una cifra chiara da cui partire, con un servizio pensato per ridurre disagio, polvere e tempi di lavoro in casa.
               </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-4">
@@ -488,9 +461,7 @@ export default function EasyBattPreventivatorePrototype() {
                 <div className="flex items-center justify-between rounded-2xl border border-slate-800 bg-slate-950 p-3">
                   <div>
                     <div className="text-sm text-slate-300">Fornitura battiscopa</div>
-                    <div className="text-xs text-slate-500">
-                      {includeSupply ? `${calculation.ml} ml × ${euro.format(calculation.supplyUnitPrice)}/ml` : "non inclusa"}
-                    </div>
+                    <div className="text-xs text-slate-500">{includeSupply ? `${calculation.ml} ml × ${euro.format(calculation.supplyUnitPrice)}/ml` : "non inclusa"}</div>
                   </div>
                   <span className="font-semibold text-white">{euro.format(calculation.supplySubtotal)}</span>
                 </div>
@@ -560,13 +531,10 @@ export default function EasyBattPreventivatorePrototype() {
 
               <div className="grid gap-3">
                 <Button className="h-12 rounded-2xl bg-yellow-400 text-base font-semibold text-slate-950 hover:bg-yellow-300">
-                  Richiedi la tua stima personalizzata <ChevronRight className="ml-2 h-4 w-4" />
+                  Richiedi verifica e conferma <ChevronRight className="ml-2 h-4 w-4" />
                 </Button>
-                <Button
-                  variant="outline"
-                  className="h-12 rounded-2xl border-slate-700 bg-transparent text-base text-slate-100 hover:bg-slate-800"
-                >
-                  <PhoneCall className="mr-2 h-4 w-4" /> Parla con noi
+                <Button variant="outline" className="h-12 rounded-2xl border-slate-700 bg-transparent text-base text-slate-100 hover:bg-slate-800">
+                  <PhoneCall className="mr-2 h-4 w-4" /> Scrivici su WhatsApp
                 </Button>
               </div>
             </CardContent>
@@ -574,22 +542,30 @@ export default function EasyBattPreventivatorePrototype() {
 
           <Card className="rounded-3xl border border-slate-800 bg-slate-900 shadow-sm">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-lg text-white">
-                <ShieldCheck className="h-5 w-5 text-yellow-400" /> Cosa ho cambiato nella struttura
-              </CardTitle>
+              <CardTitle className="flex items-center gap-2 text-lg text-white"><PhoneCall className="h-5 w-5 text-yellow-400" /> Hai dubbi? Ti aiutiamo noi</CardTitle>
+              <CardDescription className="text-slate-400">
+                Questa sezione chiude la home in modo più commerciale e rassicurante, invece di parlare della struttura interna dell’app.
+              </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-3 text-sm text-slate-400">
               <div className="rounded-2xl border border-slate-800 bg-slate-950 p-4">
-                <div className="font-semibold text-white">1. Parla al cliente privato</div>
-                <div className="mt-1">Adesso il messaggio mette al centro i vantaggi concreti in casa: meno polvere, meno disagio, più velocità.</div>
+                <div className="font-semibold text-white">Ti aiutiamo a scegliere il modello giusto</div>
+                <div className="mt-1">Se hai dubbi su altezza, finitura o stile, ti guidiamo noi nella scelta più adatta alla tua casa.</div>
               </div>
               <div className="rounded-2xl border border-slate-800 bg-slate-950 p-4">
-                <div className="font-semibold text-white">2. Fa percepire il beneficio emotivo</div>
-                <div className="mt-1">Non comunica solo organizzazione tecnica, ma sollievo, semplicità e tranquillità per il cliente finale.</div>
+                <div className="font-semibold text-white">Verifica tecnica prima di confermare</div>
+                <div className="mt-1">La stima online è il punto di partenza. Prima della conferma finale verifichiamo sempre i dettagli operativi.</div>
               </div>
               <div className="rounded-2xl border border-slate-800 bg-slate-950 p-4">
-                <div className="font-semibold text-white">3. Rafforza il tuo ruolo</div>
-                <div className="mt-1">Il cliente capisce che EasyBatt segue tutto il processo, compresa la posa, senza trasformarlo in un coordinatore dei lavori.</div>
+                <div className="font-semibold text-white">Un unico riferimento fino alla posa</div>
+                <div className="mt-1">Non devi coordinare fornitori e posatori: EasyBatt segue il flusso e rende tutto più semplice da gestire.</div>
+              </div>
+              <div className="rounded-2xl border border-dashed border-teal-800 bg-slate-950 p-4">
+                <div className="font-semibold text-white">Contatti da collegare</div>
+                <div className="mt-2 grid gap-2 text-slate-300">
+                  <div>WhatsApp: inserisci qui il tuo numero o link diretto</div>
+                  <div>Telefono: inserisci qui il numero da chiamare</div>
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -598,3 +574,4 @@ export default function EasyBattPreventivatorePrototype() {
     </div>
   );
 }
+
