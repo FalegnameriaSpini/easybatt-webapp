@@ -2,6 +2,7 @@
 
 import React, { useMemo, useState } from "react";
 import { motion } from "motion/react";
+import { Outfit } from "next/font/google";
 import {
   Calculator,
   MapPin,
@@ -19,6 +20,7 @@ import {
   PhoneCall,
   CheckCircle2,
   Sparkles,
+  Home,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -29,7 +31,7 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 
-const LOGO_DATA_URI = "data:image/webp;base64,UklGRm46AABXRUJQVlA4IGI6AADwfgCdASq8APgAPtFCnkikIyKhICgAgA2JaW7hdrEICWkA4CdAEB6A/v+51a4P6LZg2s8H+dDBycXXT2d/u+qf2fP7T9v16fAr0p0A9RP+f/yf58f9wP3J42pNpj9b0j9P8ff1v7j/7f/j36cDJh/7P+kf8Yf7k/5n/a/6Q/w7/2v5T/d3/6P8x/sT/Xf4V/oj+zP9B/av4X/xP8Y/nD9yf2Z/Tr9tf21+Xn8xv3d/Cr9N/4A/oj+vf8k/O39Qf8r/mv9of56/Rf+sv6K/Rn+hP+M/Bj+zP1J/o/+0f6d/y/+8P7f/bH+7/7m/k//2P+0/a39G/8V/yX+Wf1B/yv+8v4S/e7+Vv9p/1j+8P4K/gD+O/1j/mz8Wf4V/y7+0v1T/1D+Mf5A/wL+8P9m/s/+yv8x/2P+Kf4r/zX+Hf4W/4L9l/4k/cf++v6w/s3+eP7C/w//Wv4q/qP+cP8W/nT+Lv7J/qz/OP7k/rf+6/5d/hT+Vf4G/1D+bP3X/kn/Jf7E/4j+Yf8s/0b+9f5R/jP+qP4e/x3+tP4w/4f9Jv7B/VT/bv6L/kv+ef9O/lb+zP4u/vj+Jf4I/ib+8f6e/gv+hP89/tT+7v7U/ub+Nv5l/T7+N/6h/hX/ef4X/o3+2v49/0X+MP6I/f7+KP8j/vP+Kf6u/5b+4v3m/kj+5P5o/ib+yP7t/0b+Vv7s/lD+Zf7o/iv+XP8J/sP+9v5n/k3+6v4U/ff+J/6p/kD+gv6H/2P+fP5r/ln+Lv1l/7H+Zv6V/YP+Mv6j/jX+C/7R/0j+cP4s/s7+r/4M/nX+Qv5V/3D+1P4Q/2/+5f6G/7z+of6t/oj+aP6B/vr+4/5Y/lH+kf8I/vn+mv7B/n3+lf6P/uP+2/8T/oX+hv4W/6n+Df5V/fn+7P8s/hD+Iv5b/6X+Rf4A/zH+Zv8M/1L+Yf6y/oz+TP6h/gH+2f6W/oP+g/7W/0j+s/7g/ef+xv4f/zX+Vf6g/s7+m/69/vH+Ff8I/57+if7M/hH+3P4d/nL+Tf3z/lj+4v5w/oP+VP8N/sP+uP7W/4f+fP8B/2H+Lv5a/r/+0v4H/i7+Qv5R/rr+4v7S/3n+fP5N/3f+V/4n/6P+x/67/mL+If8P/7n+3f7S/8z+M/6F/mT+pP4s/wH+Nv6K/fL+ev4J/4j++f7r/pn+XP4I/o7+bP7Q/ov+K/4w/iT+3f5j/nH+8f7p/VP+XP4L/r7+ef7O/rP+eP5q/57+u/6m/1r+5v7E/nH+Iv6W/hf+ev8W/nj+4v65/oP+PP54/1D+Gf7R/ij+zv4l/ov+pv72/0P+nP8M/2z+u/6G/6P+pP4q/oX+pv7W/nz+e/6Q/1D+KP7b/if+FP7o/r7+hf5o/tb+cf6R/i/+0v6k/lj+Jf6l/uP+1v55/0L+iv59/8L+Gf5d/o7+oP5q/uj+nf7B/tT+f/6t/n7+iP6L/pH+Rf7Q/uT+qP6g/w==";
+const outfit = Outfit({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800"] });
 
 const MODELS = [
   { code: "3013R3TG01", description: "30x13 R3 Tanganika Grezzo", material: "Multist. Tanganika", height: 30, thickness: 13, profile: "Raggio 3", finish: "Grezzo", weightKgMl: 0.1014, supplyBaseCostPerMl: 3.2 },
@@ -63,26 +65,26 @@ const SHIPPING_BANDS = [
 const PROCESS_STEPS = [
   {
     number: "1",
-    title: "Scegli lo stile",
-    text: "Scegli il battiscopa più adatto alla tua casa in pochi passaggi, senza complicazioni tecniche e senza perdere tempo.",
+    title: "Scegli il tuo stile",
+    text: "Seleziona il battiscopa più adatto alla tua casa in modo semplice e veloce.",
     icon: Layers3,
   },
   {
     number: "2",
     title: "Rilievo preciso",
-    text: "Il servizio parte da un rilievo accurato, così si riducono imprevisti, adattamenti sul posto e lavorazioni inutili dentro casa.",
+    text: "Un rilievo accurato riduce imprevisti, adattamenti sul posto e lavori inutili dentro casa.",
     icon: ScanLine,
   },
   {
     number: "3",
     title: "Preparazione intelligente",
-    text: "I pezzi arrivano già preparati e organizzati: questo significa meno polvere, meno disordine e meno stress durante i lavori.",
+    text: "I pezzi arrivano già organizzati e pronti, con meno polvere e meno confusione durante i lavori.",
     icon: Cog,
   },
   {
     number: "4",
     title: "Posa più veloce",
-    text: "La posa diventa più rapida e scorrevole. Tu hai un risultato più pulito e tempi più brevi di intervento in casa.",
+    text: "Il lavoro scorre meglio e i tempi si accorciano, con meno disagio per chi vive la casa.",
     icon: Boxes,
   },
 ];
@@ -90,15 +92,15 @@ const PROCESS_STEPS = [
 const DIFFERENTIATORS = [
   {
     title: "Meno polvere in casa",
-    text: "Il vantaggio per te è concreto: meno tagli e meno lavorazioni improvvisate sul posto significano un ambiente più pulito.",
+    text: "Meno tagli e meno lavorazioni improvvisate sul posto significano un ambiente più pulito.",
   },
   {
     title: "Posa più rapida",
-    text: "Con i pezzi già preparati il lavoro scorre meglio e i tempi si accorciano. Meno giorni di disagio, più velocità nel risultato finale.",
+    text: "Con i pezzi già preparati il lavoro scorre meglio e il risultato arriva prima.",
   },
   {
     title: "Un solo referente",
-    text: "Non devi coordinare tutto tu: EasyBatt gestisce il flusso e coinvolge anche il posatore, così per te è tutto più semplice.",
+    text: "EasyBatt segue il flusso fino alla posa, così per te è tutto più semplice da gestire.",
   },
 ];
 
@@ -116,6 +118,25 @@ function getShippingPrice(weightKg) {
 
 function unique(array) {
   return Array.from(new Set(array));
+}
+
+function BrandLockup() {
+  return (
+    <div className="rounded-[28px] border border-slate-800 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 p-5 shadow-inner">
+      <div className="flex items-center gap-4">
+        <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-teal-400/30 bg-teal-500/10">
+          <Home className="h-8 w-8 text-teal-300" />
+        </div>
+        <div>
+          <div className="text-4xl font-extrabold tracking-tight leading-none">
+            <span className="text-yellow-300">Easy</span>
+            <span className="text-slate-100">Batt</span>
+          </div>
+          <div className="mt-2 text-sm text-slate-300">il battiscopa diventa facile</div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default function EasyBattPreventivatorePrototype() {
@@ -184,7 +205,7 @@ export default function EasyBattPreventivatorePrototype() {
   }, [includeInstallation, includeShipping, includeSupply, linearMeters, returnKm, selectedModel]);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
+    <div className={`${outfit.className} min-h-screen bg-slate-950 text-slate-100`}>
       <div className="mx-auto flex w-full max-w-md flex-col gap-4 p-4 sm:max-w-7xl sm:grid sm:grid-cols-[1.08fr_0.92fr] sm:gap-6 sm:p-6">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -204,14 +225,12 @@ export default function EasyBattPreventivatorePrototype() {
                   </Badge>
                 </div>
 
-                <div className="rounded-[28px] border border-slate-800 bg-slate-950/60 p-4">
-                  <img src={LOGO_DATA_URI} alt="EasyBatt" className="h-auto w-full max-w-[520px] object-contain" />
-                </div>
+                <BrandLockup />
 
                 <div className="grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
                   <div>
-                    <h1 className="text-3xl font-bold tracking-tight text-white">Il battiscopa pronto, con meno stress in casa</h1>
-                    <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-300">
+                    <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl">Il battiscopa pronto, con meno stress in casa</h1>
+                    <p className="mt-4 max-w-2xl text-base leading-7 text-slate-300">
                       EasyBatt è pensato per chi vuole un lavoro più pulito, più veloce e più semplice da gestire. Tu scegli il battiscopa, ricevi una stima chiara e hai un unico referente che segue il flusso fino alla posa.
                     </p>
                   </div>
@@ -220,15 +239,15 @@ export default function EasyBattPreventivatorePrototype() {
                     <div className="flex items-start gap-3">
                       <Sparkles className="mt-0.5 h-4 w-4 text-yellow-300" />
                       <div>
-                        <div className="font-semibold text-white">Perché piace al cliente privato</div>
-                        <div className="text-slate-400">Meno polvere in casa, meno confusione durante i lavori e una posa più rapida.</div>
+                        <div className="font-semibold text-white">Meno polvere, meno disordine</div>
+                        <div className="text-slate-400">Un approccio più organizzato significa una casa più pulita durante i lavori.</div>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
                       <BadgeCheck className="mt-0.5 h-4 w-4 text-teal-300" />
                       <div>
-                        <div className="font-semibold text-white">Cosa percepisce subito</div>
-                        <div className="text-slate-400">Non un semplice battiscopa, ma un servizio organizzato che ti fa risparmiare tempo e pensieri.</div>
+                        <div className="font-semibold text-white">Più velocità, meno pensieri</div>
+                        <div className="text-slate-400">Non acquisti solo battiscopa, ma un servizio studiato per semplificarti tutto.</div>
                       </div>
                     </div>
                   </div>
@@ -239,10 +258,7 @@ export default function EasyBattPreventivatorePrototype() {
 
           <Card className="rounded-3xl border border-slate-800 bg-slate-900 shadow-sm">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-lg text-white"><ShieldCheck className="h-5 w-5 text-teal-400" /> Come EasyBatt ti semplifica la casa</CardTitle>
-              <CardDescription className="text-slate-400">
-                Qui l’app deve far sentire il beneficio. Prima ancora del prezzo, il cliente deve capire perché questa soluzione gli conviene davvero.
-              </CardDescription>
+              <CardTitle className="flex items-center gap-2 text-lg text-white"><ShieldCheck className="h-5 w-5 text-teal-400" /> Come funziona</CardTitle>
             </CardHeader>
             <CardContent className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
               {PROCESS_STEPS.map((step) => {
@@ -265,10 +281,7 @@ export default function EasyBattPreventivatorePrototype() {
 
           <Card className="rounded-3xl border border-slate-800 bg-slate-900 shadow-sm">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-lg text-white"><BadgeCheck className="h-5 w-5 text-yellow-400" /> Vantaggi per te</CardTitle>
-              <CardDescription className="text-slate-400">
-                Questa sezione deve essere molto chiara: il vantaggio non è per il posatore, ma per chi vive la casa.
-              </CardDescription>
+              <CardTitle className="flex items-center gap-2 text-lg text-white"><BadgeCheck className="h-5 w-5 text-yellow-400" /> Perché conviene</CardTitle>
             </CardHeader>
             <CardContent className="grid gap-3 md:grid-cols-3">
               {DIFFERENTIATORS.map((item) => (
@@ -282,10 +295,7 @@ export default function EasyBattPreventivatorePrototype() {
 
           <Card className="rounded-3xl border border-slate-800 bg-slate-900 shadow-sm">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-lg text-white"><Layers3 className="h-5 w-5 text-teal-400" /> 1. Scegli il battiscopa</CardTitle>
-              <CardDescription className="text-slate-400">
-                Il cliente non deve perdersi nei codici. Prima filtra, poi confronta, poi seleziona.
-              </CardDescription>
+              <CardTitle className="flex items-center gap-2 text-lg text-white"><Layers3 className="h-5 w-5 text-teal-400" /> Scegli il battiscopa</CardTitle>
             </CardHeader>
             <CardContent className="grid gap-4">
               <div className="grid gap-3 sm:grid-cols-3">
@@ -366,10 +376,7 @@ export default function EasyBattPreventivatorePrototype() {
 
           <Card className="rounded-3xl border border-slate-800 bg-slate-900 shadow-sm">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-lg text-white"><Calculator className="h-5 w-5 text-yellow-400" /> 2. Ricevi una stima indicativa</CardTitle>
-              <CardDescription className="text-slate-400">
-                Pochi dati essenziali, una stima immediata e nessun linguaggio tecnico complicato.
-              </CardDescription>
+              <CardTitle className="flex items-center gap-2 text-lg text-white"><Calculator className="h-5 w-5 text-yellow-400" /> Ricevi una stima indicativa</CardTitle>
             </CardHeader>
             <CardContent className="grid gap-4 sm:grid-cols-2">
               <div className="grid gap-2">
@@ -406,21 +413,21 @@ export default function EasyBattPreventivatorePrototype() {
                 <div className="flex items-center justify-between rounded-2xl border border-slate-800 bg-slate-900 px-4 py-3">
                   <div>
                     <div className="font-medium text-white">Fornitura battiscopa inclusa</div>
-                    <div className="text-sm text-slate-400">Attiva di default: il cliente vede una stima davvero completa.</div>
+                    <div className="text-sm text-slate-400">Attiva di default per avere una stima completa.</div>
                   </div>
                   <Switch checked={includeSupply} onCheckedChange={setIncludeSupply} />
                 </div>
                 <div className="flex items-center justify-between rounded-2xl border border-slate-800 bg-slate-900 px-4 py-3">
                   <div>
                     <div className="font-medium text-white">Spedizione inclusa</div>
-                    <div className="text-sm text-slate-400">Calcolata in automatico in base al peso totale con imballo.</div>
+                    <div className="text-sm text-slate-400">Calcolata in base al peso totale con imballo.</div>
                   </div>
                   <Switch checked={includeShipping} onCheckedChange={setIncludeShipping} />
                 </div>
                 <div className="flex items-center justify-between rounded-2xl border border-slate-800 bg-slate-900 px-4 py-3">
                   <div>
                     <div className="font-medium text-white">Posa in opera inclusa</div>
-                    <div className="text-sm text-slate-400">Può restare un’opzione premium, senza complicare la versione base.</div>
+                    <div className="text-sm text-slate-400">Puoi valutarla subito nella tua stima.</div>
                   </div>
                   <Switch checked={includeInstallation} onCheckedChange={setIncludeInstallation} />
                 </div>
@@ -447,7 +454,7 @@ export default function EasyBattPreventivatorePrototype() {
                 <div className="text-sm text-slate-300">Totale indicativo IVA inclusa</div>
                 <div className="mt-2 text-4xl font-bold tracking-tight text-yellow-300">{euro.format(calculation.total)}</div>
                 <div className="mt-2 text-sm leading-6 text-slate-300">
-                  Include fornitura battiscopa, servizio EasyBatt, trasferta e opzioni attive. Il tutto con un approccio pensato per ridurre disagi, polvere e tempi di lavoro in casa.
+                  Include fornitura battiscopa, servizio EasyBatt, trasferta e opzioni attive.
                 </div>
               </div>
 
@@ -526,7 +533,7 @@ export default function EasyBattPreventivatorePrototype() {
                 </div>
                 <div className="grid gap-3 text-sm text-slate-400">
                   <div>1. Verifichiamo la richiesta e ti aiutiamo a confermare la soluzione più adatta.</div>
-                  <div>2. Organizziamo il flusso EasyBatt e coordiniamo anche la posa, senza scaricare tutto su di te.</div>
+                  <div>2. Organizziamo il flusso EasyBatt e coordiniamo anche la posa.</div>
                   <div>3. Tu hai un unico riferimento e un lavoro più veloce, più ordinato e più semplice da gestire.</div>
                 </div>
               </div>
@@ -545,9 +552,6 @@ export default function EasyBattPreventivatorePrototype() {
           <Card className="rounded-3xl border border-slate-800 bg-slate-900 shadow-sm">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-lg text-white"><PhoneCall className="h-5 w-5 text-yellow-400" /> Hai dubbi? Ti aiutiamo noi</CardTitle>
-              <CardDescription className="text-slate-400">
-                Questa sezione chiude la home in modo più commerciale e rassicurante, invece di parlare della struttura interna dell’app.
-              </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-3 text-sm text-slate-400">
               <div className="rounded-2xl border border-slate-800 bg-slate-950 p-4">
@@ -562,13 +566,6 @@ export default function EasyBattPreventivatorePrototype() {
                 <div className="font-semibold text-white">Un unico riferimento fino alla posa</div>
                 <div className="mt-1">Non devi coordinare fornitori e posatori: EasyBatt segue il flusso e rende tutto più semplice da gestire.</div>
               </div>
-              <div className="rounded-2xl border border-dashed border-teal-800 bg-slate-950 p-4">
-                <div className="font-semibold text-white">Contatti da collegare</div>
-                <div className="mt-2 grid gap-2 text-slate-300">
-                  <div>WhatsApp: inserisci qui il tuo numero o link diretto</div>
-                  <div>Telefono: inserisci qui il numero da chiamare</div>
-                </div>
-              </div>
             </CardContent>
           </Card>
         </motion.div>
@@ -576,5 +573,6 @@ export default function EasyBattPreventivatorePrototype() {
     </div>
   );
 }
+
 
 
