@@ -68,6 +68,30 @@ function unique(array) {
   return Array.from(new Set(array));
 }
 
+const fieldClassName =
+  "h-12 rounded-2xl !border !border-white/20 !bg-[#11161C] !text-white " +
+  "shadow-[inset_0_1px_0_rgba(255,255,255,0.02)] transition-all duration-200 " +
+  "hover:!border-[#10B7B3]/45 hover:!bg-[#141B22] " +
+  "focus-visible:!border-[#10B7B3] focus-visible:!bg-[#141B22] focus-visible:!ring-2 focus-visible:!ring-[#10B7B3]/25 focus-visible:!outline-none " +
+  "data-[state=open]:!border-[#10B7B3] data-[state=open]:!bg-[#141B22] data-[state=open]:!ring-2 data-[state=open]:!ring-[#10B7B3]/25 " +
+  "[&_svg]:text-[#9AA4AF] hover:[&_svg]:text-[#C7F3F1] data-[state=open]:[&_svg]:text-[#72E6E2]";
+
+const inputClassName =
+  "h-12 rounded-2xl !border !border-white/20 !bg-[#11161C] !text-white " +
+  "shadow-[inset_0_1px_0_rgba(255,255,255,0.02)] transition-all duration-200 " +
+  "hover:!border-[#10B7B3]/45 hover:!bg-[#141B22] " +
+  "focus-visible:!border-[#10B7B3] focus-visible:!bg-[#141B22] focus-visible:!ring-2 focus-visible:!ring-[#10B7B3]/25 focus-visible:!outline-none " +
+  "placeholder:!text-[#95A0AB]";
+
+const selectContentClassName =
+  "rounded-2xl !border !border-white/10 !bg-[#11161C] !text-white shadow-[0_18px_40px_rgba(0,0,0,0.28)]";
+
+const selectItemClassName =
+  "rounded-xl px-2.5 py-2 text-[#D7DCE2] " +
+  "focus:bg-[#10B7B3]/10 focus:text-white " +
+  "data-[state=checked]:bg-white/5 data-[state=checked]:text-white " +
+  "[&_svg]:text-[#72E6E2]";
+
 function TopNavCosto() {
   return (
     <header className="sticky top-3 z-30 mb-4 flex flex-col gap-3 rounded-[26px] border border-white/8 bg-[#17191D]/78 px-4 py-2.5 shadow-[0_12px_30px_rgba(0,0,0,0.16)] backdrop-blur-md sm:flex-row sm:items-center sm:justify-between sm:px-5">
@@ -186,18 +210,6 @@ export function EasyBattQuantoMiCostaPage() {
   };
 
   const effectiveSelectedCode = selectedModel?.code ?? MODELS[0].code;
-
-  const fieldClassName =
-    "rounded-2xl !border-white/20 !bg-[#17191D] !text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.02)] transition-all duration-200 hover:!border-[#10B7B3]/40 hover:!bg-[#1A1D22] focus-visible:!border-[#10B7B3] focus-visible:!ring-2 focus-visible:!ring-[#10B7B3]/20 focus-visible:!outline-none data-[state=open]:!border-[#10B7B3] data-[state=open]:!ring-2 data-[state=open]:!ring-[#10B7B3]/20 [&_svg]:!text-[#AEB6BF] hover:[&_svg]:!text-[#C7F3F1] data-[state=open]:[&_svg]:!text-[#72E6E2] data-[placeholder]:!text-[#AEB6BF]";
-
-  const selectContentClassName =
-    "rounded-2xl border border-white/10 bg-[#1A1D22] text-white shadow-[0_18px_40px_rgba(0,0,0,0.28)] ring-1 ring-[#10B7B3]/8";
-
-  const selectItemClassName =
-    "rounded-xl px-2.5 py-2 text-[#D7DCE2] focus:bg-[#10B7B3]/12 focus:text-white data-[state=checked]:bg-white/[0.06] data-[state=checked]:text-white [&_svg]:text-[#72E6E2]";
-
-  const inputClassName =
-    "rounded-2xl !border-white/20 !bg-[#17191D] !text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.02)] transition-all duration-200 hover:!border-[#10B7B3]/40 hover:!bg-[#1A1D22] focus-visible:!border-[#10B7B3] focus-visible:!ring-2 focus-visible:!ring-[#10B7B3]/20 focus-visible:!outline-none placeholder:!text-[#AEB6BF]";
 
   const switchClassName =
     "data-[state=unchecked]:bg-[#2A2E34] data-[state=unchecked]:border-white/10 data-[state=checked]:bg-[#10B7B3] data-[state=checked]:border-[#10B7B3]/40";
