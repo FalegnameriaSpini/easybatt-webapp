@@ -2,7 +2,6 @@
 
 import React from "react";
 import {
-  ArrowRight,
   BadgeCheck,
   Calculator,
   ChevronRight,
@@ -10,7 +9,6 @@ import {
   ScanLine,
   Workflow,
 } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { eb } from "@/app/easybatt-ui";
@@ -47,27 +45,15 @@ const ENTRY_POINTS = [
 
 function BrandLockup() {
   return (
-    <div className="rounded-[28px] border border-white/10 bg-[radial-gradient(circle_at_top_left,_rgba(15,175,169,0.12),_transparent_34%),linear-gradient(135deg,_rgba(20,23,29,0.98),_rgba(29,32,38,0.98))] p-4 shadow-[0_25px_80px_rgba(0,0,0,0.35)] sm:p-5">
+    <div className="rounded-[24px] border border-white/10 bg-[radial-gradient(circle_at_top_left,_rgba(15,175,169,0.1),_transparent_32%),linear-gradient(135deg,_rgba(20,23,29,0.98),_rgba(29,32,38,0.98))] px-3 py-2 shadow-[0_18px_50px_rgba(0,0,0,0.28)] sm:px-4 sm:py-2.5">
       <div className="flex items-center">
+        {/* The SVG uses a large 595.2 x 419.52 viewBox and may still include extra internal whitespace. If the logo keeps feeling too airy, trim the SVG canvas in /public/Logo_easybatt_trasp.svg. */}
         <img
           src="/Logo_easybatt_trasp.svg"
           alt="EasyBatt - il battiscopa diventa facile"
-          className="h-auto w-full max-w-[500px]"
+          className="h-auto w-full max-w-[400px] sm:max-w-[420px]"
         />
       </div>
-    </div>
-  );
-}
-
-function QuickNav() {
-  return (
-    <div className="flex flex-wrap items-center gap-2">
-      <Badge className={eb.badgeTeal}>
-        Home EasyBatt
-      </Badge>
-      <Badge className={eb.badgeYellow}>
-        Meno scroll, più chiarezza
-      </Badge>
     </div>
   );
 }
@@ -132,7 +118,6 @@ export default function EasyBattHomePage() {
             </div>
             <div>
               <div className="text-sm font-semibold uppercase tracking-[0.18em] text-[#D8DDE3]">EasyBatt</div>
-              <div className="text-sm text-[#8F98A3]">Percorso rapido</div>
             </div>
           </div>
 
@@ -155,7 +140,6 @@ export default function EasyBattHomePage() {
         <main className="flex flex-1 flex-col">
           <section className="grid items-start gap-5 lg:grid-cols-[1.02fr_0.98fr] lg:gap-6">
             <div className="flex flex-col gap-4">
-              <QuickNav />
               <BrandLockup />
 
               <div className="max-w-2xl">
@@ -199,26 +183,6 @@ export default function EasyBattHomePage() {
               {ENTRY_POINTS.map((item) => (
                 <EntryCard key={item.title} item={item} />
               ))}
-            </div>
-          </section>
-
-          <section className="mt-6 rounded-[28px] border border-white/8 bg-gradient-to-r from-white/[0.04] via-white/[0.03] to-white/[0.02] p-5 sm:p-6">
-            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-              <div className="max-w-3xl">
-                <div className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-[#8F98A3]">
-                  EasyBatt in breve
-                </div>
-                <p className="text-base leading-7 text-[#C4CBD3] sm:text-lg">
-                  Meno scroll, più chiarezza. La home orienta, le pagine spiegano e la stima resta nella sezione dedicata.
-                </p>
-              </div>
-
-              <Button asChild className={`${eb.primaryButtonTeal} h-12 px-5 text-base`}>
-                <a href="/quanto-mi-costa">
-                  Vai subito al costo
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </a>
-              </Button>
             </div>
           </section>
         </main>
