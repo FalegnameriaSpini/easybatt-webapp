@@ -188,7 +188,16 @@ export function EasyBattQuantoMiCostaPage() {
   const effectiveSelectedCode = selectedModel?.code ?? MODELS[0].code;
 
   const fieldClassName =
-    "rounded-2xl border border-white/14 bg-[#17191D] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.02)] transition-all duration-200 hover:border-white/24 hover:bg-[#1A1D22] focus:border-[#10B7B3]/50 focus:ring-2 focus:ring-[#10B7B3]/20 focus:ring-offset-0 placeholder:text-[#AEB6BF]";
+    "rounded-2xl border border-white/18 bg-[#17191D] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.02)] transition-all duration-200 hover:border-[#10B7B3]/28 hover:bg-[#1A1D22] focus:border-[#10B7B3]/55 focus:ring-2 focus:ring-[#10B7B3]/20 focus:ring-offset-0 data-[state=open]:border-[#10B7B3]/45 data-[state=open]:ring-2 data-[state=open]:ring-[#10B7B3]/16 [&_svg]:text-[#AEB6BF] hover:[&_svg]:text-[#C7F3F1] data-[state=open]:[&_svg]:text-[#72E6E2] placeholder:text-[#AEB6BF]";
+
+  const selectContentClassName =
+    "rounded-2xl border border-white/10 bg-[#1A1D22] text-white shadow-[0_18px_40px_rgba(0,0,0,0.28)] ring-1 ring-[#10B7B3]/8";
+
+  const selectItemClassName =
+    "rounded-xl px-2.5 py-2 text-[#D7DCE2] focus:bg-[#10B7B3]/12 focus:text-white data-[state=checked]:bg-white/[0.06] data-[state=checked]:text-white [&_svg]:text-[#72E6E2]";
+
+  const inputClassName =
+    "rounded-2xl border border-white/18 bg-[#17191D] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.02)] transition-all duration-200 hover:border-[#10B7B3]/28 hover:bg-[#1A1D22] focus-visible:border-[#10B7B3]/55 focus-visible:ring-2 focus-visible:ring-[#10B7B3]/20 placeholder:text-[#AEB6BF]";
 
   const switchClassName =
     "data-unchecked:bg-[#2A2E34] data-unchecked:border-white/12 data-checked:bg-[#10B7B3] data-checked:border-[#10B7B3]/40";
@@ -263,10 +272,10 @@ export function EasyBattQuantoMiCostaPage() {
                       <SelectTrigger className={fieldClassName}>
                         <SelectValue placeholder="Tutti" />
                       </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all">Tutti</SelectItem>
+                      <SelectContent className={selectContentClassName}>
+                        <SelectItem className={selectItemClassName} value="all">Tutti</SelectItem>
                         {availableMaterials.map((item) => (
-                          <SelectItem key={item} value={item}>{item}</SelectItem>
+                          <SelectItem className={selectItemClassName} key={item} value={item}>{item}</SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
@@ -278,10 +287,10 @@ export function EasyBattQuantoMiCostaPage() {
                       <SelectTrigger className={fieldClassName}>
                         <SelectValue placeholder="Tutte" />
                       </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all">Tutte</SelectItem>
+                      <SelectContent className={selectContentClassName}>
+                        <SelectItem className={selectItemClassName} value="all">Tutte</SelectItem>
                         {availableHeights.map((item) => (
-                          <SelectItem key={item} value={item}>{item} mm</SelectItem>
+                          <SelectItem className={selectItemClassName} key={item} value={item}>{item} mm</SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
@@ -293,10 +302,10 @@ export function EasyBattQuantoMiCostaPage() {
                       <SelectTrigger className={fieldClassName}>
                         <SelectValue placeholder="Tutte" />
                       </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all">Tutte</SelectItem>
+                      <SelectContent className={selectContentClassName}>
+                        <SelectItem className={selectItemClassName} value="all">Tutte</SelectItem>
                         {availableFinishes.map((item) => (
-                          <SelectItem key={item} value={item}>{item}</SelectItem>
+                          <SelectItem className={selectItemClassName} key={item} value={item}>{item}</SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
@@ -309,9 +318,9 @@ export function EasyBattQuantoMiCostaPage() {
                     <SelectTrigger className={fieldClassName}>
                       <SelectValue placeholder="Scegli un modello" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className={selectContentClassName}>
                       {filteredModels.map((model) => (
-                        <SelectItem key={model.code} value={model.code}>
+                        <SelectItem className={selectItemClassName} key={model.code} value={model.code}>
                           {model.code} · {model.description}
                         </SelectItem>
                       ))}
@@ -355,15 +364,15 @@ export function EasyBattQuantoMiCostaPage() {
               <CardContentComp className="grid gap-4 sm:grid-cols-2">
                 <div className="grid gap-2">
                   <Label className="text-[#D9DDE2]">Metri lineari</Label>
-                  <Input className={fieldClassName} type="number" min={0} value={linearMeters} onChange={(e) => setLinearMeters(e.target.value)} />
+                  <Input className={inputClassName} type="number" min={0} value={linearMeters} onChange={(e) => setLinearMeters(e.target.value)} />
                 </div>
                 <div className="grid gap-2">
                   <Label className="text-[#D9DDE2]">Km totali A/R</Label>
-                  <Input className={fieldClassName} type="number" min={0} value={returnKm} onChange={(e) => setReturnKm(e.target.value)} />
+                  <Input className={inputClassName} type="number" min={0} value={returnKm} onChange={(e) => setReturnKm(e.target.value)} />
                 </div>
                 <div className="grid gap-2 sm:col-span-2">
                   <Label className="text-[#D9DDE2]">CAP o località del cantiere</Label>
-                  <Input className={fieldClassName} placeholder="Es. 25017 Lonato del Garda" value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
+                  <Input className={inputClassName} placeholder="Es. 25017 Lonato del Garda" value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
                 </div>
                 <div className="sm:col-span-2 grid gap-3 rounded-[24px] border border-white/10 bg-[#17191D] p-4">
                   <div className="flex items-center justify-between gap-4 rounded-[20px] border border-white/10 bg-[#1F2329] px-4 py-3">
