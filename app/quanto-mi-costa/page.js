@@ -69,19 +69,19 @@ function unique(array) {
 }
 
 const fieldClassName =
-  "h-12 rounded-2xl !border !border-white/20 !bg-[#10B7B3] !text-white " +
+  "h-12 rounded-2xl !border !border-white/20 !bg-[#10B7B3] !text-[#11161C] " +
   "shadow-[inset_0_1px_0_rgba(255,255,255,0.02)] transition-all duration-200 " +
   "hover:!border-[#10B7B3]/45 hover:!bg-[#0A8B87] " +
   "focus-visible:!border-[#10B7B3] focus-visible:!bg-[#0A8B87] focus-visible:!ring-2 focus-visible:!ring-[#10B7B3]/25 focus-visible:!outline-none " +
   "data-[state=open]:!border-[#10B7B3] data-[state=open]:!bg-[#0A8B87] data-[state=open]:!ring-2 data-[state=open]:!ring-[#10B7B3]/25 " +
-  "[&_svg]:text-[#9AA4AF] hover:[&_svg]:text-[#C7F3F1] data-[state=open]:[&_svg]:text-[#72E6E2]";
+  "[&_svg]:text-[#1A1F26] hover:[&_svg]:text-[#11161C] data-[state=open]:[&_svg]:text-[#11161C]";
 
 const inputClassName =
-  "h-12 rounded-2xl !border !border-white/20 !bg-[#10B7B3] !text-white " +
+  "h-12 rounded-2xl !border !border-white/20 !bg-[#10B7B3] !text-[#11161C] " +
   "shadow-[inset_0_1px_0_rgba(255,255,255,0.02)] transition-all duration-200 " +
   "hover:!border-[#10B7B3]/45 hover:!bg-[#0A8B87] " +
   "focus-visible:!border-[#10B7B3] focus-visible:!bg-[#0A8B87] focus-visible:!ring-2 focus-visible:!ring-[#10B7B3]/25 focus-visible:!outline-none " +
-  "placeholder:!text-[#95A0AB]";
+  "placeholder:!text-[#3A4147]";
 
 const selectContentClassName =
   "rounded-2xl !border !border-white/10 !bg-[#11161C] !text-white shadow-[0_18px_40px_rgba(0,0,0,0.28)]";
