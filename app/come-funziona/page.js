@@ -15,6 +15,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { eb } from "@/app/easybatt-ui";
 
 const PROCESS_STEPS = [
   {
@@ -45,9 +46,9 @@ const PROCESS_STEPS = [
 
 function TopNavCome() {
   return (
-    <header className="mb-6 flex flex-col gap-4 rounded-[28px] border border-white/8 bg-white/[0.03] px-4 py-4 backdrop-blur sm:flex-row sm:items-center sm:justify-between sm:px-5">
+    <header className={eb.topNav}>
       <div className="flex items-center gap-3">
-        <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-[#10B7B3]/25 bg-[#10B7B3]/10">
+        <div className={eb.topNavIcon}>
           <Home className="h-5 w-5 text-[#72E6E2]" />
         </div>
         <div>
@@ -57,16 +58,16 @@ function TopNavCome() {
       </div>
 
       <nav className="flex flex-wrap items-center gap-2 text-sm">
-        <Button asChild variant="ghost" className="rounded-full px-4 text-[#D8DCE1] hover:bg-white/6 hover:text-white">
+        <Button asChild variant="ghost" className={eb.navGhost}>
           <a href="/">Home</a>
         </Button>
-        <Button className="rounded-full bg-[#10B7B3] px-4 font-semibold text-slate-950 hover:bg-[#22C7C2]">
+        <Button className={eb.navActiveTeal}>
           Pagina attiva
         </Button>
-        <Button asChild variant="ghost" className="rounded-full px-4 text-[#D8DCE1] hover:bg-white/6 hover:text-white">
+        <Button asChild variant="ghost" className={eb.navGhost}>
           <a href="/perche-conviene">Perché conviene</a>
         </Button>
-        <Button asChild className="rounded-full bg-[#F4CC18] px-4 font-semibold text-slate-950 hover:bg-[#F7D742]">
+        <Button asChild className={eb.navActiveYellow}>
           <a href="/quanto-mi-costa">Quanto mi costa</a>
         </Button>
       </nav>
@@ -77,16 +78,16 @@ function TopNavCome() {
 export function EasyBattComeFunzionaPage() {
   return (
     <div className="min-h-screen bg-[#17191D] text-white">
-      <div className="mx-auto w-full max-w-7xl px-4 py-5 sm:px-6 sm:py-6">
+      <div className={eb.pageShell}>
         <TopNavCome />
 
-        <section className="mb-6 grid gap-4 rounded-[32px] border border-white/10 bg-[radial-gradient(circle_at_top_left,_rgba(15,175,169,0.12),_transparent_34%),linear-gradient(135deg,_rgba(20,23,29,0.98),_rgba(29,32,38,0.98))] p-6 shadow-[0_25px_80px_rgba(0,0,0,0.35)] sm:p-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+        <section className={`${eb.hero} mb-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-end`}>
           <div>
             <div className="mb-3 flex flex-wrap items-center gap-2">
-              <Badge className="rounded-full border border-[#10B7B3]/35 bg-[#10B7B3]/12 px-4 py-1.5 text-[#A7F3F0] hover:bg-[#10B7B3]/12">
+              <Badge className={eb.badgeTeal}>
                 Come funziona
               </Badge>
-              <Badge className="rounded-full border border-white/15 bg-white/6 px-4 py-1.5 text-[#D6DBE0] hover:bg-white/6">
+              <Badge className={eb.badgeNeutral}>
                 Percorso chiaro e ordinato
               </Badge>
             </div>
@@ -100,7 +101,7 @@ export function EasyBattComeFunzionaPage() {
             </p>
           </div>
 
-          <div className="grid gap-3 rounded-[28px] border border-white/10 bg-white/[0.04] p-5">
+          <div className={eb.cardInsetSoft}>
             <div className="flex items-start gap-3">
               <ShieldCheck className="mt-0.5 h-5 w-5 text-[#72E6E2]" />
               <div className="text-sm leading-7 text-[#C6CCD4]">
@@ -114,7 +115,7 @@ export function EasyBattComeFunzionaPage() {
           {PROCESS_STEPS.map((step) => {
             const Icon = step.icon;
             return (
-              <Card key={step.number} className="rounded-[30px] border border-white/10 bg-[#1C1F24] shadow-[0_18px_50px_rgba(0,0,0,0.24)]">
+              <Card key={step.number} className={eb.cardInteractive}>
                 <CardHeader className="pb-4">
                   <div className="mb-4 flex items-center justify-between">
                     <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#10B7B3]/15 text-sm font-bold text-[#72E6E2]">
@@ -133,7 +134,7 @@ export function EasyBattComeFunzionaPage() {
         </section>
 
         <section className="mt-6 grid gap-6 lg:grid-cols-[1fr_1fr]">
-          <Card className="rounded-[30px] border border-white/10 bg-[#1C1F24] shadow-[0_18px_50px_rgba(0,0,0,0.24)]">
+          <Card className={eb.cardInteractive}>
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-2xl text-white">
                 <CheckCircle2 className="h-5 w-5 text-[#F4CC18]" />
@@ -144,14 +145,14 @@ export function EasyBattComeFunzionaPage() {
               </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-3 text-[#C6CCD4]">
-              <div className="rounded-2xl border border-white/10 bg-[#17191D] p-4">Battiscopa preparato con una logica precisa.</div>
-              <div className="rounded-2xl border border-white/10 bg-[#17191D] p-4">Sequenza di lavoro più chiara e meno improvvisata.</div>
-              <div className="rounded-2xl border border-white/10 bg-[#17191D] p-4">Gestione più semplice del materiale durante la posa.</div>
-              <div className="rounded-2xl border border-white/10 bg-[#17191D] p-4">Meno incertezze e meno perdite di tempo in cantiere.</div>
+              <div className={eb.cardInset}>Battiscopa preparato con una logica precisa.</div>
+              <div className={eb.cardInset}>Sequenza di lavoro più chiara e meno improvvisata.</div>
+              <div className={eb.cardInset}>Gestione più semplice del materiale durante la posa.</div>
+              <div className={eb.cardInset}>Meno incertezze e meno perdite di tempo in cantiere.</div>
             </CardContent>
           </Card>
 
-          <Card className="rounded-[30px] border border-white/10 bg-[#1C1F24] shadow-[0_18px_50px_rgba(0,0,0,0.24)]">
+          <Card className={eb.cardInteractive}>
             <CardHeader>
               <CardTitle className="text-2xl text-white">Continua il percorso</CardTitle>
               <CardDescription className="text-base leading-7 text-[#B6BDC6]">
@@ -159,13 +160,13 @@ export function EasyBattComeFunzionaPage() {
               </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-3">
-              <Button asChild className="h-12 rounded-2xl bg-[#10B7B3] text-base font-semibold text-slate-950 hover:bg-[#22C7C2]">
+              <Button asChild className={`${eb.primaryButtonTeal} h-12 text-base`}>
                 <a href="/perche-conviene">
                   Vai a Perché conviene
                   <ChevronRight className="ml-2 h-4 w-4" />
                 </a>
               </Button>
-              <Button asChild className="h-12 rounded-2xl bg-[#F4CC18] text-base font-semibold text-slate-950 hover:bg-[#F7D742]">
+              <Button asChild className={`${eb.primaryButtonYellow} h-12 text-base`}>
                 <a href="/quanto-mi-costa">
                   Vai a Quanto mi costa
                   <ArrowRight className="ml-2 h-4 w-4" />

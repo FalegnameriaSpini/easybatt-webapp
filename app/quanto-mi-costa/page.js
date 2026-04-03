@@ -23,6 +23,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
+import { eb } from "@/app/easybatt-ui";
 
 const MODELS = [
   { code: "3013R3TG01", description: "30x13 R3 Tanganika Grezzo", material: "Multist. Tanganika", height: 30, thickness: 13, profile: "Raggio 3", finish: "Grezzo", weightKgMl: 0.1014, supplyBaseCostPerMl: 3.2 },
@@ -71,9 +72,9 @@ function unique(array) {
 
 function TopNavCosto() {
   return (
-    <header className="mb-6 flex flex-col gap-4 rounded-[28px] border border-white/8 bg-white/[0.03] px-4 py-4 backdrop-blur sm:flex-row sm:items-center sm:justify-between sm:px-5">
+    <header className={eb.topNav}>
       <div className="flex items-center gap-3">
-        <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-[#10B7B3]/25 bg-[#10B7B3]/10">
+        <div className={eb.topNavIcon}>
           <HomeIcon className="h-5 w-5 text-[#72E6E2]" />
         </div>
         <div>
@@ -83,16 +84,16 @@ function TopNavCosto() {
       </div>
 
       <nav className="flex flex-wrap items-center gap-2 text-sm">
-        <ButtonComp asChild variant="ghost" className="rounded-full px-4 text-[#D8DCE1] hover:bg-white/6 hover:text-white">
+        <ButtonComp asChild variant="ghost" className={eb.navGhost}>
           <a href="/">Home</a>
         </ButtonComp>
-        <ButtonComp asChild variant="ghost" className="rounded-full px-4 text-[#D8DCE1] hover:bg-white/6 hover:text-white">
+        <ButtonComp asChild variant="ghost" className={eb.navGhost}>
           <a href="/come-funziona">Come funziona</a>
         </ButtonComp>
-        <ButtonComp asChild variant="ghost" className="rounded-full px-4 text-[#D8DCE1] hover:bg-white/6 hover:text-white">
+        <ButtonComp asChild variant="ghost" className={eb.navGhost}>
           <a href="/perche-conviene">Perché conviene</a>
         </ButtonComp>
-        <ButtonComp className="rounded-full bg-[#F4CC18] px-4 font-semibold text-slate-950 hover:bg-[#F7D742]">
+        <ButtonComp className={eb.navActiveYellow}>
           Pagina attiva
         </ButtonComp>
       </nav>
@@ -169,15 +170,15 @@ export function EasyBattQuantoMiCostaPage() {
 
   return (
     <div className="min-h-screen bg-[#17191D] text-white">
-      <div className="mx-auto w-full max-w-7xl px-4 py-5 sm:px-6 sm:py-6">
+      <div className={eb.pageShell}>
         <TopNavCosto />
 
-        <div className="mb-6 grid gap-4 rounded-[32px] border border-white/10 bg-[radial-gradient(circle_at_top_left,_rgba(15,175,169,0.12),_transparent_34%),linear-gradient(135deg,_rgba(20,23,29,0.98),_rgba(29,32,38,0.98))] p-6 shadow-[0_25px_80px_rgba(0,0,0,0.35)] sm:p-8">
+        <div className={`${eb.hero} mb-6`}>
           <div className="flex flex-wrap items-center gap-2">
-            <BadgeComp className="rounded-full border border-[#F4CC18]/35 bg-[#F4CC18]/10 px-4 py-1.5 text-[#F8E58A] hover:bg-[#F4CC18]/10">
+            <BadgeComp className={eb.badgeYellow}>
               Stima rapida EasyBatt
             </BadgeComp>
-            <BadgeComp className="rounded-full border border-[#10B7B3]/35 bg-[#10B7B3]/12 px-4 py-1.5 text-[#A7F3F0] hover:bg-[#10B7B3]/12">
+            <BadgeComp className={eb.badgeTeal}>
               Motore preventivo mantenuto
             </BadgeComp>
           </div>
@@ -193,7 +194,7 @@ export function EasyBattQuantoMiCostaPage() {
               </p>
             </div>
 
-            <div className="grid gap-3 rounded-[28px] border border-white/10 bg-white/[0.04] p-5">
+            <div className={eb.cardInsetSoft}>
               <div className="flex items-start gap-3">
                 <ShieldCheckIcon className="mt-0.5 h-5 w-5 text-[#72E6E2]" />
                 <div className="text-sm leading-7 text-[#C6CCD4]">
@@ -206,7 +207,7 @@ export function EasyBattQuantoMiCostaPage() {
 
         <div className="grid gap-6 lg:grid-cols-[1.02fr_0.98fr]">
           <div className="grid gap-6">
-            <CardComp className="rounded-[30px] border border-white/10 bg-[#1C1F24] shadow-[0_18px_50px_rgba(0,0,0,0.24)]">
+            <CardComp className={eb.cardInteractive}>
               <CardHeaderComp>
                 <CardTitleComp className="flex items-center gap-2 text-xl text-white">
                   <Layers3 className="h-5 w-5 text-[#72E6E2]" />
@@ -281,20 +282,20 @@ export function EasyBattQuantoMiCostaPage() {
                 </div>
 
                 {selectedModel && (
-                  <div className="grid gap-3 rounded-[28px] bg-[#17191D] p-4 sm:grid-cols-2 xl:grid-cols-4">
-                    <div className="rounded-2xl border border-white/10 bg-[#1F2329] p-3">
+                  <div className="grid gap-3 rounded-[24px] bg-[#17191D] p-4 sm:grid-cols-2 xl:grid-cols-4">
+                    <div className={eb.statInset}>
                       <div className="text-xs text-[#8F98A3]">Codice</div>
                       <div className="mt-1 font-semibold text-white">{selectedModel.code}</div>
                     </div>
-                    <div className="rounded-2xl border border-white/10 bg-[#1F2329] p-3">
+                    <div className={eb.statInset}>
                       <div className="text-xs text-[#8F98A3]">Profilo</div>
                       <div className="mt-1 font-semibold text-white">{selectedModel.profile}</div>
                     </div>
-                    <div className="rounded-2xl border border-white/10 bg-[#1F2329] p-3">
+                    <div className={eb.statInset}>
                       <div className="text-xs text-[#8F98A3]">Sezione</div>
                       <div className="mt-1 font-semibold text-white">{selectedModel.height} × {selectedModel.thickness} mm</div>
                     </div>
-                    <div className="rounded-2xl border border-white/10 bg-[#1F2329] p-3">
+                    <div className={eb.statInset}>
                       <div className="text-xs text-[#8F98A3]">Finitura</div>
                       <div className="mt-1 font-semibold text-white">{selectedModel.finish}</div>
                     </div>
@@ -303,7 +304,7 @@ export function EasyBattQuantoMiCostaPage() {
               </CardContentComp>
             </CardComp>
 
-            <CardComp className="rounded-[30px] border border-white/10 bg-[#1C1F24] shadow-[0_18px_50px_rgba(0,0,0,0.24)]">
+            <CardComp className={eb.cardInteractive}>
               <CardHeaderComp>
                 <CardTitleComp className="flex items-center gap-2 text-xl text-white">
                   <CalcIcon className="h-5 w-5 text-[#F8E58A]" />
@@ -326,22 +327,22 @@ export function EasyBattQuantoMiCostaPage() {
                   <Label className="text-[#D9DDE2]">CAP o località del cantiere</Label>
                   <Input className="rounded-2xl border-white/10 bg-[#17191D] text-white" placeholder="Es. 25017 Lonato del Garda" value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
                 </div>
-                <div className="sm:col-span-2 grid gap-3 rounded-[28px] border border-white/10 bg-[#17191D] p-4">
-                  <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-[#1F2329] px-4 py-3 gap-4">
+                <div className="sm:col-span-2 grid gap-3 rounded-[24px] border border-white/10 bg-[#17191D] p-4">
+                  <div className="flex items-center justify-between gap-4 rounded-[20px] border border-white/10 bg-[#1F2329] px-4 py-3">
                     <div>
                       <div className="font-medium text-white">Fornitura battiscopa inclusa</div>
                       <div className="text-sm text-[#9FA7B0]">Attiva di default per avere una stima completa.</div>
                     </div>
                     <Switch checked={includeSupply} onCheckedChange={setIncludeSupply} />
                   </div>
-                  <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-[#1F2329] px-4 py-3 gap-4">
+                  <div className="flex items-center justify-between gap-4 rounded-[20px] border border-white/10 bg-[#1F2329] px-4 py-3">
                     <div>
                       <div className="font-medium text-white">Spedizione inclusa</div>
                       <div className="text-sm text-[#9FA7B0]">Calcolata in base al peso totale con imballo.</div>
                     </div>
                     <Switch checked={includeShipping} onCheckedChange={setIncludeShipping} />
                   </div>
-                  <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-[#1F2329] px-4 py-3 gap-4">
+                  <div className="flex items-center justify-between gap-4 rounded-[20px] border border-white/10 bg-[#1F2329] px-4 py-3">
                     <div>
                       <div className="font-medium text-white">Posa in opera inclusa</div>
                       <div className="text-sm text-[#9FA7B0]">Puoi valutarla subito nella tua stima.</div>
@@ -354,7 +355,7 @@ export function EasyBattQuantoMiCostaPage() {
           </div>
 
           <div className="flex flex-col gap-6">
-            <CardComp className="sticky top-4 rounded-[30px] border border-white/10 bg-[#1C1F24] shadow-[0_18px_50px_rgba(0,0,0,0.24)]">
+            <CardComp className={`sticky top-4 ${eb.cardInteractive}`}>
               <CardHeaderComp className="pb-3">
                 <CardTitleComp className="text-2xl text-white">La tua stima indicativa</CardTitleComp>
                 <CardDescriptionComp className="text-base leading-7 text-[#B6BDC6]">
@@ -362,33 +363,33 @@ export function EasyBattQuantoMiCostaPage() {
                 </CardDescriptionComp>
               </CardHeaderComp>
               <CardContentComp className="grid gap-4">
-                <div className="rounded-[28px] border border-[#10B7B3]/20 bg-gradient-to-br from-[#17191D] via-[#1B1E23] to-[#083331] p-5 text-white">
+                <div className={eb.summaryPanel}>
                   <div className="text-sm text-[#B6BDC6]">Totale indicativo IVA inclusa</div>
                   <div className="mt-2 text-4xl font-bold tracking-tight text-[#F4CC18]">{euro.format(calculation.total)}</div>
                   <div className="mt-2 text-sm leading-6 text-[#C7CDD5]">Include servizio EasyBatt, trasferta e tutte le opzioni attive nel preventivo.</div>
                 </div>
 
                 <div className="grid gap-3">
-                  <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-[#17191D] p-3 gap-3">
+                  <div className="flex items-center justify-between gap-3 rounded-[20px] border border-white/10 bg-[#17191D] p-3">
                     <span className="text-sm text-[#D0D5DB]">Servizio EasyBatt: rilievo + preparazione + taglio</span>
                     <span className="font-semibold text-white">{euro.format(calculation.serviceSubtotal)}</span>
                   </div>
-                  <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-[#17191D] p-3 gap-3">
+                  <div className="flex items-center justify-between gap-3 rounded-[20px] border border-white/10 bg-[#17191D] p-3">
                     <span className="text-sm text-[#D0D5DB]">Trasferta</span>
                     <span className="font-semibold text-white">{euro.format(calculation.travelSubtotal)}</span>
                   </div>
-                  <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-[#17191D] p-3 gap-3">
+                  <div className="flex items-center justify-between gap-3 rounded-[20px] border border-white/10 bg-[#17191D] p-3">
                     <div>
                       <div className="text-sm text-[#D0D5DB]">Fornitura battiscopa</div>
                       <div className="text-xs text-[#8F98A3]">{includeSupply ? `${calculation.ml} ml × ${euro.format(calculation.supplyUnitPrice)}/ml` : "non inclusa"}</div>
                     </div>
                     <span className="font-semibold text-white">{euro.format(calculation.supplySubtotal)}</span>
                   </div>
-                  <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-[#17191D] p-3 gap-3">
+                  <div className="flex items-center justify-between gap-3 rounded-[20px] border border-white/10 bg-[#17191D] p-3">
                     <span className="text-sm text-[#D0D5DB]">Spedizione</span>
                     <span className="font-semibold text-white">{euro.format(calculation.shippingSubtotal)}</span>
                   </div>
-                  <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-[#17191D] p-3 gap-3">
+                  <div className="flex items-center justify-between gap-3 rounded-[20px] border border-white/10 bg-[#17191D] p-3">
                     <span className="text-sm text-[#D0D5DB]">Posa in opera</span>
                     <span className="font-semibold text-white">{euro.format(calculation.installationSubtotal)}</span>
                   </div>
@@ -403,7 +404,7 @@ export function EasyBattQuantoMiCostaPage() {
                   </div>
                 </div>
 
-                <div className="grid gap-3 rounded-[28px] border border-[#10B7B3]/18 bg-[#0E2B2A] p-4 text-sm text-[#D9E8E7]">
+                <div className="grid gap-3 rounded-[24px] border border-[#10B7B3]/18 bg-[#0E2B2A] p-4 text-sm text-[#D9E8E7]">
                   <div className="flex items-start gap-3">
                     <Package className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
                     <div>Peso battiscopa: <span className="font-semibold text-white">{calculation.baseWeight.toFixed(1)} kg</span></div>
@@ -426,7 +427,7 @@ export function EasyBattQuantoMiCostaPage() {
                   </div>
                 </div>
 
-                <div className="rounded-[28px] border border-white/10 bg-[#17191D] p-4">
+                <div className={eb.cardInset}>
                   <div className="mb-3 flex items-center gap-2 text-white">
                     <CheckCircleIcon className="h-4 w-4 text-[#F4CC18]" />
                     <span className="font-semibold">Cosa succede dopo</span>
@@ -439,11 +440,11 @@ export function EasyBattQuantoMiCostaPage() {
                 </div>
 
                 <div className="grid gap-3">
-                  <ButtonComp className="h-12 rounded-2xl bg-[#F4CC18] text-base font-semibold text-slate-950 hover:bg-[#F7D742]">
+                  <ButtonComp className={`${eb.primaryButtonYellow} h-12 text-base`}>
                     Richiedi verifica e conferma
                     <ChevronRightIcon className="ml-2 h-4 w-4" />
                   </ButtonComp>
-                  <ButtonComp variant="outline" className="h-12 rounded-2xl border-white/10 bg-transparent text-base text-white hover:bg-white/6">
+                  <ButtonComp variant="outline" className={`${eb.outlineButton} h-12 text-base`}>
                     <PhoneCall className="mr-2 h-4 w-4" />
                     Scrivici su WhatsApp
                   </ButtonComp>
