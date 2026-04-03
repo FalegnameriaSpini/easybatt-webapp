@@ -70,7 +70,7 @@ function unique(array) {
 
 function TopNavCosto() {
   return (
-    <header className="mb-4 flex flex-col gap-3 rounded-[26px] border border-white/6 bg-white/[0.02] px-4 py-2.5 backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between sm:px-5">
+    <header className="sticky top-3 z-30 mb-4 flex flex-col gap-3 rounded-[26px] border border-white/8 bg-[#17191D]/78 px-4 py-2.5 shadow-[0_12px_30px_rgba(0,0,0,0.16)] backdrop-blur-md sm:flex-row sm:items-center sm:justify-between sm:px-5">
       <div className="flex items-center gap-3">
         <div className="flex h-9 w-9 items-center justify-center rounded-2xl border border-white/8 bg-white/[0.03] text-[#72E6E2]">
           <HomeIcon className="h-5 w-5 text-[#72E6E2]" />
@@ -187,6 +187,12 @@ export function EasyBattQuantoMiCostaPage() {
 
   const effectiveSelectedCode = selectedModel?.code ?? MODELS[0].code;
 
+  const fieldClassName =
+    "rounded-2xl border border-white/14 bg-[#17191D] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.02)] transition-all duration-200 hover:border-white/24 hover:bg-[#1A1D22] focus:border-[#10B7B3]/50 focus:ring-2 focus:ring-[#10B7B3]/20 focus:ring-offset-0 placeholder:text-[#AEB6BF]";
+
+  const switchClassName =
+    "data-unchecked:bg-[#2A2E34] data-unchecked:border-white/12 data-checked:bg-[#10B7B3] data-checked:border-[#10B7B3]/40";
+
   const calculation = useMemo(() => {
     const rawMl = Number(linearMeters);
     const rawKm = Number(returnKm);
@@ -240,14 +246,11 @@ export function EasyBattQuantoMiCostaPage() {
               </CardHeaderComp>
               <CardContentComp className="grid gap-4">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                  <div className="text-sm text-[#9FA7B0]">
-                    I menu mostrano solo combinazioni disponibili.
-                  </div>
                   <ButtonComp
                     type="button"
                     variant="outline"
                     onClick={resetFilters}
-                    className={`${eb.outlineButton} h-10 px-4 text-sm`}
+                    className={`${eb.outlineButton} h-10 px-4 text-sm sm:ml-auto`}
                   >
                     Reimposta filtri
                   </ButtonComp>
@@ -257,7 +260,7 @@ export function EasyBattQuantoMiCostaPage() {
                   <div className="grid gap-2">
                     <Label className="text-[#D9DDE2]">Materiale</Label>
                     <Select value={materialFilter} onValueChange={setMaterialFilter}>
-                      <SelectTrigger className="rounded-2xl border-white/10 bg-[#17191D] text-white">
+                      <SelectTrigger className={fieldClassName}>
                         <SelectValue placeholder="Tutti" />
                       </SelectTrigger>
                       <SelectContent>
@@ -272,7 +275,7 @@ export function EasyBattQuantoMiCostaPage() {
                   <div className="grid gap-2">
                     <Label className="text-[#D9DDE2]">Altezza</Label>
                     <Select value={heightFilter} onValueChange={setHeightFilter}>
-                      <SelectTrigger className="rounded-2xl border-white/10 bg-[#17191D] text-white">
+                      <SelectTrigger className={fieldClassName}>
                         <SelectValue placeholder="Tutte" />
                       </SelectTrigger>
                       <SelectContent>
@@ -287,7 +290,7 @@ export function EasyBattQuantoMiCostaPage() {
                   <div className="grid gap-2">
                     <Label className="text-[#D9DDE2]">Finitura</Label>
                     <Select value={finishFilter} onValueChange={setFinishFilter}>
-                      <SelectTrigger className="rounded-2xl border-white/10 bg-[#17191D] text-white">
+                      <SelectTrigger className={fieldClassName}>
                         <SelectValue placeholder="Tutte" />
                       </SelectTrigger>
                       <SelectContent>
@@ -303,7 +306,7 @@ export function EasyBattQuantoMiCostaPage() {
                 <div className="grid gap-2">
                   <Label className="text-[#D9DDE2]">Modello</Label>
                   <Select value={effectiveSelectedCode} onValueChange={setSelectedCode}>
-                    <SelectTrigger className="rounded-2xl border-white/10 bg-[#17191D] text-white">
+                    <SelectTrigger className={fieldClassName}>
                       <SelectValue placeholder="Scegli un modello" />
                     </SelectTrigger>
                     <SelectContent>
@@ -352,15 +355,15 @@ export function EasyBattQuantoMiCostaPage() {
               <CardContentComp className="grid gap-4 sm:grid-cols-2">
                 <div className="grid gap-2">
                   <Label className="text-[#D9DDE2]">Metri lineari</Label>
-                  <Input className="rounded-2xl border-white/10 bg-[#17191D] text-white" type="number" min={0} value={linearMeters} onChange={(e) => setLinearMeters(e.target.value)} />
+                  <Input className={fieldClassName} type="number" min={0} value={linearMeters} onChange={(e) => setLinearMeters(e.target.value)} />
                 </div>
                 <div className="grid gap-2">
                   <Label className="text-[#D9DDE2]">Km totali A/R</Label>
-                  <Input className="rounded-2xl border-white/10 bg-[#17191D] text-white" type="number" min={0} value={returnKm} onChange={(e) => setReturnKm(e.target.value)} />
+                  <Input className={fieldClassName} type="number" min={0} value={returnKm} onChange={(e) => setReturnKm(e.target.value)} />
                 </div>
                 <div className="grid gap-2 sm:col-span-2">
                   <Label className="text-[#D9DDE2]">CAP o località del cantiere</Label>
-                  <Input className="rounded-2xl border-white/10 bg-[#17191D] text-white" placeholder="Es. 25017 Lonato del Garda" value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
+                  <Input className={fieldClassName} placeholder="Es. 25017 Lonato del Garda" value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
                 </div>
                 <div className="sm:col-span-2 grid gap-3 rounded-[24px] border border-white/10 bg-[#17191D] p-4">
                   <div className="flex items-center justify-between gap-4 rounded-[20px] border border-white/10 bg-[#1F2329] px-4 py-3">
@@ -368,21 +371,21 @@ export function EasyBattQuantoMiCostaPage() {
                       <div className="font-medium text-white">Fornitura battiscopa inclusa</div>
                       <div className="text-sm text-[#9FA7B0]">Attiva di default per avere una stima completa.</div>
                     </div>
-                    <Switch checked={includeSupply} onCheckedChange={setIncludeSupply} />
+                    <Switch className={switchClassName} checked={includeSupply} onCheckedChange={setIncludeSupply} />
                   </div>
                   <div className="flex items-center justify-between gap-4 rounded-[20px] border border-white/10 bg-[#1F2329] px-4 py-3">
                     <div>
                       <div className="font-medium text-white">Spedizione inclusa</div>
                       <div className="text-sm text-[#9FA7B0]">Calcolata in base al peso totale con imballo.</div>
                     </div>
-                    <Switch checked={includeShipping} onCheckedChange={setIncludeShipping} />
+                    <Switch className={switchClassName} checked={includeShipping} onCheckedChange={setIncludeShipping} />
                   </div>
                   <div className="flex items-center justify-between gap-4 rounded-[20px] border border-white/10 bg-[#1F2329] px-4 py-3">
                     <div>
                       <div className="font-medium text-white">Posa in opera inclusa</div>
                       <div className="text-sm text-[#9FA7B0]">Puoi valutarla subito nella tua stima.</div>
                     </div>
-                    <Switch checked={includeInstallation} onCheckedChange={setIncludeInstallation} />
+                    <Switch className={switchClassName} checked={includeInstallation} onCheckedChange={setIncludeInstallation} />
                   </div>
                 </div>
               </CardContentComp>
