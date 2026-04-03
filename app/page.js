@@ -5,8 +5,6 @@ import {
   BadgeCheck,
   Calculator,
   ChevronRight,
-  Home,
-  ScanLine,
   Workflow,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -45,13 +43,12 @@ const ENTRY_POINTS = [
 
 function BrandLockup() {
   return (
-    <div className="rounded-[24px] border border-white/10 bg-[radial-gradient(circle_at_top_left,_rgba(15,175,169,0.1),_transparent_32%),linear-gradient(135deg,_rgba(20,23,29,0.98),_rgba(29,32,38,0.98))] px-3 py-2 shadow-[0_18px_50px_rgba(0,0,0,0.28)] sm:px-4 sm:py-2.5">
+    <div className="rounded-[24px] border border-white/10 bg-[radial-gradient(circle_at_top_left,_rgba(15,175,169,0.1),_transparent_32%),linear-gradient(135deg,_rgba(20,23,29,0.98),_rgba(29,32,38,0.98))] px-3 py-2 shadow-[0_18px_50px_rgba(0,0,0,0.28)] sm:px-4 sm:py-2">
       <div className="flex items-center">
-        {/* The SVG uses a large 595.2 x 419.52 viewBox and may still include extra internal whitespace. If the logo keeps feeling too airy, trim the SVG canvas in /public/Logo_easybatt_trasp.svg. */}
         <img
           src="/Logo_easybatt_trasp.svg"
           alt="EasyBatt - il battiscopa diventa facile"
-          className="h-auto w-full max-w-[400px] sm:max-w-[420px]"
+          className="h-auto w-full max-w-[340px] sm:max-w-[360px] lg:max-w-[380px]"
         />
       </div>
     </div>
@@ -110,73 +107,11 @@ function EntryCard({ item }) {
 export default function EasyBattHomePage() {
   return (
     <div className="bg-[#17191D] text-white">
-      <div className={`flex min-h-screen flex-col ${eb.pageShell}`}>
-        <header className={eb.topNav}>
-          <div className="flex items-center gap-3">
-            <div className={eb.topNavIcon}>
-              <Home className="h-5 w-5 text-[#72E6E2]" />
-            </div>
-            <div>
-              <div className="text-sm font-semibold uppercase tracking-[0.18em] text-[#D8DDE3]">EasyBatt</div>
-            </div>
-          </div>
-
-          <nav className={eb.navGroup}>
-            <Button asChild variant="ghost" className={eb.navActiveTeal}>
-              <a href="/">Home</a>
-            </Button>
-            <Button asChild variant="ghost" className={eb.navGhost}>
-              <a href="/come-funziona">Come funziona</a>
-            </Button>
-            <Button asChild variant="ghost" className={eb.navGhost}>
-              <a href="/perche-conviene">Perché conviene</a>
-            </Button>
-            <Button asChild variant="ghost" className={eb.navGhost}>
-              <a href="/quanto-mi-costa">Quanto mi costa</a>
-            </Button>
-          </nav>
-        </header>
-
-        <main className="flex flex-1 flex-col">
-          <section className="grid items-start gap-5 lg:grid-cols-[1.02fr_0.98fr] lg:gap-6">
-            <div className="flex flex-col gap-4">
+      <div className={`flex min-h-screen flex-col justify-center ${eb.pageShell}`}>
+        <main className="flex flex-1 items-center">
+          <section className="grid w-full items-center gap-6 lg:grid-cols-[0.92fr_1.08fr] lg:gap-8">
+            <div className="flex justify-center lg:justify-start">
               <BrandLockup />
-
-              <div className="max-w-2xl">
-                <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl xl:text-5xl">
-                  Scegli dove andare
-                </h1>
-                <p className="mt-3 text-base leading-7 text-[#B6BDC6] sm:text-lg">
-                  Se stai scoprendo EasyBatt, parti da
-                  <span className="text-white"> Come funziona </span>
-                  e
-                  <span className="text-white"> Perché conviene</span>. Se vuoi una risposta rapida, vai su
-                  <span className="text-[#F8E58A]"> Quanto mi costa</span>.
-                </p>
-              </div>
-
-              <div className="grid gap-3 sm:grid-cols-2">
-                <div className={eb.cardInsetSoft}>
-                  <div className="mb-2 flex items-center gap-2 text-[#72E6E2]">
-                    <ScanLine className="h-5 w-5" />
-                    <span className="font-semibold text-white">Se parti da zero</span>
-                  </div>
-                  <p className="text-sm leading-6 text-[#B6BDC6]">
-                    Parti da <span className="text-white">Come funziona</span>, poi vai a
-                    <span className="text-white"> Perché conviene</span>.
-                  </p>
-                </div>
-
-                <div className="rounded-[24px] border border-[#F4CC18]/18 bg-[#F4CC18]/6 p-4">
-                  <div className="mb-2 flex items-center gap-2 text-[#F8E58A]">
-                    <Calculator className="h-5 w-5" />
-                    <span className="font-semibold text-white">Se vuoi andare al punto</span>
-                  </div>
-                  <p className="text-sm leading-6 text-[#C9CED4]">
-                    Vai su <span className="text-white">Quanto mi costa</span> e ottieni una stima rapida.
-                  </p>
-                </div>
-              </div>
             </div>
 
             <div className="grid gap-3 lg:gap-4">
