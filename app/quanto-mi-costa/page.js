@@ -89,7 +89,7 @@ const selectContentClassName =
 const selectItemClassName =
   "rounded-xl px-2.5 py-2 text-[#D7DCE2] " +
   "focus:bg-[#10B7B3]/10 focus:text-white " +
-  "data-[state=checked]:bg-white/5 data-[state=checked]:text-white " +
+  "data-[state=checked]:bg-[#10B7B3] data-[state=checked]:text-[#11161C] " +
   "[&_svg]:text-[#72E6E2]";
 
 function TopNavCosto() {
