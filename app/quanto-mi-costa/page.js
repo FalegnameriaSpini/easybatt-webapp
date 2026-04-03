@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   Calculator as CalcIcon,
   ChevronRight as ChevronRightIcon,
@@ -10,12 +10,10 @@ import {
   Package,
   PhoneCall,
   Ruler,
-  ShieldCheck as ShieldCheckIcon,
   Truck,
   Wrench,
   CheckCircle2 as CheckCircleIcon,
 } from "lucide-react";
-import { Badge as BadgeComp } from "@/components/ui/badge";
 import { Button as ButtonComp } from "@/components/ui/button";
 import { Card as CardComp, CardContent as CardContentComp, CardDescription as CardDescriptionComp, CardHeader as CardHeaderComp, CardTitle as CardTitleComp } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -72,9 +70,9 @@ function unique(array) {
 
 function TopNavCosto() {
   return (
-    <header className={eb.topNav}>
+    <header className="mb-4 flex flex-col gap-3 rounded-[26px] border border-white/6 bg-white/[0.02] px-4 py-2.5 backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between sm:px-5">
       <div className="flex items-center gap-3">
-        <div className={eb.topNavIcon}>
+        <div className="flex h-9 w-9 items-center justify-center rounded-2xl border border-white/8 bg-white/[0.03] text-[#72E6E2]">
           <HomeIcon className="h-5 w-5 text-[#72E6E2]" />
         </div>
         <div>
@@ -83,7 +81,7 @@ function TopNavCosto() {
         </div>
       </div>
 
-      <nav className={eb.navGroup}>
+      <nav className="flex flex-wrap items-center gap-1.5 rounded-full border border-white/8 bg-[#121418]/45 p-1 text-sm">
         <ButtonComp asChild variant="ghost" className={eb.navGhost}>
           <a href="/">Home</a>
         </ButtonComp>
@@ -113,17 +111,59 @@ export function EasyBattQuantoMiCostaPage() {
   const [includeInstallation, setIncludeInstallation] = useState(false);
   const [zipCode, setZipCode] = useState("");
 
-  const materials = useMemo(() => unique(MODELS.map((m) => m.material)), []);
-  const heights = useMemo(() => unique(MODELS.map((m) => String(m.height))).sort((a, b) => Number(a) - Number(b)), []);
-  const finishes = useMemo(() => unique(MODELS.map((m) => m.finish)).sort(), []);
+  const matchesFilters = (model, filters) => {
+    const materialOk = filters.material === "all" || model.material === filters.material;
+    const heightOk = filters.height === "all" || String(model.height) === filters.height;
+    const finishOk = filters.finish === "all" || model.finish === filters.finish;
+    return materialOk && heightOk && finishOk;
+  };
+
+  const availableMaterials = useMemo(() => {
+    return unique(
+      MODELS.filter((model) =>
+        matchesFilters(model, { material: "all", height: heightFilter, finish: finishFilter }),
+      ).map((model) => model.material),
+    ).sort();
+  }, [finishFilter, heightFilter]);
+
+  const availableHeights = useMemo(() => {
+    return unique(
+      MODELS.filter((model) =>
+        matchesFilters(model, { material: materialFilter, height: "all", finish: finishFilter }),
+      ).map((model) => String(model.height)),
+    ).sort((a, b) => Number(a) - Number(b));
+  }, [finishFilter, materialFilter]);
+
+  const availableFinishes = useMemo(() => {
+    return unique(
+      MODELS.filter((model) =>
+        matchesFilters(model, { material: materialFilter, height: heightFilter, finish: "all" }),
+      ).map((model) => model.finish),
+    ).sort();
+  }, [heightFilter, materialFilter]);
+
+  useEffect(() => {
+    if (materialFilter !== "all" && !availableMaterials.includes(materialFilter)) {
+      setMaterialFilter("all");
+    }
+  }, [availableMaterials, materialFilter]);
+
+  useEffect(() => {
+    if (heightFilter !== "all" && !availableHeights.includes(heightFilter)) {
+      setHeightFilter("all");
+    }
+  }, [availableHeights, heightFilter]);
+
+  useEffect(() => {
+    if (finishFilter !== "all" && !availableFinishes.includes(finishFilter)) {
+      setFinishFilter("all");
+    }
+  }, [availableFinishes, finishFilter]);
 
   const filteredModels = useMemo(() => {
-    return MODELS.filter((model) => {
-      const materialOk = materialFilter === "all" || model.material === materialFilter;
-      const heightOk = heightFilter === "all" || String(model.height) === heightFilter;
-      const finishOk = finishFilter === "all" || model.finish === finishFilter;
-      return materialOk && heightOk && finishOk;
-    });
+    return MODELS.filter((model) =>
+      matchesFilters(model, { material: materialFilter, height: heightFilter, finish: finishFilter }),
+    );
   }, [materialFilter, heightFilter, finishFilter]);
 
   const selectedModel = useMemo(() => {
@@ -131,6 +171,19 @@ export function EasyBattQuantoMiCostaPage() {
     if (insideFiltered) return insideFiltered;
     return filteredModels[0] ?? MODELS[0];
   }, [filteredModels, selectedCode]);
+
+  useEffect(() => {
+    if (!filteredModels.some((model) => model.code === selectedCode)) {
+      setSelectedCode(filteredModels[0]?.code ?? MODELS[0].code);
+    }
+  }, [filteredModels, selectedCode]);
+
+  const resetFilters = () => {
+    setMaterialFilter("all");
+    setHeightFilter("all");
+    setFinishFilter("all");
+    setSelectedCode(MODELS[0].code);
+  };
 
   const effectiveSelectedCode = selectedModel?.code ?? MODELS[0].code;
 
@@ -173,43 +226,6 @@ export function EasyBattQuantoMiCostaPage() {
       <div className={eb.pageShell}>
         <TopNavCosto />
 
-        <div className="mb-5 grid gap-3 rounded-[24px] border border-white/10 bg-[radial-gradient(circle_at_top_left,_rgba(15,175,169,0.1),_transparent_30%),linear-gradient(135deg,_rgba(20,23,29,0.96),_rgba(29,32,38,0.96))] p-4 shadow-[0_20px_60px_rgba(0,0,0,0.28)] sm:p-5">
-          <div className="flex flex-wrap items-center gap-2">
-            <BadgeComp className={eb.badgeYellow}>
-              Stima rapida EasyBatt
-            </BadgeComp>
-            <BadgeComp className={eb.badgeTeal}>
-              Preventivo operativo
-            </BadgeComp>
-          </div>
-
-          <div className="grid gap-3 lg:grid-cols-[1.12fr_0.88fr] lg:items-center">
-            <div>
-              <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl xl:text-5xl">
-                Quanto mi costa
-              </h1>
-              <p className="mt-2 max-w-2xl text-base leading-7 text-[#B6BDC6] sm:text-lg">
-                Scegli il modello, inserisci i dati essenziali e ottieni subito una stima indicativa chiara.
-              </p>
-            </div>
-
-            <div className="grid gap-2 rounded-[20px] border border-white/10 bg-white/[0.04] p-4">
-              <div className="flex items-start gap-3">
-                <ShieldCheckIcon className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
-                <div className="text-sm leading-6 text-[#C6CCD4]">
-                  Totale aggiornato in tempo reale.
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <CalcIcon className="mt-0.5 h-4 w-4 text-[#F8E58A]" />
-                <div className="text-sm leading-6 text-[#C6CCD4]">
-                  Servizio, trasferta, fornitura, spedizione e posa restano inclusi nel calcolo.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div className="grid gap-6 lg:grid-cols-[1.02fr_0.98fr]">
           <div className="grid gap-6">
             <CardComp className={eb.cardInteractive}>
@@ -223,6 +239,20 @@ export function EasyBattQuantoMiCostaPage() {
                 </CardDescriptionComp>
               </CardHeaderComp>
               <CardContentComp className="grid gap-4">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <div className="text-sm text-[#9FA7B0]">
+                    I menu mostrano solo combinazioni disponibili.
+                  </div>
+                  <ButtonComp
+                    type="button"
+                    variant="outline"
+                    onClick={resetFilters}
+                    className={`${eb.outlineButton} h-10 px-4 text-sm`}
+                  >
+                    Reimposta filtri
+                  </ButtonComp>
+                </div>
+
                 <div className="grid gap-3 sm:grid-cols-3">
                   <div className="grid gap-2">
                     <Label className="text-[#D9DDE2]">Materiale</Label>
@@ -232,7 +262,7 @@ export function EasyBattQuantoMiCostaPage() {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="all">Tutti</SelectItem>
-                        {materials.map((item) => (
+                        {availableMaterials.map((item) => (
                           <SelectItem key={item} value={item}>{item}</SelectItem>
                         ))}
                       </SelectContent>
@@ -247,7 +277,7 @@ export function EasyBattQuantoMiCostaPage() {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="all">Tutte</SelectItem>
-                        {heights.map((item) => (
+                        {availableHeights.map((item) => (
                           <SelectItem key={item} value={item}>{item} mm</SelectItem>
                         ))}
                       </SelectContent>
@@ -262,7 +292,7 @@ export function EasyBattQuantoMiCostaPage() {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="all">Tutte</SelectItem>
-                        {finishes.map((item) => (
+                        {availableFinishes.map((item) => (
                           <SelectItem key={item} value={item}>{item}</SelectItem>
                         ))}
                       </SelectContent>
