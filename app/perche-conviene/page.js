@@ -43,22 +43,22 @@ function TopNavPerche() {
           <Home className="h-5 w-5 text-[#72E6E2]" />
         </div>
         <div>
-          <div className="text-sm font-semibold uppercase tracking-[0.18em] text-[#BFC3C8]">EasyBatt</div>
+          <div className="text-sm font-semibold uppercase tracking-[0.18em] text-[#D8DDE3]">EasyBatt</div>
           <div className="text-sm text-[#8F98A3]">Perché conviene</div>
         </div>
       </div>
 
-      <nav className="flex flex-wrap items-center gap-2 text-sm">
+      <nav className={eb.navGroup}>
         <Button asChild variant="ghost" className={eb.navGhost}>
           <a href="/">Home</a>
         </Button>
         <Button asChild variant="ghost" className={eb.navGhost}>
           <a href="/come-funziona">Come funziona</a>
         </Button>
-        <Button className={eb.navActiveTeal}>
-          Pagina attiva
+        <Button asChild variant="ghost" className={eb.navActiveTeal}>
+          <a href="/perche-conviene">Perché conviene</a>
         </Button>
-        <Button asChild className={eb.navActiveYellow}>
+        <Button asChild variant="ghost" className={eb.navGhost}>
           <a href="/quanto-mi-costa">Quanto mi costa</a>
         </Button>
       </nav>

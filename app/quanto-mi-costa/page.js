@@ -78,12 +78,12 @@ function TopNavCosto() {
           <HomeIcon className="h-5 w-5 text-[#72E6E2]" />
         </div>
         <div>
-          <div className="text-sm font-semibold uppercase tracking-[0.18em] text-[#BFC3C8]">EasyBatt</div>
+          <div className="text-sm font-semibold uppercase tracking-[0.18em] text-[#D8DDE3]">EasyBatt</div>
           <div className="text-sm text-[#8F98A3]">Quanto mi costa</div>
         </div>
       </div>
 
-      <nav className="flex flex-wrap items-center gap-2 text-sm">
+      <nav className={eb.navGroup}>
         <ButtonComp asChild variant="ghost" className={eb.navGhost}>
           <a href="/">Home</a>
         </ButtonComp>
@@ -93,8 +93,8 @@ function TopNavCosto() {
         <ButtonComp asChild variant="ghost" className={eb.navGhost}>
           <a href="/perche-conviene">Perché conviene</a>
         </ButtonComp>
-        <ButtonComp className={eb.navActiveYellow}>
-          Pagina attiva
+        <ButtonComp asChild variant="ghost" className={eb.navActiveYellow}>
+          <a href="/quanto-mi-costa">Quanto mi costa</a>
         </ButtonComp>
       </nav>
     </header>
@@ -173,32 +173,37 @@ export function EasyBattQuantoMiCostaPage() {
       <div className={eb.pageShell}>
         <TopNavCosto />
 
-        <div className={`${eb.hero} mb-6`}>
+        <div className="mb-5 grid gap-3 rounded-[24px] border border-white/10 bg-[radial-gradient(circle_at_top_left,_rgba(15,175,169,0.1),_transparent_30%),linear-gradient(135deg,_rgba(20,23,29,0.96),_rgba(29,32,38,0.96))] p-4 shadow-[0_20px_60px_rgba(0,0,0,0.28)] sm:p-5">
           <div className="flex flex-wrap items-center gap-2">
             <BadgeComp className={eb.badgeYellow}>
               Stima rapida EasyBatt
             </BadgeComp>
             <BadgeComp className={eb.badgeTeal}>
-              Motore preventivo mantenuto
+              Preventivo operativo
             </BadgeComp>
           </div>
 
-          <div className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+          <div className="grid gap-3 lg:grid-cols-[1.12fr_0.88fr] lg:items-center">
             <div>
-              <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl xl:text-6xl">
+              <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl xl:text-5xl">
                 Quanto mi costa
               </h1>
-              <p className="mt-4 max-w-3xl text-lg leading-8 text-[#B6BDC6] sm:text-xl">
-                Inserisci i dati principali, scegli il modello e ottieni una stima indicativa chiara.
-                Il calcolo tiene conto di servizio EasyBatt, trasferta, fornitura, spedizione e posa se attivata.
+              <p className="mt-2 max-w-2xl text-base leading-7 text-[#B6BDC6] sm:text-lg">
+                Scegli il modello, inserisci i dati essenziali e ottieni subito una stima indicativa chiara.
               </p>
             </div>
 
-            <div className={eb.cardInsetSoft}>
+            <div className="grid gap-2 rounded-[20px] border border-white/10 bg-white/[0.04] p-4">
               <div className="flex items-start gap-3">
-                <ShieldCheckIcon className="mt-0.5 h-5 w-5 text-[#72E6E2]" />
-                <div className="text-sm leading-7 text-[#C6CCD4]">
-                  La stima è pensata per orientarti subito. Prima della conferma finale i dettagli tecnici vengono sempre verificati.
+                <ShieldCheckIcon className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
+                <div className="text-sm leading-6 text-[#C6CCD4]">
+                  Totale aggiornato in tempo reale.
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <CalcIcon className="mt-0.5 h-4 w-4 text-[#F8E58A]" />
+                <div className="text-sm leading-6 text-[#C6CCD4]">
+                  Servizio, trasferta, fornitura, spedizione e posa restano inclusi nel calcolo.
                 </div>
               </div>
             </div>

@@ -6,15 +6,17 @@ const cardBase =
 export const eb = {
   pageShell: "mx-auto w-full max-w-7xl px-4 py-4 sm:px-6 sm:py-5",
   topNav:
-    "mb-4 flex flex-col gap-3 rounded-[28px] border border-white/8 bg-white/[0.03] px-4 py-3 backdrop-blur sm:flex-row sm:items-center sm:justify-between sm:px-5",
+    "mb-4 flex flex-col gap-3 rounded-[30px] border border-white/6 bg-white/[0.025] px-4 py-3 shadow-[0_14px_40px_rgba(0,0,0,0.16)] backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between sm:px-5",
   topNavIcon:
-    "flex h-10 w-10 items-center justify-center rounded-2xl border border-[#10B7B3]/25 bg-[#10B7B3]/10",
+    "flex h-9 w-9 items-center justify-center rounded-2xl border border-white/8 bg-white/[0.03] text-[#72E6E2]",
+  navGroup:
+    "flex flex-wrap items-center gap-1.5 rounded-full border border-white/8 bg-[#121418]/55 p-1 text-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]",
   navGhost:
-    "rounded-full border border-transparent px-4 text-[#D8DCE1] transition-all duration-200 hover:border-white/10 hover:bg-white/[0.06] hover:text-white",
+    "rounded-full border border-transparent px-3.5 text-[#B9C1CA] transition-all duration-200 hover:bg-white/[0.06] hover:text-white",
   navActiveTeal:
-    "rounded-full border border-[#10B7B3]/20 bg-[#10B7B3] px-4 font-semibold text-slate-950 transition-colors duration-200 hover:bg-[#22C7C2]",
+    "rounded-full border border-[#10B7B3]/16 bg-[#10B7B3]/12 px-3.5 font-medium text-[#C8FAF8] transition-all duration-200 hover:bg-[#10B7B3]/18",
   navActiveYellow:
-    "rounded-full border border-[#F4CC18]/20 bg-[#F4CC18] px-4 font-semibold text-slate-950 transition-colors duration-200 hover:bg-[#F7D742]",
+    "rounded-full border border-[#F4CC18]/16 bg-[#F4CC18]/12 px-3.5 font-medium text-[#F9E796] transition-all duration-200 hover:bg-[#F4CC18]/18",
   badgeTeal:
     "rounded-full border border-[#10B7B3]/35 bg-[#10B7B3]/12 px-4 py-1.5 text-[#A7F3F0] transition-colors duration-200 hover:bg-[#10B7B3]/16",
   badgeYellow:
