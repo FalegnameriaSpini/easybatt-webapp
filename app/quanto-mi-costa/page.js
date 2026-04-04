@@ -98,7 +98,7 @@ function BrandLockup() {
         <img
           src="/Logo_easybatt_trasp.svg"
           alt="EasyBatt - il battiscopa diventa facile"
-          className="h-auto w-full max-w-[340px] sm:max-w-[360px] lg:max-w-[380px]"
+          className="h-auto w-full max-w-[300px] sm:max-w-[328px] lg:max-w-[352px] xl:max-w-[368px]"
         />
       </div>
     </div>
@@ -246,7 +246,7 @@ export function EasyBattQuantoMiCostaPage() {
     <div className="min-h-screen bg-[#17191D] text-white">
       <StickyBrandHeader />
 
-      <div className={`${eb.pageShell} pt-[196px] sm:pt-[208px] lg:pt-[220px]`}>
+      <div className={`${eb.pageShell} pt-[184px] sm:pt-[198px] lg:pt-[210px]`}>
 
         <div className="grid gap-6 lg:grid-cols-[1.02fr_0.98fr]">
           <div className="grid gap-6">
@@ -409,7 +409,7 @@ export function EasyBattQuantoMiCostaPage() {
           </div>
 
           <div className="flex flex-col gap-6">
-            <CardComp className={`sticky top-[196px] sm:top-[208px] lg:top-4 ${eb.cardInteractive}`}>
+            <CardComp className={`sticky top-[184px] sm:top-[198px] lg:top-4 ${eb.cardInteractive}`}>
               <CardHeaderComp className="pb-3">
                 <CardTitleComp className="text-2xl text-white">La tua stima indicativa</CardTitleComp>
                 <CardDescriptionComp className="text-base leading-7 text-[#B6BDC6]">
