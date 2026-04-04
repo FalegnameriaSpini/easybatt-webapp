@@ -91,20 +91,26 @@ const selectItemClassName =
   "data-[state=checked]:bg-white/5 data-[state=checked]:text-white " +
   "[&_svg]:text-[#72E6E2]";
 
+function BrandLockup() {
+  return (
+    <div className="rounded-[24px] border border-white/10 bg-[radial-gradient(circle_at_top_left,_rgba(15,175,169,0.1),_transparent_32%),linear-gradient(135deg,_rgba(20,23,29,0.98),_rgba(29,32,38,0.98))] px-3 py-2 shadow-[0_18px_50px_rgba(0,0,0,0.28)] sm:px-4 sm:py-2">
+      <div className="flex items-center">
+        <img
+          src="/Logo_easybatt_trasp.svg"
+          alt="EasyBatt - il battiscopa diventa facile"
+          className="h-auto w-full max-w-[340px] sm:max-w-[360px] lg:max-w-[380px]"
+        />
+      </div>
+    </div>
+  );
+}
+
 function StickyBrandHeader() {
   return (
     <div className="fixed inset-x-0 top-0 z-40">
-      <div className="mx-auto flex w-full max-w-7xl px-4 pt-3 sm:px-6 sm:pt-4">
-        <a
-          href="/"
-          aria-label="Torna alla home EasyBatt"
-          className="rounded-[20px] border border-white/10 bg-[radial-gradient(circle_at_top_left,_rgba(15,175,169,0.12),_transparent_34%),linear-gradient(135deg,_rgba(20,23,29,0.94),_rgba(29,32,38,0.9))] px-3 py-2 shadow-[0_18px_46px_rgba(0,0,0,0.22)] backdrop-blur-xl transition-all duration-200 hover:border-white/16 hover:bg-[radial-gradient(circle_at_top_left,_rgba(15,175,169,0.16),_transparent_38%),linear-gradient(135deg,_rgba(22,25,31,0.96),_rgba(31,35,42,0.92))] sm:rounded-[24px] sm:px-4 sm:py-2.5"
-        >
-          <img
-            src="/Logo_easybatt_trasp.svg"
-            alt="EasyBatt - il battiscopa diventa facile"
-            className="h-auto w-[148px] sm:w-[176px] lg:w-[196px]"
-          />
+      <div className="mx-auto w-full max-w-7xl px-4 pt-4 sm:px-6 sm:pt-5">
+        <a href="/" aria-label="Torna alla home EasyBatt" className="block w-fit">
+          <BrandLockup />
         </a>
       </div>
     </div>
@@ -240,7 +246,7 @@ export function EasyBattQuantoMiCostaPage() {
     <div className="min-h-screen bg-[#17191D] text-white">
       <StickyBrandHeader />
 
-      <div className={`${eb.pageShell} pt-[86px] sm:pt-[98px] lg:pt-[108px]`}>
+      <div className={`${eb.pageShell} pt-[196px] sm:pt-[208px] lg:pt-[220px]`}>
 
         <div className="grid gap-6 lg:grid-cols-[1.02fr_0.98fr]">
           <div className="grid gap-6">
@@ -403,7 +409,7 @@ export function EasyBattQuantoMiCostaPage() {
           </div>
 
           <div className="flex flex-col gap-6">
-            <CardComp className={`sticky top-[86px] sm:top-[98px] lg:top-4 ${eb.cardInteractive}`}>
+            <CardComp className={`sticky top-[196px] sm:top-[208px] lg:top-4 ${eb.cardInteractive}`}>
               <CardHeaderComp className="pb-3">
                 <CardTitleComp className="text-2xl text-white">La tua stima indicativa</CardTitleComp>
                 <CardDescriptionComp className="text-base leading-7 text-[#B6BDC6]">
