@@ -48,10 +48,30 @@ function BrandLockup() {
         <img
           src="/Logo_easybatt_trasp.svg"
           alt="EasyBatt - il battiscopa diventa facile"
-          className="h-auto w-full max-w-[340px] sm:max-w-[360px] lg:max-w-[380px]"
+          className="h-auto w-full max-w-[300px] sm:max-w-[328px] lg:max-w-[352px] xl:max-w-[368px]"
         />
       </div>
     </div>
+  );
+}
+
+function FixedBrandLockup() {
+  return (
+    <>
+      <div className="fixed inset-x-0 top-0 z-40 lg:hidden">
+        <div className="mx-auto w-full max-w-7xl px-4 pt-4 sm:px-6 sm:pt-5">
+          <BrandLockup />
+        </div>
+      </div>
+
+      <div className="pointer-events-none fixed inset-0 z-40 hidden lg:flex lg:items-center">
+        <div className="mx-auto flex w-full max-w-7xl px-6">
+          <div className="pointer-events-auto w-full max-w-[368px]">
+            <BrandLockup />
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 
@@ -107,12 +127,12 @@ function EntryCard({ item }) {
 export default function EasyBattHomePage() {
   return (
     <div className="bg-[#17191D] text-white">
-      <div className={`flex min-h-screen flex-col justify-center ${eb.pageShell}`}>
-        <main className="flex flex-1 items-center">
+      <FixedBrandLockup />
+
+      <div className={`flex min-h-screen flex-col ${eb.pageShell} pt-[184px] sm:pt-[198px] lg:py-5`}>
+        <main className="flex flex-1 items-start lg:items-center">
           <section className="grid w-full items-center gap-6 lg:grid-cols-[0.92fr_1.08fr] lg:gap-8">
-            <div className="flex justify-center lg:justify-start">
-              <BrandLockup />
-            </div>
+            <div aria-hidden="true" className="hidden lg:block" />
 
             <div className="grid gap-3 lg:gap-4">
               {ENTRY_POINTS.map((item) => (
