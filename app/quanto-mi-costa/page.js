@@ -4,7 +4,6 @@ import React, { useEffect, useMemo, useState } from "react";
 import {
   Calculator as CalcIcon,
   ChevronRight as ChevronRightIcon,
-  Home as HomeIcon,
   Layers3,
   MapPin,
   Package,
@@ -89,37 +88,26 @@ const selectContentClassName =
 const selectItemClassName =
   "rounded-xl px-2.5 py-2 text-[#D7DCE2] " +
   "focus:bg-[#10B7B3]/10 focus:text-white " +
-  "data-[state=checked]:bg-[#10B7B3] data-[state=checked]:text-[#11161C] " +
+  "data-[state=checked]:bg-white/5 data-[state=checked]:text-white " +
   "[&_svg]:text-[#72E6E2]";
 
-function TopNavCosto() {
+function StickyBrandHeader() {
   return (
-    <header className="sticky top-3 z-30 mb-4 flex flex-col gap-3 rounded-[26px] border border-white/8 bg-[#17191D]/78 px-4 py-2.5 shadow-[0_12px_30px_rgba(0,0,0,0.16)] backdrop-blur-md sm:flex-row sm:items-center sm:justify-between sm:px-5">
-      <div className="flex items-center gap-3">
-        <div className="flex h-9 w-9 items-center justify-center rounded-2xl border border-white/8 bg-white/[0.03] text-[#72E6E2]">
-          <HomeIcon className="h-5 w-5 text-[#72E6E2]" />
-        </div>
-        <div>
-          <div className="text-sm font-semibold uppercase tracking-[0.18em] text-[#D8DDE3]">EasyBatt</div>
-          <div className="text-sm text-[#8F98A3]">Quanto mi costa</div>
-        </div>
+    <div className="fixed inset-x-0 top-0 z-40">
+      <div className="mx-auto flex w-full max-w-7xl px-4 pt-3 sm:px-6 sm:pt-4">
+        <a
+          href="/"
+          aria-label="Torna alla home EasyBatt"
+          className="rounded-[20px] border border-white/10 bg-[radial-gradient(circle_at_top_left,_rgba(15,175,169,0.12),_transparent_34%),linear-gradient(135deg,_rgba(20,23,29,0.94),_rgba(29,32,38,0.9))] px-3 py-2 shadow-[0_18px_46px_rgba(0,0,0,0.22)] backdrop-blur-xl transition-all duration-200 hover:border-white/16 hover:bg-[radial-gradient(circle_at_top_left,_rgba(15,175,169,0.16),_transparent_38%),linear-gradient(135deg,_rgba(22,25,31,0.96),_rgba(31,35,42,0.92))] sm:rounded-[24px] sm:px-4 sm:py-2.5"
+        >
+          <img
+            src="/Logo_easybatt_trasp.svg"
+            alt="EasyBatt - il battiscopa diventa facile"
+            className="h-auto w-[148px] sm:w-[176px] lg:w-[196px]"
+          />
+        </a>
       </div>
-
-      <nav className="flex flex-wrap items-center gap-1.5 rounded-full border border-white/8 bg-[#121418]/45 p-1 text-sm">
-        <ButtonComp asChild variant="ghost" className={eb.navGhost}>
-          <a href="/">Home</a>
-        </ButtonComp>
-        <ButtonComp asChild variant="ghost" className={eb.navGhost}>
-          <a href="/come-funziona">Come funziona</a>
-        </ButtonComp>
-        <ButtonComp asChild variant="ghost" className={eb.navGhost}>
-          <a href="/perche-conviene">Perché conviene</a>
-        </ButtonComp>
-        <ButtonComp asChild variant="ghost" className={eb.navActiveYellow}>
-          <a href="/quanto-mi-costa">Quanto mi costa</a>
-        </ButtonComp>
-      </nav>
-    </header>
+    </div>
   );
 }
 
@@ -250,8 +238,9 @@ export function EasyBattQuantoMiCostaPage() {
 
   return (
     <div className="min-h-screen bg-[#17191D] text-white">
-      <div className={eb.pageShell}>
-        <TopNavCosto />
+      <StickyBrandHeader />
+
+      <div className={`${eb.pageShell} pt-[86px] sm:pt-[98px] lg:pt-[108px]`}>
 
         <div className="grid gap-6 lg:grid-cols-[1.02fr_0.98fr]">
           <div className="grid gap-6">
@@ -414,7 +403,7 @@ export function EasyBattQuantoMiCostaPage() {
           </div>
 
           <div className="flex flex-col gap-6">
-            <CardComp className={`sticky top-4 ${eb.cardInteractive}`}>
+            <CardComp className={`sticky top-[86px] sm:top-[98px] lg:top-4 ${eb.cardInteractive}`}>
               <CardHeaderComp className="pb-3">
                 <CardTitleComp className="text-2xl text-white">La tua stima indicativa</CardTitleComp>
                 <CardDescriptionComp className="text-base leading-7 text-[#B6BDC6]">
