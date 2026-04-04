@@ -109,7 +109,7 @@ function StickyBrandHeader() {
   return (
     <div className="fixed inset-x-0 top-0 z-40">
       <div className="mx-auto w-full max-w-7xl px-4 pt-4 sm:px-6 sm:pt-5">
-        <a href="/" aria-label="Torna alla home EasyBatt" className="block w-fit">
+        <a href="/" aria-label="Torna alla home EasyBatt" className="block w-full max-w-[368px]">
           <BrandLockup />
         </a>
       </div>
