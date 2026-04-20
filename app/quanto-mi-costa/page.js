@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import {
   Calculator as CalcIcon,
   ChevronRight as ChevronRightIcon,
@@ -15,6 +16,7 @@ import {
 } from "lucide-react";
 import { Button as ButtonComp } from "@/components/ui/button";
 import { Card as CardComp, CardContent as CardContentComp, CardDescription as CardDescriptionComp, CardHeader as CardHeaderComp, CardTitle as CardTitleComp } from "@/components/ui/card";
+import { GooglePlacesAutocomplete } from "@/components/google-places-autocomplete";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -109,9 +111,9 @@ function StickyBrandHeader() {
   return (
     <div className="fixed inset-x-0 top-0 z-40">
       <div className="mx-auto w-full max-w-7xl px-4 pt-4 sm:px-6 sm:pt-5">
-        <a href="/" aria-label="Torna alla home EasyBatt" className="block w-full max-w-[368px]">
+        <Link href="/" aria-label="Torna alla home EasyBatt" className="block w-full max-w-[368px]">
           <BrandLockup />
-        </a>
+        </Link>
       </div>
     </div>
   );
@@ -128,6 +130,10 @@ export function EasyBattQuantoMiCostaPage() {
   const [includeShipping, setIncludeShipping] = useState(true);
   const [includeInstallation, setIncludeInstallation] = useState(false);
   const [zipCode, setZipCode] = useState("");
+  const [isDistanceLoading, setIsDistanceLoading] = useState(false);
+  const [distanceError, setDistanceError] = useState("");
+  const [distanceMeta, setDistanceMeta] = useState(null);
+  const [hasManualKmOverride, setHasManualKmOverride] = useState(false);
 
   const matchesFilters = (model, filters) => {
     const materialOk = filters.material === "all" || model.material === filters.material;
@@ -207,6 +213,86 @@ export function EasyBattQuantoMiCostaPage() {
 
   const switchClassName =
     "data-[state=unchecked]:bg-[#2A2E34] data-[state=unchecked]:border-white/10 data-[state=checked]:bg-[#10B7B3] data-[state=checked]:border-[#10B7B3]/40";
+
+  const handleReturnKmChange = (e) => {
+    setReturnKm(e.target.value);
+    setDistanceError("");
+
+    if (distanceMeta?.mode === "auto") {
+      setHasManualKmOverride(true);
+      setDistanceMeta((current) => (current ? { ...current, mode: "manual" } : current));
+    }
+  };
+
+  const handleZipCodeChange = (nextValue) => {
+    setZipCode(nextValue);
+    setDistanceError("");
+    setDistanceMeta(null);
+  };
+
+  const handleCalculateDistance = async () => {
+    const destinationQuery = zipCode.trim();
+
+    if (!destinationQuery) {
+      setDistanceMeta(null);
+      setDistanceError("Inserisci indirizzo o CAP/località prima di calcolare i km.");
+      return;
+    }
+
+    setIsDistanceLoading(true);
+    setDistanceError("");
+    setDistanceMeta(null);
+
+    try {
+      const response = await fetch("/api/quanto-mi-costa/distance", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ destinationQuery }),
+      });
+
+      const payload = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        throw new Error(payload?.error || "Calcolo non riuscito: inserisci i km manualmente");
+      }
+
+      setReturnKm(String(payload.returnKm));
+      setHasManualKmOverride(false);
+      setDistanceMeta({
+        mode: "auto",
+        precision: payload.precision,
+        resolvedAddress: payload.resolvedAddress,
+        originLabel: payload.originLabel,
+      });
+    } catch (error) {
+      setDistanceMeta(null);
+      setDistanceError(error.message || "Calcolo non riuscito: inserisci i km manualmente");
+    } finally {
+      setIsDistanceLoading(false);
+    }
+  };
+
+  const distanceFeedback = distanceError
+    ? {
+        tone: "error",
+        message: distanceError,
+      }
+    : distanceMeta?.mode === "auto"
+      ? {
+          tone: distanceMeta.precision === "approx" ? "approx" : "success",
+          message:
+            distanceMeta.precision === "approx"
+              ? "Stima basata su CAP/località"
+              : "Km calcolati automaticamente",
+        }
+      : hasManualKmOverride
+        ? {
+            tone: "manual",
+            message: "Km modificati manualmente",
+          }
+        : null;
 
   const calculation = useMemo(() => {
     const rawMl = Number(linearMeters);
@@ -362,11 +448,8 @@ export function EasyBattQuantoMiCostaPage() {
               <CardHeaderComp>
                 <CardTitleComp className="flex items-center gap-2 text-xl text-white">
                   <CalcIcon className="h-5 w-5 text-[#F8E58A]" />
-                  Dati per la stima
+                  Completa i Dati
                 </CardTitleComp>
-                <CardDescriptionComp className="text-base leading-7 text-[#B6BDC6]">
-                  Compila solo i dati essenziali. Il totale si aggiorna subito.
-                </CardDescriptionComp>
               </CardHeaderComp>
               <CardContentComp className="grid gap-4 sm:grid-cols-2">
                 <div className="grid gap-2">
@@ -375,13 +458,53 @@ export function EasyBattQuantoMiCostaPage() {
                 </div>
                 <div className="grid gap-2">
                   <Label className="text-[#D9DDE2]">Km totali A/R</Label>
-                  <Input className={inputClassName} type="number" min={0} value={returnKm} onChange={(e) => setReturnKm(e.target.value)} />
+                  <Input className={inputClassName} type="number" min={0} value={returnKm} onChange={handleReturnKmChange} />
                 </div>
                 <div className="grid gap-2 sm:col-span-2">
-                  <Label className="text-[#D9DDE2]">CAP o località del cantiere</Label>
-                  <Input className={inputClassName} placeholder="Es. 25017 Lonato del Garda" value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
+                  <Label className="text-[#D9DDE2]">Indirizzo, CAP o localita del cantiere</Label>
+                  <div className="flex flex-col gap-3 sm:flex-row">
+                    <GooglePlacesAutocomplete
+                      className="flex-1"
+                      inputClassName={inputClassName}
+                      placeholder="Es. 25017 Lonato del Garda oppure Via Roma 12, Lonato del Garda"
+                      value={zipCode}
+                      onValueChange={handleZipCodeChange}
+                    />
+                    <ButtonComp
+                      type="button"
+                      variant="outline"
+                      onClick={handleCalculateDistance}
+                      disabled={isDistanceLoading || !zipCode.trim()}
+                      className={`${eb.outlineButton} h-12 rounded-2xl px-4 text-sm disabled:pointer-events-none disabled:opacity-60`}
+                    >
+                      {isDistanceLoading ? "Calcolo..." : "Calcola km"}
+                    </ButtonComp>
+                  </div>
+                  {distanceFeedback && (
+                    <div
+                      className={`px-1 text-sm ${
+                        distanceFeedback.tone === "error"
+                          ? "text-[#F2A3A3]"
+                          : distanceFeedback.tone === "approx"
+                            ? "text-[#F8E58A]"
+                            : distanceFeedback.tone === "manual"
+                              ? "text-[#AEB6BF]"
+                              : "text-[#72E6E2]"
+                      }`}
+                    >
+                      {distanceFeedback.message}
+                    </div>
+                  )}
+                  {distanceMeta?.mode === "auto" && distanceMeta.resolvedAddress && (
+                    <div className="px-1 text-xs leading-6 text-[#8F98A3]">
+                      Destinazione trovata: {distanceMeta.resolvedAddress}
+                    </div>
+                  )}
                 </div>
                 <div className="sm:col-span-2 grid gap-3 rounded-[24px] border border-white/10 bg-[#17191D] p-4">
+                  <div className="px-1 text-sm font-medium tracking-[0.01em] text-[#C9D0D8]">
+                    Opzioni del servizio
+                  </div>
                   <div className="flex items-center justify-between gap-4 rounded-[20px] border border-white/10 bg-[#1F2329] px-4 py-3">
                     <div>
                       <div className="font-medium text-white">Fornitura battiscopa inclusa</div>
