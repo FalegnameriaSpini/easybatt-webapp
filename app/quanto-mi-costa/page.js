@@ -45,6 +45,7 @@ const INSTALLATION_RATE = 3;
 const PACKAGING_WEIGHT_KG_ML = 0.07;
 const SUPPLY_MARGIN = 0.3;
 const VAT = 0.22;
+const SEDE_LABEL = "Sede EasyBatt - indirizzo da definire";
 
 const SHIPPING_BANDS = [
   { maxKg: 50, price: 17.5 },
@@ -128,6 +129,7 @@ export function EasyBattQuantoMiCostaPage() {
   const [returnKm, setReturnKm] = useState("");
   const [includeSupply, setIncludeSupply] = useState(true);
   const [includeShipping, setIncludeShipping] = useState(true);
+  const [includePickup, setIncludePickup] = useState(false);
   const [includeInstallation, setIncludeInstallation] = useState(false);
   const [zipCode, setZipCode] = useState("");
   const [isDistanceLoading, setIsDistanceLoading] = useState(false);
@@ -213,6 +215,22 @@ export function EasyBattQuantoMiCostaPage() {
   const switchClassName =
     "data-[state=unchecked]:bg-[#2A2E34] data-[state=unchecked]:border-white/10 data-[state=checked]:bg-[#10B7B3] data-[state=checked]:border-[#10B7B3]/40";
 
+  const handleShippingChange = (checked) => {
+    setIncludeShipping(checked);
+
+    if (checked) {
+      setIncludePickup(false);
+    }
+  };
+
+  const handlePickupChange = (checked) => {
+    setIncludePickup(checked);
+
+    if (checked) {
+      setIncludeShipping(false);
+    }
+  };
+
   const handleZipCodeChange = (nextValue) => {
     setZipCode(nextValue);
     setReturnKm("");
@@ -293,8 +311,9 @@ export function EasyBattQuantoMiCostaPage() {
     const totalWeight = includeSupply ? baseWeight + PACKAGING_WEIGHT_KG_ML * ml : 0;
     const serviceSubtotal = ml * SERVICE_RATE;
     const travelSubtotal = km * TRAVEL_RATE;
+    const serviceAndTravelSubtotal = serviceSubtotal + travelSubtotal;
     const supplySubtotal = includeSupply ? ml * supplyUnitPrice : 0;
-    const shippingSubtotal = includeShipping && includeSupply ? getShippingPrice(totalWeight) : 0;
+    const shippingSubtotal = includeShipping && includeSupply && !includePickup ? getShippingPrice(totalWeight) : 0;
     const installationSubtotal = includeInstallation ? ml * INSTALLATION_RATE : 0;
     const subtotal = serviceSubtotal + travelSubtotal + supplySubtotal + shippingSubtotal + installationSubtotal;
     const vat = subtotal * VAT;
@@ -308,6 +327,7 @@ export function EasyBattQuantoMiCostaPage() {
       totalWeight,
       serviceSubtotal,
       travelSubtotal,
+      serviceAndTravelSubtotal,
       supplySubtotal,
       shippingSubtotal,
       installationSubtotal,
@@ -315,7 +335,7 @@ export function EasyBattQuantoMiCostaPage() {
       vat,
       total,
     };
-  }, [includeInstallation, includeShipping, includeSupply, linearMeters, returnKm, selectedModel]);
+  }, [includeInstallation, includePickup, includeShipping, includeSupply, linearMeters, returnKm, selectedModel]);
 
   return (
     <div className="min-h-screen bg-[#17191D] text-white">
@@ -437,32 +457,22 @@ export function EasyBattQuantoMiCostaPage() {
               <CardHeaderComp>
                 <CardTitleComp className="flex items-center gap-2 text-xl text-white">
                   <CalcIcon className="h-5 w-5 text-[#F8E58A]" />
-                  Completa i Dati
+                  Completa la stima
                 </CardTitleComp>
               </CardHeaderComp>
-              <CardContentComp className="grid gap-4 sm:grid-cols-2">
+              <CardContentComp className="grid gap-5">
                 <div className="grid gap-2">
-                  <Label className="text-[#D9DDE2]">Metri lineari</Label>
+                  <Label className="text-base font-semibold text-white">Quanti metri di battiscopa ti servono?</Label>
                   <Input className={inputClassName} type="number" min={0} value={linearMeters} onChange={(e) => setLinearMeters(e.target.value)} />
                 </div>
+
                 <div className="grid gap-2">
-                  <Label className="text-[#D9DDE2]">Km A/R calcolati</Label>
-                  <Input
-                    aria-readonly="true"
-                    className={`${inputClassName} cursor-not-allowed`}
-                    placeholder="Da confermare"
-                    readOnly
-                    type="number"
-                    value={returnKm}
-                  />
-                </div>
-                <div className="grid gap-2 sm:col-span-2">
-                  <Label className="text-[#D9DDE2]">Indirizzo, CAP o localita del cantiere</Label>
+                  <Label className="text-[#D9DDE2]">Dove si trova il cantiere?</Label>
                   <div className="flex flex-col gap-3 sm:flex-row">
                     <GooglePlacesAutocomplete
                       className="flex-1"
                       inputClassName={inputClassName}
-                      placeholder="Es. 25017 Lonato del Garda oppure Via Roma 12, Lonato del Garda"
+                      placeholder="Es. Via Roma 12, Lonato del Garda oppure 25017 Lonato del Garda"
                       value={zipCode}
                       onValueChange={handleZipCodeChange}
                     />
@@ -472,7 +482,7 @@ export function EasyBattQuantoMiCostaPage() {
                       disabled={isDistanceLoading || !zipCode.trim()}
                       className={`${eb.primaryButtonYellow} h-12 rounded-2xl px-4 text-sm disabled:pointer-events-none disabled:opacity-60`}
                     >
-                      {isDistanceLoading ? "Confermo..." : "Conferma indirizzo"}
+                      {isDistanceLoading ? "Calcolo..." : "Calcola i km"}
                     </ButtonComp>
                   </div>
                   {distanceFeedback && (
@@ -496,28 +506,48 @@ export function EasyBattQuantoMiCostaPage() {
                     </div>
                   )}
                 </div>
-                <div className="sm:col-span-2 grid gap-3 rounded-[24px] border border-white/10 bg-[#17191D] p-4">
-                  <div className="px-1 text-sm font-medium tracking-[0.01em] text-[#C9D0D8]">
+
+                <div className="grid gap-2 sm:max-w-sm">
+                  <Label className="text-[#D9DDE2]">Distanza A/R calcolata</Label>
+                  <Input
+                    aria-readonly="true"
+                    className={`${inputClassName} cursor-not-allowed`}
+                    placeholder="Da confermare"
+                    readOnly
+                    type="number"
+                    value={returnKm}
+                  />
+                </div>
+
+                <div className="grid gap-3 rounded-[24px] border border-white/10 bg-[#17191D] p-4">
+                  <div className="px-1 text-[15px] font-semibold tracking-[0.01em] text-[#D9DDE2]">
                     Opzioni del servizio
                   </div>
-                  <div className="flex items-center justify-between gap-4 rounded-[20px] border border-white/10 bg-[#1F2329] px-4 py-3">
+                  <div className="flex items-center justify-between gap-4 rounded-[20px] border border-white/10 bg-[#1F2329] px-4 py-3.5">
                     <div>
-                      <div className="font-medium text-white">Fornitura battiscopa inclusa</div>
-                      <div className="text-sm text-[#9FA7B0]">Attiva di default per avere una stima completa.</div>
+                      <div className="font-semibold text-white">Fornitura battiscopa inclusa</div>
+                      <div className="text-sm text-[#9FA7B0]">Ricevi il materiale già pronto da posare</div>
                     </div>
                     <Switch className={switchClassName} checked={includeSupply} onCheckedChange={setIncludeSupply} />
                   </div>
-                  <div className="flex items-center justify-between gap-4 rounded-[20px] border border-white/10 bg-[#1F2329] px-4 py-3">
+                  <div className="flex items-center justify-between gap-4 rounded-[20px] border border-white/10 bg-[#1F2329] px-4 py-3.5">
                     <div>
-                      <div className="font-medium text-white">Spedizione inclusa</div>
-                      <div className="text-sm text-[#9FA7B0]">Calcolata in base al peso totale con imballo.</div>
+                      <div className="font-semibold text-white">Spedizione inclusa</div>
+                      <div className="text-sm text-[#9FA7B0]">Consegna diretta dove serve</div>
                     </div>
-                    <Switch className={switchClassName} checked={includeShipping} onCheckedChange={setIncludeShipping} />
+                    <Switch className={switchClassName} checked={includeShipping} onCheckedChange={handleShippingChange} />
                   </div>
-                  <div className="flex items-center justify-between gap-4 rounded-[20px] border border-white/10 bg-[#1F2329] px-4 py-3">
+                  <div className="flex items-center justify-between gap-4 rounded-[20px] border border-white/10 bg-[#1F2329] px-4 py-3.5">
                     <div>
-                      <div className="font-medium text-white">Posa in opera inclusa</div>
-                      <div className="text-sm text-[#9FA7B0]">Puoi valutarla subito nella tua stima.</div>
+                      <div className="font-semibold text-white">Ritiro presso la sede</div>
+                      <div className="text-sm text-[#9FA7B0]">Risparmi la spedizione ritirando direttamente</div>
+                    </div>
+                    <Switch className={switchClassName} checked={includePickup} onCheckedChange={handlePickupChange} />
+                  </div>
+                  <div className="flex items-center justify-between gap-4 rounded-[20px] border border-white/10 bg-[#1F2329] px-4 py-3.5">
+                    <div>
+                      <div className="font-semibold text-white">Posa in opera inclusa</div>
+                      <div className="text-sm text-[#9FA7B0]">Valuta subito anche il servizio completo</div>
                     </div>
                     <Switch className={switchClassName} checked={includeInstallation} onCheckedChange={setIncludeInstallation} />
                   </div>
@@ -531,24 +561,22 @@ export function EasyBattQuantoMiCostaPage() {
               <CardHeaderComp className="pb-3">
                 <CardTitleComp className="text-2xl text-white">La tua stima indicativa</CardTitleComp>
                 <CardDescriptionComp className="text-base leading-7 text-[#B6BDC6]">
-                  Una cifra chiara da cui partire, con il motore di calcolo già presente nel preventivatore attuale.
+                  Una stima chiara e immediata per capire subito il costo del tuo progetto.
                 </CardDescriptionComp>
               </CardHeaderComp>
               <CardContentComp className="grid gap-4">
                 <div className={eb.summaryPanel}>
                   <div className="text-sm text-[#B6BDC6]">Totale indicativo IVA inclusa</div>
-                  <div className="mt-2 text-4xl font-bold tracking-tight text-[#F4CC18]">{euro.format(calculation.total)}</div>
-                  <div className="mt-2 text-sm leading-6 text-[#C7CDD5]">Include servizio EasyBatt, trasferta e tutte le opzioni attive nel preventivo.</div>
+                  <div className="mt-3 text-4xl font-bold tracking-tight text-[#F4CC18]">{euro.format(calculation.total)}</div>
+                  <div className="mt-3 text-sm leading-6 text-[#C7CDD5]">Include tutto il necessario per partire, senza costi nascosti.</div>
+                  <div className="mt-1 text-xs leading-5 text-[#8F98A3]">Stima aggiornata in tempo reale in base alle tue scelte</div>
                 </div>
 
                 <div className="grid gap-3">
+                  <div className="px-1 text-xs font-medium uppercase tracking-[0.08em] text-[#8F98A3]">Dettaglio della stima</div>
                   <div className="flex items-center justify-between gap-3 rounded-[20px] border border-white/10 bg-[#17191D] p-3">
-                    <span className="text-sm text-[#D0D5DB]">Servizio EasyBatt: rilievo + preparazione + taglio</span>
-                    <span className="font-semibold text-white">{euro.format(calculation.serviceSubtotal)}</span>
-                  </div>
-                  <div className="flex items-center justify-between gap-3 rounded-[20px] border border-white/10 bg-[#17191D] p-3">
-                    <span className="text-sm text-[#D0D5DB]">Trasferta</span>
-                    <span className="font-semibold text-white">{euro.format(calculation.travelSubtotal)}</span>
+                    <span className="text-[15px] font-medium text-[#E3E7EC]">Servizio di rilievo, taglio e imballo</span>
+                    <span className="font-semibold text-white">{euro.format(calculation.serviceAndTravelSubtotal)}</span>
                   </div>
                   <div className="flex items-center justify-between gap-3 rounded-[20px] border border-white/10 bg-[#17191D] p-3">
                     <div>
@@ -585,6 +613,19 @@ export function EasyBattQuantoMiCostaPage() {
                     <Truck className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
                     <div>Peso totale con imballo: <span className="font-semibold text-white">{calculation.totalWeight.toFixed(1)} kg</span></div>
                   </div>
+                  <div className="flex items-start gap-3">
+                    <Truck className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
+                    <div>Consegna: <span className="font-semibold text-white">{includePickup ? "ritiro presso la sede" : includeShipping ? "spedizione inclusa" : "da concordare"}</span></div>
+                  </div>
+                  {includePickup && (
+                    <div className="flex items-start gap-3">
+                      <MapPin className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
+                      <div>
+                        <div className="font-semibold text-white">Ritiro presso la sede EasyBatt</div>
+                        <div>{SEDE_LABEL}</div>
+                      </div>
+                    </div>
+                  )}
                   <div className="flex items-start gap-3">
                     <MapPin className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
                     <div>Località: <span className="font-semibold text-white">{zipCode || "non inserita"}</span></div>
