@@ -47,7 +47,9 @@ const SUPPLY_MARGIN = 0.3;
 const VAT = 0.22;
 const SEDE_LABEL = "Via Benedetto Castelli,40/42 - Gussago - BS";
 const WHATSAPP_NUMBER = "393445677063";
-const WHATSAPP_MESSAGE = "Ciao, ho visto la stima su EasyBatt e vorrei un chiarimento.";
+const WHATSAPP_VERIFY_MESSAGE = "Ciao, ho visto la mia stima su EasyBatt e vorrei richiedere una verifica del progetto.";
+const WHATSAPP_MESSAGE = "Ciao, ho visto la mia stima su EasyBatt e vorrei un chiarimento.";
+const WHATSAPP_VERIFY_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_VERIFY_MESSAGE)}`;
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
 const SHIPPING_BANDS = [
@@ -652,16 +654,18 @@ export function EasyBattQuantoMiCostaPage() {
                     <span className="font-semibold">Cosa succede dopo</span>
                   </div>
                   <div className="grid gap-3 text-sm text-[#AAB2BB]">
-                    <div>1. Verifichiamo la richiesta e ti aiutiamo a confermare la soluzione più adatta.</div>
-                    <div>2. Controlliamo i dettagli operativi prima della conferma finale.</div>
-                    <div>3. Ricevi un riferimento chiaro da cui partire per organizzare il lavoro.</div>
+                    <div>1. Ci mandi la stima e controlliamo insieme misure, modello e servizi scelti.</div>
+                    <div>2. Ti confermiamo eventuali dettagli pratici prima di procedere.</div>
+                    <div>3. Ricevi un riferimento chiaro per organizzare il tuo progetto senza sorprese.</div>
                   </div>
                 </div>
 
                 <div className="grid gap-3">
-                  <ButtonComp className={`${eb.primaryButtonYellow} h-12 text-base`}>
-                    Richiedi una verifica del tuo progetto
-                    <ChevronRightIcon className="ml-2 h-4 w-4" />
+                  <ButtonComp asChild className={`${eb.primaryButtonYellow} h-12 text-base`}>
+                    <a href={WHATSAPP_VERIFY_URL} target="_blank" rel="noreferrer">
+                      Richiedi una verifica del tuo progetto
+                      <ChevronRightIcon className="ml-2 h-4 w-4" />
+                    </a>
                   </ButtonComp>
                   <ButtonComp asChild variant="outline" className={`${eb.outlineButton} h-12 text-base`}>
                     <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
