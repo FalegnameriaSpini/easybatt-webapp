@@ -45,7 +45,10 @@ const INSTALLATION_RATE = 3;
 const PACKAGING_WEIGHT_KG_ML = 0.07;
 const SUPPLY_MARGIN = 0.3;
 const VAT = 0.22;
-const SEDE_LABEL = "Sede EasyBatt - indirizzo da definire";
+const SEDE_LABEL = "Via Benedetto Castelli,40/42 - Gussago - BS";
+const WHATSAPP_NUMBER = "393445677063";
+const WHATSAPP_MESSAGE = "Ciao, ho visto la stima su EasyBatt e vorrei un chiarimento.";
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
 const SHIPPING_BANDS = [
   { maxKg: 50, price: 17.5 },
@@ -84,6 +87,8 @@ const inputClassName =
   "hover:!border-[#10B7B3]/45 hover:!bg-[#0A8B87] " +
   "focus-visible:!border-[#10B7B3] focus-visible:!bg-[#0A8B87] focus-visible:!ring-2 focus-visible:!ring-[#10B7B3]/25 focus-visible:!outline-none " +
   "placeholder:!text-[#3A4147]";
+
+const estimateFieldLabelClassName = "text-base font-semibold leading-6 text-white";
 
 const selectContentClassName =
   "rounded-2xl !border !border-white/10 !bg-[#11161C] !text-white shadow-[0_18px_40px_rgba(0,0,0,0.28)]";
@@ -462,12 +467,12 @@ export function EasyBattQuantoMiCostaPage() {
               </CardHeaderComp>
               <CardContentComp className="grid gap-5">
                 <div className="grid gap-2">
-                  <Label className="text-base font-semibold text-white">Quanti metri di battiscopa ti servono?</Label>
+                  <Label className={estimateFieldLabelClassName}>Quanti metri di battiscopa ti servono?</Label>
                   <Input className={inputClassName} type="number" min={0} value={linearMeters} onChange={(e) => setLinearMeters(e.target.value)} />
                 </div>
 
                 <div className="grid gap-2">
-                  <Label className="text-[#D9DDE2]">Dove si trova il cantiere?</Label>
+                  <Label className={estimateFieldLabelClassName}>Dove si trova il cantiere?</Label>
                   <div className="flex flex-col gap-3 sm:flex-row">
                     <GooglePlacesAutocomplete
                       className="flex-1"
@@ -508,7 +513,7 @@ export function EasyBattQuantoMiCostaPage() {
                 </div>
 
                 <div className="grid gap-2 sm:max-w-sm">
-                  <Label className="text-[#D9DDE2]">Distanza A/R calcolata</Label>
+                  <Label className={estimateFieldLabelClassName}>Distanza A/R calcolata</Label>
                   <Input
                     aria-readonly="true"
                     className={`${inputClassName} cursor-not-allowed`}
@@ -520,8 +525,9 @@ export function EasyBattQuantoMiCostaPage() {
                 </div>
 
                 <div className="grid gap-3 rounded-[24px] border border-white/10 bg-[#17191D] p-4">
-                  <div className="px-1 text-[15px] font-semibold tracking-[0.01em] text-[#D9DDE2]">
-                    Opzioni del servizio
+                  <div className="grid gap-1 px-1">
+                    <div className="text-base font-semibold tracking-[0.01em] text-white">Opzioni del servizio</div>
+                    <div className="text-sm text-[#8F98A3]">Personalizza la tua soluzione</div>
                   </div>
                   <div className="flex items-center justify-between gap-4 rounded-[20px] border border-white/10 bg-[#1F2329] px-4 py-3.5">
                     <div>
@@ -654,12 +660,14 @@ export function EasyBattQuantoMiCostaPage() {
 
                 <div className="grid gap-3">
                   <ButtonComp className={`${eb.primaryButtonYellow} h-12 text-base`}>
-                    Richiedi verifica e conferma
+                    Richiedi una verifica del tuo progetto
                     <ChevronRightIcon className="ml-2 h-4 w-4" />
                   </ButtonComp>
-                  <ButtonComp variant="outline" className={`${eb.outlineButton} h-12 text-base`}>
-                    <PhoneCall className="mr-2 h-4 w-4" />
-                    Scrivici su WhatsApp
+                  <ButtonComp asChild variant="outline" className={`${eb.outlineButton} h-12 text-base`}>
+                    <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
+                      <PhoneCall className="mr-2 h-4 w-4" />
+                      Hai un dubbio? Scrivici su WhatsApp
+                    </a>
                   </ButtonComp>
                 </div>
               </CardContentComp>
