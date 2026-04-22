@@ -125,7 +125,7 @@ export function EasyBattQuantoMiCostaPage() {
   const [finishFilter, setFinishFilter] = useState("all");
   const [selectedCode, setSelectedCode] = useState("4013R3TG11");
   const [linearMeters, setLinearMeters] = useState(100);
-  const [returnKm, setReturnKm] = useState(50);
+  const [returnKm, setReturnKm] = useState("");
   const [includeSupply, setIncludeSupply] = useState(true);
   const [includeShipping, setIncludeShipping] = useState(true);
   const [includeInstallation, setIncludeInstallation] = useState(false);
@@ -133,7 +133,6 @@ export function EasyBattQuantoMiCostaPage() {
   const [isDistanceLoading, setIsDistanceLoading] = useState(false);
   const [distanceError, setDistanceError] = useState("");
   const [distanceMeta, setDistanceMeta] = useState(null);
-  const [hasManualKmOverride, setHasManualKmOverride] = useState(false);
 
   const matchesFilters = (model, filters) => {
     const materialOk = filters.material === "all" || model.material === filters.material;
@@ -214,18 +213,9 @@ export function EasyBattQuantoMiCostaPage() {
   const switchClassName =
     "data-[state=unchecked]:bg-[#2A2E34] data-[state=unchecked]:border-white/10 data-[state=checked]:bg-[#10B7B3] data-[state=checked]:border-[#10B7B3]/40";
 
-  const handleReturnKmChange = (e) => {
-    setReturnKm(e.target.value);
-    setDistanceError("");
-
-    if (distanceMeta?.mode === "auto") {
-      setHasManualKmOverride(true);
-      setDistanceMeta((current) => (current ? { ...current, mode: "manual" } : current));
-    }
-  };
-
   const handleZipCodeChange = (nextValue) => {
     setZipCode(nextValue);
+    setReturnKm("");
     setDistanceError("");
     setDistanceMeta(null);
   };
@@ -259,7 +249,6 @@ export function EasyBattQuantoMiCostaPage() {
       }
 
       setReturnKm(String(payload.returnKm));
-      setHasManualKmOverride(false);
       setDistanceMeta({
         mode: "auto",
         precision: payload.precision,
@@ -282,15 +271,15 @@ export function EasyBattQuantoMiCostaPage() {
     : distanceMeta?.mode === "auto"
       ? {
           tone: distanceMeta.precision === "approx" ? "approx" : "success",
-          message:
-            distanceMeta.precision === "approx"
-              ? "Stima basata su CAP/località"
-              : "Km calcolati automaticamente",
+        message:
+          distanceMeta.precision === "approx"
+            ? "Stima basata su CAP/località"
+            : "Km calcolati automaticamente",
         }
-      : hasManualKmOverride
+      : zipCode.trim()
         ? {
-            tone: "manual",
-            message: "Km modificati manualmente",
+            tone: "pending",
+            message: "Conferma l'indirizzo per calcolare la trasferta.",
           }
         : null;
 
@@ -457,8 +446,15 @@ export function EasyBattQuantoMiCostaPage() {
                   <Input className={inputClassName} type="number" min={0} value={linearMeters} onChange={(e) => setLinearMeters(e.target.value)} />
                 </div>
                 <div className="grid gap-2">
-                  <Label className="text-[#D9DDE2]">Km totali A/R</Label>
-                  <Input className={inputClassName} type="number" min={0} value={returnKm} onChange={handleReturnKmChange} />
+                  <Label className="text-[#D9DDE2]">Km A/R calcolati</Label>
+                  <Input
+                    aria-readonly="true"
+                    className={`${inputClassName} cursor-not-allowed`}
+                    placeholder="Da confermare"
+                    readOnly
+                    type="number"
+                    value={returnKm}
+                  />
                 </div>
                 <div className="grid gap-2 sm:col-span-2">
                   <Label className="text-[#D9DDE2]">Indirizzo, CAP o localita del cantiere</Label>
@@ -472,12 +468,11 @@ export function EasyBattQuantoMiCostaPage() {
                     />
                     <ButtonComp
                       type="button"
-                      variant="outline"
                       onClick={handleCalculateDistance}
                       disabled={isDistanceLoading || !zipCode.trim()}
-                      className={`${eb.outlineButton} h-12 rounded-2xl px-4 text-sm disabled:pointer-events-none disabled:opacity-60`}
+                      className={`${eb.primaryButtonYellow} h-12 rounded-2xl px-4 text-sm disabled:pointer-events-none disabled:opacity-60`}
                     >
-                      {isDistanceLoading ? "Calcolo..." : "Calcola km"}
+                      {isDistanceLoading ? "Confermo..." : "Conferma indirizzo"}
                     </ButtonComp>
                   </div>
                   {distanceFeedback && (
@@ -487,7 +482,7 @@ export function EasyBattQuantoMiCostaPage() {
                           ? "text-[#F2A3A3]"
                           : distanceFeedback.tone === "approx"
                             ? "text-[#F8E58A]"
-                            : distanceFeedback.tone === "manual"
+                            : distanceFeedback.tone === "pending"
                               ? "text-[#AEB6BF]"
                               : "text-[#72E6E2]"
                       }`}
