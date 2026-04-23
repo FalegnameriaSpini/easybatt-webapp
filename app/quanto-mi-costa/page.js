@@ -48,8 +48,8 @@ const VAT = 0.22;
 const SEDE_LABEL = "Via Benedetto Castelli,40/42 - Gussago - BS";
 const WHATSAPP_NUMBER = "393445677063";
 const WHATSAPP_VERIFY_MESSAGE = "Ciao, ho visto la mia stima su EasyBatt e vorrei richiedere una verifica del progetto.";
+const WHATSAPP_ESTIMATE_MESSAGE = "Ciao, vorrei ricevere la stima che ho appena fatto su EasyBatt.";
 const WHATSAPP_MESSAGE = "Ciao, ho visto la mia stima su EasyBatt e vorrei un chiarimento.";
-const WHATSAPP_VERIFY_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_VERIFY_MESSAGE)}`;
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
 const SHIPPING_BANDS = [
@@ -344,6 +344,44 @@ export function EasyBattQuantoMiCostaPage() {
     };
   }, [includeInstallation, includePickup, includeShipping, includeSupply, linearMeters, returnKm, selectedModel]);
 
+  const estimateSummary = useMemo(() => {
+    const chantierAddress = distanceMeta?.resolvedAddress || zipCode.trim() || "Non indicata";
+    const roundTripDistance = returnKm ? `${returnKm} km` : "Da confermare";
+
+    return [
+      `Modello: ${selectedModel?.description || "Non selezionato"}`,
+      `Metri di battiscopa: ${calculation.ml}`,
+      `Località cantiere: ${chantierAddress}`,
+      `Distanza A/R: ${roundTripDistance}`,
+      `Fornitura battiscopa: ${includeSupply ? "Sì" : "No"}`,
+      `Spedizione: ${includeShipping && !includePickup ? "Sì" : "No"}`,
+      `Ritiro presso la sede: ${includePickup ? "Sì" : "No"}`,
+      `Posa in opera: ${includeInstallation ? "Sì" : "No"}`,
+      `Totale indicativo: ${euro.format(calculation.total)}`,
+    ].join("\n");
+  }, [
+    calculation.ml,
+    calculation.total,
+    distanceMeta?.resolvedAddress,
+    includeInstallation,
+    includePickup,
+    includeShipping,
+    includeSupply,
+    returnKm,
+    selectedModel?.description,
+    zipCode,
+  ]);
+
+  const whatsappVerifyUrl = useMemo(
+    () => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`${WHATSAPP_VERIFY_MESSAGE}\n\n${estimateSummary}`)}`,
+    [estimateSummary],
+  );
+
+  const whatsappEstimateUrl = useMemo(
+    () => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`${WHATSAPP_ESTIMATE_MESSAGE}\n\n${estimateSummary}`)}`,
+    [estimateSummary],
+  );
+
   return (
     <div className="min-h-screen bg-[#17191D] text-white">
       <StickyBrandHeader />
@@ -578,6 +616,7 @@ export function EasyBattQuantoMiCostaPage() {
                   <div className="mt-3 text-4xl font-bold tracking-tight text-[#F4CC18]">{euro.format(calculation.total)}</div>
                   <div className="mt-3 text-sm leading-6 text-[#C7CDD5]">Include tutto il necessario per partire, senza costi nascosti.</div>
                   <div className="mt-1 text-xs leading-5 text-[#8F98A3]">Stima aggiornata in tempo reale in base alle tue scelte</div>
+                  <div className="mt-1 text-xs leading-5 text-[#8F98A3]">Questa è una stima indicativa. La verifica finale è gratuita.</div>
                 </div>
 
                 <div className="grid gap-3">
@@ -661,8 +700,14 @@ export function EasyBattQuantoMiCostaPage() {
                 </div>
 
                 <div className="grid gap-3">
+                  <ButtonComp asChild variant="outline" className={`${eb.outlineButton} h-12 text-base`}>
+                    <a href={whatsappEstimateUrl} target="_blank" rel="noreferrer">
+                      <PhoneCall className="mr-2 h-4 w-4" />
+                      Ricevi questa stima su WhatsApp
+                    </a>
+                  </ButtonComp>
                   <ButtonComp asChild className={`${eb.primaryButtonYellow} h-12 text-base`}>
-                    <a href={WHATSAPP_VERIFY_URL} target="_blank" rel="noreferrer">
+                    <a href={whatsappVerifyUrl} target="_blank" rel="noreferrer">
                       Richiedi una verifica del tuo progetto
                       <ChevronRightIcon className="ml-2 h-4 w-4" />
                     </a>
