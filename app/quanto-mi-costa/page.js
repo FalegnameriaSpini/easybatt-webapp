@@ -47,9 +47,9 @@ const SUPPLY_MARGIN = 0.3;
 const VAT = 0.22;
 const SEDE_LABEL = "Via Benedetto Castelli,40/42 - Gussago - BS";
 const WHATSAPP_NUMBER = "393445677063";
-const WHATSAPP_VERIFY_MESSAGE = "Ciao, ho visto la mia stima su EasyBatt e vorrei richiedere una verifica del progetto.";
-const WHATSAPP_ESTIMATE_MESSAGE = "Ciao, vorrei ricevere la stima che ho appena fatto su EasyBatt.";
-const WHATSAPP_MESSAGE = "Ciao, ho visto la mia stima su EasyBatt e vorrei un chiarimento.";
+const WHATSAPP_VERIFY_MESSAGE = "Ciao, ho visto il prezzo per il mio progetto EasyBatt e vorrei prenotare la verifica.";
+const WHATSAPP_ESTIMATE_MESSAGE = "Ciao, vorrei inviare il riepilogo del mio progetto EasyBatt.";
+const WHATSAPP_MESSAGE = "Ciao, ho visto EasyBatt e vorrei un chiarimento.";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
 const SHIPPING_BANDS = [
@@ -91,6 +91,10 @@ const inputClassName =
   "placeholder:!text-[#3A4147]";
 
 const estimateFieldLabelClassName = "text-base font-semibold leading-6 text-white";
+const neutralButtonClassName =
+  `${eb.outlineButton} active:bg-[#10B7B3] active:text-white active:border-[#0A8B87] focus-visible:bg-[#10B7B3] focus-visible:text-white focus-visible:border-[#0A8B87] hover:border-[#10B7B3]/35`;
+const tealAccentButtonClassName =
+  "h-12 rounded-2xl border border-[#10B7B3]/30 bg-[#10B7B3]/10 text-base font-semibold text-[#C8FAF8] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#10B7B3]/45 hover:bg-[#10B7B3]/16 active:bg-[#10B7B3] active:text-white active:border-[#0A8B87] focus-visible:bg-[#10B7B3] focus-visible:text-white focus-visible:border-[#0A8B87]";
 
 const selectContentClassName =
   "rounded-2xl !border !border-white/10 !bg-[#11161C] !text-white shadow-[0_18px_40px_rgba(0,0,0,0.28)]";
@@ -407,7 +411,7 @@ export function EasyBattQuantoMiCostaPage() {
                     type="button"
                     variant="outline"
                     onClick={resetFilters}
-                    className={`${eb.outlineButton} h-10 px-4 text-sm sm:ml-auto`}
+                    className={`${neutralButtonClassName} h-10 px-4 text-sm sm:ml-auto`}
                   >
                     Reimposta filtri
                   </ButtonComp>
@@ -717,29 +721,33 @@ export function EasyBattQuantoMiCostaPage() {
                     <span className="font-semibold">Cosa succede dopo</span>
                   </div>
                   <div className="grid gap-3 text-sm text-[#AAB2BB]">
-                    <div>1. Ci mandi la stima e controlliamo insieme misure, modello e servizi scelti.</div>
-                    <div>2. Ti confermiamo eventuali dettagli pratici prima di procedere.</div>
-                    <div>3. Ricevi un riferimento chiaro per organizzare il tuo progetto senza sorprese.</div>
+                    <div>1. Ci invii i dati del progetto e verifichiamo insieme misure, modello e servizi scelti.</div>
+                    <div>2. Confermiamo il prezzo sulla base dei dati reali del rilievo.</div>
+                    <div>3. Parti con un riferimento chiaro, senza sprechi e senza sorprese.</div>
                   </div>
                 </div>
 
                 <div className="grid gap-3">
-                  <ButtonComp asChild variant="outline" className={`${eb.outlineButton} h-12 text-base`}>
+                  <ButtonComp
+                    asChild
+                    variant="outline"
+                    className={tealAccentButtonClassName}
+                  >
                     <a href={whatsappEstimateUrl} target="_blank" rel="noreferrer">
                       <PhoneCall className="mr-2 h-4 w-4" />
-                      Ricevi questa stima su WhatsApp
+                      Invia il riepilogo su WhatsApp
                     </a>
                   </ButtonComp>
                   <ButtonComp asChild className={`${eb.primaryButtonYellow} h-12 text-base`}>
                     <a href={whatsappVerifyUrl} target="_blank" rel="noreferrer">
-                      Procedi con la verifica del progetto
+                      Prenota la verifica del progetto
                       <ChevronRightIcon className="ml-2 h-4 w-4" />
                     </a>
                   </ButtonComp>
-                  <ButtonComp asChild variant="outline" className={`${eb.outlineButton} h-12 text-base`}>
+                  <ButtonComp asChild variant="outline" className={`${neutralButtonClassName} h-12 text-base`}>
                     <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
                       <PhoneCall className="mr-2 h-4 w-4" />
-                      Hai un dubbio? Scrivici su WhatsApp
+                      Hai un dubbio? Parla con noi
                     </a>
                   </ButtonComp>
                 </div>
