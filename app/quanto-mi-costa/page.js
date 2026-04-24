@@ -95,6 +95,14 @@ const neutralButtonClassName =
   `${eb.outlineButton} active:bg-[#10B7B3] active:text-white active:border-[#0A8B87] focus-visible:bg-[#10B7B3] focus-visible:text-white focus-visible:border-[#0A8B87] hover:border-[#10B7B3]/35`;
 const tealAccentButtonClassName =
   "h-12 rounded-2xl border border-[#10B7B3]/30 bg-[#10B7B3]/10 text-base font-semibold text-[#C8FAF8] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#10B7B3]/45 hover:bg-[#10B7B3]/16 active:bg-[#10B7B3] active:text-white active:border-[#0A8B87] focus-visible:bg-[#10B7B3] focus-visible:text-white focus-visible:border-[#0A8B87]";
+const finalSecondaryButtonClassName =
+  "h-12 rounded-2xl text-base select-none touch-manipulation transition-all duration-150 active:scale-[0.98] focus-visible:scale-[0.98]";
+const finalNeutralButtonClassName =
+  `${eb.outlineButton} ${finalSecondaryButtonClassName} !border-white/10 !bg-transparent !text-white hover:!border-[#10B7B3]/35 hover:!bg-white/[0.06] active:!bg-[#10B7B3] active:!text-white active:!border-[#0A8B87] focus-visible:!bg-[#10B7B3] focus-visible:!text-white focus-visible:!border-[#0A8B87]`;
+const finalTealAccentButtonClassName =
+  `${finalSecondaryButtonClassName} !border-[#10B7B3]/30 !bg-[#10B7B3]/10 !text-[#C8FAF8] font-semibold hover:-translate-y-0.5 hover:!border-[#10B7B3]/45 hover:!bg-[#10B7B3]/16 active:!bg-[#10B7B3] active:!text-white active:!border-[#0A8B87] focus-visible:!bg-[#10B7B3] focus-visible:!text-white focus-visible:!border-[#0A8B87]`;
+const finalPrimaryButtonClassName =
+  `${eb.primaryButtonYellow} h-12 text-base select-none touch-manipulation transition-all duration-150 active:scale-[0.98] active:!bg-[#E1BC14] active:!text-slate-950 active:!border-[#C9A713] focus-visible:!bg-[#F7D742] focus-visible:!text-slate-950 focus-visible:!border-[#C9A713]`;
 
 const selectContentClassName =
   "rounded-2xl !border !border-white/10 !bg-[#11161C] !text-white shadow-[0_18px_40px_rgba(0,0,0,0.28)]";
@@ -731,21 +739,21 @@ export function EasyBattQuantoMiCostaPage() {
                   <ButtonComp
                     asChild
                     variant="outline"
-                    className={tealAccentButtonClassName}
+                    className={finalTealAccentButtonClassName}
                   >
-                    <a href={whatsappEstimateUrl} target="_blank" rel="noreferrer">
+                    <a href={whatsappEstimateUrl} target="_blank" rel="noreferrer" draggable={false} onContextMenu={(e) => e.preventDefault()}>
                       <PhoneCall className="mr-2 h-4 w-4" />
                       Invia il riepilogo su WhatsApp
                     </a>
                   </ButtonComp>
-                  <ButtonComp asChild className={`${eb.primaryButtonYellow} h-12 text-base`}>
-                    <a href={whatsappVerifyUrl} target="_blank" rel="noreferrer">
+                  <ButtonComp asChild className={finalPrimaryButtonClassName}>
+                    <a href={whatsappVerifyUrl} target="_blank" rel="noreferrer" draggable={false} onContextMenu={(e) => e.preventDefault()}>
                       Prenota la verifica del progetto
                       <ChevronRightIcon className="ml-2 h-4 w-4" />
                     </a>
                   </ButtonComp>
-                  <ButtonComp asChild variant="outline" className={`${neutralButtonClassName} h-12 text-base`}>
-                    <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
+                  <ButtonComp asChild variant="outline" className={finalNeutralButtonClassName}>
+                    <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" draggable={false} onContextMenu={(e) => e.preventDefault()}>
                       <PhoneCall className="mr-2 h-4 w-4" />
                       Hai un dubbio? Parla con noi
                     </a>
