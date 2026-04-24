@@ -142,6 +142,7 @@ export function EasyBattQuantoMiCostaPage() {
   const [isDistanceLoading, setIsDistanceLoading] = useState(false);
   const [distanceError, setDistanceError] = useState("");
   const [distanceMeta, setDistanceMeta] = useState(null);
+  const [isLinearMetersFocused, setIsLinearMetersFocused] = useState(false);
 
   const matchesFilters = (model, filters) => {
     const materialOk = filters.material === "all" || model.material === filters.material;
@@ -508,7 +509,29 @@ export function EasyBattQuantoMiCostaPage() {
               <CardContentComp className="grid gap-5">
                 <div className="grid gap-2">
                   <Label className={estimateFieldLabelClassName}>Quanti metri di battiscopa ti servono?</Label>
-                  <Input className={inputClassName} type="number" min={0} value={linearMeters} onChange={(e) => setLinearMeters(e.target.value)} />
+                  <Input
+                    className={inputClassName}
+                    type="number"
+                    min={0}
+                    value={linearMeters}
+                    onChange={(e) => setLinearMeters(e.target.value)}
+                    onFocus={() => setIsLinearMetersFocused(true)}
+                    onBlur={() => setIsLinearMetersFocused(false)}
+                  />
+                  {isLinearMetersFocused && (
+                    <div className="rounded-[20px] border border-[#10B7B3]/20 bg-white/[0.04] px-4 py-3 text-sm text-[#D9E8E7] shadow-[0_14px_34px_rgba(0,0,0,0.16)]">
+                      <div className="font-semibold text-white">Non sai quanti metri inserire?</div>
+                      <div className="mt-2 leading-6 text-[#C7CDD5]">
+                        Per una prima valutazione puoi indicare i metri stimati aggiungendo circa un 10% di margine.
+                      </div>
+                      <div className="mt-2 leading-6 text-[#C7CDD5]">
+                        Il costo finale verrà calcolato dopo il rilievo, sui metri reali effettivamente necessari. Questo evita sprechi e maggiorazioni inutili.
+                      </div>
+                      <div className="mt-2 leading-6 text-[#A7F3F0]">
+                        Se hai dubbi, usa il pulsante WhatsApp in fondo alla pagina.
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <div className="grid gap-2">
@@ -605,22 +628,23 @@ export function EasyBattQuantoMiCostaPage() {
           <div className="flex flex-col gap-6">
             <CardComp className={`sticky top-[184px] sm:top-[198px] lg:top-4 ${eb.cardInteractive}`}>
               <CardHeaderComp className="pb-3">
-                <CardTitleComp className="text-2xl text-white">La tua stima indicativa</CardTitleComp>
+                <CardTitleComp className="text-2xl text-white">Il tuo prezzo EasyBatt</CardTitleComp>
                 <CardDescriptionComp className="text-base leading-7 text-[#B6BDC6]">
-                  Una stima chiara e immediata per capire subito il costo del tuo progetto.
+                  Un prezzo calcolato sui dati inseriti, per capire subito il costo del tuo progetto.
                 </CardDescriptionComp>
               </CardHeaderComp>
               <CardContentComp className="grid gap-4">
                 <div className={eb.summaryPanel}>
-                  <div className="text-sm text-[#B6BDC6]">Totale indicativo IVA inclusa</div>
+                  <div className="text-sm text-[#B6BDC6]">Totale IVA inclusa</div>
                   <div className="mt-3 text-4xl font-bold tracking-tight text-[#F4CC18]">{euro.format(calculation.total)}</div>
                   <div className="mt-3 text-sm leading-6 text-[#C7CDD5]">Include tutto il necessario per partire, senza costi nascosti.</div>
-                  <div className="mt-1 text-xs leading-5 text-[#8F98A3]">Stima aggiornata in tempo reale in base alle tue scelte</div>
-                  <div className="mt-1 text-xs leading-5 text-[#8F98A3]">Questa è una stima indicativa. La verifica finale è gratuita.</div>
+                  <div className="mt-1 text-xs leading-5 text-[#8F98A3]">Prezzo calcolato sui dati inseriti.</div>
+                  <div className="mt-1 text-xs leading-5 text-[#8F98A3]">Il costo finale viene confermato dopo il rilievo sui metri reali.</div>
+                  <div className="mt-1 text-xs leading-5 text-[#8F98A3]">Paghi solo i metri realmente necessari, senza margini di sicurezza.</div>
                 </div>
 
                 <div className="grid gap-3">
-                  <div className="px-1 text-xs font-medium uppercase tracking-[0.08em] text-[#8F98A3]">Dettaglio della stima</div>
+                  <div className="px-1 text-xs font-medium uppercase tracking-[0.08em] text-[#8F98A3]">Dettaglio del prezzo</div>
                   <div className="flex items-center justify-between gap-3 rounded-[20px] border border-white/10 bg-[#17191D] p-3">
                     <span className="text-[15px] font-medium text-[#E3E7EC]">Servizio di rilievo, taglio e imballo</span>
                     <span className="font-semibold text-white">{euro.format(calculation.serviceAndTravelSubtotal)}</span>
@@ -708,7 +732,7 @@ export function EasyBattQuantoMiCostaPage() {
                   </ButtonComp>
                   <ButtonComp asChild className={`${eb.primaryButtonYellow} h-12 text-base`}>
                     <a href={whatsappVerifyUrl} target="_blank" rel="noreferrer">
-                      Richiedi una verifica del tuo progetto
+                      Procedi con la verifica del progetto
                       <ChevronRightIcon className="ml-2 h-4 w-4" />
                     </a>
                   </ButtonComp>
