@@ -48,7 +48,7 @@ const VAT = 0.22;
 const SEDE_LABEL = "Via Benedetto Castelli,40/42 - Gussago - BS";
 const WHATSAPP_NUMBER = "393445677063";
 const WHATSAPP_VERIFY_MESSAGE = "Ciao, ho visto il prezzo per il mio progetto EasyBatt e vorrei prenotare la verifica.";
-const WHATSAPP_ESTIMATE_MESSAGE = "Ciao, vorrei inviare il riepilogo del mio progetto EasyBatt.";
+const WHATSAPP_RECAP_MESSAGE = "Ciao, vorrei inviare il riepilogo del mio progetto EasyBatt.";
 const WHATSAPP_MESSAGE = "Ciao, ho visto EasyBatt e vorrei un chiarimento.";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
@@ -93,8 +93,6 @@ const inputClassName =
 const estimateFieldLabelClassName = "text-base font-semibold leading-6 text-white";
 const neutralButtonClassName =
   `${eb.outlineButton} active:bg-[#10B7B3] active:text-white active:border-[#0A8B87] focus-visible:bg-[#10B7B3] focus-visible:text-white focus-visible:border-[#0A8B87] hover:border-[#10B7B3]/35`;
-const tealAccentButtonClassName =
-  "h-12 rounded-2xl border border-[#10B7B3]/30 bg-[#10B7B3]/10 text-base font-semibold text-[#C8FAF8] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#10B7B3]/45 hover:bg-[#10B7B3]/16 active:bg-[#10B7B3] active:text-white active:border-[#0A8B87] focus-visible:bg-[#10B7B3] focus-visible:text-white focus-visible:border-[#0A8B87]";
 const finalSecondaryButtonClassName =
   "h-12 rounded-2xl text-base select-none touch-manipulation transition-all duration-150 active:scale-[0.98] focus-visible:scale-[0.98]";
 const finalNeutralButtonClassName =
@@ -283,7 +281,7 @@ export function EasyBattQuantoMiCostaPage() {
       const payload = await response.json().catch(() => null);
 
       if (!response.ok) {
-        throw new Error(payload?.error || "Calcolo non riuscito: inserisci i km manualmente");
+        throw new Error(payload?.error || "Calcolo non riuscito. Verifica l'indirizzo e riprova.");
       }
 
       setReturnKm(String(payload.returnKm));
@@ -295,7 +293,7 @@ export function EasyBattQuantoMiCostaPage() {
       });
     } catch (error) {
       setDistanceMeta(null);
-      setDistanceError(error.message || "Calcolo non riuscito: inserisci i km manualmente");
+      setDistanceError(error.message || "Calcolo non riuscito. Verifica l'indirizzo e riprova.");
     } finally {
       setIsDistanceLoading(false);
     }
@@ -311,7 +309,7 @@ export function EasyBattQuantoMiCostaPage() {
           tone: distanceMeta.precision === "approx" ? "approx" : "success",
         message:
           distanceMeta.precision === "approx"
-            ? "Stima basata su CAP/località"
+            ? "Calcolo basato su CAP/località"
             : "Km calcolati automaticamente",
         }
       : zipCode.trim()
@@ -328,12 +326,12 @@ export function EasyBattQuantoMiCostaPage() {
     const km = Number.isFinite(rawKm) ? Math.max(0, rawKm) : 0;
     const supplyUnitPrice = includeSupply ? (selectedModel?.supplyBaseCostPerMl ?? 0) * (1 + SUPPLY_MARGIN) : 0;
     const baseWeight = (selectedModel?.weightKgMl ?? 0) * ml;
-    const totalWeight = includeSupply ? baseWeight + PACKAGING_WEIGHT_KG_ML * ml : 0;
+    const totalWeight = baseWeight + PACKAGING_WEIGHT_KG_ML * ml;
     const serviceSubtotal = ml * SERVICE_RATE;
     const travelSubtotal = km * TRAVEL_RATE;
     const serviceAndTravelSubtotal = serviceSubtotal + travelSubtotal;
     const supplySubtotal = includeSupply ? ml * supplyUnitPrice : 0;
-    const shippingSubtotal = includeShipping && includeSupply && !includePickup ? getShippingPrice(totalWeight) : 0;
+    const shippingSubtotal = includeShipping && !includePickup ? getShippingPrice(totalWeight) : 0;
     const installationSubtotal = includeInstallation ? ml * INSTALLATION_RATE : 0;
     const subtotal = serviceSubtotal + travelSubtotal + supplySubtotal + shippingSubtotal + installationSubtotal;
     const vat = subtotal * VAT;
@@ -357,20 +355,26 @@ export function EasyBattQuantoMiCostaPage() {
     };
   }, [includeInstallation, includePickup, includeShipping, includeSupply, linearMeters, returnKm, selectedModel]);
 
-  const estimateSummary = useMemo(() => {
-    const chantierAddress = distanceMeta?.resolvedAddress || zipCode.trim() || "Non indicata";
-    const roundTripDistance = returnKm ? `${returnKm} km` : "Da confermare";
+  const projectSummary = useMemo(() => {
+    const chantierAddress = distanceMeta?.resolvedAddress || zipCode.trim() || "Da definire";
+    const servizi = [
+      includeSupply && "Fornitura battiscopa",
+      includeShipping && !includePickup && "Spedizione",
+      includePickup && "Ritiro presso la sede",
+      includeInstallation && "Posa in opera",
+    ].filter(Boolean);
 
     return [
-      `Modello: ${selectedModel?.description || "Non selezionato"}`,
-      `Metri di battiscopa: ${calculation.ml}`,
-      `Località cantiere: ${chantierAddress}`,
-      `Distanza A/R: ${roundTripDistance}`,
-      `Fornitura battiscopa: ${includeSupply ? "Sì" : "No"}`,
-      `Spedizione: ${includeShipping && !includePickup ? "Sì" : "No"}`,
-      `Ritiro presso la sede: ${includePickup ? "Sì" : "No"}`,
-      `Posa in opera: ${includeInstallation ? "Sì" : "No"}`,
-      `Totale indicativo: ${euro.format(calculation.total)}`,
+      "Ciao, ho configurato un progetto EasyBatt 👇",
+      "",
+      `📐 Metri battiscopa: ${calculation.ml} ml`,
+      `📦 Modello: ${selectedModel?.description || "Non selezionato"}`,
+      `📍 Località: ${chantierAddress}`,
+      "",
+      `💰 Totale calcolato: ${euro.format(calculation.total)}`,
+      "",
+      ...(servizi.length ? ["Servizi inclusi:", ...servizi.map((servizio) => `- ${servizio}`), ""] : []),
+      "Possiamo verificare insieme il progetto?",
     ].join("\n");
   }, [
     calculation.ml,
@@ -380,20 +384,21 @@ export function EasyBattQuantoMiCostaPage() {
     includePickup,
     includeShipping,
     includeSupply,
-    returnKm,
     selectedModel?.description,
     zipCode,
   ]);
 
   const whatsappVerifyUrl = useMemo(
-    () => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`${WHATSAPP_VERIFY_MESSAGE}\n\n${estimateSummary}`)}`,
-    [estimateSummary],
+    () => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`${WHATSAPP_VERIFY_MESSAGE}\n\n${projectSummary}`)}`,
+    [projectSummary],
   );
 
-  const whatsappEstimateUrl = useMemo(
-    () => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`${WHATSAPP_ESTIMATE_MESSAGE}\n\n${estimateSummary}`)}`,
-    [estimateSummary],
+  const whatsappRecapUrl = useMemo(
+    () => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`${WHATSAPP_RECAP_MESSAGE}\n\n${projectSummary}`)}`,
+    [projectSummary],
   );
+
+  const resolvedLocationLabel = distanceMeta?.resolvedAddress || zipCode.trim();
 
   return (
     <div className="min-h-screen bg-[#17191D] text-white">
@@ -534,13 +539,13 @@ export function EasyBattQuantoMiCostaPage() {
                     <div className="rounded-[20px] border border-[#10B7B3]/20 bg-white/[0.04] px-4 py-3 text-sm text-[#D9E8E7] shadow-[0_14px_34px_rgba(0,0,0,0.16)]">
                       <div className="font-semibold text-white">Non sai quanti metri inserire?</div>
                       <div className="mt-2 leading-6 text-[#C7CDD5]">
-                        Per una prima valutazione puoi indicare i metri stimati aggiungendo circa un 10% di margine.
+                        Per una prima valutazione puoi inserire i metri stimati aggiungendo circa un 10% di margine.
                       </div>
                       <div className="mt-2 leading-6 text-[#C7CDD5]">
-                        Il costo finale verrà calcolato dopo il rilievo, sui metri reali effettivamente necessari. Questo evita sprechi e maggiorazioni inutili.
+                        Il prezzo verrà verificato sui metri reali prima della conferma dell&apos;ordine.
                       </div>
                       <div className="mt-2 leading-6 text-[#A7F3F0]">
-                        Se hai dubbi, usa il pulsante WhatsApp in fondo alla pagina.
+                        Se hai dubbi, contattaci usando il pulsante WhatsApp in fondo alla pagina.
                       </div>
                     </div>
                   )}
@@ -657,7 +662,7 @@ export function EasyBattQuantoMiCostaPage() {
                 <div className="grid gap-3">
                   <div className="px-1 text-xs font-medium uppercase tracking-[0.08em] text-[#8F98A3]">Dettaglio del prezzo</div>
                   <div className="flex items-center justify-between gap-3 rounded-[20px] border border-white/10 bg-[#17191D] p-3">
-                    <span className="text-[15px] font-medium text-[#E3E7EC]">Servizio di rilievo, taglio e imballo</span>
+                    <span className="text-[15px] font-medium text-[#E3E7EC]">Servizio di taglio e preparazione</span>
                     <span className="font-semibold text-white">{euro.format(calculation.serviceAndTravelSubtotal)}</span>
                   </div>
                   <div className="flex items-center justify-between gap-3 rounded-[20px] border border-white/10 bg-[#17191D] p-3">
@@ -695,10 +700,12 @@ export function EasyBattQuantoMiCostaPage() {
                     <Truck className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
                     <div>Peso totale con imballo: <span className="font-semibold text-white">{calculation.totalWeight.toFixed(1)} kg</span></div>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <Truck className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
-                    <div>Consegna: <span className="font-semibold text-white">{includePickup ? "ritiro presso la sede" : includeShipping ? "spedizione inclusa" : "da concordare"}</span></div>
-                  </div>
+                  {!includePickup && (
+                    <div className="flex items-start gap-3">
+                      <Truck className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
+                      <div>Modalità di consegna: <span className="font-semibold text-white">{includeShipping ? "spedizione inclusa" : "da concordare"}</span></div>
+                    </div>
+                  )}
                   {includePickup && (
                     <div className="flex items-start gap-3">
                       <MapPin className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
@@ -708,17 +715,19 @@ export function EasyBattQuantoMiCostaPage() {
                       </div>
                     </div>
                   )}
-                  <div className="flex items-start gap-3">
-                    <MapPin className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
-                    <div>Località: <span className="font-semibold text-white">{zipCode || "non inserita"}</span></div>
-                  </div>
+                  {resolvedLocationLabel && (
+                    <div className="flex items-start gap-3">
+                      <MapPin className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
+                      <div>Località: <span className="font-semibold text-white">{resolvedLocationLabel}</span></div>
+                    </div>
+                  )}
                   <div className="flex items-start gap-3">
                     <Ruler className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
                     <div>Modello selezionato: <span className="font-semibold text-white">{selectedModel?.description}</span></div>
                   </div>
                   <div className="flex items-start gap-3">
                     <Wrench className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
-                    <div>Stato fornitura: <span className="font-semibold text-white">{includeSupply ? "inclusa nel preventivo" : "esclusa dal preventivo"}</span></div>
+                    <div>Stato fornitura: <span className="font-semibold text-white">{includeSupply ? "inclusa nel prezzo" : "esclusa dal prezzo"}</span></div>
                   </div>
                 </div>
 
@@ -739,7 +748,7 @@ export function EasyBattQuantoMiCostaPage() {
                     variant="outline"
                     className={finalTealAccentButtonClassName}
                   >
-                    <a href={whatsappEstimateUrl} target="_blank" rel="noreferrer" draggable={false} onContextMenu={(e) => e.preventDefault()}>
+                    <a href={whatsappRecapUrl} target="_blank" rel="noreferrer" draggable={false} onContextMenu={(e) => e.preventDefault()}>
                       <PhoneCall className="mr-2 h-4 w-4" />
                       Invia il riepilogo su WhatsApp
                     </a>
