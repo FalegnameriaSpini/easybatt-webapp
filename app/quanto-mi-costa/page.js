@@ -102,7 +102,7 @@ const finalNeutralButtonClassName =
 const finalTealAccentButtonClassName =
   `${finalSecondaryButtonClassName} !border-[#10B7B3]/30 !bg-[#10B7B3]/10 !text-[#C8FAF8] font-semibold hover:-translate-y-0.5 hover:!border-[#10B7B3]/45 hover:!bg-[#10B7B3]/16 active:!bg-[#10B7B3] active:!text-white active:!border-[#0A8B87] focus-visible:!bg-[#10B7B3] focus-visible:!text-white focus-visible:!border-[#0A8B87]`;
 const finalPrimaryButtonClassName =
-  `${eb.primaryButtonYellow} h-12 text-base select-none touch-manipulation transition-all duration-150 active:scale-[0.98] active:!bg-[#E1BC14] active:!text-slate-950 active:!border-[#C9A713] focus-visible:!bg-[#F7D742] focus-visible:!text-slate-950 focus-visible:!border-[#C9A713]`;
+  `${eb.primaryButtonYellow} h-12 text-base select-none touch-manipulation transition-all duration-150 active:scale-[0.98] active:!bg-[#F4CC18] active:!text-slate-950 active:!border-[#C9A713] focus-visible:!bg-[#F4CC18] focus-visible:!text-slate-950 focus-visible:!border-[#C9A713]`;
 
 const selectContentClassName =
   "rounded-2xl !border !border-white/10 !bg-[#11161C] !text-white shadow-[0_18px_40px_rgba(0,0,0,0.28)]";
