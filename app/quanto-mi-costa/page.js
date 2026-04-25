@@ -100,9 +100,9 @@ const finalSecondaryButtonClassName =
 const finalNeutralButtonClassName =
   `${eb.outlineButton} ${finalSecondaryButtonClassName} !border-white/10 !bg-transparent !text-white hover:!border-[#10B7B3]/35 hover:!bg-white/[0.06] active:!bg-[#10B7B3] active:!text-white active:!border-[#0A8B87] focus-visible:!bg-[#10B7B3] focus-visible:!text-white focus-visible:!border-[#0A8B87]`;
 const finalTealAccentButtonClassName =
-  `${finalSecondaryButtonClassName} !border-[#10B7B3]/30 !bg-[#10B7B3]/10 !text-[#C8FAF8] font-semibold hover:-translate-y-0.5 hover:!border-[#10B7B3]/45 hover:!bg-[#10B7B3]/16 active:!bg-[#10B7B3] active:!text-white active:!border-[#0A8B87] focus-visible:!bg-[#10B7B3] focus-visible:!text-white focus-visible:!border-[#0A8B87]`;
-const finalPrimaryButtonClassName =
-  "h-12 rounded-2xl !border !border-[#F4CC18]/20 !bg-[#F4CC18] !text-slate-950 text-base font-semibold select-none touch-manipulation transition-all duration-150 hover:-translate-y-0.5 hover:!bg-[#F7D742] hover:!text-slate-950 hover:!border-[#F4CC18]/30 active:scale-[0.98] active:!bg-[#E1BC14] active:!text-slate-950 active:!border-[#C9A713] focus-visible:!bg-[#F4CC18] focus-visible:!text-slate-950 focus-visible:!border-[#C9A713]";
+  `${eb.primaryButtonTeal} h-12 text-base select-none touch-manipulation transition-all duration-150 active:scale-[0.98] active:!bg-[#0A8B87] active:!text-white active:!border-[#08716E] focus-visible:!bg-[#10B7B3] focus-visible:!text-white focus-visible:!border-[#08716E]`;
+const finalSecondaryActionButtonClassName =
+  `${eb.outlineButton} ${finalSecondaryButtonClassName} !border-[#F4CC18]/24 !bg-[#F4CC18]/10 !text-[#F8E58A] hover:!border-[#F4CC18]/36 hover:!bg-[#F4CC18]/14 hover:!text-[#FFF1A8] active:!bg-[#F4CC18]/18 active:!text-[#FFF1A8] active:!border-[#D4AF12] focus-visible:!bg-[#F4CC18]/14 focus-visible:!text-[#FFF1A8] focus-visible:!border-[#D4AF12]`;
 
 const selectContentClassName =
   "rounded-2xl !border !border-white/10 !bg-[#11161C] !text-white shadow-[0_18px_40px_rgba(0,0,0,0.28)]";
@@ -515,7 +515,7 @@ export function EasyBattQuantoMiCostaPage() {
               <CardHeaderComp>
                 <CardTitleComp className="flex items-center gap-2 text-xl text-white">
                   <CalcIcon className="h-5 w-5 text-[#F8E58A]" />
-                  Completa la stima
+                  Completa il prezzo
                 </CardTitleComp>
               </CardHeaderComp>
               <CardContentComp className="grid gap-5">
@@ -651,8 +651,7 @@ export function EasyBattQuantoMiCostaPage() {
                   <div className="mt-3 text-4xl font-bold tracking-tight text-[#F4CC18]">{euro.format(calculation.total)}</div>
                   <div className="mt-3 text-sm leading-6 text-[#C7CDD5]">Include tutto il necessario per partire, senza costi nascosti.</div>
                   <div className="mt-1 text-xs leading-5 text-[#8F98A3]">Prezzo calcolato sui dati inseriti.</div>
-                  <div className="mt-1 text-xs leading-5 text-[#8F98A3]">Il costo finale viene confermato dopo il rilievo sui metri reali.</div>
-                  <div className="mt-1 text-xs leading-5 text-[#8F98A3]">Paghi solo i metri realmente necessari, senza margini di sicurezza.</div>
+                  <div className="mt-1 text-xs leading-5 text-[#8F98A3]">Verrà verificato prima della conferma dell&apos;ordine.</div>
                 </div>
 
                 <div className="grid gap-3">
@@ -729,16 +728,14 @@ export function EasyBattQuantoMiCostaPage() {
                     <span className="font-semibold">Cosa succede dopo</span>
                   </div>
                   <div className="grid gap-3 text-sm text-[#AAB2BB]">
-                    <div>1. Ci invii i dati del progetto e verifichiamo insieme misure, modello e servizi scelti.</div>
-                    <div>2. Confermiamo il prezzo sulla base dei dati reali del rilievo.</div>
-                    <div>3. Parti con un riferimento chiaro, senza sprechi e senza sorprese.</div>
+                    <div>1. Inviaci i dati del progetto per verificare insieme misure, modello e servizi scelti.</div>
+                    <div>2. Ricevi un riepilogo chiaro per partire con il tuo ordine.</div>
                   </div>
                 </div>
 
                 <div className="grid gap-3">
                   <ButtonComp
                     asChild
-                    variant="outline"
                     className={finalTealAccentButtonClassName}
                   >
                     <a href={whatsappEstimateUrl} target="_blank" rel="noreferrer" draggable={false} onContextMenu={(e) => e.preventDefault()}>
@@ -746,7 +743,7 @@ export function EasyBattQuantoMiCostaPage() {
                       Invia il riepilogo su WhatsApp
                     </a>
                   </ButtonComp>
-                  <ButtonComp asChild className={finalPrimaryButtonClassName}>
+                  <ButtonComp asChild variant="outline" className={finalSecondaryActionButtonClassName}>
                     <a href={whatsappVerifyUrl} target="_blank" rel="noreferrer" draggable={false} onContextMenu={(e) => e.preventDefault()}>
                       Prenota la verifica del progetto
                       <ChevronRightIcon className="ml-2 h-4 w-4" />
