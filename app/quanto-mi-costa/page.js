@@ -100,9 +100,9 @@ const finalSecondaryButtonClassName =
 const finalNeutralButtonClassName =
   `${eb.outlineButton} ${finalSecondaryButtonClassName} !border-white/10 !bg-transparent !text-white hover:!border-[#10B7B3]/35 hover:!bg-white/[0.06] active:!bg-[#10B7B3] active:!text-white active:!border-[#0A8B87] focus-visible:!bg-[#10B7B3] focus-visible:!text-white focus-visible:!border-[#0A8B87]`;
 const finalTealAccentButtonClassName =
-  `${eb.primaryButtonTeal} h-12 text-base select-none touch-manipulation transition-all duration-150 active:scale-[0.98] active:!bg-[#0A8B87] active:!text-white active:!border-[#08716E] focus-visible:!bg-[#10B7B3] focus-visible:!text-white focus-visible:!border-[#08716E]`;
+  `${finalSecondaryButtonClassName} !border-[#0A8B87] !bg-[#10B7B3] !text-white font-semibold hover:-translate-y-0.5 hover:!border-[#0A8B87] hover:!bg-[#22C7C2] hover:!text-white active:!bg-[#0A8B87] active:!text-white active:!border-[#08716E] focus-visible:!bg-[#10B7B3] focus-visible:!text-white focus-visible:!border-[#0A8B87]`;
 const finalSecondaryActionButtonClassName =
-  `${eb.outlineButton} ${finalSecondaryButtonClassName} !border-[#F4CC18]/24 !bg-[#F4CC18]/10 !text-[#F8E58A] hover:!border-[#F4CC18]/36 hover:!bg-[#F4CC18]/14 hover:!text-[#FFF1A8] active:!bg-[#F4CC18]/18 active:!text-[#FFF1A8] active:!border-[#D4AF12] focus-visible:!bg-[#F4CC18]/14 focus-visible:!text-[#FFF1A8] focus-visible:!border-[#D4AF12]`;
+  `${eb.outlineButton} ${finalSecondaryButtonClassName} !border-white/12 !bg-[#17191D] !text-[#D9DDE2] hover:!border-[#10B7B3]/25 hover:!bg-white/[0.05] hover:!text-white active:!bg-[#1F2329] active:!text-white active:!border-[#10B7B3]/35 focus-visible:!bg-[#1F2329] focus-visible:!text-white focus-visible:!border-[#10B7B3]/35`;
 
 const selectContentClassName =
   "rounded-2xl !border !border-white/10 !bg-[#11161C] !text-white shadow-[0_18px_40px_rgba(0,0,0,0.28)]";
@@ -736,6 +736,7 @@ export function EasyBattQuantoMiCostaPage() {
                 <div className="grid gap-3">
                   <ButtonComp
                     asChild
+                    variant="outline"
                     className={finalTealAccentButtonClassName}
                   >
                     <a href={whatsappEstimateUrl} target="_blank" rel="noreferrer" draggable={false} onContextMenu={(e) => e.preventDefault()}>
