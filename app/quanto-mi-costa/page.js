@@ -23,41 +23,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import { eb } from "@/app/easybatt-ui";
-
-const MODELS = [
-  { code: "3013R3TG01", description: "30x13 R3 Tanganika Grezzo", material: "Multist. Tanganika", height: 30, thickness: 13, profile: "Raggio 3", finish: "Grezzo", weightKgMl: 0.1014, supplyBaseCostPerMl: 3.2 },
-  { code: "3013R3TG11", description: "30x13 R3 Tanganika Bianco", material: "Multist. Tanganika", height: 30, thickness: 13, profile: "Raggio 3", finish: "Bianco", weightKgMl: 0.1014, supplyBaseCostPerMl: 3.2 },
-  { code: "4013R3TG11", description: "40x13 R3 Tanganika Bianco", material: "Multist. Tanganika", height: 40, thickness: 13, profile: "Raggio 3", finish: "Bianco", weightKgMl: 0.1352, supplyBaseCostPerMl: 4 },
-  { code: "4013R3RV02", description: "40x13 R3 Rovere Naturale", material: "Multistrati Rovere", height: 40, thickness: 13, profile: "Raggio 3", finish: "Naturale", weightKgMl: 0.1352, supplyBaseCostPerMl: 4 },
-  { code: "5013R3TG11", description: "50x13 R3 Tanganika Bianco", material: "Multist. Tanganika", height: 50, thickness: 13, profile: "Raggio 3", finish: "Bianco", weightKgMl: 0.169, supplyBaseCostPerMl: 4 },
-  { code: "5013R3RV02", description: "50x13 R3 Rovere Naturale", material: "Multistrati Rovere", height: 50, thickness: 13, profile: "Raggio 3", finish: "Naturale", weightKgMl: 0.169, supplyBaseCostPerMl: 4 },
-  { code: "8013R3TG11", description: "80x13 R3 Tanganika Bianco", material: "Multist. Tanganika", height: 80, thickness: 13, profile: "Raggio 3", finish: "Bianco", weightKgMl: 0.2704, supplyBaseCostPerMl: 4 },
-  { code: "8013R3RV02", description: "80x13 R3 Rovere Naturale", material: "Multistrati Rovere", height: 80, thickness: 13, profile: "Raggio 3", finish: "Naturale", weightKgMl: 0.2704, supplyBaseCostPerMl: 4 },
-  { code: "10013R3TG11", description: "100x13 R3 Tanganika Bianco", material: "Multist. Tanganika", height: 100, thickness: 13, profile: "Raggio 3", finish: "Bianco", weightKgMl: 0.338, supplyBaseCostPerMl: 4 },
-  { code: "10015AYB14", description: "100x15 Baroc Ayous 9010", material: "Massello Ayous", height: 100, thickness: 15, profile: "Barocco", finish: "Ral 9010", weightKgMl: 0.39, supplyBaseCostPerMl: 4.8 },
-  { code: "12013R3RV02", description: "120x13 R3 Rovere Naturale", material: "Multistrati Rovere", height: 120, thickness: 13, profile: "Raggio 3", finish: "Naturale", weightKgMl: 0.4056, supplyBaseCostPerMl: 4.8 },
-  { code: "12015ROB01", description: "120x15 Baroc Rovere Grezzo", material: "Massello Rovere", height: 120, thickness: 15, profile: "Barocco", finish: "Grezzo", weightKgMl: 0.468, supplyBaseCostPerMl: 8.96 },
-];
-
-const SERVICE_RATE = 3.6;
-const TRAVEL_RATE = 0.95;
-const INSTALLATION_RATE = 3;
-const PACKAGING_WEIGHT_KG_ML = 0.07;
-const SUPPLY_MARGIN = 0.3;
-const VAT = 0.22;
-const SEDE_LABEL = "Via Benedetto Castelli,40/42 - Gussago - BS";
-const WHATSAPP_NUMBER = "393445677063";
-const WHATSAPP_VERIFY_MESSAGE = "Ciao, ho visto il prezzo per il mio progetto EasyBatt e vorrei prenotare la verifica.";
-const WHATSAPP_RECAP_MESSAGE = "Ciao, vorrei inviare il riepilogo del mio progetto EasyBatt.";
-const WHATSAPP_MESSAGE = "Ciao, ho visto EasyBatt e vorrei un chiarimento.";
-const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
-
-const SHIPPING_BANDS = [
-  { maxKg: 50, price: 17.5 },
-  { maxKg: 100, price: 35 },
-  { maxKg: 200, price: 70 },
-  { maxKg: 300, price: 105 },
-];
+import { DEFAULT_EASYBATT_CONFIG, normalizeEasyBattConfig } from "@/lib/easybatt-config";
 
 const euro = new Intl.NumberFormat("it-IT", {
   style: "currency",
@@ -65,10 +31,10 @@ const euro = new Intl.NumberFormat("it-IT", {
   minimumFractionDigits: 2,
 });
 
-function getShippingPrice(weightKg) {
+function getShippingPrice(weightKg, shippingBands) {
   if (weightKg <= 0) return 0;
-  const band = SHIPPING_BANDS.find((item) => weightKg <= item.maxKg);
-  return band ? band.price : SHIPPING_BANDS[SHIPPING_BANDS.length - 1].price;
+  const band = shippingBands.find((item) => weightKg <= item.maxKg);
+  return band ? band.price : shippingBands[shippingBands.length - 1]?.price ?? 0;
 }
 
 function unique(array) {
@@ -116,8 +82,8 @@ function BrandLockup() {
     <div className="rounded-[24px] border border-white/10 bg-[radial-gradient(circle_at_top_left,_rgba(15,175,169,0.1),_transparent_32%),linear-gradient(135deg,_rgba(20,23,29,0.98),_rgba(29,32,38,0.98))] px-3 py-2 shadow-[0_18px_50px_rgba(0,0,0,0.28)] sm:px-4 sm:py-2">
       <div className="flex items-center">
         <img
-          src="/Logo_easybatt_trasp.svg"
-          alt="EasyBatt - il battiscopa diventa facile"
+          src="/Logo_easybatt_trasp.png"
+          alt="EasyBatt - Battiscopa pronti da posare senza tagli sul posto"
           className="h-auto w-full max-w-[300px] sm:max-w-[328px] lg:max-w-[352px] xl:max-w-[368px]"
         />
       </div>
@@ -138,6 +104,7 @@ function StickyBrandHeader() {
 }
 
 export function EasyBattQuantoMiCostaPage() {
+  const [pricingConfig, setPricingConfig] = useState(() => normalizeEasyBattConfig(DEFAULT_EASYBATT_CONFIG));
   const [materialFilter, setMaterialFilter] = useState("all");
   const [heightFilter, setHeightFilter] = useState("all");
   const [finishFilter, setFinishFilter] = useState("all");
@@ -153,6 +120,29 @@ export function EasyBattQuantoMiCostaPage() {
   const [distanceError, setDistanceError] = useState("");
   const [distanceMeta, setDistanceMeta] = useState(null);
   const [isLinearMetersFocused, setIsLinearMetersFocused] = useState(false);
+  const models = useMemo(
+    () => pricingConfig.models.filter((model) => model.active !== false),
+    [pricingConfig.models],
+  );
+  const defaultModel = models[0] ?? DEFAULT_EASYBATT_CONFIG.models[0];
+  const whatsappUrl = `https://wa.me/${pricingConfig.whatsappNumber}?text=${encodeURIComponent(pricingConfig.whatsappMessage)}`;
+
+  useEffect(() => {
+    let active = true;
+
+    fetch("/api/easybatt-config")
+      .then((response) => response.ok ? response.json() : null)
+      .then((payload) => {
+        if (active && payload?.config) {
+          setPricingConfig(normalizeEasyBattConfig(payload.config));
+        }
+      })
+      .catch(() => {});
+
+    return () => {
+      active = false;
+    };
+  }, []);
 
   const matchesFilters = (model, filters) => {
     const materialOk = filters.material === "all" || model.material === filters.material;
@@ -163,27 +153,27 @@ export function EasyBattQuantoMiCostaPage() {
 
   const availableMaterials = useMemo(() => {
     return unique(
-      MODELS.filter((model) =>
+      models.filter((model) =>
         matchesFilters(model, { material: "all", height: heightFilter, finish: finishFilter }),
       ).map((model) => model.material),
     ).sort();
-  }, [finishFilter, heightFilter]);
+  }, [finishFilter, heightFilter, models]);
 
   const availableHeights = useMemo(() => {
     return unique(
-      MODELS.filter((model) =>
+      models.filter((model) =>
         matchesFilters(model, { material: materialFilter, height: "all", finish: finishFilter }),
       ).map((model) => String(model.height)),
     ).sort((a, b) => Number(a) - Number(b));
-  }, [finishFilter, materialFilter]);
+  }, [finishFilter, materialFilter, models]);
 
   const availableFinishes = useMemo(() => {
     return unique(
-      MODELS.filter((model) =>
+      models.filter((model) =>
         matchesFilters(model, { material: materialFilter, height: heightFilter, finish: "all" }),
       ).map((model) => model.finish),
     ).sort();
-  }, [heightFilter, materialFilter]);
+  }, [heightFilter, materialFilter, models]);
 
   useEffect(() => {
     if (materialFilter !== "all" && !availableMaterials.includes(materialFilter)) {
@@ -204,31 +194,31 @@ export function EasyBattQuantoMiCostaPage() {
   }, [availableFinishes, finishFilter]);
 
   const filteredModels = useMemo(() => {
-    return MODELS.filter((model) =>
+    return models.filter((model) =>
       matchesFilters(model, { material: materialFilter, height: heightFilter, finish: finishFilter }),
     );
-  }, [materialFilter, heightFilter, finishFilter]);
+  }, [materialFilter, heightFilter, finishFilter, models]);
 
   const selectedModel = useMemo(() => {
     const insideFiltered = filteredModels.find((m) => m.code === selectedCode);
     if (insideFiltered) return insideFiltered;
-    return filteredModels[0] ?? MODELS[0];
-  }, [filteredModels, selectedCode]);
+    return filteredModels[0] ?? defaultModel;
+  }, [defaultModel, filteredModels, selectedCode]);
 
   useEffect(() => {
     if (!filteredModels.some((model) => model.code === selectedCode)) {
-      setSelectedCode(filteredModels[0]?.code ?? MODELS[0].code);
+      setSelectedCode(filteredModels[0]?.code ?? defaultModel.code);
     }
-  }, [filteredModels, selectedCode]);
+  }, [defaultModel.code, filteredModels, selectedCode]);
 
   const resetFilters = () => {
     setMaterialFilter("all");
     setHeightFilter("all");
     setFinishFilter("all");
-    setSelectedCode(MODELS[0].code);
+    setSelectedCode(defaultModel.code);
   };
 
-  const effectiveSelectedCode = selectedModel?.code ?? MODELS[0].code;
+  const effectiveSelectedCode = selectedModel?.code ?? defaultModel.code;
 
   const switchClassName =
     "data-[state=unchecked]:bg-[#2A2E34] data-[state=unchecked]:border-white/10 data-[state=checked]:bg-[#10B7B3] data-[state=checked]:border-[#10B7B3]/40";
@@ -324,17 +314,17 @@ export function EasyBattQuantoMiCostaPage() {
     const rawKm = Number(returnKm);
     const ml = Number.isFinite(rawMl) ? Math.max(0, rawMl) : 0;
     const km = Number.isFinite(rawKm) ? Math.max(0, rawKm) : 0;
-    const supplyUnitPrice = includeSupply ? (selectedModel?.supplyBaseCostPerMl ?? 0) * (1 + SUPPLY_MARGIN) : 0;
+    const supplyUnitPrice = includeSupply ? (selectedModel?.supplyBaseCostPerMl ?? 0) * (1 + pricingConfig.supplyMargin) : 0;
     const baseWeight = (selectedModel?.weightKgMl ?? 0) * ml;
-    const totalWeight = baseWeight + PACKAGING_WEIGHT_KG_ML * ml;
-    const serviceSubtotal = ml * SERVICE_RATE;
-    const travelSubtotal = km * TRAVEL_RATE;
+    const totalWeight = baseWeight + pricingConfig.packagingWeightKgMl * ml;
+    const serviceSubtotal = ml * pricingConfig.serviceRate;
+    const travelSubtotal = km * pricingConfig.travelRate;
     const serviceAndTravelSubtotal = serviceSubtotal + travelSubtotal;
     const supplySubtotal = includeSupply ? ml * supplyUnitPrice : 0;
-    const shippingSubtotal = includeShipping && !includePickup ? getShippingPrice(totalWeight) : 0;
-    const installationSubtotal = includeInstallation ? ml * INSTALLATION_RATE : 0;
+    const shippingSubtotal = includeShipping && !includePickup ? getShippingPrice(totalWeight, pricingConfig.shippingBands) : 0;
+    const installationSubtotal = includeInstallation ? ml * pricingConfig.installationRate : 0;
     const subtotal = serviceSubtotal + travelSubtotal + supplySubtotal + shippingSubtotal + installationSubtotal;
-    const vat = subtotal * VAT;
+    const vat = subtotal * pricingConfig.vat;
     const total = subtotal + vat;
 
     return {
@@ -353,7 +343,7 @@ export function EasyBattQuantoMiCostaPage() {
       vat,
       total,
     };
-  }, [includeInstallation, includePickup, includeShipping, includeSupply, linearMeters, returnKm, selectedModel]);
+  }, [includeInstallation, includePickup, includeShipping, includeSupply, linearMeters, pricingConfig, returnKm, selectedModel]);
 
   const projectSummary = useMemo(() => {
     const chantierAddress = distanceMeta?.resolvedAddress || zipCode.trim() || "Da definire";
@@ -389,13 +379,13 @@ export function EasyBattQuantoMiCostaPage() {
   ]);
 
   const whatsappVerifyUrl = useMemo(
-    () => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`${WHATSAPP_VERIFY_MESSAGE}\n\n${projectSummary}`)}`,
-    [projectSummary],
+    () => `https://wa.me/${pricingConfig.whatsappNumber}?text=${encodeURIComponent(`${pricingConfig.whatsappVerifyMessage}\n\n${projectSummary}`)}`,
+    [pricingConfig.whatsappNumber, pricingConfig.whatsappVerifyMessage, projectSummary],
   );
 
   const whatsappRecapUrl = useMemo(
-    () => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`${WHATSAPP_RECAP_MESSAGE}\n\n${projectSummary}`)}`,
-    [projectSummary],
+    () => `https://wa.me/${pricingConfig.whatsappNumber}?text=${encodeURIComponent(`${pricingConfig.whatsappRecapMessage}\n\n${projectSummary}`)}`,
+    [pricingConfig.whatsappNumber, pricingConfig.whatsappRecapMessage, projectSummary],
   );
 
   const resolvedLocationLabel = distanceMeta?.resolvedAddress || zipCode.trim();
@@ -686,7 +676,7 @@ export function EasyBattQuantoMiCostaPage() {
                     <span>{euro.format(calculation.subtotal)}</span>
                   </div>
                   <div className="flex items-center justify-between text-sm text-[#D0D5DB]">
-                    <span>IVA 22%</span>
+                  <span>IVA {Math.round(pricingConfig.vat * 100)}%</span>
                     <span>{euro.format(calculation.vat)}</span>
                   </div>
                 </div>
@@ -711,7 +701,7 @@ export function EasyBattQuantoMiCostaPage() {
                       <MapPin className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
                       <div>
                         <div className="font-semibold text-white">Ritiro presso la sede EasyBatt</div>
-                        <div>{SEDE_LABEL}</div>
+                        <div>{pricingConfig.headquartersLabel}</div>
                       </div>
                     </div>
                   )}
@@ -760,7 +750,7 @@ export function EasyBattQuantoMiCostaPage() {
                     </a>
                   </ButtonComp>
                   <ButtonComp asChild variant="outline" className={finalNeutralButtonClassName}>
-                    <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" draggable={false} onContextMenu={(e) => e.preventDefault()}>
+                    <a href={whatsappUrl} target="_blank" rel="noreferrer" draggable={false} onContextMenu={(e) => e.preventDefault()}>
                       <PhoneCall className="mr-2 h-4 w-4" />
                       Hai un dubbio? Parla con noi
                     </a>

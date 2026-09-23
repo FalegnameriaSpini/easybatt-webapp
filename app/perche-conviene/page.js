@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import {
   ArrowRight,
   BadgeCheck,
@@ -50,16 +51,16 @@ function TopNavPerche() {
 
       <nav className={eb.navGroup}>
         <Button asChild variant="ghost" className={eb.navGhost}>
-          <a href="/">Home</a>
+          <Link href="/">Home</Link>
         </Button>
         <Button asChild variant="ghost" className={eb.navGhost}>
-          <a href="/come-funziona">Come funziona</a>
+          <Link href="/come-funziona">Come funziona</Link>
         </Button>
         <Button asChild variant="ghost" className={eb.navActiveTeal}>
-          <a href="/perche-conviene">Perché conviene</a>
+          <Link href="/perche-conviene">Perché conviene</Link>
         </Button>
         <Button asChild variant="ghost" className={eb.navGhost}>
-          <a href="/quanto-mi-costa">Quanto mi costa</a>
+          <Link href="/quanto-mi-costa">Quanto mi costa</Link>
         </Button>
       </nav>
     </header>
@@ -151,16 +152,16 @@ export function EasyBattPercheConvienePage() {
             </CardHeader>
             <CardContent className="grid gap-3">
               <Button asChild className={`${eb.primaryButtonTeal} h-12 text-base`}>
-                <a href="/come-funziona">
+                <Link href="/come-funziona">
                   Vai a Come funziona
                   <ChevronRight className="ml-2 h-4 w-4" />
-                </a>
+                </Link>
               </Button>
               <Button asChild className={`${eb.primaryButtonYellow} h-12 text-base`}>
-                <a href="/quanto-mi-costa">
+                <Link href="/quanto-mi-costa">
                   Vai a Quanto mi costa
                   <ArrowRight className="ml-2 h-4 w-4" />
-                </a>
+                </Link>
               </Button>
             </CardContent>
           </Card>

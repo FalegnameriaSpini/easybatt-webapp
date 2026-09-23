@@ -46,8 +46,8 @@ function BrandLockup() {
     <div className="rounded-[24px] border border-white/10 bg-[radial-gradient(circle_at_top_left,_rgba(15,175,169,0.1),_transparent_32%),linear-gradient(135deg,_rgba(20,23,29,0.98),_rgba(29,32,38,0.98))] px-3 py-2 shadow-[0_18px_50px_rgba(0,0,0,0.28)] sm:px-4 sm:py-2">
       <div className="flex items-center">
         <img
-          src="/Logo_easybatt_trasp.svg"
-          alt="EasyBatt - il battiscopa diventa facile"
+          src="/Logo_easybatt_trasp.png"
+          alt="EasyBatt - Battiscopa pronti da posare senza tagli sul posto"
           className="h-auto w-full max-w-[300px] sm:max-w-[328px] lg:max-w-[352px] xl:max-w-[368px]"
         />
       </div>
