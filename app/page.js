@@ -43,12 +43,12 @@ const ENTRY_POINTS = [
 
 function BrandLockup() {
   return (
-    <div className="rounded-[24px] border border-white/10 bg-[radial-gradient(circle_at_top_left,_rgba(15,175,169,0.1),_transparent_32%),linear-gradient(135deg,_rgba(20,23,29,0.98),_rgba(29,32,38,0.98))] px-3 py-2 shadow-[0_18px_50px_rgba(0,0,0,0.28)] sm:px-4 sm:py-2">
+    <div className="rounded-[20px] border border-white/10 bg-[radial-gradient(circle_at_top_left,_rgba(15,175,169,0.1),_transparent_32%),linear-gradient(135deg,_rgba(20,23,29,0.98),_rgba(29,32,38,0.98))] px-3 py-2 shadow-[0_18px_50px_rgba(0,0,0,0.28)] sm:px-4">
       <div className="flex items-center">
         <img
           src="/Logo_easybatt_trasp.png"
           alt="EasyBatt - Battiscopa pronti da posare senza tagli sul posto"
-          className="h-auto w-full max-w-[300px] sm:max-w-[328px] lg:max-w-[352px] xl:max-w-[368px]"
+          className="h-auto max-h-[108px] w-full max-w-[300px] object-contain object-left sm:max-w-[328px] lg:max-w-[352px] xl:max-w-[368px]"
         />
       </div>
     </div>
@@ -129,7 +129,7 @@ export default function EasyBattHomePage() {
     <div className="bg-[#17191D] text-white">
       <FixedBrandLockup />
 
-      <div className={`flex min-h-screen flex-col ${eb.pageShell} pt-[184px] sm:pt-[198px] lg:py-5`}>
+      <div className={`flex min-h-screen flex-col ${eb.pageShell} pt-[144px] sm:pt-[158px] lg:py-5`}>
         <main className="flex flex-1 items-start lg:items-center">
           <section className="grid w-full items-center gap-6 lg:grid-cols-[0.92fr_1.08fr] lg:gap-8">
             <div aria-hidden="true" className="hidden lg:block" />

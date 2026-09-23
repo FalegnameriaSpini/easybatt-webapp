@@ -98,12 +98,12 @@ const selectItemClassName =
 
 function BrandLockup() {
   return (
-    <div className="rounded-[24px] border border-white/10 bg-[radial-gradient(circle_at_top_left,_rgba(15,175,169,0.1),_transparent_32%),linear-gradient(135deg,_rgba(20,23,29,0.98),_rgba(29,32,38,0.98))] px-3 py-2 shadow-[0_18px_50px_rgba(0,0,0,0.28)] sm:px-4 sm:py-2">
+    <div className="rounded-[20px] border border-white/10 bg-[radial-gradient(circle_at_top_left,_rgba(15,175,169,0.1),_transparent_32%),linear-gradient(135deg,_rgba(20,23,29,0.98),_rgba(29,32,38,0.98))] px-3 py-2 shadow-[0_18px_50px_rgba(0,0,0,0.28)] sm:px-4">
       <div className="flex items-center">
         <img
           src="/Logo_easybatt_trasp.png"
           alt="EasyBatt - Battiscopa pronti da posare senza tagli sul posto"
-          className="h-auto w-full max-w-[300px] sm:max-w-[328px] lg:max-w-[352px] xl:max-w-[368px]"
+          className="h-auto max-h-[108px] w-full max-w-[300px] object-contain object-left sm:max-w-[328px] lg:max-w-[352px] xl:max-w-[368px]"
         />
       </div>
     </div>
@@ -413,7 +413,7 @@ export function EasyBattQuantoMiCostaPage() {
     <div className="min-h-screen bg-[#17191D] text-white">
       <StickyBrandHeader />
 
-      <div className={`${eb.pageShell} pt-[184px] sm:pt-[198px] lg:pt-[210px]`}>
+      <div className={`${eb.pageShell} pt-[144px] sm:pt-[158px] lg:pt-[170px]`}>
 
         <div className="grid gap-6 lg:grid-cols-[1.02fr_0.98fr]">
           <div className="grid gap-6">
@@ -667,7 +667,7 @@ export function EasyBattQuantoMiCostaPage() {
           </div>
 
           <div className="flex flex-col gap-6">
-            <CardComp className={`sticky top-[184px] sm:top-[198px] lg:top-4 ${eb.cardInteractive}`}>
+            <CardComp className={`sticky top-[144px] sm:top-[158px] lg:top-4 ${eb.cardInteractive}`}>
               <CardHeaderComp className="pb-3">
                 <CardTitleComp className="text-2xl text-white">Il tuo prezzo EasyBatt</CardTitleComp>
                 <CardDescriptionComp className="text-base leading-7 text-[#B6BDC6]">
