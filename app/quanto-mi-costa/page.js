@@ -41,6 +41,25 @@ function unique(array) {
   return Array.from(new Set(array));
 }
 
+function ModelImagePreview({ title, src, alt }) {
+  return (
+    <div className="overflow-hidden rounded-[22px] border border-white/10 bg-[#11161C]">
+      <div className="flex h-44 items-center justify-center bg-white/[0.03]">
+        {src ? (
+          <img src={src} alt={alt} className="h-full w-full object-cover" />
+        ) : (
+          <div className="px-4 text-center text-sm leading-6 text-[#8F98A3]">
+            Immagine non ancora caricata
+          </div>
+        )}
+      </div>
+      <div className="border-t border-white/10 px-4 py-3 text-sm font-semibold text-[#E3E7EC]">
+        {title}
+      </div>
+    </div>
+  );
+}
+
 const fieldClassName =
   "h-12 rounded-2xl !border !border-white/20 !bg-[#10B7B3] !text-[#11161C] " +
   "shadow-[inset_0_1px_0_rgba(255,255,255,0.02)] transition-all duration-200 " +
@@ -484,22 +503,37 @@ export function EasyBattQuantoMiCostaPage() {
                 </div>
 
                 {selectedModel && (
-                  <div className="grid gap-3 rounded-[24px] bg-[#17191D] p-4 sm:grid-cols-2 xl:grid-cols-4">
-                    <div className={eb.statInset}>
-                      <div className="text-xs text-[#8F98A3]">Codice</div>
-                      <div className="mt-1 font-semibold text-white">{selectedModel.code}</div>
+                  <div className="grid gap-4 rounded-[24px] bg-[#17191D] p-4">
+                    <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+                      <div className={eb.statInset}>
+                        <div className="text-xs text-[#8F98A3]">Codice</div>
+                        <div className="mt-1 font-semibold text-white">{selectedModel.code}</div>
+                      </div>
+                      <div className={eb.statInset}>
+                        <div className="text-xs text-[#8F98A3]">Profilo</div>
+                        <div className="mt-1 font-semibold text-white">{selectedModel.profile}</div>
+                      </div>
+                      <div className={eb.statInset}>
+                        <div className="text-xs text-[#8F98A3]">Sezione</div>
+                        <div className="mt-1 font-semibold text-white">{selectedModel.height} × {selectedModel.thickness} mm</div>
+                      </div>
+                      <div className={eb.statInset}>
+                        <div className="text-xs text-[#8F98A3]">Finitura</div>
+                        <div className="mt-1 font-semibold text-white">{selectedModel.finish}</div>
+                      </div>
                     </div>
-                    <div className={eb.statInset}>
-                      <div className="text-xs text-[#8F98A3]">Profilo</div>
-                      <div className="mt-1 font-semibold text-white">{selectedModel.profile}</div>
-                    </div>
-                    <div className={eb.statInset}>
-                      <div className="text-xs text-[#8F98A3]">Sezione</div>
-                      <div className="mt-1 font-semibold text-white">{selectedModel.height} × {selectedModel.thickness} mm</div>
-                    </div>
-                    <div className={eb.statInset}>
-                      <div className="text-xs text-[#8F98A3]">Finitura</div>
-                      <div className="mt-1 font-semibold text-white">{selectedModel.finish}</div>
+
+                    <div className="grid gap-3 md:grid-cols-2">
+                      <ModelImagePreview
+                        title="Sezione tecnica"
+                        src={selectedModel.sectionImageUrl}
+                        alt={`Sezione tecnica ${selectedModel.description}`}
+                      />
+                      <ModelImagePreview
+                        title="Battiscopa ambientato"
+                        src={selectedModel.ambientImageUrl}
+                        alt={`Battiscopa ambientato ${selectedModel.description}`}
+                      />
                     </div>
                   </div>
                 )}

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { ArrowLeft, Eye, Plus, Save, Trash2 } from "lucide-react";
+import { ArrowLeft, Eye, Plus, Save, Trash2, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DEFAULT_EASYBATT_CONFIG, normalizeEasyBattConfig } from "@/lib/easybatt-config";
 import { eb } from "@/app/easybatt-ui";
@@ -92,6 +92,8 @@ export default function EasyBattAdminPage() {
           finish: "Grezzo",
           weightKgMl: 0.27,
           supplyBaseCostPerMl: 4,
+          sectionImageUrl: "",
+          ambientImageUrl: "",
           active: true,
         },
       ],
@@ -105,6 +107,41 @@ export default function EasyBattAdminPage() {
       models: current.models.filter((_, itemIndex) => itemIndex !== index),
     }));
     setStatus("idle");
+  }
+
+  async function uploadModelImage(index, kind, file) {
+    if (!file) return;
+
+    setStatus("saving");
+    setMessage("Caricamento immagine in corso...");
+    sessionStorage.setItem("easybatt-admin-password", password);
+
+    try {
+      const model = config.models[index];
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("code", model.code);
+      formData.append("kind", kind);
+
+      const response = await fetch("/api/easybatt-model-image", {
+        method: "POST",
+        headers: {
+          "x-admin-password": password,
+        },
+        body: formData,
+      });
+      const payload = await response.json().catch(() => null);
+      if (!response.ok || !payload?.url) {
+        throw new Error(payload?.error || "Caricamento non riuscito.");
+      }
+
+      updateModel(index, kind === "section" ? { sectionImageUrl: payload.url } : { ambientImageUrl: payload.url });
+      setStatus("idle");
+      setMessage("Immagine caricata. Premi Salva e pubblica per aggiornare il sito.");
+    } catch (error) {
+      setStatus("error");
+      setMessage(error instanceof Error ? error.message : "Caricamento non riuscito.");
+    }
   }
 
   function updateBand(index, patch) {
@@ -311,6 +348,47 @@ export default function EasyBattAdminPage() {
                         <Field label="Profilo"><input className={inputClass} value={model.profile} onChange={(event) => updateModel(index, { profile: event.target.value })} /></Field>
                         <Field label="Kg/ml"><input className={inputClass} type="number" min="0" step="0.0001" value={model.weightKgMl} onChange={(event) => updateModel(index, { weightKgMl: numberValue(event.target.value) })} /></Field>
                         <Field label="Costo base EUR/ml"><input className={inputClass} type="number" min="0" step="0.01" value={model.supplyBaseCostPerMl} onChange={(event) => updateModel(index, { supplyBaseCostPerMl: numberValue(event.target.value) })} /></Field>
+                      </div>
+                      <div className="grid gap-3 md:grid-cols-2">
+                        <div className="overflow-hidden rounded-[20px] border border-white/10 bg-[#11161C]">
+                          <div className="flex h-40 items-center justify-center bg-white/[0.03]">
+                            {model.sectionImageUrl ? (
+                              <img src={model.sectionImageUrl} alt={`Sezione tecnica ${model.description}`} className="h-full w-full object-cover" />
+                            ) : (
+                              <span className="px-4 text-center text-sm text-[#8F98A3]">Sezione tecnica non caricata</span>
+                            )}
+                          </div>
+                          <div className="grid gap-3 border-t border-white/10 p-3">
+                            <Field label="URL sezione tecnica">
+                              <input className={inputClass} value={model.sectionImageUrl || ""} onChange={(event) => updateModel(index, { sectionImageUrl: event.target.value })} placeholder="/uploads/easybatt-models/..." />
+                            </Field>
+                            <label className={`${eb.outlineButton} flex h-11 cursor-pointer items-center justify-center rounded-2xl text-sm font-semibold`}>
+                              <Upload className="mr-2 h-4 w-4" />
+                              Carica sezione tecnica
+                              <input className="sr-only" type="file" accept="image/jpeg,image/png,image/webp" onChange={(event) => void uploadModelImage(index, "section", event.target.files?.[0])} />
+                            </label>
+                          </div>
+                        </div>
+
+                        <div className="overflow-hidden rounded-[20px] border border-white/10 bg-[#11161C]">
+                          <div className="flex h-40 items-center justify-center bg-white/[0.03]">
+                            {model.ambientImageUrl ? (
+                              <img src={model.ambientImageUrl} alt={`Battiscopa ambientato ${model.description}`} className="h-full w-full object-cover" />
+                            ) : (
+                              <span className="px-4 text-center text-sm text-[#8F98A3]">Immagine ambientata non caricata</span>
+                            )}
+                          </div>
+                          <div className="grid gap-3 border-t border-white/10 p-3">
+                            <Field label="URL immagine ambientata">
+                              <input className={inputClass} value={model.ambientImageUrl || ""} onChange={(event) => updateModel(index, { ambientImageUrl: event.target.value })} placeholder="/uploads/easybatt-models/..." />
+                            </Field>
+                            <label className={`${eb.outlineButton} flex h-11 cursor-pointer items-center justify-center rounded-2xl text-sm font-semibold`}>
+                              <Upload className="mr-2 h-4 w-4" />
+                              Carica immagine ambientata
+                              <input className="sr-only" type="file" accept="image/jpeg,image/png,image/webp" onChange={(event) => void uploadModelImage(index, "ambient", event.target.files?.[0])} />
+                            </label>
+                          </div>
+                        </div>
                       </div>
                     </article>
                   ))}
