@@ -6451,22 +6451,22 @@
       "active": true
     },
     {
-      "code": "08014SFX52",
-      "description": "80x14 Stondato R10 Polimero Flessibile Fondo Bianco",
+      "code": "08013SFX52",
+      "description": "80x13 Stondato R10 Polimero Flessibile Fondo Bianco",
       "material": "Polimero Flessibile",
       "height": 80,
-      "thickness": 14,
-      "measure": "80x14",
+      "thickness": 13,
+      "measure": "80x13",
       "stickLengthLabel": "2400",
       "profile": "Stondato R10",
       "finish": "Flessibile Fondo Bianco",
       "finishFamily": "Prelaccato / fondo",
       "finishLabel": "Flessibile Fondo Bianco",
       "finishKey": "/catalog/finiture/flessibile-fondo-bianco.jpg",
-      "weightKgMl": 1.064,
+      "weightKgMl": 0.988,
       "supplyBaseCostPerMl": 20.03,
       "sourceVatPricePerMl": 24.44,
-      "sectionImageUrl": "/catalog/profili/flessibile-80x14.jpg",
+      "sectionImageUrl": "/catalog/profili/flessibile-80x13.jpg",
       "finishImageUrl": "/catalog/finiture/flessibile-fondo-bianco.jpg",
       "active": true
     }

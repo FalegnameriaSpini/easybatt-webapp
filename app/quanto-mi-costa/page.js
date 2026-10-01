@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
   Calculator as CalcIcon,
+  ChevronDown,
   ChevronRight as ChevronRightIcon,
   Layers3,
   MapPin,
@@ -67,6 +68,18 @@ function StepHeading({ number, children }) {
   );
 }
 
+function SummaryDisclosure({ title, children }) {
+  return (
+    <details className="group/disclosure border-t border-white/10">
+      <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 py-3 text-sm font-semibold text-[#E3E7EC] outline-none focus-visible:ring-2 focus-visible:ring-[#10B7B3] [&::-webkit-details-marker]:hidden">
+        {title}
+        <ChevronDown className="h-4 w-4 shrink-0 text-[#72E6E2] transition-transform group-open/disclosure:rotate-180" />
+      </summary>
+      <div className="grid gap-3 pb-3">{children}</div>
+    </details>
+  );
+}
+
 function ChoiceButton({ active, children, className = "", ...props }) {
   return (
     <button
@@ -94,7 +107,7 @@ const estimateFieldLabelClassName = "text-base font-semibold leading-6 text-whit
 const neutralButtonClassName =
   `${eb.outlineButton} active:bg-[#10B7B3] active:text-white active:border-[#0A8B87] focus-visible:bg-[#10B7B3] focus-visible:text-white focus-visible:border-[#0A8B87] hover:border-[#10B7B3]/35`;
 const finalSecondaryButtonClassName =
-  "h-12 rounded-2xl text-base select-none touch-manipulation transition-all duration-150 active:scale-[0.98] focus-visible:scale-[0.98]";
+  "h-auto min-h-12 whitespace-normal rounded-2xl py-3 text-center text-base select-none touch-manipulation transition-all duration-150 active:scale-[0.98] focus-visible:scale-[0.98]";
 const finalNeutralButtonClassName =
   `${eb.outlineButton} ${finalSecondaryButtonClassName} !border-white/10 !bg-transparent !text-white hover:!border-[#10B7B3]/35 hover:!bg-white/[0.06] active:!bg-[#10B7B3] active:!text-white active:!border-[#0A8B87] focus-visible:!bg-[#10B7B3] focus-visible:!text-white focus-visible:!border-[#0A8B87]`;
 const finalTealAccentButtonClassName =
@@ -116,15 +129,13 @@ function BrandLockup() {
   );
 }
 
-function StickyBrandHeader() {
+function BrandHeader() {
   return (
-    <div className="fixed inset-x-0 top-0 z-40">
-      <div className="mx-auto w-full max-w-7xl px-4 pt-4 sm:px-6 sm:pt-5">
-        <Link href="/" aria-label="Torna alla home EasyBatt" className="block w-full max-w-[368px]">
-          <BrandLockup />
-        </Link>
-      </div>
-    </div>
+    <header className="mb-6">
+      <Link href="/" aria-label="Torna alla home EasyBatt" className="block w-full max-w-[368px]">
+        <BrandLockup />
+      </Link>
+    </header>
   );
 }
 
@@ -432,12 +443,11 @@ export function EasyBattQuantoMiCostaPage() {
 
   return (
     <div className="min-h-screen bg-[#17191D] text-white">
-      <StickyBrandHeader />
+      <div className={`${eb.pageShell} lg:max-w-[1800px]`}>
+        <BrandHeader />
 
-      <div className={`${eb.pageShell} pt-[144px] sm:pt-[158px] lg:pt-[170px]`}>
-
-        <div className="grid gap-6 lg:grid-cols-[1.02fr_0.98fr]">
-          <div className="grid gap-6">
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(320px,1fr)]">
+          <div className="grid min-w-0 gap-6">
             <CardComp className={eb.cardInteractive}>
               <CardHeaderComp>
                 <CardTitleComp className="flex items-center gap-2 text-xl text-white">
@@ -483,7 +493,7 @@ export function EasyBattQuantoMiCostaPage() {
 
                   <div className="grid gap-3">
                     <StepHeading number="2">Finitura</StepHeading>
-                    <div className="grid max-h-[420px] auto-rows-max grid-cols-2 content-start gap-2 overflow-y-auto pr-1 sm:grid-cols-3">
+                    <div className="grid max-h-[420px] auto-rows-max grid-cols-2 content-start gap-2 overflow-y-auto pr-1 sm:grid-cols-3 lg:max-h-[620px] xl:grid-cols-4 2xl:grid-cols-5">
                       {finishOptions.map((item) => (
                         <button
                           key={item.key}
@@ -566,7 +576,7 @@ export function EasyBattQuantoMiCostaPage() {
 
                 {selectedModel && (
                   <div className="grid gap-4 rounded-[24px] bg-[#17191D] p-4">
-                    <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
+                    <div className="grid gap-3 [overflow-wrap:anywhere] sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5">
                       <div className={eb.statInset}>
                         <div className="text-xs text-[#8F98A3]">Codice</div>
                         <div className="mt-1 font-semibold text-white">{selectedModel.code}</div>
@@ -616,8 +626,9 @@ export function EasyBattQuantoMiCostaPage() {
               </CardHeaderComp>
               <CardContentComp className="grid gap-5">
                 <div className="grid gap-2">
-                  <Label className={estimateFieldLabelClassName}>Quanti metri di battiscopa ti servono?</Label>
+                  <Label htmlFor="linear-meters" className={estimateFieldLabelClassName}>Quanti metri di battiscopa ti servono?</Label>
                   <Input
+                    id="linear-meters"
                     className={inputClassName}
                     type="number"
                     min={0}
@@ -658,7 +669,7 @@ export function EasyBattQuantoMiCostaPage() {
                       disabled={isDistanceLoading || !zipCode.trim()}
                       className={`${eb.primaryButtonYellow} h-12 rounded-2xl px-4 text-sm disabled:pointer-events-none disabled:opacity-60`}
                     >
-                      {isDistanceLoading ? "Calcolo..." : "Calcola i km"}
+                      {isDistanceLoading ? "Calcolo..." : "Conferma l'Indirizzo"}
                     </ButtonComp>
                   </div>
                   {distanceFeedback && (
@@ -733,133 +744,138 @@ export function EasyBattQuantoMiCostaPage() {
             </CardComp>
           </div>
 
-          <div className="flex flex-col gap-6">
-            <CardComp className={`sticky top-[144px] sm:top-[158px] lg:top-4 ${eb.cardInteractive}`}>
-              <CardHeaderComp className="pb-3">
-                <CardTitleComp className="text-2xl text-white">Il tuo prezzo EasyBatt</CardTitleComp>
-                <CardDescriptionComp className="text-base leading-7 text-[#B6BDC6]">
-                  Un prezzo calcolato sui dati inseriti, per capire subito il costo del tuo progetto.
-                </CardDescriptionComp>
+          <aside aria-label="Riepilogo preventivo" className="min-w-0 self-start lg:sticky lg:top-6">
+            <CardComp className={`${eb.card} lg:max-h-[calc(100dvh-3rem)] lg:overflow-y-auto`}>
+              <CardHeaderComp>
+                <CardTitleComp className="text-xl text-white">Il tuo prezzo EasyBatt</CardTitleComp>
               </CardHeaderComp>
-              <CardContentComp className="grid gap-4">
-                <div className={eb.summaryPanel}>
+              <CardContentComp className="grid min-w-0 gap-4 [overflow-wrap:anywhere] [&_svg]:shrink-0">
+                <div className="border-b border-white/10 pb-4">
                   <div className="text-sm text-[#B6BDC6]">Totale IVA inclusa</div>
-                  <div className="mt-3 text-4xl font-bold tracking-tight text-[#F4CC18]">{euro.format(calculation.total)}</div>
-                  <div className="mt-3 text-sm leading-6 text-[#C7CDD5]">Include tutto il necessario per partire, senza costi nascosti.</div>
-                  <div className="mt-1 text-xs leading-5 text-[#8F98A3]">Prezzo calcolato sui dati inseriti.</div>
-                  <div className="mt-1 text-xs leading-5 text-[#8F98A3]">Verrà verificato prima della conferma dell&apos;ordine.</div>
+                  <div aria-live="polite" aria-atomic="true" className="mt-2 text-3xl font-bold text-[#F4CC18] xl:text-4xl">{euro.format(calculation.total)}</div>
+                  <div className="mt-2 text-xs leading-5 text-[#8F98A3]">Prezzo da verificare prima della conferma dell&apos;ordine.</div>
                 </div>
 
-                <div className="grid gap-3">
-                  <div className="px-1 text-xs font-medium uppercase tracking-[0.08em] text-[#8F98A3]">Dettaglio del prezzo</div>
-                  <div className="flex items-center justify-between gap-3 rounded-[20px] border border-white/10 bg-[#17191D] p-3">
-                    <span className="text-[15px] font-medium text-[#E3E7EC]">Servizio di taglio e preparazione</span>
-                    <span className="font-semibold text-white">{euro.format(calculation.serviceAndTravelSubtotal)}</span>
-                  </div>
-                  <div className="flex items-center justify-between gap-3 rounded-[20px] border border-white/10 bg-[#17191D] p-3">
-                    <div>
-                      <div className="text-sm text-[#D0D5DB]">Fornitura battiscopa</div>
-                      <div className="text-xs text-[#8F98A3]">{includeSupply ? `${calculation.ml} ml × ${euro.format(calculation.supplyUnitPrice)}/ml` : "non inclusa"}</div>
-                    </div>
-                    <span className="font-semibold text-white">{euro.format(calculation.supplySubtotal)}</span>
-                  </div>
-                  <div className="flex items-center justify-between gap-3 rounded-[20px] border border-white/10 bg-[#17191D] p-3">
-                    <span className="text-sm text-[#D0D5DB]">Spedizione</span>
-                    <span className="font-semibold text-white">{euro.format(calculation.shippingSubtotal)}</span>
-                  </div>
-                  <div className="flex items-center justify-between gap-3 rounded-[20px] border border-white/10 bg-[#17191D] p-3">
-                    <span className="text-sm text-[#D0D5DB]">Posa in opera</span>
-                    <span className="font-semibold text-white">{euro.format(calculation.installationSubtotal)}</span>
-                  </div>
-                  <Separator className="bg-white/10" />
-                  <div className="flex items-center justify-between text-sm text-[#D0D5DB]">
-                    <span>Subtotale imponibile</span>
-                    <span>{euro.format(calculation.subtotal)}</span>
-                  </div>
-                  <div className="flex items-center justify-between text-sm text-[#D0D5DB]">
-                  <span>IVA {Math.round(pricingConfig.vat * 100)}%</span>
-                    <span>{euro.format(calculation.vat)}</span>
-                  </div>
-                </div>
-
-                <div className="grid gap-3 rounded-[24px] border border-[#10B7B3]/18 bg-[#0E2B2A] p-4 text-sm text-[#D9E8E7]">
-                  <div className="flex items-start gap-3">
-                    <Package className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
-                    <div>Peso battiscopa: <span className="font-semibold text-white">{calculation.baseWeight.toFixed(1)} kg</span></div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <Truck className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
-                    <div>Peso totale con imballo: <span className="font-semibold text-white">{calculation.totalWeight.toFixed(1)} kg</span></div>
-                  </div>
-                  {!includePickup && (
-                    <div className="flex items-start gap-3">
-                      <Truck className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
-                      <div>Modalità di consegna: <span className="font-semibold text-white">{includeShipping ? "spedizione inclusa" : "da concordare"}</span></div>
-                    </div>
-                  )}
-                  {includePickup && (
-                    <div className="flex items-start gap-3">
-                      <MapPin className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
-                      <div>
-                        <div className="font-semibold text-white">Ritiro presso la sede EasyBatt</div>
-                        <div>{pricingConfig.headquartersLabel}</div>
-                      </div>
-                    </div>
-                  )}
-                  {resolvedLocationLabel && (
-                    <div className="flex items-start gap-3">
-                      <MapPin className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
-                      <div>Località: <span className="font-semibold text-white">{resolvedLocationLabel}</span></div>
-                    </div>
-                  )}
+                <div className="grid gap-3 text-sm text-[#D9E8E7]">
                   <div className="flex items-start gap-3">
                     <Ruler className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
-                    <div>Modello selezionato: <span className="font-semibold text-white">{selectedModel?.description}</span></div>
+                    <div className="min-w-0">
+                      <div className="font-semibold text-white">{selectedModel?.description}</div>
+                      <div className="mt-1 text-[#B6BDC6]">{calculation.ml} metri lineari</div>
+                    </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <Wrench className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
-                    <div>Stato fornitura: <span className="font-semibold text-white">{includeSupply ? "inclusa nel prezzo" : "esclusa dal prezzo"}</span></div>
+                    <div>Fornitura {includeSupply ? "inclusa" : "esclusa"} · {includePickup ? "Ritiro in sede" : includeShipping ? "Spedizione inclusa" : "Consegna da concordare"}{includeInstallation ? " · Posa inclusa" : ""}</div>
                   </div>
                 </div>
 
-                <div className={eb.cardInset}>
-                  <div className="mb-3 flex items-center gap-2 text-white">
-                    <CheckCircleIcon className="h-4 w-4 text-[#F4CC18]" />
-                    <span className="font-semibold">Cosa succede dopo</span>
-                  </div>
-                  <div className="grid gap-3 text-sm text-[#AAB2BB]">
-                    <div>1. Inviaci i dati del progetto per verificare insieme misure, modello e servizi scelti.</div>
-                    <div>2. Ricevi un riepilogo chiaro per partire con il tuo ordine.</div>
-                  </div>
-                </div>
+                <ButtonComp asChild variant="outline" className={finalTealAccentButtonClassName}>
+                  <a href={whatsappRecapUrl} target="_blank" rel="noreferrer" draggable={false} onContextMenu={(e) => e.preventDefault()}>
+                    <PhoneCall className="mr-2 h-4 w-4" />
+                    Invia il riepilogo su WhatsApp
+                  </a>
+                </ButtonComp>
 
-                <div className="grid gap-3">
-                  <ButtonComp
-                    asChild
-                    variant="outline"
-                    className={finalTealAccentButtonClassName}
-                  >
-                    <a href={whatsappRecapUrl} target="_blank" rel="noreferrer" draggable={false} onContextMenu={(e) => e.preventDefault()}>
-                      <PhoneCall className="mr-2 h-4 w-4" />
-                      Invia il riepilogo su WhatsApp
-                    </a>
-                  </ButtonComp>
-                  <ButtonComp asChild variant="outline" className={finalSecondaryActionButtonClassName}>
-                    <a href={whatsappVerifyUrl} target="_blank" rel="noreferrer" draggable={false} onContextMenu={(e) => e.preventDefault()}>
-                      Prenota la verifica del progetto
-                      <ChevronRightIcon className="ml-2 h-4 w-4" />
-                    </a>
-                  </ButtonComp>
-                  <ButtonComp asChild variant="outline" className={finalNeutralButtonClassName}>
-                    <a href={whatsappUrl} target="_blank" rel="noreferrer" draggable={false} onContextMenu={(e) => e.preventDefault()}>
-                      <PhoneCall className="mr-2 h-4 w-4" />
-                      Hai un dubbio? Parla con noi
-                    </a>
-                  </ButtonComp>
+                <div>
+                  <SummaryDisclosure title="Dettaglio del prezzo">
+                    <div className="grid gap-3">
+                      <div className="flex items-center justify-between gap-3 rounded-[20px] border border-white/10 bg-[#17191D] p-3">
+                        <span className="text-[15px] font-medium text-[#E3E7EC]">Servizio di taglio e preparazione</span>
+                        <span className="shrink-0 whitespace-nowrap font-semibold text-white">{euro.format(calculation.serviceAndTravelSubtotal)}</span>
+                      </div>
+                      <div className="flex items-center justify-between gap-3 rounded-[20px] border border-white/10 bg-[#17191D] p-3">
+                        <div>
+                          <div className="text-sm text-[#D0D5DB]">Fornitura battiscopa</div>
+                          <div className="text-xs text-[#8F98A3]">{includeSupply ? `${calculation.ml} ml × ${euro.format(calculation.supplyUnitPrice)}/ml` : "non inclusa"}</div>
+                        </div>
+                        <span className="shrink-0 whitespace-nowrap font-semibold text-white">{euro.format(calculation.supplySubtotal)}</span>
+                      </div>
+                      <div className="flex items-center justify-between gap-3 rounded-[20px] border border-white/10 bg-[#17191D] p-3">
+                        <span className="text-sm text-[#D0D5DB]">Spedizione</span>
+                        <span className="shrink-0 whitespace-nowrap font-semibold text-white">{euro.format(calculation.shippingSubtotal)}</span>
+                      </div>
+                      <div className="flex items-center justify-between gap-3 rounded-[20px] border border-white/10 bg-[#17191D] p-3">
+                        <span className="text-sm text-[#D0D5DB]">Posa in opera</span>
+                        <span className="shrink-0 whitespace-nowrap font-semibold text-white">{euro.format(calculation.installationSubtotal)}</span>
+                      </div>
+                      <Separator className="bg-white/10" />
+                      <div className="flex items-center justify-between text-sm text-[#D0D5DB]">
+                        <span>Subtotale imponibile</span>
+                        <span className="shrink-0 whitespace-nowrap">{euro.format(calculation.subtotal)}</span>
+                      </div>
+                      <div className="flex items-center justify-between text-sm text-[#D0D5DB]">
+                      <span>IVA {Math.round(pricingConfig.vat * 100)}%</span>
+                        <span className="shrink-0 whitespace-nowrap">{euro.format(calculation.vat)}</span>
+                      </div>
+                    </div>
+                  </SummaryDisclosure>
+
+                  <SummaryDisclosure title="Consegna e pesi">
+                    <div className="grid gap-3 text-sm text-[#D9E8E7]">
+                      <div className="flex items-start gap-3">
+                        <Package className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
+                        <div>Peso battiscopa: <span className="font-semibold text-white">{calculation.baseWeight.toFixed(1)} kg</span></div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <Truck className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
+                        <div>Peso totale con imballo: <span className="font-semibold text-white">{calculation.totalWeight.toFixed(1)} kg</span></div>
+                      </div>
+                      {!includePickup && (
+                        <div className="flex items-start gap-3">
+                          <Truck className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
+                          <div>Modalità di consegna: <span className="font-semibold text-white">{includeShipping ? "spedizione inclusa" : "da concordare"}</span></div>
+                        </div>
+                      )}
+                      {includePickup && (
+                        <div className="flex items-start gap-3">
+                          <MapPin className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
+                          <div>
+                            <div className="font-semibold text-white">Ritiro presso la sede EasyBatt</div>
+                            <div>{pricingConfig.headquartersLabel}</div>
+                          </div>
+                        </div>
+                      )}
+                      {resolvedLocationLabel && (
+                        <div className="flex items-start gap-3">
+                          <MapPin className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
+                          <div>Località: <span className="font-semibold text-white">{resolvedLocationLabel}</span></div>
+                        </div>
+                      )}
+                    </div>
+                  </SummaryDisclosure>
+
+                  <SummaryDisclosure title="Cosa succede dopo">
+                    <div>
+                      <div className="mb-3 flex items-center gap-2 text-white">
+                        <CheckCircleIcon className="h-4 w-4 text-[#F4CC18]" />
+                        <span className="font-semibold">Verifichiamo insieme il progetto</span>
+                      </div>
+                      <div className="grid gap-3 text-sm text-[#AAB2BB]">
+                        <div>1. Inviaci i dati del progetto per verificare insieme misure, modello e servizi scelti.</div>
+                        <div>2. Ricevi un riepilogo chiaro per partire con il tuo ordine.</div>
+                      </div>
+                    </div>
+
+                    <div className="grid gap-3">
+                      <ButtonComp asChild variant="outline" className={finalSecondaryActionButtonClassName}>
+                        <a href={whatsappVerifyUrl} target="_blank" rel="noreferrer" draggable={false} onContextMenu={(e) => e.preventDefault()}>
+                          Prenota la verifica del progetto
+                          <ChevronRightIcon className="ml-2 h-4 w-4" />
+                        </a>
+                      </ButtonComp>
+                      <ButtonComp asChild variant="outline" className={finalNeutralButtonClassName}>
+                        <a href={whatsappUrl} target="_blank" rel="noreferrer" draggable={false} onContextMenu={(e) => e.preventDefault()}>
+                          <PhoneCall className="mr-2 h-4 w-4" />
+                          Hai un dubbio? Parla con noi
+                        </a>
+                      </ButtonComp>
+                    </div>
+                  </SummaryDisclosure>
                 </div>
               </CardContentComp>
             </CardComp>
-          </div>
+          </aside>
         </div>
       </div>
     </div>

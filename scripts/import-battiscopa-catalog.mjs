@@ -9,9 +9,6 @@ const sourceProfileDir = path.join(root, "data", "import", "profili");
 const sourceFinishDir = path.join(root, "data", "import", "finiture");
 const publicProfileDir = path.join(root, "public", "catalog", "profili");
 const publicFinishDir = path.join(root, "public", "catalog", "finiture");
-const profileFallbacks = new Map([
-  ["flessibile-80x14.jpg", "flessibile-80x13.jpg"],
-]);
 
 async function filesByName(directory) {
   const entries = await fs.readdir(directory, { withFileTypes: true, recursive: true });
@@ -31,7 +28,7 @@ async function copyCatalogImages(models) {
   for (const model of models) {
     const profileName = decodeURIComponent(model.sectionImageUrl.split("/").at(-1));
     const finishName = decodeURIComponent(model.finishImageUrl.split("/").at(-1));
-    const profileSource = profileSources.get(profileName) || profileSources.get(profileFallbacks.get(profileName));
+    const profileSource = profileSources.get(profileName);
     const finishSource = finishSources.get(finishName);
 
     if (!profileSource) missing.push(`Profilo mancante: ${profileName}`);

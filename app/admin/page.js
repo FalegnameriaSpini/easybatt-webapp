@@ -17,9 +17,9 @@ function numberValue(value) {
   return Number.isFinite(parsed) ? parsed : 0;
 }
 
-function Field({ label, children, help }) {
+function Field({ label, children, help, className = "" }) {
   return (
-    <label className="grid gap-2">
+    <label className={`grid gap-2 lg:min-w-0 ${className}`}>
       <span className="text-sm font-semibold text-[#E7EBEF]">{label}</span>
       {children}
       {help && <span className="text-xs leading-5 text-[#8F98A3]">{help}</span>}
@@ -28,7 +28,7 @@ function Field({ label, children, help }) {
 }
 
 const inputClass =
-  "h-11 rounded-xl border border-white/10 bg-[#11161C] px-3 text-sm text-white outline-none transition focus:border-[#10B7B3]/50 focus:ring-2 focus:ring-[#10B7B3]/20";
+  "h-11 rounded-xl border border-white/10 bg-[#11161C] px-3 text-sm text-white outline-none transition focus:border-[#10B7B3]/50 focus:ring-2 focus:ring-[#10B7B3]/20 lg:min-w-0 lg:w-full";
 
 export default function EasyBattAdminPage() {
   const [password, setPassword] = useState("");
@@ -258,7 +258,7 @@ export default function EasyBattAdminPage() {
 
   return (
     <main className="min-h-screen bg-[#17191D] text-white">
-      <div className={eb.pageShell}>
+      <div className={`${eb.pageShell} lg:max-w-[1800px]`}>
         <header className="mb-5 flex flex-col gap-3 rounded-[24px] border border-white/10 bg-[#1C1F24] p-4 shadow-[0_18px_50px_rgba(0,0,0,0.2)] sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3">
             <img src="/Logo_easybatt_trasp.png" alt="EasyBatt" className="h-auto w-52 max-w-full" />
@@ -283,7 +283,7 @@ export default function EasyBattAdminPage() {
           </div>
         </header>
 
-        <div className="grid gap-5 lg:grid-cols-[260px_1fr]">
+        <div className="grid gap-5 lg:grid-cols-[260px_minmax(0,1fr)]">
           <aside className="h-fit rounded-[24px] border border-white/10 bg-[#1C1F24] p-4">
             <nav className="grid gap-2 text-sm">
               <a className="rounded-xl bg-[#10B7B3]/12 px-3 py-2 font-semibold text-[#A7F3F0]" href="#accesso">Accesso</a>
@@ -294,7 +294,7 @@ export default function EasyBattAdminPage() {
             </nav>
           </aside>
 
-          <section className="grid gap-5 pb-24">
+          <section className="grid gap-5 pb-24 lg:min-w-0">
             <section id="accesso" className={eb.card}>
               <div className="grid gap-4 p-5">
                 <div>
@@ -395,8 +395,8 @@ export default function EasyBattAdminPage() {
                   </div>
                 )}
 
-                <div className="grid gap-4 lg:grid-cols-[300px_1fr]">
-                  <div className="grid content-start gap-3">
+                <div className="grid gap-4 xl:grid-cols-[260px_minmax(0,1fr)] 2xl:grid-cols-[280px_minmax(0,1fr)]">
+                  <div className="grid content-start gap-3 lg:min-w-0">
                     <label className="relative">
                       <Search className="pointer-events-none absolute left-3 top-3.5 h-4 w-4 text-[#8F98A3]" />
                       <input className={`${inputClass} w-full pl-10`} value={modelSearch} onChange={(event) => setModelSearch(event.target.value)} placeholder="Codice, finitura o materiale" />
@@ -419,7 +419,7 @@ export default function EasyBattAdminPage() {
                   </div>
 
                   {adminModel && (
-                    <article className="grid gap-4 rounded-[20px] border border-white/10 bg-[#17191D] p-4">
+                    <article className="grid gap-4 rounded-[20px] border border-white/10 bg-[#17191D] p-4 lg:min-w-0">
                       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                         <div>
                           <strong className="text-[#F4CC18]">{adminModel.code}</strong>
@@ -436,10 +436,10 @@ export default function EasyBattAdminPage() {
                           </Button>
                         </div>
                       </div>
-                      <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+                      <div className="grid gap-3 md:grid-cols-2 2xl:grid-cols-3">
                         <Field label="Codice"><input className={inputClass} value={adminModel.code} onChange={(event) => { updateModel(activeModelIndex, { code: event.target.value }); setSelectedModelCode(event.target.value); }} /></Field>
-                        <Field label="Descrizione"><input className={inputClass} value={adminModel.description} onChange={(event) => updateModel(activeModelIndex, { description: event.target.value })} /></Field>
-                        <Field label="Materiale"><input className={inputClass} value={adminModel.material} onChange={(event) => updateModel(activeModelIndex, { material: event.target.value })} /></Field>
+                        <Field label="Descrizione" className="2xl:col-span-2"><input className={inputClass} value={adminModel.description} onChange={(event) => updateModel(activeModelIndex, { description: event.target.value })} /></Field>
+                        <Field label="Materiale" className="lg:col-span-full"><input className={inputClass} value={adminModel.material} onChange={(event) => updateModel(activeModelIndex, { material: event.target.value })} /></Field>
                         <Field label="Famiglia finitura"><input className={inputClass} value={adminModel.finishFamily} onChange={(event) => updateModel(activeModelIndex, { finishFamily: event.target.value })} /></Field>
                         <Field label="Finitura commerciale"><input className={inputClass} value={adminModel.finishLabel} onChange={(event) => updateModel(activeModelIndex, { finishLabel: event.target.value })} /></Field>
                         <Field label="Finitura tecnica"><input className={inputClass} value={adminModel.finish} onChange={(event) => updateModel(activeModelIndex, { finish: event.target.value })} /></Field>
@@ -517,7 +517,7 @@ export default function EasyBattAdminPage() {
         </div>
 
         <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-[#11161C]/95 px-4 py-3 backdrop-blur">
-          <div className="mx-auto flex max-w-7xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="mx-auto flex max-w-7xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between lg:max-w-[1752px]">
             <div className={`text-sm ${status === "error" ? "text-[#F2A3A3]" : status === "saved" ? "text-[#72E6E2]" : "text-[#B6BDC6]"}`}>
               {message || (changed ? "Hai modifiche non ancora pubblicate." : "Tutto salvato.")}
             </div>
