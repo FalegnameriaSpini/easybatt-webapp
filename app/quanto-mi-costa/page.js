@@ -19,11 +19,11 @@ import { Card as CardComp, CardContent as CardContentComp, CardDescription as Ca
 import { GooglePlacesAutocomplete } from "@/components/google-places-autocomplete";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import { eb } from "@/app/easybatt-ui";
 import { DEFAULT_EASYBATT_CONFIG, normalizeEasyBattConfig } from "@/lib/easybatt-config";
+import { FINISH_FAMILY_ORDER } from "@/lib/easybatt-catalog.mjs";
 
 const euro = new Intl.NumberFormat("it-IT", {
   style: "currency",
@@ -37,16 +37,12 @@ function getShippingPrice(weightKg, shippingBands) {
   return band ? band.price : shippingBands[shippingBands.length - 1]?.price ?? 0;
 }
 
-function unique(array) {
-  return Array.from(new Set(array));
-}
-
-function ModelImagePreview({ title, src, alt }) {
+function ModelImagePreview({ title, src, alt, contain = false }) {
   return (
     <div className="overflow-hidden rounded-[22px] border border-white/10 bg-[#11161C]">
       <div className="flex h-44 items-center justify-center bg-white/[0.03]">
         {src ? (
-          <img src={src} alt={alt} className="h-full w-full object-cover" />
+          <img src={src} alt={alt} className={`h-full w-full ${contain ? "bg-white p-3 object-contain" : "object-cover"}`} />
         ) : (
           <div className="px-4 text-center text-sm leading-6 text-[#8F98A3]">
             Immagine non ancora caricata
@@ -60,13 +56,32 @@ function ModelImagePreview({ title, src, alt }) {
   );
 }
 
-const fieldClassName =
-  "h-12 rounded-2xl !border !border-white/20 !bg-[#10B7B3] !text-[#11161C] " +
-  "shadow-[inset_0_1px_0_rgba(255,255,255,0.02)] transition-all duration-200 " +
-  "hover:!border-[#10B7B3]/45 hover:!bg-[#0A8B87] " +
-  "focus-visible:!border-[#10B7B3] focus-visible:!bg-[#0A8B87] focus-visible:!ring-2 focus-visible:!ring-[#10B7B3]/25 focus-visible:!outline-none " +
-  "data-[state=open]:!border-[#10B7B3] data-[state=open]:!bg-[#0A8B87] data-[state=open]:!ring-2 data-[state=open]:!ring-[#10B7B3]/25 " +
-  "[&_svg]:text-[#1A1F26] hover:[&_svg]:text-[#11161C] data-[state=open]:[&_svg]:text-[#11161C]";
+function StepHeading({ number, children }) {
+  return (
+    <div className="flex items-center gap-2.5">
+      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#10B7B3] text-xs font-bold text-[#11161C]">
+        {number}
+      </span>
+      <h3 className="text-base font-semibold text-white">{children}</h3>
+    </div>
+  );
+}
+
+function ChoiceButton({ active, children, className = "", ...props }) {
+  return (
+    <button
+      type="button"
+      className={`min-h-11 rounded-xl border px-3 py-2 text-sm font-semibold transition ${
+        active
+          ? "border-[#10B7B3]/70 bg-[#10B7B3] text-[#11161C] shadow-[0_8px_24px_rgba(16,183,179,0.18)]"
+          : "border-white/10 bg-[#11161C] text-[#D9DDE2] hover:border-[#10B7B3]/35 hover:bg-white/[0.04]"
+      } ${className}`}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+}
 
 const inputClassName =
   "h-12 rounded-2xl !border !border-white/20 !bg-[#10B7B3] !text-[#11161C] " +
@@ -86,15 +101,6 @@ const finalTealAccentButtonClassName =
   `${finalSecondaryButtonClassName} !border-[#0A8B87] !bg-[#10B7B3] !text-white font-semibold hover:-translate-y-0.5 hover:!border-[#0A8B87] hover:!bg-[#22C7C2] hover:!text-white active:!bg-[#0A8B87] active:!text-white active:!border-[#08716E] focus-visible:!bg-[#10B7B3] focus-visible:!text-white focus-visible:!border-[#0A8B87]`;
 const finalSecondaryActionButtonClassName =
   `${eb.outlineButton} ${finalSecondaryButtonClassName} !border-white/12 !bg-[#17191D] !text-[#D9DDE2] hover:!border-[#10B7B3]/25 hover:!bg-white/[0.05] hover:!text-white active:!bg-[#1F2329] active:!text-white active:!border-[#10B7B3]/35 focus-visible:!bg-[#1F2329] focus-visible:!text-white focus-visible:!border-[#10B7B3]/35`;
-
-const selectContentClassName =
-  "rounded-2xl !border !border-white/10 !bg-[#11161C] !text-white shadow-[0_18px_40px_rgba(0,0,0,0.28)]";
-
-const selectItemClassName =
-  "rounded-xl px-2.5 py-2 text-[#D7DCE2] " +
-  "focus:bg-[#10B7B3]/10 focus:text-white " +
-  "data-[state=checked]:bg-white/5 data-[state=checked]:text-white " +
-  "[&_svg]:text-[#72E6E2]";
 
 function BrandLockup() {
   return (
@@ -124,10 +130,10 @@ function StickyBrandHeader() {
 
 export function EasyBattQuantoMiCostaPage() {
   const [pricingConfig, setPricingConfig] = useState(() => normalizeEasyBattConfig(DEFAULT_EASYBATT_CONFIG));
-  const [materialFilter, setMaterialFilter] = useState("all");
-  const [heightFilter, setHeightFilter] = useState("all");
-  const [finishFilter, setFinishFilter] = useState("all");
-  const [selectedCode, setSelectedCode] = useState("4013R3TG11");
+  const [finishFamilyFilter, setFinishFamilyFilter] = useState("");
+  const [finishImageFilter, setFinishImageFilter] = useState("");
+  const [measureFilter, setMeasureFilter] = useState("");
+  const [profileFilter, setProfileFilter] = useState("");
   const [linearMeters, setLinearMeters] = useState(100);
   const [returnKm, setReturnKm] = useState("");
   const [includeSupply, setIncludeSupply] = useState(true);
@@ -163,81 +169,96 @@ export function EasyBattQuantoMiCostaPage() {
     };
   }, []);
 
-  const matchesFilters = (model, filters) => {
-    const materialOk = filters.material === "all" || model.material === filters.material;
-    const heightOk = filters.height === "all" || String(model.height) === filters.height;
-    const finishOk = filters.finish === "all" || model.finish === filters.finish;
-    return materialOk && heightOk && finishOk;
-  };
+  const finishFamilies = useMemo(() => {
+    const available = new Set(models.map((model) => model.finishFamily));
+    return [
+      ...FINISH_FAMILY_ORDER.filter((family) => available.has(family)),
+      ...[...available].filter((family) => !FINISH_FAMILY_ORDER.includes(family)).sort(),
+    ];
+  }, [models]);
 
-  const availableMaterials = useMemo(() => {
-    return unique(
-      models.filter((model) =>
-        matchesFilters(model, { material: "all", height: heightFilter, finish: finishFilter }),
-      ).map((model) => model.material),
-    ).sort();
-  }, [finishFilter, heightFilter, models]);
+  const selectedFamily = finishFamilies.includes(finishFamilyFilter)
+    ? finishFamilyFilter
+    : finishFamilies[0] || "";
 
-  const availableHeights = useMemo(() => {
-    return unique(
-      models.filter((model) =>
-        matchesFilters(model, { material: materialFilter, height: "all", finish: finishFilter }),
-      ).map((model) => String(model.height)),
-    ).sort((a, b) => Number(a) - Number(b));
-  }, [finishFilter, materialFilter, models]);
+  const finishOptions = useMemo(() => {
+    const byImage = new Map();
+    models
+      .filter((model) => model.finishFamily === selectedFamily)
+      .forEach((model) => {
+        const key = model.finishKey || model.finishImageUrl || model.finishLabel;
+        if (!byImage.has(key)) {
+          const materialSuffix = ` \u00b7 ${model.material}`;
+          byImage.set(key, {
+            key,
+            label: model.finishLabel.endsWith(materialSuffix)
+              ? model.finishLabel.slice(0, -materialSuffix.length)
+              : model.finishLabel,
+            material: model.material,
+            imageUrl: model.finishImageUrl,
+          });
+        }
+      });
+    return [...byImage.values()].sort((a, b) => a.label.localeCompare(b.label, "it"));
+  }, [models, selectedFamily]);
 
-  const availableFinishes = useMemo(() => {
-    return unique(
-      models.filter((model) =>
-        matchesFilters(model, { material: materialFilter, height: heightFilter, finish: "all" }),
-      ).map((model) => model.finish),
-    ).sort();
-  }, [heightFilter, materialFilter, models]);
+  const selectedFinishImage = finishOptions.some((item) => item.key === finishImageFilter)
+    ? finishImageFilter
+    : finishOptions[0]?.key || "";
 
-  useEffect(() => {
-    if (materialFilter !== "all" && !availableMaterials.includes(materialFilter)) {
-      setMaterialFilter("all");
-    }
-  }, [availableMaterials, materialFilter]);
+  const finishModels = useMemo(
+    () => models.filter((model) =>
+      model.finishFamily === selectedFamily &&
+      (model.finishKey || model.finishImageUrl || model.finishLabel) === selectedFinishImage,
+    ),
+    [models, selectedFamily, selectedFinishImage],
+  );
 
-  useEffect(() => {
-    if (heightFilter !== "all" && !availableHeights.includes(heightFilter)) {
-      setHeightFilter("all");
-    }
-  }, [availableHeights, heightFilter]);
+  const measureOptions = useMemo(() => {
+    const byMeasure = new Map();
+    finishModels.forEach((model) => {
+      if (!byMeasure.has(model.measure)) byMeasure.set(model.measure, model);
+    });
+    return [...byMeasure.values()]
+      .sort((a, b) => a.height - b.height || a.thickness - b.thickness)
+      .map((model) => ({ key: model.measure, label: `${model.height} × ${model.thickness} mm` }));
+  }, [finishModels]);
 
-  useEffect(() => {
-    if (finishFilter !== "all" && !availableFinishes.includes(finishFilter)) {
-      setFinishFilter("all");
-    }
-  }, [availableFinishes, finishFilter]);
+  const selectedMeasure = measureOptions.some((item) => item.key === measureFilter)
+    ? measureFilter
+    : measureOptions[0]?.key || "";
 
-  const filteredModels = useMemo(() => {
-    return models.filter((model) =>
-      matchesFilters(model, { material: materialFilter, height: heightFilter, finish: finishFilter }),
-    );
-  }, [materialFilter, heightFilter, finishFilter, models]);
+  const measureModels = useMemo(
+    () => finishModels.filter((model) => model.measure === selectedMeasure),
+    [finishModels, selectedMeasure],
+  );
 
-  const selectedModel = useMemo(() => {
-    const insideFiltered = filteredModels.find((m) => m.code === selectedCode);
-    if (insideFiltered) return insideFiltered;
-    return filteredModels[0] ?? defaultModel;
-  }, [defaultModel, filteredModels, selectedCode]);
+  const profileOptions = useMemo(() => {
+    const byProfile = new Map();
+    measureModels.forEach((model) => {
+      if (!byProfile.has(model.profile)) {
+        byProfile.set(model.profile, {
+          key: model.profile,
+          label: model.profile,
+          imageUrl: model.sectionImageUrl,
+        });
+      }
+    });
+    return [...byProfile.values()].sort((a, b) => a.label.localeCompare(b.label, "it"));
+  }, [measureModels]);
 
-  useEffect(() => {
-    if (!filteredModels.some((model) => model.code === selectedCode)) {
-      setSelectedCode(filteredModels[0]?.code ?? defaultModel.code);
-    }
-  }, [defaultModel.code, filteredModels, selectedCode]);
+  const selectedProfile = profileOptions.some((item) => item.key === profileFilter)
+    ? profileFilter
+    : profileOptions[0]?.key || "";
+
+  const selectedModel = measureModels.find((model) => model.profile === selectedProfile) ?? defaultModel;
 
   const resetFilters = () => {
-    setMaterialFilter("all");
-    setHeightFilter("all");
-    setFinishFilter("all");
-    setSelectedCode(defaultModel.code);
+    setFinishFamilyFilter("");
+    setFinishImageFilter("");
+    setMeasureFilter("");
+    setProfileFilter("");
   };
-
-  const effectiveSelectedCode = selectedModel?.code ?? defaultModel.code;
 
   const switchClassName =
     "data-[state=unchecked]:bg-[#2A2E34] data-[state=unchecked]:border-white/10 data-[state=checked]:bg-[#10B7B3] data-[state=checked]:border-[#10B7B3]/40";
@@ -439,72 +460,113 @@ export function EasyBattQuantoMiCostaPage() {
                   </ButtonComp>
                 </div>
 
-                <div className="grid gap-3 sm:grid-cols-3">
-                  <div className="grid gap-2">
-                    <Label className="text-[#D9DDE2]">Materiale</Label>
-                    <Select value={materialFilter} onValueChange={setMaterialFilter}>
-                      <SelectTrigger className={fieldClassName}>
-                        <SelectValue placeholder="Tutti" />
-                      </SelectTrigger>
-                      <SelectContent className={selectContentClassName}>
-                        <SelectItem className={selectItemClassName} value="all">Tutti</SelectItem>
-                        {availableMaterials.map((item) => (
-                          <SelectItem className={selectItemClassName} key={item} value={item}>{item}</SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="grid gap-2">
-                    <Label className="text-[#D9DDE2]">Altezza</Label>
-                    <Select value={heightFilter} onValueChange={setHeightFilter}>
-                      <SelectTrigger className={fieldClassName}>
-                        <SelectValue placeholder="Tutte" />
-                      </SelectTrigger>
-                      <SelectContent className={selectContentClassName}>
-                        <SelectItem className={selectItemClassName} value="all">Tutte</SelectItem>
-                        {availableHeights.map((item) => (
-                          <SelectItem className={selectItemClassName} key={item} value={item}>{item} mm</SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="grid gap-2">
-                    <Label className="text-[#D9DDE2]">Finitura</Label>
-                    <Select value={finishFilter} onValueChange={setFinishFilter}>
-                      <SelectTrigger className={fieldClassName}>
-                        <SelectValue placeholder="Tutte" />
-                      </SelectTrigger>
-                      <SelectContent className={selectContentClassName}>
-                        <SelectItem className={selectItemClassName} value="all">Tutte</SelectItem>
-                        {availableFinishes.map((item) => (
-                          <SelectItem className={selectItemClassName} key={item} value={item}>{item}</SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
-                <div className="grid gap-2">
-                  <Label className="text-[#D9DDE2]">Modello</Label>
-                  <Select value={effectiveSelectedCode} onValueChange={setSelectedCode}>
-                    <SelectTrigger className={fieldClassName}>
-                      <SelectValue placeholder="Scegli un modello" />
-                    </SelectTrigger>
-                    <SelectContent className={selectContentClassName}>
-                      {filteredModels.map((model) => (
-                        <SelectItem className={selectItemClassName} key={model.code} value={model.code}>
-                          {model.code} · {model.description}
-                        </SelectItem>
+                <div className="grid gap-5">
+                  <div className="grid gap-3">
+                    <StepHeading number="1">Famiglia di finitura</StepHeading>
+                    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                      {finishFamilies.map((family) => (
+                        <ChoiceButton
+                          key={family}
+                          active={family === selectedFamily}
+                          onClick={() => {
+                            setFinishFamilyFilter(family);
+                            setFinishImageFilter("");
+                            setMeasureFilter("");
+                            setProfileFilter("");
+                          }}
+                        >
+                          {family}
+                        </ChoiceButton>
                       ))}
-                    </SelectContent>
-                  </Select>
+                    </div>
+                  </div>
+
+                  <div className="grid gap-3">
+                    <StepHeading number="2">Finitura</StepHeading>
+                    <div className="grid max-h-[420px] auto-rows-max grid-cols-2 content-start gap-2 overflow-y-auto pr-1 sm:grid-cols-3">
+                      {finishOptions.map((item) => (
+                        <button
+                          key={item.key}
+                          type="button"
+                          aria-pressed={item.key === selectedFinishImage}
+                          onClick={() => {
+                            setFinishImageFilter(item.key);
+                            setMeasureFilter("");
+                            setProfileFilter("");
+                          }}
+                          className={`flex min-w-0 flex-col overflow-hidden rounded-xl border text-left transition ${
+                            item.key === selectedFinishImage
+                              ? "border-[#10B7B3]/70 bg-[#10B7B3]/12 shadow-[0_8px_24px_rgba(16,183,179,0.14)]"
+                              : "border-white/10 bg-[#11161C] hover:border-[#10B7B3]/35"
+                          }`}
+                        >
+                          <span className="flex h-20 w-full shrink-0 items-center justify-center bg-white/[0.04]">
+                            {item.imageUrl ? (
+                              <img src={item.imageUrl} alt="" className="h-full w-full object-cover" />
+                            ) : (
+                              <span className="text-xs text-[#8F98A3]">Nessuna immagine</span>
+                            )}
+                          </span>
+                          <span className="flex w-full flex-1 flex-col gap-1 px-3 py-3 [overflow-wrap:anywhere]">
+                            <span className="block text-sm font-semibold leading-5 text-white">{item.label}</span>
+                            {item.material && (
+                              <span className="block text-xs leading-4 text-[#B8C0CC]">{item.material}</span>
+                            )}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="grid gap-3">
+                    <StepHeading number="3">Misura</StepHeading>
+                    <div className="flex flex-wrap gap-2">
+                      {measureOptions.map((item) => (
+                        <ChoiceButton
+                          key={item.key}
+                          active={item.key === selectedMeasure}
+                          onClick={() => {
+                            setMeasureFilter(item.key);
+                            setProfileFilter("");
+                          }}
+                        >
+                          {item.label}
+                        </ChoiceButton>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="grid gap-3">
+                    <StepHeading number="4">Profilo</StepHeading>
+                    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                      {profileOptions.map((item) => (
+                        <button
+                          key={item.key}
+                          type="button"
+                          onClick={() => setProfileFilter(item.key)}
+                          className={`overflow-hidden rounded-xl border text-left transition ${
+                            item.key === selectedProfile
+                              ? "border-[#10B7B3]/70 bg-[#10B7B3]/12"
+                              : "border-white/10 bg-[#11161C] hover:border-[#10B7B3]/35"
+                          }`}
+                        >
+                          <span className="flex h-24 items-center justify-center bg-white p-2">
+                            {item.imageUrl ? (
+                              <img src={item.imageUrl} alt="" className="h-full w-full object-contain" />
+                            ) : (
+                              <span className="text-xs text-[#68717A]">Nessuna immagine</span>
+                            )}
+                          </span>
+                          <span className="block px-3 py-2 text-sm font-semibold text-white">{item.label}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
                 </div>
 
                 {selectedModel && (
                   <div className="grid gap-4 rounded-[24px] bg-[#17191D] p-4">
-                    <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+                    <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
                       <div className={eb.statInset}>
                         <div className="text-xs text-[#8F98A3]">Codice</div>
                         <div className="mt-1 font-semibold text-white">{selectedModel.code}</div>
@@ -519,7 +581,11 @@ export function EasyBattQuantoMiCostaPage() {
                       </div>
                       <div className={eb.statInset}>
                         <div className="text-xs text-[#8F98A3]">Finitura</div>
-                        <div className="mt-1 font-semibold text-white">{selectedModel.finish}</div>
+                        <div className="mt-1 font-semibold text-white">{selectedModel.finishLabel}</div>
+                      </div>
+                      <div className={eb.statInset}>
+                        <div className="text-xs text-[#8F98A3]">Lunghezza stecca</div>
+                        <div className="mt-1 font-semibold text-white">{selectedModel.stickLengthLabel} mm</div>
                       </div>
                     </div>
 
@@ -528,11 +594,12 @@ export function EasyBattQuantoMiCostaPage() {
                         title="Sezione tecnica"
                         src={selectedModel.sectionImageUrl}
                         alt={`Sezione tecnica ${selectedModel.description}`}
+                        contain
                       />
                       <ModelImagePreview
-                        title="Battiscopa ambientato"
-                        src={selectedModel.ambientImageUrl}
-                        alt={`Battiscopa ambientato ${selectedModel.description}`}
+                        title="Finitura"
+                        src={selectedModel.finishImageUrl}
+                        alt={`Finitura ${selectedModel.finishLabel}`}
                       />
                     </div>
                   </div>

@@ -20,6 +20,10 @@
 # production
 /build
 
+# local catalog source images (published copies live in public/catalog)
+/data/import/profili/
+/data/import/finiture/
+
 # misc
 .DS_Store
 *.pem
