@@ -84,6 +84,7 @@ function ChoiceButton({ active, children, className = "", ...props }) {
   return (
     <button
       type="button"
+      aria-pressed={active}
       className={`min-h-11 rounded-xl border px-3 py-2 text-sm font-semibold transition ${
         active
           ? "border-[#10B7B3]/70 bg-[#10B7B3] text-[#11161C] shadow-[0_8px_24px_rgba(16,183,179,0.18)]"
@@ -225,28 +226,9 @@ export function EasyBattQuantoMiCostaPage() {
     [models, selectedFamily, selectedFinishImage],
   );
 
-  const measureOptions = useMemo(() => {
-    const byMeasure = new Map();
-    finishModels.forEach((model) => {
-      if (!byMeasure.has(model.measure)) byMeasure.set(model.measure, model);
-    });
-    return [...byMeasure.values()]
-      .sort((a, b) => a.height - b.height || a.thickness - b.thickness)
-      .map((model) => ({ key: model.measure, label: `${model.height} × ${model.thickness} mm` }));
-  }, [finishModels]);
-
-  const selectedMeasure = measureOptions.some((item) => item.key === measureFilter)
-    ? measureFilter
-    : measureOptions[0]?.key || "";
-
-  const measureModels = useMemo(
-    () => finishModels.filter((model) => model.measure === selectedMeasure),
-    [finishModels, selectedMeasure],
-  );
-
   const profileOptions = useMemo(() => {
     const byProfile = new Map();
-    measureModels.forEach((model) => {
+    finishModels.forEach((model) => {
       if (!byProfile.has(model.profile)) {
         byProfile.set(model.profile, {
           key: model.profile,
@@ -256,13 +238,32 @@ export function EasyBattQuantoMiCostaPage() {
       }
     });
     return [...byProfile.values()].sort((a, b) => a.label.localeCompare(b.label, "it"));
-  }, [measureModels]);
+  }, [finishModels]);
 
   const selectedProfile = profileOptions.some((item) => item.key === profileFilter)
     ? profileFilter
     : profileOptions[0]?.key || "";
 
-  const selectedModel = measureModels.find((model) => model.profile === selectedProfile) ?? defaultModel;
+  const profileModels = useMemo(
+    () => finishModels.filter((model) => model.profile === selectedProfile),
+    [finishModels, selectedProfile],
+  );
+
+  const measureOptions = useMemo(() => {
+    const byMeasure = new Map();
+    profileModels.forEach((model) => {
+      if (!byMeasure.has(model.measure)) byMeasure.set(model.measure, model);
+    });
+    return [...byMeasure.values()]
+      .sort((a, b) => a.height - b.height || a.thickness - b.thickness)
+      .map((model) => ({ key: model.measure, label: `${model.height} × ${model.thickness} mm` }));
+  }, [profileModels]);
+
+  const selectedMeasure = measureOptions.some((item) => item.key === measureFilter)
+    ? measureFilter
+    : measureOptions[0]?.key || "";
+
+  const selectedModel = profileModels.find((model) => model.measure === selectedMeasure) ?? defaultModel;
 
   const resetFilters = () => {
     setFinishFamilyFilter("");
@@ -529,31 +530,17 @@ export function EasyBattQuantoMiCostaPage() {
                   </div>
 
                   <div className="grid gap-3">
-                    <StepHeading number="3">Misura</StepHeading>
-                    <div className="flex flex-wrap gap-2">
-                      {measureOptions.map((item) => (
-                        <ChoiceButton
-                          key={item.key}
-                          active={item.key === selectedMeasure}
-                          onClick={() => {
-                            setMeasureFilter(item.key);
-                            setProfileFilter("");
-                          }}
-                        >
-                          {item.label}
-                        </ChoiceButton>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="grid gap-3">
-                    <StepHeading number="4">Profilo</StepHeading>
+                    <StepHeading number="3">Profilo</StepHeading>
                     <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
                       {profileOptions.map((item) => (
                         <button
                           key={item.key}
                           type="button"
-                          onClick={() => setProfileFilter(item.key)}
+                          aria-pressed={item.key === selectedProfile}
+                          onClick={() => {
+                            setProfileFilter(item.key);
+                            setMeasureFilter("");
+                          }}
                           className={`overflow-hidden rounded-xl border text-left transition ${
                             item.key === selectedProfile
                               ? "border-[#10B7B3]/70 bg-[#10B7B3]/12"
@@ -562,13 +549,28 @@ export function EasyBattQuantoMiCostaPage() {
                         >
                           <span className="flex h-24 items-center justify-center bg-white p-2">
                             {item.imageUrl ? (
-                              <img src={item.imageUrl} alt="" className="h-full w-full object-contain" />
+                              <img src={item.key === selectedProfile ? selectedModel.sectionImageUrl : item.imageUrl} alt="" className="h-full w-full object-contain" />
                             ) : (
                               <span className="text-xs text-[#68717A]">Nessuna immagine</span>
                             )}
                           </span>
                           <span className="block px-3 py-2 text-sm font-semibold text-white">{item.label}</span>
                         </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="grid gap-3">
+                    <StepHeading number="4">Misura</StepHeading>
+                    <div className="flex flex-wrap gap-2">
+                      {measureOptions.map((item) => (
+                        <ChoiceButton
+                          key={item.key}
+                          active={item.key === selectedMeasure}
+                          onClick={() => setMeasureFilter(item.key)}
+                        >
+                          {item.label}
+                        </ChoiceButton>
                       ))}
                     </div>
                   </div>
