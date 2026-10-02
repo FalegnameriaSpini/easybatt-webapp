@@ -367,13 +367,14 @@ export function EasyBattQuantoMiCostaPage() {
     const ml = Number.isFinite(rawMl) ? Math.max(0, rawMl) : 0;
     const km = Number.isFinite(rawKm) ? Math.max(0, rawKm) : 0;
     const supplyUnitPrice = includeSupply ? (selectedModel?.supplyBaseCostPerMl ?? 0) * (1 + pricingConfig.supplyMargin) : 0;
-    const baseWeight = (selectedModel?.weightKgMl ?? 0) * ml;
-    const totalWeight = baseWeight + pricingConfig.packagingWeightKgMl * ml;
+    const baseWeight = includeSupply ? (selectedModel?.weightKgMl ?? 0) * ml : 0;
+    const totalWeight = includeSupply ? baseWeight + pricingConfig.packagingWeightKgMl * ml : 0;
     const serviceSubtotal = ml * pricingConfig.serviceRate;
     const travelSubtotal = km * pricingConfig.travelRate;
     const serviceAndTravelSubtotal = serviceSubtotal + travelSubtotal;
     const supplySubtotal = includeSupply ? ml * supplyUnitPrice : 0;
-    const shippingSubtotal = includeShipping && !includePickup ? getShippingPrice(totalWeight, pricingConfig.shippingBands) : 0;
+    const shippingNeedsQuote = includeShipping && !includePickup && !includeSupply;
+    const shippingSubtotal = includeShipping && !includePickup && includeSupply ? getShippingPrice(totalWeight, pricingConfig.shippingBands) : 0;
     const installationSubtotal = includeInstallation ? ml * pricingConfig.installationRate : 0;
     const subtotal = serviceSubtotal + travelSubtotal + supplySubtotal + shippingSubtotal + installationSubtotal;
     const vat = subtotal * pricingConfig.vat;
@@ -390,6 +391,7 @@ export function EasyBattQuantoMiCostaPage() {
       serviceAndTravelSubtotal,
       supplySubtotal,
       shippingSubtotal,
+      shippingNeedsQuote,
       installationSubtotal,
       subtotal,
       vat,
@@ -400,8 +402,9 @@ export function EasyBattQuantoMiCostaPage() {
   const projectSummary = useMemo(() => {
     const chantierAddress = distanceMeta?.resolvedAddress || zipCode.trim() || "Da definire";
     const servizi = [
+      "Misurazione e taglio",
       includeSupply && "Fornitura battiscopa",
-      includeShipping && !includePickup && "Spedizione",
+      includeShipping && !includePickup && !calculation.shippingNeedsQuote && "Spedizione",
       includePickup && "Ritiro presso la sede",
       includeInstallation && "Posa in opera",
     ].filter(Boolean);
@@ -410,10 +413,13 @@ export function EasyBattQuantoMiCostaPage() {
       "Ciao, ho configurato un progetto EasyBatt 👇",
       "",
       `📐 Metri battiscopa: ${calculation.ml} ml`,
-      `📦 Modello: ${selectedModel?.description || "Non selezionato"}`,
+      ...(includeSupply
+        ? [`📦 Modello: ${selectedModel?.description || "Non selezionato"}`]
+        : ["Fornitura battiscopa esclusa: materiale del cliente."]),
       `📍 Località: ${chantierAddress}`,
       "",
       `💰 Totale calcolato: ${euro.format(calculation.total)}`,
+      ...(calculation.shippingNeedsQuote ? ["Spedizione richiesta: da quotare a parte, esclusa dal totale."] : []),
       "",
       ...(servizi.length ? ["Servizi inclusi:", ...servizi.map((servizio) => `- ${servizio}`), ""] : []),
       "Possiamo verificare insieme il progetto?",
@@ -421,6 +427,7 @@ export function EasyBattQuantoMiCostaPage() {
   }, [
     calculation.ml,
     calculation.total,
+    calculation.shippingNeedsQuote,
     distanceMeta?.resolvedAddress,
     includeInstallation,
     includePickup,
@@ -449,181 +456,11 @@ export function EasyBattQuantoMiCostaPage() {
 
         <div className="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(320px,1fr)]">
           <div className="grid min-w-0 gap-6">
-            <CardComp className={eb.cardInteractive}>
+            <CardComp id="service-configuration" className={eb.cardInteractive}>
               <CardHeaderComp>
-                <CardTitleComp className="flex items-center gap-2 text-xl text-white">
-                  <Layers3 className="h-5 w-5 text-[#72E6E2]" />
-                  Scegli il battiscopa
-                </CardTitleComp>
-                <CardDescriptionComp className="text-base leading-7 text-[#B6BDC6]">
-                  Filtra i modelli e seleziona quello più adatto al tuo progetto.
-                </CardDescriptionComp>
-              </CardHeaderComp>
-              <CardContentComp className="grid gap-4">
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                  <ButtonComp
-                    type="button"
-                    variant="outline"
-                    onClick={resetFilters}
-                    className={`${neutralButtonClassName} h-10 px-4 text-sm sm:ml-auto`}
-                  >
-                    Reimposta filtri
-                  </ButtonComp>
-                </div>
-
-                <div className="grid gap-5">
-                  <div className="grid gap-3">
-                    <StepHeading number="1">Famiglia di finitura</StepHeading>
-                    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-                      {finishFamilies.map((family) => (
-                        <ChoiceButton
-                          key={family}
-                          active={family === selectedFamily}
-                          onClick={() => {
-                            setFinishFamilyFilter(family);
-                            setFinishImageFilter("");
-                            setMeasureFilter("");
-                            setProfileFilter("");
-                          }}
-                        >
-                          {family}
-                        </ChoiceButton>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="grid gap-3">
-                    <StepHeading number="2">Finitura</StepHeading>
-                    <div className="grid max-h-[420px] auto-rows-max grid-cols-2 content-start gap-2 overflow-y-auto pr-1 sm:grid-cols-3 lg:max-h-[620px] xl:grid-cols-4 2xl:grid-cols-5">
-                      {finishOptions.map((item) => (
-                        <button
-                          key={item.key}
-                          type="button"
-                          aria-pressed={item.key === selectedFinishImage}
-                          onClick={() => {
-                            setFinishImageFilter(item.key);
-                            setMeasureFilter("");
-                            setProfileFilter("");
-                          }}
-                          className={`flex min-w-0 flex-col overflow-hidden rounded-xl border text-left transition ${
-                            item.key === selectedFinishImage
-                              ? "border-[#10B7B3]/70 bg-[#10B7B3]/12 shadow-[0_8px_24px_rgba(16,183,179,0.14)]"
-                              : "border-white/10 bg-[#11161C] hover:border-[#10B7B3]/35"
-                          }`}
-                        >
-                          <span className="flex h-20 w-full shrink-0 items-center justify-center bg-white/[0.04]">
-                            {item.imageUrl ? (
-                              <img src={item.imageUrl} alt="" className="h-full w-full object-cover" />
-                            ) : (
-                              <span className="text-xs text-[#8F98A3]">Nessuna immagine</span>
-                            )}
-                          </span>
-                          <span className="flex w-full flex-1 flex-col gap-1 px-3 py-3 [overflow-wrap:anywhere]">
-                            <span className="block text-sm font-semibold leading-5 text-white">{item.label}</span>
-                            {item.material && (
-                              <span className="block text-xs leading-4 text-[#B8C0CC]">{item.material}</span>
-                            )}
-                          </span>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="grid gap-3">
-                    <StepHeading number="3">Profilo</StepHeading>
-                    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-                      {profileOptions.map((item) => (
-                        <button
-                          key={item.key}
-                          type="button"
-                          aria-pressed={item.key === selectedProfile}
-                          onClick={() => {
-                            setProfileFilter(item.key);
-                            setMeasureFilter("");
-                          }}
-                          className={`overflow-hidden rounded-xl border text-left transition ${
-                            item.key === selectedProfile
-                              ? "border-[#10B7B3]/70 bg-[#10B7B3]/12"
-                              : "border-white/10 bg-[#11161C] hover:border-[#10B7B3]/35"
-                          }`}
-                        >
-                          <span className="flex h-24 items-center justify-center bg-white p-2">
-                            {item.imageUrl ? (
-                              <img src={item.key === selectedProfile ? selectedModel.sectionImageUrl : item.imageUrl} alt="" className="h-full w-full object-contain" />
-                            ) : (
-                              <span className="text-xs text-[#68717A]">Nessuna immagine</span>
-                            )}
-                          </span>
-                          <span className="block px-3 py-2 text-sm font-semibold text-white">{item.label}</span>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="grid gap-3">
-                    <StepHeading number="4">Misura</StepHeading>
-                    <div className="flex flex-wrap gap-2">
-                      {measureOptions.map((item) => (
-                        <ChoiceButton
-                          key={item.key}
-                          active={item.key === selectedMeasure}
-                          onClick={() => setMeasureFilter(item.key)}
-                        >
-                          {item.label}
-                        </ChoiceButton>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {selectedModel && (
-                  <div className="grid gap-4 rounded-[24px] bg-[#17191D] p-4">
-                    <div className="grid gap-3 [overflow-wrap:anywhere] sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5">
-                      <div className={eb.statInset}>
-                        <div className="text-xs text-[#8F98A3]">Codice</div>
-                        <div className="mt-1 font-semibold text-white">{selectedModel.code}</div>
-                      </div>
-                      <div className={eb.statInset}>
-                        <div className="text-xs text-[#8F98A3]">Profilo</div>
-                        <div className="mt-1 font-semibold text-white">{selectedModel.profile}</div>
-                      </div>
-                      <div className={eb.statInset}>
-                        <div className="text-xs text-[#8F98A3]">Sezione</div>
-                        <div className="mt-1 font-semibold text-white">{selectedModel.height} × {selectedModel.thickness} mm</div>
-                      </div>
-                      <div className={eb.statInset}>
-                        <div className="text-xs text-[#8F98A3]">Finitura</div>
-                        <div className="mt-1 font-semibold text-white">{selectedModel.finishLabel}</div>
-                      </div>
-                      <div className={eb.statInset}>
-                        <div className="text-xs text-[#8F98A3]">Lunghezza stecca</div>
-                        <div className="mt-1 font-semibold text-white">{selectedModel.stickLengthLabel} mm</div>
-                      </div>
-                    </div>
-
-                    <div className="grid gap-3 md:grid-cols-2">
-                      <ModelImagePreview
-                        title="Sezione tecnica"
-                        src={selectedModel.sectionImageUrl}
-                        alt={`Sezione tecnica ${selectedModel.description}`}
-                        contain
-                      />
-                      <ModelImagePreview
-                        title="Finitura"
-                        src={selectedModel.finishImageUrl}
-                        alt={`Finitura ${selectedModel.finishLabel}`}
-                      />
-                    </div>
-                  </div>
-                )}
-              </CardContentComp>
-            </CardComp>
-
-            <CardComp className={eb.cardInteractive}>
-              <CardHeaderComp>
-                <CardTitleComp className="flex items-center gap-2 text-xl text-white">
+                <CardTitleComp role="heading" aria-level={2} className="flex items-center gap-2 text-xl text-white">
                   <CalcIcon className="h-5 w-5 text-[#F8E58A]" />
-                  Completa il prezzo
+                  Configura il servizio
                 </CardTitleComp>
               </CardHeaderComp>
               <CardContentComp className="grid gap-5">
@@ -718,32 +555,204 @@ export function EasyBattQuantoMiCostaPage() {
                       <div className="font-semibold text-white">Fornitura battiscopa inclusa</div>
                       <div className="text-sm text-[#9FA7B0]">Ricevi il materiale già pronto da posare</div>
                     </div>
-                    <Switch className={switchClassName} checked={includeSupply} onCheckedChange={setIncludeSupply} />
+                    <Switch aria-label="Fornitura battiscopa inclusa" className={switchClassName} checked={includeSupply} onCheckedChange={setIncludeSupply} />
                   </div>
                   <div className="flex items-center justify-between gap-4 rounded-[20px] border border-white/10 bg-[#1F2329] px-4 py-3.5">
                     <div>
-                      <div className="font-semibold text-white">Spedizione inclusa</div>
-                      <div className="text-sm text-[#9FA7B0]">Consegna diretta dove serve</div>
+                      <div className="font-semibold text-white">{includeSupply ? "Spedizione inclusa" : "Richiedi spedizione"}</div>
+                      <div className="text-sm text-[#9FA7B0]">{includeSupply ? "Consegna diretta dove serve" : "Con materiale del cliente, costo da quotare a parte"}</div>
                     </div>
-                    <Switch className={switchClassName} checked={includeShipping} onCheckedChange={handleShippingChange} />
+                    <Switch aria-label="Spedizione" className={switchClassName} checked={includeShipping} onCheckedChange={handleShippingChange} />
                   </div>
                   <div className="flex items-center justify-between gap-4 rounded-[20px] border border-white/10 bg-[#1F2329] px-4 py-3.5">
                     <div>
                       <div className="font-semibold text-white">Ritiro presso la sede</div>
                       <div className="text-sm text-[#9FA7B0]">Risparmi la spedizione ritirando direttamente</div>
                     </div>
-                    <Switch className={switchClassName} checked={includePickup} onCheckedChange={handlePickupChange} />
+                    <Switch aria-label="Ritiro presso la sede" className={switchClassName} checked={includePickup} onCheckedChange={handlePickupChange} />
                   </div>
                   <div className="flex items-center justify-between gap-4 rounded-[20px] border border-white/10 bg-[#1F2329] px-4 py-3.5">
                     <div>
                       <div className="font-semibold text-white">Posa in opera inclusa</div>
                       <div className="text-sm text-[#9FA7B0]">Valuta subito anche il servizio completo</div>
                     </div>
-                    <Switch className={switchClassName} checked={includeInstallation} onCheckedChange={setIncludeInstallation} />
+                    <Switch aria-label="Posa in opera inclusa" className={switchClassName} checked={includeInstallation} onCheckedChange={setIncludeInstallation} />
                   </div>
                 </div>
               </CardContentComp>
             </CardComp>
+
+            {includeSupply && (
+              <CardComp id="battiscopa-selection" className={eb.cardInteractive}>
+                <CardHeaderComp>
+                  <CardTitleComp role="heading" aria-level={2} className="flex items-center gap-2 text-xl text-white">
+                    <Layers3 className="h-5 w-5 text-[#72E6E2]" />
+                    Scegli il battiscopa
+                  </CardTitleComp>
+                  <CardDescriptionComp className="text-base leading-7 text-[#B6BDC6]">
+                    Filtra i modelli e seleziona quello più adatto al tuo progetto.
+                  </CardDescriptionComp>
+                </CardHeaderComp>
+                <CardContentComp className="grid gap-4">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <ButtonComp
+                      type="button"
+                      variant="outline"
+                      onClick={resetFilters}
+                      className={`${neutralButtonClassName} h-10 px-4 text-sm sm:ml-auto`}
+                    >
+                      Reimposta filtri
+                    </ButtonComp>
+                  </div>
+
+                  <div className="grid gap-5">
+                    <div className="grid gap-3">
+                      <StepHeading number="1">Famiglia di finitura</StepHeading>
+                      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                        {finishFamilies.map((family) => (
+                          <ChoiceButton
+                            key={family}
+                            active={family === selectedFamily}
+                            onClick={() => {
+                              setFinishFamilyFilter(family);
+                              setFinishImageFilter("");
+                              setMeasureFilter("");
+                              setProfileFilter("");
+                            }}
+                          >
+                            {family}
+                          </ChoiceButton>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="grid gap-3">
+                      <StepHeading number="2">Finitura</StepHeading>
+                      <div className="grid max-h-[420px] auto-rows-max grid-cols-2 content-start gap-2 overflow-y-auto pr-1 sm:grid-cols-3 lg:max-h-[620px] xl:grid-cols-4 2xl:grid-cols-5">
+                        {finishOptions.map((item) => (
+                          <button
+                            key={item.key}
+                            type="button"
+                            aria-pressed={item.key === selectedFinishImage}
+                            onClick={() => {
+                              setFinishImageFilter(item.key);
+                              setMeasureFilter("");
+                              setProfileFilter("");
+                            }}
+                            className={`flex min-w-0 flex-col overflow-hidden rounded-xl border text-left transition ${
+                              item.key === selectedFinishImage
+                                ? "border-[#10B7B3]/70 bg-[#10B7B3]/12 shadow-[0_8px_24px_rgba(16,183,179,0.14)]"
+                                : "border-white/10 bg-[#11161C] hover:border-[#10B7B3]/35"
+                            }`}
+                          >
+                            <span className="flex h-20 w-full shrink-0 items-center justify-center bg-white/[0.04]">
+                              {item.imageUrl ? (
+                                <img src={item.imageUrl} alt="" className="h-full w-full object-cover" />
+                              ) : (
+                                <span className="text-xs text-[#8F98A3]">Nessuna immagine</span>
+                              )}
+                            </span>
+                            <span className="flex w-full flex-1 flex-col gap-1 px-3 py-3 [overflow-wrap:anywhere]">
+                              <span className="block text-sm font-semibold leading-5 text-white">{item.label}</span>
+                              {item.material && (
+                                <span className="block text-xs leading-4 text-[#B8C0CC]">{item.material}</span>
+                              )}
+                            </span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="grid gap-3">
+                      <StepHeading number="3">Profilo</StepHeading>
+                      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                        {profileOptions.map((item) => (
+                          <button
+                            key={item.key}
+                            type="button"
+                            aria-pressed={item.key === selectedProfile}
+                            onClick={() => {
+                              setProfileFilter(item.key);
+                              setMeasureFilter("");
+                            }}
+                            className={`overflow-hidden rounded-xl border text-left transition ${
+                              item.key === selectedProfile
+                                ? "border-[#10B7B3]/70 bg-[#10B7B3]/12"
+                                : "border-white/10 bg-[#11161C] hover:border-[#10B7B3]/35"
+                            }`}
+                          >
+                            <span className="flex h-24 items-center justify-center bg-white p-2">
+                              {item.imageUrl ? (
+                                <img src={item.key === selectedProfile ? selectedModel.sectionImageUrl : item.imageUrl} alt="" className="h-full w-full object-contain" />
+                              ) : (
+                                <span className="text-xs text-[#68717A]">Nessuna immagine</span>
+                              )}
+                            </span>
+                            <span className="block px-3 py-2 text-sm font-semibold text-white">{item.label}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="grid gap-3">
+                      <StepHeading number="4">Misura</StepHeading>
+                      <div className="flex flex-wrap gap-2">
+                        {measureOptions.map((item) => (
+                          <ChoiceButton
+                            key={item.key}
+                            active={item.key === selectedMeasure}
+                            onClick={() => setMeasureFilter(item.key)}
+                          >
+                            {item.label}
+                          </ChoiceButton>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {selectedModel && (
+                    <div className="grid gap-4 rounded-[24px] bg-[#17191D] p-4">
+                      <div className="grid gap-3 [overflow-wrap:anywhere] sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5">
+                        <div className={eb.statInset}>
+                          <div className="text-xs text-[#8F98A3]">Codice</div>
+                          <div className="mt-1 font-semibold text-white">{selectedModel.code}</div>
+                        </div>
+                        <div className={eb.statInset}>
+                          <div className="text-xs text-[#8F98A3]">Profilo</div>
+                          <div className="mt-1 font-semibold text-white">{selectedModel.profile}</div>
+                        </div>
+                        <div className={eb.statInset}>
+                          <div className="text-xs text-[#8F98A3]">Sezione</div>
+                          <div className="mt-1 font-semibold text-white">{selectedModel.height} × {selectedModel.thickness} mm</div>
+                        </div>
+                        <div className={eb.statInset}>
+                          <div className="text-xs text-[#8F98A3]">Finitura</div>
+                          <div className="mt-1 font-semibold text-white">{selectedModel.finishLabel}</div>
+                        </div>
+                        <div className={eb.statInset}>
+                          <div className="text-xs text-[#8F98A3]">Lunghezza stecca</div>
+                          <div className="mt-1 font-semibold text-white">{selectedModel.stickLengthLabel} mm</div>
+                        </div>
+                      </div>
+
+                      <div className="grid gap-3 md:grid-cols-2">
+                        <ModelImagePreview
+                          title="Sezione tecnica"
+                          src={selectedModel.sectionImageUrl}
+                          alt={`Sezione tecnica ${selectedModel.description}`}
+                          contain
+                        />
+                        <ModelImagePreview
+                          title="Finitura"
+                          src={selectedModel.finishImageUrl}
+                          alt={`Finitura ${selectedModel.finishLabel}`}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </CardContentComp>
+              </CardComp>
+            )}
           </div>
 
           <aside aria-label="Riepilogo preventivo" className="min-w-0 self-start lg:sticky lg:top-6">
@@ -755,6 +764,9 @@ export function EasyBattQuantoMiCostaPage() {
                 <div className="border-b border-white/10 pb-4">
                   <div className="text-sm text-[#B6BDC6]">Totale IVA inclusa</div>
                   <div aria-live="polite" aria-atomic="true" className="mt-2 text-3xl font-bold text-[#F4CC18] xl:text-4xl">{euro.format(calculation.total)}</div>
+                  {calculation.shippingNeedsQuote && (
+                    <div className="mt-2 text-sm font-semibold text-[#F8E58A]">Spedizione da quotare a parte, esclusa dal totale.</div>
+                  )}
                   <div className="mt-2 text-xs leading-5 text-[#8F98A3]">Prezzo da verificare prima della conferma dell&apos;ordine.</div>
                 </div>
 
@@ -762,13 +774,14 @@ export function EasyBattQuantoMiCostaPage() {
                   <div className="flex items-start gap-3">
                     <Ruler className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
                     <div className="min-w-0">
-                      <div className="font-semibold text-white">{selectedModel?.description}</div>
+                      <div className="font-semibold text-white">Misurazione e taglio</div>
                       <div className="mt-1 text-[#B6BDC6]">{calculation.ml} metri lineari</div>
+                      {includeSupply && <div className="mt-2 text-[#D9E8E7]">{selectedModel?.description}</div>}
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <Wrench className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
-                    <div>Fornitura {includeSupply ? "inclusa" : "esclusa"} · {includePickup ? "Ritiro in sede" : includeShipping ? "Spedizione inclusa" : "Consegna da concordare"}{includeInstallation ? " · Posa inclusa" : ""}</div>
+                    <div>Fornitura {includeSupply ? "inclusa" : "esclusa"} · {includePickup ? "Ritiro in sede" : calculation.shippingNeedsQuote ? "Spedizione da quotare" : includeShipping ? "Spedizione inclusa" : "Consegna da concordare"}{includeInstallation ? " · Posa inclusa" : ""}</div>
                   </div>
                 </div>
 
@@ -795,7 +808,7 @@ export function EasyBattQuantoMiCostaPage() {
                       </div>
                       <div className="flex items-center justify-between gap-3 rounded-[20px] border border-white/10 bg-[#17191D] p-3">
                         <span className="text-sm text-[#D0D5DB]">Spedizione</span>
-                        <span className="shrink-0 whitespace-nowrap font-semibold text-white">{euro.format(calculation.shippingSubtotal)}</span>
+                        <span className="shrink-0 whitespace-nowrap font-semibold text-white">{calculation.shippingNeedsQuote ? "Da quotare" : euro.format(calculation.shippingSubtotal)}</span>
                       </div>
                       <div className="flex items-center justify-between gap-3 rounded-[20px] border border-white/10 bg-[#17191D] p-3">
                         <span className="text-sm text-[#D0D5DB]">Posa in opera</span>
@@ -813,20 +826,24 @@ export function EasyBattQuantoMiCostaPage() {
                     </div>
                   </SummaryDisclosure>
 
-                  <SummaryDisclosure title="Consegna e pesi">
+                  <SummaryDisclosure title={includeSupply ? "Consegna e pesi" : "Consegna"}>
                     <div className="grid gap-3 text-sm text-[#D9E8E7]">
-                      <div className="flex items-start gap-3">
-                        <Package className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
-                        <div>Peso battiscopa: <span className="font-semibold text-white">{calculation.baseWeight.toFixed(1)} kg</span></div>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <Truck className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
-                        <div>Peso totale con imballo: <span className="font-semibold text-white">{calculation.totalWeight.toFixed(1)} kg</span></div>
-                      </div>
+                      {includeSupply && (
+                        <>
+                          <div className="flex items-start gap-3">
+                            <Package className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
+                            <div>Peso battiscopa: <span className="font-semibold text-white">{calculation.baseWeight.toFixed(1)} kg</span></div>
+                          </div>
+                          <div className="flex items-start gap-3">
+                            <Truck className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
+                            <div>Peso totale con imballo: <span className="font-semibold text-white">{calculation.totalWeight.toFixed(1)} kg</span></div>
+                          </div>
+                        </>
+                      )}
                       {!includePickup && (
                         <div className="flex items-start gap-3">
                           <Truck className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
-                          <div>Modalità di consegna: <span className="font-semibold text-white">{includeShipping ? "spedizione inclusa" : "da concordare"}</span></div>
+                          <div>Modalità di consegna: <span className="font-semibold text-white">{calculation.shippingNeedsQuote ? "spedizione da quotare a parte" : includeShipping ? "spedizione inclusa" : "da concordare"}</span></div>
                         </div>
                       )}
                       {includePickup && (
