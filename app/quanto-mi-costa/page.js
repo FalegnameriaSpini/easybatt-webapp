@@ -233,7 +233,6 @@ export function EasyBattQuantoMiCostaPage() {
         byProfile.set(model.profile, {
           key: model.profile,
           label: model.profile,
-          imageUrl: model.sectionImageUrl,
         });
       }
     });
@@ -256,7 +255,11 @@ export function EasyBattQuantoMiCostaPage() {
     });
     return [...byMeasure.values()]
       .sort((a, b) => a.height - b.height || a.thickness - b.thickness)
-      .map((model) => ({ key: model.measure, label: `${model.height} × ${model.thickness} mm` }));
+      .map((model) => ({
+        key: model.measure,
+        label: `${model.height} × ${model.thickness} mm`,
+        imageUrl: model.sectionImageUrl,
+      }));
   }, [profileModels]);
 
   const selectedMeasure = measureOptions.some((item) => item.key === measureFilter)
@@ -665,46 +668,46 @@ export function EasyBattQuantoMiCostaPage() {
 
                     <div className="grid gap-3">
                       <StepHeading number="3">Profilo</StepHeading>
-                      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                      <div className="flex flex-wrap gap-2">
                         {profileOptions.map((item) => (
-                          <button
+                          <ChoiceButton
                             key={item.key}
-                            type="button"
-                            aria-pressed={item.key === selectedProfile}
+                            active={item.key === selectedProfile}
                             onClick={() => {
                               setProfileFilter(item.key);
                               setMeasureFilter("");
                             }}
-                            className={`overflow-hidden rounded-xl border text-left transition ${
-                              item.key === selectedProfile
-                                ? "border-[#10B7B3]/70 bg-[#10B7B3]/12"
-                                : "border-white/10 bg-[#11161C] hover:border-[#10B7B3]/35"
-                            }`}
                           >
-                            <span className="flex h-24 items-center justify-center bg-white p-2">
-                              {item.imageUrl ? (
-                                <img src={item.key === selectedProfile ? selectedModel.sectionImageUrl : item.imageUrl} alt="" className="h-full w-full object-contain" />
-                              ) : (
-                                <span className="text-xs text-[#68717A]">Nessuna immagine</span>
-                              )}
-                            </span>
-                            <span className="block px-3 py-2 text-sm font-semibold text-white">{item.label}</span>
-                          </button>
+                            {item.label}
+                          </ChoiceButton>
                         ))}
                       </div>
                     </div>
 
                     <div className="grid gap-3">
                       <StepHeading number="4">Misura</StepHeading>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
                         {measureOptions.map((item) => (
-                          <ChoiceButton
+                          <button
                             key={item.key}
-                            active={item.key === selectedMeasure}
+                            type="button"
+                            aria-pressed={item.key === selectedMeasure}
                             onClick={() => setMeasureFilter(item.key)}
+                            className={`flex min-w-0 flex-col overflow-hidden rounded-xl border text-left transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#10B7B3] ${
+                              item.key === selectedMeasure
+                                ? "border-[#10B7B3]/70 bg-[#10B7B3]/12"
+                                : "border-white/10 bg-[#11161C] hover:border-[#10B7B3]/35"
+                            }`}
                           >
-                            {item.label}
-                          </ChoiceButton>
+                            <span className="flex h-28 w-full shrink-0 items-center justify-center bg-white p-2 sm:h-32">
+                              {item.imageUrl ? (
+                                <img src={item.imageUrl} alt="" className="h-full w-full object-contain" />
+                              ) : (
+                                <span className="text-xs text-[#68717A]">Nessuna immagine</span>
+                              )}
+                            </span>
+                            <span className="block w-full px-3 py-2 text-sm font-semibold text-white [overflow-wrap:anywhere]">{item.label}</span>
+                          </button>
                         ))}
                       </div>
                     </div>
