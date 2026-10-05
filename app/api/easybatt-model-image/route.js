@@ -3,9 +3,10 @@ import path from "path";
 import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 import { isEasyBattAdmin } from "@/lib/easybatt-store";
-import { assertLocalWritesAllowed, createPersistenceClient, MAX_IMAGE_BYTES, PersistenceError, uploadCloudImage, validateImage } from "@/lib/easybatt-persistence.mjs";
+import { assertLocalWritesAllowed, createPersistenceClient, MAX_IMAGE_BYTES, PersistenceError, persistenceMode, uploadCloudImage, validateImage } from "@/lib/easybatt-persistence.mjs";
 
-const uploadDir = path.join(process.cwd(), "public", "uploads", "easybatt-models");
+const uploadFolder = persistenceMode() === "sandbox" ? "easybatt-sandbox" : "easybatt-models";
+const uploadDir = path.join(process.cwd(), "public", "uploads", uploadFolder);
 const allowedTypes = new Map([
   ["image/jpeg", "jpg"],
   ["image/png", "png"],
@@ -56,7 +57,7 @@ export async function POST(request) {
     await fs.mkdir(uploadDir, { recursive: true });
     await fs.writeFile(path.join(uploadDir, fileName), buffer);
 
-    return NextResponse.json({ url: `/uploads/easybatt-models/${fileName}` });
+    return NextResponse.json({ url: `/uploads/${uploadFolder}/${fileName}` });
   } catch (error) {
     return NextResponse.json({ error: error instanceof PersistenceError ? error.message : "Caricamento non riuscito." },
       { status: error instanceof PersistenceError ? error.status : 500 });

@@ -6,6 +6,8 @@ import { ArrowLeft, Eye, LogIn, LogOut, Plus, Save, Search, Trash2, Upload } fro
 import { Button } from "@/components/ui/button";
 import { normalizeEasyBattConfig } from "@/lib/easybatt-config";
 import { mapBattiscopaCatalog } from "@/lib/easybatt-catalog.mjs";
+import { validatePriceLists } from "@/lib/easybatt-price-lists.mjs";
+import { AdminPriceLists } from "@/components/admin-price-lists";
 import { eb } from "@/app/easybatt-ui";
 
 function cloneConfig(config) {
@@ -262,6 +264,12 @@ function AdminEditor({ initialRecord, password, onLogout }) {
   }
 
   async function save() {
+    const errors = validatePriceLists(config.priceLists);
+    if (errors.length) {
+      setStatus("error");
+      setMessage(errors[0]);
+      return;
+    }
     setStatus("saving");
     setMessage("");
 
@@ -284,7 +292,7 @@ function AdminEditor({ initialRecord, password, onLogout }) {
       setSavedConfig(cloneConfig(next));
       setRevision(payload.revision);
       setStatus("saved");
-      setMessage("Listino pubblicato. Il preventivatore usa gia' questi valori.");
+      setMessage("Configurazione salvata. I listini dedicati mantengono lo stato scelto.");
     } catch (error) {
       setStatus("error");
       setMessage(error instanceof Error ? error.message : "Salvataggio non riuscito.");
@@ -295,9 +303,9 @@ function AdminEditor({ initialRecord, password, onLogout }) {
     <main className="min-h-screen bg-[#17191D] text-white">
       <div className={`${eb.pageShell} lg:max-w-[1800px]`}>
         <header className="mb-5 flex flex-col gap-3 rounded-[24px] border border-white/10 bg-[#1C1F24] p-4 shadow-[0_18px_50px_rgba(0,0,0,0.2)] sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center gap-3">
+          <div className="flex min-w-0 flex-wrap items-center gap-3">
             <img src="/Logo_easybatt_trasp.png" alt="EasyBatt" className="h-auto w-52 max-w-full" />
-            <div>
+            <div className="min-w-0">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#72E6E2]">Area riservata</p>
               <h1 className="text-2xl font-bold">Gestione EasyBatt</h1>
             </div>
@@ -323,6 +331,7 @@ function AdminEditor({ initialRecord, password, onLogout }) {
             <nav className="grid gap-2 text-sm">
               <a className="rounded-xl bg-[#10B7B3]/12 px-3 py-2 font-semibold text-[#A7F3F0]" href="#accesso">Accesso</a>
               <a className="rounded-xl px-3 py-2 text-[#B9C1CA] hover:bg-white/[0.06]" href="#tariffe">Tariffe</a>
+              <a className="rounded-xl px-3 py-2 text-[#B9C1CA] hover:bg-white/[0.06]" href="#listini">Listini dedicati</a>
               <a className="rounded-xl px-3 py-2 text-[#B9C1CA] hover:bg-white/[0.06]" href="#spedizioni">Spedizioni</a>
               <a className="rounded-xl px-3 py-2 text-[#B9C1CA] hover:bg-white/[0.06]" href="#modelli">Modelli</a>
               <a className="rounded-xl px-3 py-2 text-[#B9C1CA] hover:bg-white/[0.06]" href="#contatti">WhatsApp</a>
@@ -334,7 +343,7 @@ function AdminEditor({ initialRecord, password, onLogout }) {
               <div className="grid gap-4 p-5">
                 <div>
                   <h2 className="text-xl font-bold">Accesso admin</h2>
-                  <p className="mt-1 text-sm text-[#B6BDC6]">{initialRecord.storage === "supabase" ? "Database e immagini: Supabase" : "Archivio locale"}</p>
+                  <p className={`mt-1 text-sm ${initialRecord.storage === "sandbox" ? "text-[#F4CC18]" : "text-[#B6BDC6]"}`}>{initialRecord.storage === "supabase" ? "Database e immagini: Supabase" : initialRecord.storage === "sandbox" ? "Ambiente di prova - dati locali separati" : "Archivio locale"}</p>
                   {!initialRecord.writable && <p role="alert" className="mt-2 text-sm text-[#F2A3A3]">Salvataggio online non configurato. Collega Supabase.</p>}
                 </div>
                 <Button type="button" variant="outline" className={`${eb.outlineButton} w-fit`} onClick={onLogout}><LogOut className="mr-2 h-4 w-4" />Esci</Button>
@@ -369,6 +378,8 @@ function AdminEditor({ initialRecord, password, onLogout }) {
                 </div>
               </div>
             </section>
+
+            <AdminPriceLists config={config} onChange={(priceLists) => updateValue("priceLists", priceLists)} disabled={status === "saving" || !initialRecord.writable} />
 
             <section id="spedizioni" className={eb.card}>
               <div className="grid gap-4 p-5">

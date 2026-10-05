@@ -7,6 +7,8 @@ Per configurare database e immagini persistenti su Vercel, consulta
 
 `npm test` esegue i controlli della persistenza e del listino pubblico.
 `npm run supabase:migrate` verifica il trasferimento iniziale senza scrivere online.
+`npm run dev:sandbox` avvia un admin di prova su http://127.0.0.1:3001/admin,
+con catalogo locale separato e nessuna scrittura su Supabase.
 
 ## Getting Started
 
