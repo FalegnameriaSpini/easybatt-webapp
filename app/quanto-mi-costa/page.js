@@ -23,7 +23,6 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import { eb } from "@/app/easybatt-ui";
-import { DEFAULT_EASYBATT_CONFIG, normalizeEasyBattConfig } from "@/lib/easybatt-config";
 import { FINISH_FAMILY_ORDER } from "@/lib/easybatt-catalog.mjs";
 
 const euro = new Intl.NumberFormat("it-IT", {
@@ -141,7 +140,37 @@ function BrandHeader() {
 }
 
 export function EasyBattQuantoMiCostaPage() {
-  const [pricingConfig, setPricingConfig] = useState(() => normalizeEasyBattConfig(DEFAULT_EASYBATT_CONFIG));
+  const [config, setConfig] = useState(null);
+  const [error, setError] = useState("");
+  const [attempt, setAttempt] = useState(0);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch("/api/easybatt-config", { cache: "no-store", signal: controller.signal })
+      .then(async (response) => {
+        const payload = await response.json();
+        if (!response.ok || !payload?.config) throw new Error("Il listino non e' disponibile al momento. Riprova tra poco.");
+        setConfig(payload.config);
+      })
+      .catch((error) => {
+        if (!controller.signal.aborted) setError(error.message || "Caricamento non riuscito.");
+      });
+    return () => controller.abort();
+  }, [attempt]);
+
+  if (config) return <QuoteConfigurator pricingConfig={config} />;
+  return (
+    <main className="min-h-screen bg-[#17191D] text-white">
+      <div className={eb.pageShell}>
+        <BrandHeader />
+        <p role={error ? "alert" : "status"} className="py-6 text-base">{error || "Caricamento listino..."}</p>
+        {error && <ButtonComp className={eb.primaryButtonYellow} onClick={() => { setError(""); setAttempt((value) => value + 1); }}>Riprova</ButtonComp>}
+      </div>
+    </main>
+  );
+}
+
+function QuoteConfigurator({ pricingConfig }) {
   const [finishFamilyFilter, setFinishFamilyFilter] = useState("");
   const [finishImageFilter, setFinishImageFilter] = useState("");
   const [measureFilter, setMeasureFilter] = useState("");
@@ -161,25 +190,8 @@ export function EasyBattQuantoMiCostaPage() {
     () => pricingConfig.models.filter((model) => model.active !== false),
     [pricingConfig.models],
   );
-  const defaultModel = models[0] ?? DEFAULT_EASYBATT_CONFIG.models[0];
+  const defaultModel = models[0];
   const whatsappUrl = `https://wa.me/${pricingConfig.whatsappNumber}?text=${encodeURIComponent(pricingConfig.whatsappMessage)}`;
-
-  useEffect(() => {
-    let active = true;
-
-    fetch("/api/easybatt-config")
-      .then((response) => response.ok ? response.json() : null)
-      .then((payload) => {
-        if (active && payload?.config) {
-          setPricingConfig(normalizeEasyBattConfig(payload.config));
-        }
-      })
-      .catch(() => {});
-
-    return () => {
-      active = false;
-    };
-  }, []);
 
   const finishFamilies = useMemo(() => {
     const available = new Set(models.map((model) => model.finishFamily));
@@ -369,7 +381,7 @@ export function EasyBattQuantoMiCostaPage() {
     const rawKm = Number(returnKm);
     const ml = Number.isFinite(rawMl) ? Math.max(0, rawMl) : 0;
     const km = Number.isFinite(rawKm) ? Math.max(0, rawKm) : 0;
-    const supplyUnitPrice = includeSupply ? (selectedModel?.supplyBaseCostPerMl ?? 0) * (1 + pricingConfig.supplyMargin) : 0;
+    const supplyUnitPrice = includeSupply ? (selectedModel?.supplyPricePerMl ?? 0) : 0;
     const baseWeight = includeSupply ? (selectedModel?.weightKgMl ?? 0) * ml : 0;
     const totalWeight = includeSupply ? baseWeight + pricingConfig.packagingWeightKgMl * ml : 0;
     const serviceSubtotal = ml * pricingConfig.serviceRate;

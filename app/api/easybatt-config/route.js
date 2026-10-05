@@ -1,10 +1,29 @@
 import { NextResponse } from "next/server";
-import { getEasyBattConfig, isEasyBattAdmin, saveEasyBattConfig } from "@/lib/easybatt-store";
+import { getEasyBattConfig, getEasyBattConfigRecord, getStorageStatus, isEasyBattAdmin, saveEasyBattConfig } from "@/lib/easybatt-store";
+import { publicEasyBattConfig } from "@/lib/easybatt-public-config.mjs";
+import { PersistenceError } from "@/lib/easybatt-persistence.mjs";
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
-  return NextResponse.json({ config: await getEasyBattConfig() });
+const headers = { "Cache-Control": "private, no-store", Vary: "x-admin-password" };
+
+function failure(error) {
+  return NextResponse.json({ error: error instanceof PersistenceError ? error.message : "Configurazione non disponibile. Riprova tra poco." },
+    { status: error instanceof PersistenceError ? error.status : 503, headers });
+}
+
+export async function GET(request) {
+  const admin = new URL(request.url).searchParams.get("admin") === "1";
+  if (admin && !isEasyBattAdmin(request)) {
+    return NextResponse.json({ error: "Accesso non autorizzato." }, { status: 401, headers });
+  }
+  try {
+    return NextResponse.json(admin
+      ? { ...await getEasyBattConfigRecord(), ...getStorageStatus() }
+      : { config: publicEasyBattConfig(await getEasyBattConfig()) }, { headers });
+  } catch (error) {
+    return failure(error);
+  }
 }
 
 export async function PUT(request) {
@@ -14,9 +33,9 @@ export async function PUT(request) {
 
   try {
     const body = await request.json();
-    const config = await saveEasyBattConfig(body?.config);
-    return NextResponse.json({ config });
-  } catch {
-    return NextResponse.json({ error: "Non e' stato possibile salvare la configurazione." }, { status: 500 });
+    const record = await saveEasyBattConfig(body?.config, body?.revision);
+    return NextResponse.json(record, { headers });
+  } catch (error) {
+    return failure(error);
   }
 }

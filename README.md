@@ -1,5 +1,13 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+# EasyBatt
+
+Per configurare database e immagini persistenti su Vercel, consulta
+[la guida Supabase](docs/supabase-setup.md).
+
+`npm test` esegue i controlli della persistenza e del listino pubblico.
+`npm run supabase:migrate` verifica il trasferimento iniziale senza scrivere online.
+
 ## Getting Started
 
 First, run the development server:

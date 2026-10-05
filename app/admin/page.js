@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { ArrowLeft, Eye, Plus, Save, Search, Trash2, Upload } from "lucide-react";
+import { ArrowLeft, Eye, LogIn, LogOut, Plus, Save, Search, Trash2, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { DEFAULT_EASYBATT_CONFIG, normalizeEasyBattConfig } from "@/lib/easybatt-config";
+import { normalizeEasyBattConfig } from "@/lib/easybatt-config";
 import { mapBattiscopaCatalog } from "@/lib/easybatt-catalog.mjs";
 import { eb } from "@/app/easybatt-ui";
 
@@ -32,36 +32,61 @@ const inputClass =
 
 export default function EasyBattAdminPage() {
   const [password, setPassword] = useState("");
-  const [config, setConfig] = useState(() => cloneConfig(DEFAULT_EASYBATT_CONFIG));
-  const [savedConfig, setSavedConfig] = useState(() => cloneConfig(DEFAULT_EASYBATT_CONFIG));
+  const [record, setRecord] = useState(null);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => { sessionStorage.removeItem("easybatt-admin-password"); }, []);
+
+  async function login(event) {
+    event.preventDefault();
+    setLoading(true);
+    setError("");
+    try {
+      const response = await fetch("/api/easybatt-config?admin=1", {
+        headers: { "x-admin-password": password }, cache: "no-store",
+      });
+      const payload = await response.json();
+      if (!response.ok || !payload.config) throw new Error(payload.error || "Accesso non riuscito.");
+      setRecord(payload);
+    } catch (error) {
+      setError(error.message || "Accesso non riuscito.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  if (record) return <AdminEditor initialRecord={record} password={password} onLogout={() => { setRecord(null); setPassword(""); }} />;
+
+  return (
+    <main className="min-h-screen bg-[#17191D] px-5 py-12 text-white">
+      <form onSubmit={login} className="mx-auto grid w-full max-w-sm gap-5">
+        <Link href="/"><img src="/Logo_easybatt_trasp.png" alt="EasyBatt" className="h-auto w-64 max-w-full" /></Link>
+        <h1 className="text-2xl font-bold">Accesso admin</h1>
+        <Field label="Password admin">
+          <input className={inputClass} type="password" autoComplete="current-password" required value={password} onChange={(event) => setPassword(event.target.value)} />
+        </Field>
+        {error && <p role="alert" className="text-sm text-[#F2A3A3]">{error}</p>}
+        <Button type="submit" disabled={loading} className={eb.primaryButtonYellow}><LogIn className="mr-2 h-4 w-4" />{loading ? "Accesso..." : "Accedi"}</Button>
+      </form>
+    </main>
+  );
+}
+
+function AdminEditor({ initialRecord, password, onLogout }) {
+  const [config, setConfig] = useState(() => cloneConfig(initialRecord.config));
+  const [savedConfig, setSavedConfig] = useState(() => cloneConfig(initialRecord.config));
+  const [revision, setRevision] = useState(initialRecord.revision);
   const [status, setStatus] = useState("idle");
   const [message, setMessage] = useState("");
   const [modelSearch, setModelSearch] = useState("");
-  const [selectedModelCode, setSelectedModelCode] = useState("");
+  const [selectedModelCode, setSelectedModelCode] = useState(initialRecord.config.models[0]?.code || "");
   const [catalogImportSummary, setCatalogImportSummary] = useState(null);
 
   const changed = useMemo(
     () => JSON.stringify(config) !== JSON.stringify(savedConfig),
     [config, savedConfig],
   );
-
-  useEffect(() => {
-    setPassword(sessionStorage.getItem("easybatt-admin-password") || "");
-
-    fetch("/api/easybatt-config")
-      .then((response) => response.ok ? response.json() : null)
-      .then((payload) => {
-        if (payload?.config) {
-          const next = cloneConfig(payload.config);
-          setConfig(next);
-          setSavedConfig(cloneConfig(next));
-          setSelectedModelCode(next.models[0]?.code || "");
-        }
-      })
-      .catch(() => {
-        setMessage("Non riesco a caricare la configurazione salvata. Uso i valori di default.");
-      });
-  }, []);
 
   function updateValue(key, value) {
     setConfig((current) => ({ ...current, [key]: value }));
@@ -123,10 +148,14 @@ export default function EasyBattAdminPage() {
 
   async function uploadModelImage(index, kind, file) {
     if (!file) return;
+    if (file.size > 3 * 1024 * 1024) {
+      setStatus("error");
+      setMessage("Immagine troppo grande. Limite 3 MB.");
+      return;
+    }
 
     setStatus("saving");
     setMessage("Caricamento immagine in corso...");
-    sessionStorage.setItem("easybatt-admin-password", password);
 
     try {
       const model = config.models[index];
@@ -172,6 +201,12 @@ export default function EasyBattAdminPage() {
       let unchanged = 0;
       models.forEach((model) => {
         const current = currentByCode.get(model.code);
+        // Price imports must not discard photographs already published from the admin.
+        for (const key of ["sectionImageUrl", "finishImageUrl"]) {
+          if (current?.[key]?.startsWith("https://") || current?.[key]?.startsWith("/uploads/")) {
+            model[key] = current[key];
+          }
+        }
         if (!current) added += 1;
         else if (JSON.stringify(current) === JSON.stringify(model)) unchanged += 1;
         else updated += 1;
@@ -229,7 +264,6 @@ export default function EasyBattAdminPage() {
   async function save() {
     setStatus("saving");
     setMessage("");
-    sessionStorage.setItem("easybatt-admin-password", password);
 
     try {
       const response = await fetch("/api/easybatt-config", {
@@ -238,7 +272,7 @@ export default function EasyBattAdminPage() {
           "Content-Type": "application/json",
           "x-admin-password": password,
         },
-        body: JSON.stringify({ config }),
+        body: JSON.stringify({ config, revision }),
       });
       const payload = await response.json().catch(() => null);
       if (!response.ok || !payload?.config) {
@@ -248,6 +282,7 @@ export default function EasyBattAdminPage() {
       const next = cloneConfig(payload.config);
       setConfig(next);
       setSavedConfig(cloneConfig(next));
+      setRevision(payload.revision);
       setStatus("saved");
       setMessage("Listino pubblicato. Il preventivatore usa gia' questi valori.");
     } catch (error) {
@@ -299,11 +334,10 @@ export default function EasyBattAdminPage() {
               <div className="grid gap-4 p-5">
                 <div>
                   <h2 className="text-xl font-bold">Accesso admin</h2>
-                  <p className="mt-1 text-sm text-[#B6BDC6]">Password richiesta per salvare. In locale, se non imposti una variabile ambiente, la password e&apos; easybatt-admin.</p>
+                  <p className="mt-1 text-sm text-[#B6BDC6]">{initialRecord.storage === "supabase" ? "Database e immagini: Supabase" : "Archivio locale"}</p>
+                  {!initialRecord.writable && <p role="alert" className="mt-2 text-sm text-[#F2A3A3]">Salvataggio online non configurato. Collega Supabase.</p>}
                 </div>
-                <Field label="Password admin">
-                  <input className={inputClass} type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Password" />
-                </Field>
+                <Button type="button" variant="outline" className={`${eb.outlineButton} w-fit`} onClick={onLogout}><LogOut className="mr-2 h-4 w-4" />Esci</Button>
               </div>
             </section>
 
@@ -525,7 +559,7 @@ export default function EasyBattAdminPage() {
               <Button type="button" variant="outline" className={eb.outlineButton} disabled={!changed || status === "saving"} onClick={() => { setConfig(cloneConfig(savedConfig)); setStatus("idle"); setMessage(""); }}>
                 Annulla
               </Button>
-              <Button type="button" className={eb.primaryButtonYellow} disabled={!changed || status === "saving"} onClick={() => void save()}>
+              <Button type="button" className={eb.primaryButtonYellow} disabled={!initialRecord.writable || !changed || status === "saving"} onClick={() => void save()}>
                 <Save className="mr-2 h-4 w-4" />
                 {status === "saving" ? "Salvataggio..." : "Salva e pubblica"}
               </Button>
