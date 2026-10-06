@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import {
   Calculator as CalcIcon,
@@ -205,6 +205,8 @@ function QuoteConfigurator({ pricingConfig, pricing }) {
   const [includePickup, setIncludePickup] = useState(false);
   const [includeInstallation, setIncludeInstallation] = useState(false);
   const [zipCode, setZipCode] = useState("");
+  const [googleSearchEnabled, setGoogleSearchEnabled] = useState(false);
+  const distanceRequest = useRef(0);
   const [isDistanceLoading, setIsDistanceLoading] = useState(false);
   const [distanceError, setDistanceError] = useState("");
   const [distanceMeta, setDistanceMeta] = useState(null);
@@ -330,6 +332,8 @@ function QuoteConfigurator({ pricingConfig, pricing }) {
   };
 
   const handleZipCodeChange = (nextValue) => {
+    distanceRequest.current += 1;
+    setIsDistanceLoading(false);
     setZipCode(nextValue);
     setReturnKm("");
     setDistanceError("");
@@ -337,6 +341,7 @@ function QuoteConfigurator({ pricingConfig, pricing }) {
   };
 
   const handleCalculateDistance = async () => {
+    if (!googleSearchEnabled) return;
     const destinationQuery = zipCode.trim();
 
     if (!destinationQuery) {
@@ -345,6 +350,7 @@ function QuoteConfigurator({ pricingConfig, pricing }) {
       return;
     }
 
+    const requestId = ++distanceRequest.current;
     setIsDistanceLoading(true);
     setDistanceError("");
     setDistanceMeta(null);
@@ -359,6 +365,7 @@ function QuoteConfigurator({ pricingConfig, pricing }) {
       });
 
       const payload = await response.json().catch(() => null);
+      if (requestId !== distanceRequest.current) return;
 
       if (!response.ok) {
         throw new Error(payload?.error || "Calcolo non riuscito. Verifica l'indirizzo e riprova.");
@@ -372,10 +379,11 @@ function QuoteConfigurator({ pricingConfig, pricing }) {
         originLabel: payload.originLabel,
       });
     } catch (error) {
+      if (requestId !== distanceRequest.current) return;
       setDistanceMeta(null);
       setDistanceError(error.message || "Calcolo non riuscito. Verifica l'indirizzo e riprova.");
     } finally {
-      setIsDistanceLoading(false);
+      if (requestId === distanceRequest.current) setIsDistanceLoading(false);
     }
   };
 
@@ -392,6 +400,8 @@ function QuoteConfigurator({ pricingConfig, pricing }) {
             ? "Calcolo basato su CAP/località"
             : "Km calcolati automaticamente",
         }
+      : distanceMeta?.mode === "manual"
+        ? { tone: "success", message: "Distanza inserita manualmente." }
       : zipCode.trim()
         ? {
             tone: "pending",
@@ -535,10 +545,27 @@ function QuoteConfigurator({ pricingConfig, pricing }) {
                 </div>
 
                 <div className="grid gap-2">
-                  <Label className={estimateFieldLabelClassName}>Dove si trova il cantiere?</Label>
+                  <Label htmlFor={googleSearchEnabled ? "chantier-address" : undefined} className={estimateFieldLabelClassName}>Dove si trova il cantiere?</Label>
+                  {!googleSearchEnabled ? (
+                    <div className="grid gap-2">
+                      <p id="google-search-notice" className="text-sm leading-6 text-[#AEB6BF]">
+                        Attivando la ricerca, Google riceve dati di connessione e il testo digitato per i suggerimenti e il calcolo della distanza.
+                      </p>
+                      <ButtonComp
+                        type="button"
+                        aria-describedby="google-search-notice"
+                        onClick={() => setGoogleSearchEnabled(true)}
+                        className={`${neutralButtonClassName} h-auto min-h-12 w-full whitespace-normal rounded-lg px-4 py-3 text-sm sm:w-fit`}
+                      >
+                        <MapPin className="h-4 w-4 shrink-0" aria-hidden="true" />
+                        Attiva ricerca indirizzo con Google
+                      </ButtonComp>
+                    </div>
+                  ) : (
                   <div className="flex flex-col gap-3 sm:flex-row">
                     <GooglePlacesAutocomplete
-                      className="flex-1"
+                      id="chantier-address"
+                      className="min-w-0 flex-1"
                       inputClassName={inputClassName}
                       placeholder="Es. Via Roma 12, Lonato del Garda oppure 25017 Lonato del Garda"
                       value={zipCode}
@@ -553,6 +580,7 @@ function QuoteConfigurator({ pricingConfig, pricing }) {
                       {isDistanceLoading ? "Calcolo..." : "Conferma l'Indirizzo"}
                     </ButtonComp>
                   </div>
+                  )}
                   {distanceFeedback && (
                     <div
                       className={`px-1 text-sm ${
@@ -576,14 +604,25 @@ function QuoteConfigurator({ pricingConfig, pricing }) {
                 </div>
 
                 <div className="grid gap-2 sm:max-w-sm">
-                  <Label className={estimateFieldLabelClassName}>Distanza A/R calcolata</Label>
+                  <Label htmlFor="return-km" className={estimateFieldLabelClassName}>Distanza andata e ritorno (km)</Label>
                   <Input
-                    aria-readonly="true"
-                    className={`${inputClassName} cursor-not-allowed`}
-                    placeholder="Da confermare"
-                    readOnly
+                    id="return-km"
+                    className={inputClassName}
+                    placeholder="Inserisci i km"
+                    min={0}
+                    step="any"
+                    disabled={isDistanceLoading}
                     type="number"
                     value={returnKm}
+                    onChange={(event) => {
+                      distanceRequest.current += 1;
+                      setReturnKm(event.target.value);
+                      setDistanceError("");
+                      setDistanceMeta(event.target.value === "" ? null : {
+                        ...distanceMeta,
+                        mode: "manual",
+                      });
+                    }}
                   />
                 </div>
 

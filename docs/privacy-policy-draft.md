@@ -1,6 +1,6 @@
 # Bozza informativa privacy EasyBatt
 
-**Bozza interna del 6 ottobre 2026. Non pubblicare e non collegare al modulo di registrazione.**
+**Bozza interna del 6 ottobre 2026. Non pubblicare e non collegare ai moduli.**
 
 Testo da completare e sottoporre a un consulente privacy prima dell'uso.
 I punti contrassegnati **DA DEFINIRE** impediscono di considerarlo definitivo.
@@ -8,8 +8,37 @@ La data della bozza non e' la versione dell'informativa accettata dagli utenti.
 Account, modulo Prova EasyBatt e consenso marketing descritti sotto sono
 predisposti nel codice, ma non sono ancora attivati online. Nessuna campagna
 email e' collegata. Le tabelle del modulo sono presenti nel progetto Supabase
-configurato localmente; questo non costituisce un collaudo completo dei permessi
-o una conferma dell'attivazione pubblica.
+EasyBatt secondo la conferma del titolare, che ha eseguito anche la migrazione
+dei 12 mesi e verificato il caricamento dell'elenco richieste online. Questo
+non costituisce un collaudo completo dei permessi o dell'invio pubblico.
+
+## Ambito della prima attivazione
+
+La prima fase riguarda il sito pubblico, il preventivatore e l'apertura del
+modulo Prova EasyBatt per ricevere richieste e ricontattare gli interessati.
+La bozza distingue questo percorso da registrazione account, listini riservati
+e marketing: le relative parti sono una preparazione per una fase successiva,
+non la descrizione di servizi gia' attivi.
+
+Il testo pubblico dovra' descrivere solo i trattamenti effettivamente svolti.
+Non occorre attivare account, newsletter o Brevo per ricevere richieste di
+progetto. Restano invece da verificare i servizi gia' utilizzati dal sito,
+anche se il modulo e' ancora chiuso.
+
+### Verifiche necessarie
+
+| Punto | Stato e azione prima dell'apertura |
+| --- | --- |
+| Titolare, sede e recapito privacy | Dati forniti dal titolare, riportati sotto; confermare l'eventuale nomina di un DPO senza confonderlo con la persona incaricata della casella. |
+| Finalita' e basi giuridiche | Validare la distinzione tra richieste personali, referenti aziendali, sicurezza e provenienza delle richieste. |
+| Fornitori e trasferimenti | Verificare contratti e impostazioni reali di Vercel, Supabase, Microsoft 365 e dei servizi Google; completare ruoli, localizzazioni e garanzie. |
+| Cookie, log e copie di sicurezza | Verificare il sito pubblicato e i tempi configurati, non desumerli dalla sola lettura del codice. |
+| Conservazione e diritti | Strumenti dei 12 mesi installati secondo conferma del titolare; definire il presidio operativo e le procedure per email, WhatsApp, backup e richieste di cancellazione anticipata. |
+| Pubblicazione e prova completa | Revisione del testo, versione approvata, pagina pubblica e URL configurato; collaudo controllato di invio, consultazione e cancellazione prima dell'apertura generale. |
+
+I punti aperti relativi ai soli account e al marketing restano rinviati, a
+condizione che tali funzioni rimangano disattivate. Non rinviare invece le
+verifiche che riguardano il sito e il modulo della prima fase.
 
 ## Titolare e contatti
 
@@ -54,8 +83,9 @@ Con l'attivazione del modulo saranno trattati:
   previsto, per i quali e' possibile indicare che il dato non e' ancora noto.
 - Identificativo e data della richiesta, versione e URL dell'informativa,
   data di presa visione. Nella prima fase non viene raccolto consenso marketing.
-- Stato della valutazione, annotazioni interne e data di ricontatto inseriti
-  dalle persone autorizzate a seguire il progetto.
+- Stato della valutazione, annotazioni interne, data di ricontatto e ultimo
+  contatto effettivo inseriti dalle persone autorizzate a seguire il progetto;
+  termine di conservazione calcolato dall'ultimo contatto.
 - Pagina di provenienza dichiarata e parametri fonte, mezzo e campagna, solo
   quando presenti nel collegamento al modulo. Non vengono memorizzati URL
   completi o identificativi pubblicitari attraverso questa funzione.
@@ -68,8 +98,11 @@ credenziali o informazioni personali di terzi non necessarie alla valutazione.
 
 La finalita' principale e' leggere la richiesta, approfondire il lavoro e
 rispondere ai recapiti forniti. Per richieste dell'interessato relative a un
-possibile contratto, la base proposta e' l'art. 6.1.b GDPR; per i referenti di
-aziende va individuata la base appropriata al rapporto concreto. La presa
+possibile contratto, la base proposta e' l'art. 6.1.b GDPR. Per i referenti di
+societa' si propone l'interesse legittimo alla gestione dei rapporti e delle
+richieste aziendali (art. 6.1.f), da validare e bilanciare sul caso concreto,
+senza estendere automaticamente la base contrattuale del cliente al referente.
+La presa
 visione dell'informativa non e' un consenso generico a ulteriori utilizzi.
 [GDPR, articoli 6 e 13](https://eur-lex.europa.eu/legal-content/IT/TXT/?uri=CELEX%3A32016R0679).
 
@@ -91,13 +124,19 @@ verifica e conferma. Per nuove richieste la data iniziale e' quella di ricezione
 per quelle preesistenti deve essere verificata. La modifica di una nota o un
 ricontatto futuro non fanno ripartire i 12 mesi. I progetti in stato Cliente
 sono esclusi da questa procedura, non da qualsiasi obbligo di conservazione limitata.
-**DA ATTUARE prima dell'attivazione:** migrazione e distribuzione del codice,
-collaudo e controllo periodico affidato al titolare o a persona incaricata,
-gestione delle eventuali copie operative. Non dichiarare una cancellazione
+**Stato confermato dal titolare:** migrazioni eseguite e sezione richieste
+caricata correttamente nell'admin online.
+**DA ATTUARE prima dell'attivazione:** collaudo completo e controllo periodico
+affidato al titolare o a persona incaricata, gestione delle eventuali copie
+operative. Non dichiarare una cancellazione
 automatica: non e' implementata. I 12 mesi sono una scelta operativa del titolare, da verificare
 nel contesto complessivo dell'informativa, non un termine prescritto per legge.
 
-### Account clienti
+### Account clienti per una fase successiva
+
+Questa sezione non deve essere presentata come un servizio attivo nella prima
+versione pubblica dell'informativa. La sua approvazione e' separata dall'apertura
+del solo modulo Prova EasyBatt.
 
 Con l'attivazione degli account saranno trattati:
 
@@ -112,12 +151,21 @@ Con l'attivazione degli account saranno trattati:
 - Presa visione dell'informativa e scelta marketing, con versione del testo,
   data e storico delle concessioni o revoche del consenso.
 
+### Preventivatore e canali di contatto pubblici
+
+Queste funzioni non dipendono dalla registrazione di un account.
 Per il calcolo della trasferta possono essere trattati indirizzo del cantiere,
 coordinate ricavate dall'indirizzo e distanza dalla sede. Google Places riceve
 il testo digitato per proporre indirizzi; alla conferma il server utilizza
-Google Geocoding e Routes. La libreria Google viene caricata dal browser quando
-si inizializza il campo indirizzo, se il servizio e' configurato: non soltanto
-quando premi il pulsante di conferma.
+Google Geocoding e Routes. Nella modifica locale del 6 ottobre 2026 la libreria
+Google viene caricata solo dopo il pulsante "Attiva ricerca indirizzo con Google",
+preceduto da un avviso sui dati trasmessi. Il campo dei chilometri andata e ritorno
+e' modificabile anche senza Google. La scelta non viene memorizzata nel browser:
+a ogni ricarica la ricerca riparte disattivata. Dopo l'attivazione, i suggerimenti
+trasmettono il testo digitato senza attendere "Conferma l'Indirizzo".
+Il controllo del sito pubblico precedente alla modifica mostrava invece il
+caricamento immediato di Google. Verificare il nuovo comportamento dopo il deploy;
+non descriverlo come gia' pubblicato o come un sistema completo di consenso cookie.
 
 I collegamenti WhatsApp possono contenere un riepilogo con localita', quantita',
 modello, servizi e prezzo stimato. Aprendo il collegamento il testo incluso
@@ -136,10 +184,12 @@ L'impostazione seguente va validata sulle attivita' effettive della falegnameria
 
 | Attivita' | Base proposta |
 | --- | --- |
-| Account, stime richieste, contatti e assistenza precontrattuale | Esecuzione del servizio richiesto o misure precontrattuali, art. 6.1.b GDPR. Per referenti di societa' va verificata la base pertinente al loro rapporto con il titolare. |
-| Valutazione della richiesta professionale e applicazione del listino | Gestione della relazione richiesta; confermare separatamente la base per eventuali verifiche esterne dell'azienda. |
+| Richieste di progetto, stime e assistenza precontrattuale dell'interessato | Misure precontrattuali richieste dall'interessato, art. 6.1.b GDPR. |
+| Contatti con referenti di societa' | Interesse legittimo alla gestione della relazione aziendale richiesta, art. 6.1.f, da verificare e bilanciare. |
 | Protezione degli accessi e prevenzione degli abusi | Interesse legittimo alla sicurezza, art. 6.1.f, previa valutazione e documentazione del bilanciamento. |
-| Novita' e offerte EasyBatt via email | Consenso facoltativo, art. 6.1.a; distinto dalle comunicazioni necessarie all'account. |
+| Provenienza delle richieste e tre etichette UTM | Finalita' proposta: comprendere quali canali generano richieste. Validare necessita', base giuridica e bilanciamento prima dell'apertura; i dati sono associati alla richiesta, non statistiche anonime. Non inserire nomi, email o identificativi individuali nelle etichette campagna. |
+| Account e condizioni professionali, fase successiva | Gestione della relazione richiesta; validare la base per l'account, il referente aziendale e le eventuali verifiche esterne. |
+| Novita' e offerte via email, fase successiva | Consenso facoltativo, art. 6.1.a; non raccolto dal modulo progetti della prima fase. |
 
 La presa visione dell'informativa non sostituisce il consenso marketing.
 Le basi e il bilanciamento richiedono una verifica concreta, non la sola
@@ -151,7 +201,19 @@ della loro introduzione.
 
 ## Dati necessari e scelte facoltative
 
-Nome, email e credenziali sono necessari per creare l'account. Ragione sociale
+Nel modulo Prova EasyBatt i campi obbligatori sono indicati prima dell'invio:
+senza compilarli non e' possibile inoltrare la richiesta tramite il modulo.
+Azienda e note sono facoltative; per metri e tempi e' disponibile l'opzione
+di dato non ancora noto. Non fornire dati particolari o informazioni di terzi
+non necessarie. Il preventivatore pubblico resta utilizzabile senza inviare
+una richiesta o registrarsi.
+
+**Verifica di minimizzazione:** il codice richiede sia email sia telefono.
+Confermare che entrambi siano necessari al ricontatto previsto oppure rendere
+facoltativo il telefono prima della pubblicazione, allineando modulo e validazione.
+Questa bozza non modifica i campi del sito.
+
+Per la futura registrazione, nome, email e credenziali sono necessari per creare l'account. Ragione sociale
 e partita IVA servono per richiedere le condizioni professionali. Senza questi
 dati restano disponibili le funzioni pubbliche; senza approvazione si applica
 il listino pubblico. L'indirizzo serve al calcolo automatico della trasferta;
@@ -213,7 +275,7 @@ ancora stabilite scadenze automatiche di cancellazione nel codice dell'app.
 | Account attivi o inattivi | Durata del rapporto, criterio di inattivita' e gestione della chiusura. |
 | Richieste professionali e storico approvazioni | Termine per richieste non approvate e durata dello storico necessario. |
 | Richieste di preventivo e messaggi email o WhatsApp | Periodo dalla conclusione del contatto e distinzione dai rapporti divenuti contrattuali. |
-| Richieste Prova EasyBatt che non diventano lavori | 12 mesi dall'ultimo contatto, poi cancellazione: scelta confermata; strumenti manuali predisposti nell'admin, da distribuire e presidiare insieme alla gestione delle copie. |
+| Richieste Prova EasyBatt che non diventano lavori | 12 mesi dall'ultimo contatto effettivo, poi cancellazione: scelta confermata; strumenti manuali installati secondo conferma del titolare, da collaudare e presidiare insieme alla gestione delle copie. |
 | Marketing e prove del consenso | Durata massima dell'uso promozionale, stop alla revoca, durata e base della conservazione delle prove. |
 | Log e backup | Tempi effettivi per ciascun fornitore, rotazione e trattamento delle copie. |
 
@@ -245,7 +307,10 @@ esaminato non risultano integrazioni esplicite con Google Analytics o pixel
 pubblicitari; questo non esclude funzioni attivate dai fornitori o dalla
 dashboard di hosting.
 
-Va valutato anche il caricamento iniziale di Google Places: se emergono
+La modifica locale evita il caricamento iniziale di Google Places senza una
+scelta esplicita; non scarica la libreria gia' caricata e non costituisce da sola
+una gestione del consenso e della revoca. Va verificata la classificazione dei
+trattamenti Google: se emergono
 strumenti non tecnici soggetti a consenso, occorre bloccarli fino alla scelta
 dell'utente e predisporre i relativi controlli. Non e' sufficiente aggiungere
 un banner privo di effetti sul caricamento. [Garante, linee guida cookie e altri strumenti di tracciamento](https://www.garanteprivacy.it/web/guest/home/docweb/-/docweb-display/docweb/9677876).
@@ -261,9 +326,21 @@ Le richieste possono essere rivolte al titolare ai recapiti indicati sopra.
 Resta il diritto di presentare reclamo al Garante per la protezione dei dati
 personali. [Garante, diritti degli interessati](https://www.garanteprivacy.it/it/home/i-miei-diritti/diritti).
 
-**DA DEFINIRE:** responsabile interno della gestione richieste, procedura di
-identificazione proporzionata e gestione di rettifiche, esportazioni e
-cancellazioni. Non promettere funzioni self-service non disponibili.
+Il referente operativo confermato e' il titolare, con l'eventuale supporto di
+una persona autorizzata, tramite `info@easy-batt.it`. Il riscontro va fornito
+entro un mese; quando necessario per numero o complessita' delle richieste,
+la proroga puo' arrivare a ulteriori due mesi, comunicandone i motivi entro il
+primo mese. In presenza di ragionevoli dubbi sull'identita' possono essere
+chieste informazioni proporzionate per verificarla, non documenti indiscriminati.
+[GDPR, articolo 12](https://eur-lex.europa.eu/legal-content/IT/TXT/?uri=CELEX%3A32016R0679).
+
+**DA ATTUARE:** registrazione della ricezione, verifica proporzionata
+dell'identita', ricerca delle copie pertinenti e gestione di rettifiche,
+esportazioni e cancellazioni. Il pulsante dei 12 mesi non gestisce le richieste
+di esercizio dei diritti: non consente di eliminare richieste non scadute o
+in stato Cliente. Per questi casi serve una procedura riservata separata,
+senza attendere la scadenza dei 12 mesi e valutando le condizioni applicabili.
+Non promettere funzioni self-service non disponibili.
 
 L'approvazione professionale e l'assegnazione del listino sono manuali. Il
 preventivatore calcola una stima utilizzando le tariffe applicabili; non
@@ -274,6 +351,27 @@ regole e informativa, senza estendere automaticamente il consenso email.
 ## Note interne prima dell'attivazione
 
 Questa sezione non va inclusa nel testo pubblico.
+
+### Presidio della conservazione da confermare
+
+1. Il titolare o la persona autorizzata aggiorna l'ultimo contatto solo dopo
+   uno scambio effettivo sul progetto; una nota interna non rinnova il termine.
+2. Proposta operativa: controllare almeno ogni settimana il filtro dei 12 mesi
+   e le date da verificare; valutare un'automazione se il volume non permette
+   di rispettare il termine concordato. La periodicita' non autorizza una
+   conservazione indefinita e non e' ancora stata approvata dal titolare.
+3. Prima della cancellazione verificare che la richiesta non sia diventata un
+   lavoro, risolvere date mancanti e gestire le copie pertinenti in posta e
+   negli altri canali. Non usare lo stato Cliente solo per evitare la scadenza.
+4. La cancellazione admin elimina la richiesta e la relativa riga della coda
+   interna Brevo, non messaggi, log o backup dei fornitori. Verificare tempi di
+   rotazione e procedura di ripristino per non reintrodurre dati gia' cancellati.
+5. Definire la conservazione dei fascicoli divenuti lavori e delle eventuali
+   informazioni necessarie per obblighi o controversie, con finalita', accessi
+   e termini separati. L'esclusione dal filtro non significa conservazione
+   illimitata di tutti i dati del modulo.
+
+### Attivazione tecnica
 
 Aggiornamento tecnico: e' ora predisposto anche il modulo Prova EasyBatt, disattivato
 per impostazione predefinita. Integrare la bozza per nome, azienda facoltativa, email,
@@ -295,9 +393,11 @@ non sono accettati. Questa nota tecnica non approva o completa l'informativa.
    incaricata e autorizzata, sulla casella condivisa Microsoft 365. Definire
    gli accessi individuali e le relative istruzioni operative.
 2. Completare le parti evidenziate e far verificare il testo al consulente privacy.
-3. Configurare l'invio SMTP ed eventuale futuro servizio marketing, mantenendo
-   la casella Microsoft 365 esistente;
+3. Per la fase account configurare l'invio SMTP ed eventualmente, in una fase
+   successiva, il servizio marketing, mantenendo la casella Microsoft 365 esistente;
    non iscrivere automaticamente ai messaggi promozionali i clienti registrati.
+   L'SMTP degli account non e' un prerequisito del solo modulo progetti, che
+   attualmente non invia email automatiche.
 4. Verificare trattamenti esterni, contratti, trasferimenti, cookie e log anche
    sul sito gia' pubblico: la disattivazione degli account non disattiva mappe,
    hosting e collegamenti WhatsApp.
@@ -311,5 +411,9 @@ non sono accettati. Questa nota tecnica non approva o completa l'informativa.
    diverso. Allineare codice, migrazione e archivio dei testi prima dell'apertura.
 7. Solo dopo l'approvazione, pubblicare la pagina privacy e collegarne l'URL
    a `EASYBATT_PRIVACY_URL`. Non usare questa bozza come informativa definitiva.
-8. Completare i collaudi descritti in [Attivazione account](customer-accounts.md)
-   prima di abilitare le registrazioni pubbliche.
+8. Per il solo modulo progetti, seguire la procedura e i collaudi in
+   [Configurazione Supabase](supabase-setup.md). Assegnare al testo approvato
+   `EASYBATT_PROJECTS_PRIVACY_VERSION` e verificare l'URL prima di impostare
+   `EASYBATT_PROJECTS_ENABLED=1`. Non abilitare gli account contestualmente.
+9. In una fase successiva completare i collaudi descritti in
+   [Attivazione account](customer-accounts.md) prima di abilitare le registrazioni.

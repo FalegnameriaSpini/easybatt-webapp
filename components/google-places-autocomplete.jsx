@@ -9,6 +9,7 @@ const MIN_QUERY_LENGTH = 3;
 const SEARCH_DEBOUNCE_MS = 250;
 
 function GooglePlacesAutocomplete({
+  id,
   value,
   onValueChange,
   className,
@@ -234,6 +235,7 @@ function GooglePlacesAutocomplete({
     <div className={className}>
       <div className="relative">
         <Input
+          id={id}
           className={inputClassName}
           placeholder={placeholder}
           value={value}
