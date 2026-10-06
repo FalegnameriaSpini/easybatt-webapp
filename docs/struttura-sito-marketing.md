@@ -8,7 +8,7 @@ Questa e' la specifica per la realizzazione progressiva, non una conferma di pub
 
 Home, Come funziona, Per i professionisti, Il sistema e Chi siamo hanno ora un'intestazione e un footer condivisi, sezioni responsive, FAQ specifiche espandibili e un'ambientazione illustrativa dichiarata. Preventivatore, catalogo e admin non sono stati modificati da questo intervento.
 
-Il menu, il footer e gli approfondimenti collegano le pagine dedicate `/per-professionisti`, `/il-sistema` e `/chi-siamo`. La pagina professionisti comprende quattro ancore per mestiere e un invito al contatto sempre visibile nell'intestazione mobile. Prova EasyBatt raggiunge una sezione di primo contatto tramite la casella attiva `info@easy-batt.it`: non e' ancora il modulo con salvataggio e CRM. I collegamenti del menu sono centralizzati in `lib/easybatt-marketing.mjs`.
+Il menu, il footer e gli approfondimenti collegano le pagine dedicate `/per-professionisti`, `/il-sistema` e `/chi-siamo`. La pagina professionisti comprende quattro ancore per mestiere e un invito al contatto sempre visibile nell'intestazione mobile. Prova EasyBatt raggiunge `/prova-easybatt`, con presentazione, FAQ e modulo predisposto. Finche' la ricezione non e' attivata, online viene proposto il contatto tramite `info@easy-batt.it`; nella sandbox locale compare il modulo in anteprima senza invio. I collegamenti del menu sono centralizzati in `lib/easybatt-marketing.mjs`.
 
 L'immagine di apertura e' sostituibile tramite la stessa configurazione; provenienza e prompt sono in `docs/marketing-assets.md`. La gestione dei contenuti nell'admin, i filmati e il flusso CRM restano interventi successivi. Le sezioni di casi reali non sono pubblicate senza materiale autentico.
 
@@ -177,13 +177,25 @@ La pagina `/grazie-prova-easybatt` conferma la ricezione e spiega i passaggi suc
 
 ### Gestione dei contatti
 
-La realizzazione del flusso contatti segue quella della struttura pubblica. Il documento dell'agenzia propone Brevo, ma la configurazione effettiva e il piano necessario restano da verificare prima dell'integrazione.
+Brevo e' stato confermato dal titolare come destinazione futura. La configurazione effettiva e il piano necessario restano da verificare prima dell'integrazione. La ricezione e' predisposta in Supabase con una richiesta distinta per progetto e una coda privata per Brevo creata nella stessa transazione. Non sono ancora implementati il connettore, le email automatiche o le campagne.
+
+L'admin comprende l'elenco richieste, filtro per stato, dettagli, note interne e data di ricontatto. Gli aggiornamenti verificano la revisione per non sovrascrivere modifiche concorrenti e sono separati da Salva e pubblica del catalogo. La conferma `/grazie-prova-easybatt` richiede una ricevuta firmata, generata solo dopo il salvataggio; non e' una conferma dell'invio di un'email. Attivazione e limiti sono descritti in `docs/supabase-setup.md`, sezione Richieste progetto.
 
 Il percorso previsto e': richiesta ricevuta, registrazione del progetto, creazione o aggiornamento del contatto nel CRM, conferma al richiedente, notifica al titolare e attivita' di ricontatto. Piu' richieste della stessa persona devono rimanere progetti distinti, non sovrascriversi.
 
 Conservare provenienza, professione, territorio, tempi, stato della richiesta e preferenze di contatto. La registrazione di un account e l'assegnazione dei listini rimangono processi separati. Gli allegati dei clienti non vanno nel contenitore pubblico delle fotografie dei battiscopa.
 
 ## Quanto mi costa
+
+Nella navigazione pubblica il comando e' **Calcola il prezzo**; l'indirizzo
+`/quanto-mi-costa` rimane invariato e il titolo e' **Quanto mi costa EasyBatt?**.
+Il risultato e' una stima indicativa autonoma, senza richiesta di contatto o ordine.
+**Prova EasyBatt** e' invece la valutazione di un lavoro concreto con ricontatto:
+non e' una demo del calcolatore e non richiede una stima precedente. Il risultato
+collega al modulo con **Valutiamo il tuo progetto**, mentre WhatsApp resta un canale
+alternativo per condividere il riepilogo. Il collegamento al modulo registra solo
+la provenienza: il trasferimento automatico di misure, modello e servizi e' ancora
+da implementare, non viene presentato come disponibile.
 
 Il preventivatore rimane operativo e conserva calcoli, selezione dei modelli, immagini, tariffe e listini autorizzati. Non e' necessario riscriverne il funzionamento per realizzare le pagine informative.
 

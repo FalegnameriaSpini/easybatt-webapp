@@ -66,17 +66,20 @@ export function SiteHeader({ mobileContact = false }) {
             </Link>
           ))}
           <Link href="/quanto-mi-costa" className={styles.priceLink}>
-            Quanto mi costa
+            Calcola il prezzo
           </Link>
           <AccountLink />
-          <Link href="/#prova" className={styles.headerCta}>
+          <Link
+            href={`/prova-easybatt?from=${encodeURIComponent(pathname)}`}
+            className={styles.headerCta}
+          >
             Prova EasyBatt <ArrowUpRight size={16} aria-hidden="true" />
           </Link>
         </nav>
       </div>
       {mobileContact && (
         <Link
-          href="#prova"
+          href={`/prova-easybatt?from=${encodeURIComponent(pathname)}`}
           className={styles.mobileContact}
           onClick={() => setOpen(false)}
         >

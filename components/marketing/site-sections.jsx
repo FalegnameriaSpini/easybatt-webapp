@@ -10,13 +10,11 @@ import {
   Map,
   PackageCheck,
   Plus,
-  Mail,
 } from "lucide-react";
 import {
   marketingMedia,
   processSteps,
   projectEmail,
-  projectEmailHref,
 } from "@/lib/easybatt-marketing.mjs";
 import { SiteHeader } from "./site-header";
 import styles from "./marketing.module.css";
@@ -98,8 +96,8 @@ export function MarketingHero({ method = false, content }) {
         <p className={styles.heroDescription}>{copy.description}</p>
         <div className={styles.actions}>
           <ActionLink href={copy.href}>{copy.action}</ActionLink>
-          <ActionLink href={content ? "#prova" : "/#prova"} secondary>
-            Prova EasyBatt
+          <ActionLink href={copy.secondaryHref || "/prova-easybatt"} secondary>
+            {copy.secondaryLabel || "Prova EasyBatt"}
           </ActionLink>
         </div>
       </div>
@@ -182,8 +180,8 @@ export function ProjectContact() {
           <p className={styles.eyebrow}>Prova EasyBatt</p>
           <h2>Hai un lavoro in programma?</h2>
           <p className={styles.lead}>
-            Raccontaci il progetto. Verifichiamo insieme se EasyBatt è la
-            soluzione adatta al tuo prossimo lavoro.
+            Raccontaci il tuo lavoro. Ti ricontattiamo per valutare insieme
+            se EasyBatt è la soluzione adatta.
           </p>
           <p>
             Partiamo da dove si trova il cantiere, dal tipo di intervento e dai
@@ -191,9 +189,9 @@ export function ProjectContact() {
           </p>
         </div>
         <div className={styles.contactActions}>
-          <a className={styles.primaryButton} href={projectEmailHref}>
-            Parlaci del tuo progetto <Mail size={18} aria-hidden="true" />
-          </a>
+          <ActionLink href="/prova-easybatt">
+            Parlaci del tuo progetto
+          </ActionLink>
           <a className={styles.textLink} href={`mailto:${projectEmail}`}>
             {projectEmail}
           </a>
@@ -201,7 +199,7 @@ export function ProjectContact() {
             Un primo contatto per valutare il lavoro, senza impegno di acquisto.
           </p>
           <Link className={styles.textLink} href="/quanto-mi-costa">
-            Vuoi prima una stima? Quanto mi costa{" "}
+            Cerchi solo una stima? Calcola il prezzo{" "}
             <ArrowRight size={16} aria-hidden="true" />
           </Link>
         </div>
@@ -229,12 +227,12 @@ function SiteFooter() {
           <Link href="/per-professionisti">Per i professionisti</Link>
           <Link href="/il-sistema">Il sistema</Link>
           <Link href="/chi-siamo">Chi siamo</Link>
-          <Link href="/quanto-mi-costa">Quanto mi costa</Link>
+          <Link href="/quanto-mi-costa">Calcola il prezzo</Link>
         </div>
         <div>
           <p className={styles.footerTitle}>Parliamone</p>
           <a href={`mailto:${projectEmail}`}>{projectEmail}</a>
-          <Link href="/#prova">Prova EasyBatt</Link>
+          <Link href="/prova-easybatt">Prova EasyBatt</Link>
           <p>Gussago, Brescia</p>
         </div>
       </div>

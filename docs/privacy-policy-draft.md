@@ -189,6 +189,20 @@ regole e informativa, senza estendere automaticamente il consenso email.
 
 Questa sezione non va inclusa nel testo pubblico.
 
+Aggiornamento tecnico: e' ora predisposto anche il modulo Prova EasyBatt, disattivato
+per impostazione predefinita. Integrare la bozza per nome, azienda facoltativa, email,
+telefono, professione, comune/provincia, intervento, metri indicativi, tempi e note.
+La richiesta conserva versione/URL dell'informativa, data di presa visione e preferenza
+marketing; quest'ultima non verifica la titolarita' dell'indirizzo. Sono previsti note
+interne, stato e data del ricontatto, tre etichette UTM e un percorso di provenienza
+dichiarato. I contatori antiabuso usano HMAC di IP/email con rimozione delle finestre
+piu' vecchie di due giorni al successivo invio nuovo. La conferma usa un cookie firmato,
+HttpOnly, di 30 minuti, limitato al percorso `/grazie-prova-easybatt` e privo di recapiti.
+E' predisposta una coda privata per Brevo, ma nessun dato viene ancora trasferito al
+fornitore e non sono inviate email automatiche. Definire conservazione delle richieste,
+revoche, verifica email e responsabilita' operative prima dell'attivazione. Gli allegati
+non sono accettati. Questa nota tecnica non approva o completa l'informativa.
+
 1. Confermare i dati del titolare e individuare il referente privacy della
    casella condivisa gia' attiva su Microsoft 365.
 2. Completare le parti evidenziate e far verificare il testo al consulente privacy.

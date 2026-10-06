@@ -114,8 +114,6 @@ const finalNeutralButtonClassName =
   `${eb.outlineButton} ${finalSecondaryButtonClassName} !border-white/10 !bg-transparent !text-white hover:!border-[#10B7B3]/35 hover:!bg-white/[0.06] active:!bg-[#10B7B3] active:!text-white active:!border-[#0A8B87] focus-visible:!bg-[#10B7B3] focus-visible:!text-white focus-visible:!border-[#0A8B87]`;
 const finalTealAccentButtonClassName =
   `${finalSecondaryButtonClassName} !border-[#0A8B87] !bg-[#10B7B3] !text-white font-semibold hover:-translate-y-0.5 hover:!border-[#0A8B87] hover:!bg-[#22C7C2] hover:!text-white active:!bg-[#0A8B87] active:!text-white active:!border-[#08716E] focus-visible:!bg-[#10B7B3] focus-visible:!text-white focus-visible:!border-[#0A8B87]`;
-const finalSecondaryActionButtonClassName =
-  `${eb.outlineButton} ${finalSecondaryButtonClassName} !border-white/12 !bg-[#17191D] !text-[#D9DDE2] hover:!border-[#10B7B3]/25 hover:!bg-white/[0.05] hover:!text-white active:!bg-[#1F2329] active:!text-white active:!border-[#10B7B3]/35 focus-visible:!bg-[#1F2329] focus-visible:!text-white focus-visible:!border-[#10B7B3]/35`;
 
 function BrandLockup() {
   return (
@@ -477,11 +475,6 @@ function QuoteConfigurator({ pricingConfig, pricing }) {
     zipCode,
   ]);
 
-  const whatsappVerifyUrl = useMemo(
-    () => `https://wa.me/${pricingConfig.whatsappNumber}?text=${encodeURIComponent(`${pricingConfig.whatsappVerifyMessage}\n\n${projectSummary}`)}`,
-    [pricingConfig.whatsappNumber, pricingConfig.whatsappVerifyMessage, projectSummary],
-  );
-
   const whatsappRecapUrl = useMemo(
     () => `https://wa.me/${pricingConfig.whatsappNumber}?text=${encodeURIComponent(`${pricingConfig.whatsappRecapMessage}\n\n${projectSummary}`)}`,
     [pricingConfig.whatsappNumber, pricingConfig.whatsappRecapMessage, projectSummary],
@@ -494,6 +487,14 @@ function QuoteConfigurator({ pricingConfig, pricing }) {
       <div className={`${eb.pageShell} lg:max-w-[1800px]`}>
         <BrandHeader />
         {pricing?.kind === "dedicated" && <p className="mb-5 text-sm text-[#72E6E2]">Listino applicato: <strong>{pricing.name}</strong></p>}
+
+        <div className="mb-6 max-w-3xl">
+          <h1 className="text-2xl font-bold leading-tight sm:text-3xl">Quanto mi costa EasyBatt?</h1>
+          <p className="mt-3 text-base leading-relaxed text-[#B6BDC6]">
+            Calcola una stima indicativa in autonomia, senza registrarti o lasciare contatti.
+            Il calcolo non invia una richiesta e non conferma un ordine.
+          </p>
+        </div>
 
         <div className="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(320px,1fr)]">
           <div className="grid min-w-0 gap-6">
@@ -796,19 +797,19 @@ function QuoteConfigurator({ pricingConfig, pricing }) {
             )}
           </div>
 
-          <aside aria-label="Riepilogo preventivo" className="min-w-0 self-start lg:sticky lg:top-6">
+          <aside aria-label="Riepilogo della stima" className="min-w-0 self-start lg:sticky lg:top-6">
             <CardComp className={`${eb.card} lg:max-h-[calc(100dvh-3rem)] lg:overflow-y-auto`}>
               <CardHeaderComp>
-                <CardTitleComp className="text-xl text-white">Il tuo prezzo EasyBatt</CardTitleComp>
+                <CardTitleComp className="text-xl text-white">La tua stima indicativa</CardTitleComp>
               </CardHeaderComp>
               <CardContentComp className="grid min-w-0 gap-4 [overflow-wrap:anywhere] [&_svg]:shrink-0">
                 <div className="border-b border-white/10 pb-4">
-                  <div className="text-sm text-[#B6BDC6]">Totale IVA inclusa</div>
+                  <div className="text-sm text-[#B6BDC6]">Totale stimato, IVA inclusa</div>
                   <div aria-live="polite" aria-atomic="true" className="mt-2 text-3xl font-bold text-[#F4CC18] xl:text-4xl">{euro.format(calculation.total)}</div>
                   {calculation.shippingNeedsQuote && (
                     <div className="mt-2 text-sm font-semibold text-[#F8E58A]">Spedizione da quotare a parte, esclusa dal totale.</div>
                   )}
-                  <div className="mt-2 text-xs leading-5 text-[#8F98A3]">Prezzo da verificare prima della conferma dell&apos;ordine.</div>
+                  <div className="mt-2 text-sm leading-5 text-[#B6BDC6]">Non è un preventivo definitivo. Misure, fattibilità e costi vanno verificati prima dell&apos;ordine.</div>
                 </div>
 
                 <div className="grid gap-3 text-sm text-[#D9E8E7]">
@@ -826,7 +827,17 @@ function QuoteConfigurator({ pricingConfig, pricing }) {
                   </div>
                 </div>
 
-                <ButtonComp asChild variant="outline" className={finalTealAccentButtonClassName}>
+                <div className="grid gap-3 border-t border-white/10 pt-4">
+                  <p className="text-sm leading-6 text-[#B6BDC6]">Hai un lavoro concreto? Con Prova EasyBatt ne valutiamo insieme la fattibilità.</p>
+                  <ButtonComp asChild className={finalTealAccentButtonClassName}>
+                    <Link href="/prova-easybatt?from=%2Fquanto-mi-costa#progetto">
+                      Valutiamo il tuo progetto
+                      <ChevronRightIcon className="ml-2 h-4 w-4" />
+                    </Link>
+                  </ButtonComp>
+                </div>
+
+                <ButtonComp asChild variant="outline" className={finalNeutralButtonClassName}>
                   <a href={whatsappRecapUrl} target="_blank" rel="noreferrer" draggable={false} onContextMenu={(e) => e.preventDefault()}>
                     <PhoneCall className="mr-2 h-4 w-4" />
                     Invia il riepilogo su WhatsApp
@@ -905,25 +916,19 @@ function QuoteConfigurator({ pricingConfig, pricing }) {
                     </div>
                   </SummaryDisclosure>
 
-                  <SummaryDisclosure title="Cosa succede dopo">
+                  <SummaryDisclosure title="Dalla stima alla valutazione">
                     <div>
                       <div className="mb-3 flex items-center gap-2 text-white">
                         <CheckCircleIcon className="h-4 w-4 text-[#F4CC18]" />
                         <span className="font-semibold">Verifichiamo insieme il progetto</span>
                       </div>
                       <div className="grid gap-3 text-sm text-[#AAB2BB]">
-                        <div>1. Inviaci i dati del progetto per verificare insieme misure, modello e servizi scelti.</div>
-                        <div>2. Ricevi un riepilogo chiaro per partire con il tuo ordine.</div>
+                        <div>1. Raccontaci il lavoro con Prova EasyBatt, anche se non hai ancora tutte le misure.</div>
+                        <div>2. Ti ricontattiamo per valutare il progetto e concordare come procedere, senza impegno di acquisto.</div>
                       </div>
                     </div>
 
                     <div className="grid gap-3">
-                      <ButtonComp asChild variant="outline" className={finalSecondaryActionButtonClassName}>
-                        <a href={whatsappVerifyUrl} target="_blank" rel="noreferrer" draggable={false} onContextMenu={(e) => e.preventDefault()}>
-                          Prenota la verifica del progetto
-                          <ChevronRightIcon className="ml-2 h-4 w-4" />
-                        </a>
-                      </ButtonComp>
                       <ButtonComp asChild variant="outline" className={finalNeutralButtonClassName}>
                         <a href={whatsappUrl} target="_blank" rel="noreferrer" draggable={false} onContextMenu={(e) => e.preventDefault()}>
                           <PhoneCall className="mr-2 h-4 w-4" />

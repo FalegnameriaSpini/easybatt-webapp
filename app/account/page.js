@@ -132,7 +132,7 @@ export default function AccountPage() {
     <div className="mx-auto w-full max-w-xl">
       <header className="mb-8 grid gap-5">
         <Link href="/" className="w-fit"><img src="/Logo_easybatt_trasp.png" alt="EasyBatt" className="h-auto w-64 max-w-full" /></Link>
-        <Link href="/quanto-mi-costa" className="inline-flex w-fit items-center gap-2 text-sm text-[#72E6E2]"><ArrowLeft size={16} />Quanto mi costa</Link>
+        <Link href="/quanto-mi-costa" className="inline-flex w-fit items-center gap-2 text-sm text-[#72E6E2]"><ArrowLeft size={16} />Calcola il prezzo</Link>
         <h1 className="text-2xl font-bold">Il tuo account EasyBatt</h1>
       </header>
       {error && <p role="alert" className="mb-5 text-sm text-[#F2A3A3]">{error}</p>}
