@@ -73,6 +73,10 @@ export function EasyBattComeFunzionaPage() {
               Tecnologia dietro le quinte. Semplicità quando arriva il momento
               di posare.
             </p>
+            <Link href="/il-sistema" className={styles.sectionLink}>
+              Approfondisci il sistema EasyBatt{" "}
+              <ArrowRight size={18} aria-hidden="true" />
+            </Link>
           </div>
           <ul className={styles.systemList}>
             <li>
@@ -134,7 +138,7 @@ export function EasyBattComeFunzionaPage() {
               artigianale, rilievo digitale, software proprietario e lavorazione
               CNC.
             </p>
-            <Link href="/#chi-siamo" className={styles.sectionLink}>
+            <Link href="/chi-siamo" className={styles.sectionLink}>
               Da dove nasce EasyBatt <ArrowRight size={18} aria-hidden="true" />
             </Link>
           </div>

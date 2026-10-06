@@ -4,11 +4,11 @@ Il sito presenta il servizio EasyBatt e accompagna il visitatore verso la valuta
 
 Questa e' la specifica per la realizzazione progressiva, non una conferma di pubblicazione online. Il primo pubblico e' costituito dai professionisti di Brescia e provincia; i privati possono continuare a consultare il sito e il preventivatore. Il servizio di rilievo e preparazione rimane centrale, con fornitura del battiscopa opzionale.
 
-## Stato della prima implementazione
+## Stato dell'implementazione
 
-Home e Come funziona hanno ora un'intestazione e un footer condivisi, sezioni responsive, FAQ espandibili e un'ambientazione illustrativa dichiarata. Preventivatore, catalogo e admin non sono stati modificati da questo intervento.
+Home, Come funziona, Per i professionisti, Il sistema e Chi siamo hanno ora un'intestazione e un footer condivisi, sezioni responsive, FAQ specifiche espandibili e un'ambientazione illustrativa dichiarata. Preventivatore, catalogo e admin non sono stati modificati da questo intervento.
 
-In attesa delle pagine dedicate, Per i professionisti e Chi siamo puntano alle sezioni della Home; Il sistema punta all'approfondimento di Come funziona. Prova EasyBatt raggiunge una sezione di primo contatto tramite la casella attiva `info@easy-batt.it`: non e' ancora il modulo con salvataggio e CRM. I collegamenti provvisori sono centralizzati in `lib/easybatt-marketing.mjs`.
+Il menu, il footer e gli approfondimenti collegano le pagine dedicate `/per-professionisti`, `/il-sistema` e `/chi-siamo`. La pagina professionisti comprende quattro ancore per mestiere e un invito al contatto sempre visibile nell'intestazione mobile. Prova EasyBatt raggiunge una sezione di primo contatto tramite la casella attiva `info@easy-batt.it`: non e' ancora il modulo con salvataggio e CRM. I collegamenti del menu sono centralizzati in `lib/easybatt-marketing.mjs`.
 
 L'immagine di apertura e' sostituibile tramite la stessa configurazione; provenienza e prompt sono in `docs/marketing-assets.md`. La gestione dei contenuti nell'admin, i filmati e il flusso CRM restano interventi successivi. Le sezioni di casi reali non sono pubblicate senza materiale autentico.
 
@@ -222,7 +222,7 @@ Anteprima e pubblicazione devono restare distinte. Le immagini campione dei mode
 
 ## Continuita e pubblicazione
 
-Conservare gli indirizzi esistenti di Come funziona, Quanto mi costa, Account e Admin. I benefici di `/perche-conviene` vengono trasferiti nella Home e nella pagina professionisti; solo quando la destinazione sara' pronta, predisporre un reindirizzamento permanente verso `/per-professionisti#benefici`.
+Gli indirizzi esistenti di Come funziona, Quanto mi costa, Account e Admin sono conservati. I benefici sono presentati nella Home e nella pagina professionisti; `/perche-conviene` reindirizza in modo permanente verso `/per-professionisti#benefici`.
 
 Le FAQ restano specifiche di ciascuna pagina. Al lancio non serve aggiungere una pagina FAQ autonoma: dalla Home si raggiungono le sezioni pertinenti. Non pubblicare il comando generico "Leggi tutte le domande" senza una destinazione che le raccolga davvero. Lo stesso vale per "Guarda i lavori": nessun collegamento a pagine vuote.
 

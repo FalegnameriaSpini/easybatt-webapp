@@ -29,10 +29,12 @@ const icons = {
   map: Map,
   package: PackageCheck,
 };
-export function MarketingShell({ children }) {
+export function MarketingShell({ children, mobileContact = false }) {
   return (
-    <div className={styles.site}>
-      <SiteHeader />
+    <div
+      className={`${styles.site} ${mobileContact ? styles.withMobileContact : ""}`}
+    >
+      <SiteHeader mobileContact={mobileContact} />
       <main id="contenuto" tabIndex={-1}>
         {children}
       </main>
@@ -60,11 +62,25 @@ export function SectionHeading({ eyebrow, title, children }) {
     </div>
   );
 }
-export function MarketingHero({ method = false }) {
+export function MarketingHero({ method = false, content }) {
   const media = marketingMedia.hero;
+  const copy = content ?? {
+    eyebrow: method
+      ? "Il metodo EasyBatt"
+      : "Brescia e provincia / Professionisti e imprese",
+    title: method ? "Come funziona EasyBatt" : "EasyBatt",
+    statement: method
+      ? "Dal rilievo al battiscopa pronto da posare."
+      : "Battiscopa su misura, già tagliati e pronti da posare.",
+    description: method
+      ? "Rileviamo, elaboriamo, prepariamo. Tu arrivi in cantiere e pensi alla posa."
+      : "Prepariamo i battiscopa sulle misure del tuo ambiente. Tagliati, codificati e accompagnati dalla planimetria di posa.",
+    href: method ? "#metodo" : "/come-funziona",
+    action: method ? "Scopri il metodo" : "Scopri come funziona",
+  };
   return (
     <section
-      className={`${styles.hero} ${method ? styles.methodHero : ""}`}
+      className={`${styles.hero} ${method || content ? styles.methodHero : ""}`}
       aria-labelledby="hero-title"
     >
       <Image
@@ -76,29 +92,13 @@ export function MarketingHero({ method = false }) {
         className={styles.heroImage}
       />
       <div className={`${styles.container} ${styles.heroContent}`}>
-        <p className={styles.eyebrow}>
-          {method
-            ? "Il metodo EasyBatt"
-            : "Brescia e provincia / Professionisti e imprese"}
-        </p>
-        <h1 id="hero-title">
-          {method ? "Come funziona EasyBatt" : "EasyBatt"}
-        </h1>
-        <p className={styles.heroStatement}>
-          {method
-            ? "Dal rilievo al battiscopa pronto da posare."
-            : "Battiscopa su misura, già tagliati e pronti da posare."}
-        </p>
-        <p className={styles.heroDescription}>
-          {method
-            ? "Rileviamo, elaboriamo, prepariamo. Tu arrivi in cantiere e pensi alla posa."
-            : "Prepariamo i battiscopa sulle misure del tuo ambiente. Tagliati, codificati e accompagnati dalla planimetria di posa."}
-        </p>
+        <p className={styles.eyebrow}>{copy.eyebrow}</p>
+        <h1 id="hero-title">{copy.title}</h1>
+        <p className={styles.heroStatement}>{copy.statement}</p>
+        <p className={styles.heroDescription}>{copy.description}</p>
         <div className={styles.actions}>
-          <ActionLink href={method ? "#metodo" : "/come-funziona"}>
-            {method ? "Scopri il metodo" : "Scopri come funziona"}
-          </ActionLink>
-          <ActionLink href="/#prova" secondary>
+          <ActionLink href={copy.href}>{copy.action}</ActionLink>
+          <ActionLink href={content ? "#prova" : "/#prova"} secondary>
             Prova EasyBatt
           </ActionLink>
         </div>
@@ -226,7 +226,9 @@ function SiteFooter() {
         <div>
           <p className={styles.footerTitle}>Il servizio</p>
           <Link href="/come-funziona">Come funziona</Link>
-          <Link href="/#professionisti">Per i professionisti</Link>
+          <Link href="/per-professionisti">Per i professionisti</Link>
+          <Link href="/il-sistema">Il sistema</Link>
+          <Link href="/chi-siamo">Chi siamo</Link>
           <Link href="/quanto-mi-costa">Quanto mi costa</Link>
         </div>
         <div>

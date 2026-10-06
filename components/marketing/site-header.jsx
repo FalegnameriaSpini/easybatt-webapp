@@ -9,7 +9,7 @@ import { AccountLink } from "@/components/account-link";
 import { marketingNavigation } from "@/lib/easybatt-marketing.mjs";
 import styles from "./marketing.module.css";
 
-export function SiteHeader() {
+export function SiteHeader({ mobileContact = false }) {
   const [open, setOpen] = useState(false);
   const button = useRef(null);
   const pathname = usePathname();
@@ -74,6 +74,16 @@ export function SiteHeader() {
           </Link>
         </nav>
       </div>
+      {mobileContact && (
+        <Link
+          href="#prova"
+          className={styles.mobileContact}
+          onClick={() => setOpen(false)}
+        >
+          Hai un lavoro? Prova EasyBatt{" "}
+          <ArrowUpRight size={16} aria-hidden="true" />
+        </Link>
+      )}
     </header>
   );
 }

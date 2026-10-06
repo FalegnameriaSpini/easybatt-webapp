@@ -151,7 +151,7 @@ export default function EasyBattHomePage() {
               di un unico processo. La tecnologia ha uno scopo concreto:
               consegnare un lavoro organizzato.
             </SectionHeading>
-            <Link href="/come-funziona#sistema" className={styles.sectionLink}>
+            <Link href="/il-sistema" className={styles.sectionLink}>
               Entra nel sistema EasyBatt{" "}
               <ArrowRight size={18} aria-hidden="true" />
             </Link>
@@ -201,8 +201,8 @@ export default function EasyBattHomePage() {
               <article key={id} id={id}>
                 <h3>{title}</h3>
                 <p>{text}</p>
-                <Link href="#prova">
-                  Valutiamolo sul tuo lavoro{" "}
+                <Link href={`/per-professionisti#${id}`}>
+                  Scopri cosa cambia per te{" "}
                   <ArrowRight size={16} aria-hidden="true" />
                 </Link>
               </article>
@@ -263,13 +263,10 @@ export default function EasyBattHomePage() {
               Non per cambiare il mestiere di chi posa, ma per mettere
               esperienza e tecnologia al servizio della preparazione.
             </p>
-            <a
-              href="https://www.falegnameriaspini.it"
-              className={styles.sectionLink}
-            >
-              Scopri Falegnameria Spini{" "}
+            <Link href="/chi-siamo" className={styles.sectionLink}>
+              Scopri da dove nasce EasyBatt{" "}
               <ArrowRight size={18} aria-hidden="true" />
-            </a>
+            </Link>
           </div>
         </div>
       </section>
