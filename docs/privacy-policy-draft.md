@@ -5,8 +5,11 @@
 Testo da completare e sottoporre a un consulente privacy prima dell'uso.
 I punti contrassegnati **DA DEFINIRE** impediscono di considerarlo definitivo.
 La data della bozza non e' la versione dell'informativa accettata dagli utenti.
-Account e consenso marketing descritti sotto sono predisposti nel codice, ma
-non sono ancora attivati online. Nessuna campagna email e' collegata.
+Account, modulo Prova EasyBatt e consenso marketing descritti sotto sono
+predisposti nel codice, ma non sono ancora attivati online. Nessuna campagna
+email e' collegata. Le tabelle del modulo sono presenti nel progetto Supabase
+configurato localmente; questo non costituisce un collaudo completo dei permessi
+o una conferma dell'attivazione pubblica.
 
 ## Titolare e contatti
 
@@ -22,8 +25,12 @@ Sito: **www.easy-batt.it**.
 Email per assistenza e richieste privacy: **info@easy-batt.it**.
 Il titolare conferma che la casella e' gia' attiva e condivisa su Microsoft 365,
 nel tenant Easybatt.
-**DA DEFINIRE:** individuare chi presidia le richieste privacy. Confermare se esiste un
-responsabile della protezione dei dati e, se applicabile, inserirne i contatti.
+Il titolare conferma che seguira' personalmente le richieste dei clienti e quelle
+relative ai dati personali, con l'eventuale supporto di una persona incaricata
+e autorizzata, tramite `info@easy-batt.it`.
+**DA DEFINIRE:** confermare se esiste un responsabile della protezione dei dati
+e, se applicabile, inserirne i contatti. La persona incaricata della casella
+non viene automaticamente qualificata come responsabile della protezione dei dati.
 
 ## Dati e funzioni del sito
 
@@ -32,6 +39,60 @@ servizi, modello e quantita' di battiscopa per ottenere una stima. Nel codice
 attuale non e' previsto il salvataggio automatico del progetto nel profilo.
 Restano distinti i dati trasmessi ai servizi tecnici e quelli che decidi di
 condividere contattandoci.
+
+### Richieste Prova EasyBatt
+
+Il modulo serve a raccontare un lavoro e chiedere una valutazione con ricontatto.
+Non richiede un account, non conferma un ordine e non implica una lavorazione
+gratuita. Il calcolo autonomo del prezzo non invia automaticamente una richiesta.
+
+Con l'attivazione del modulo saranno trattati:
+
+- Nome e cognome, email, telefono, professione (compresa la scelta Privato),
+  comune e provincia del cantiere e tipo di intervento, richiesti dal modulo.
+- Azienda e note sul lavoro, facoltative; fascia indicativa dei metri e periodo
+  previsto, per i quali e' possibile indicare che il dato non e' ancora noto.
+- Identificativo e data della richiesta, versione e URL dell'informativa,
+  data di presa visione. Nella prima fase non viene raccolto consenso marketing.
+- Stato della valutazione, annotazioni interne e data di ricontatto inseriti
+  dalle persone autorizzate a seguire il progetto.
+- Pagina di provenienza dichiarata e parametri fonte, mezzo e campagna, solo
+  quando presenti nel collegamento al modulo. Non vengono memorizzati URL
+  completi o identificativi pubblicitari attraverso questa funzione.
+
+Richieste diverse della stessa persona rimangono progetti distinti. I dati
+digitati non sono salvati dal modulo nel local storage del browser. In caso di
+errore rimangono nei campi fino alla chiusura o ricarica della pagina. Non sono
+attualmente accettati allegati: non inserire nelle note dati particolari,
+credenziali o informazioni personali di terzi non necessarie alla valutazione.
+
+La finalita' principale e' leggere la richiesta, approfondire il lavoro e
+rispondere ai recapiti forniti. Per richieste dell'interessato relative a un
+possibile contratto, la base proposta e' l'art. 6.1.b GDPR; per i referenti di
+aziende va individuata la base appropriata al rapporto concreto. La presa
+visione dell'informativa non e' un consenso generico a ulteriori utilizzi.
+[GDPR, articoli 6 e 13](https://eur-lex.europa.eu/legal-content/IT/TXT/?uri=CELEX%3A32016R0679).
+
+Le richieste saranno salvate nel database Supabase e consultate dall'admin
+riservato. Brevo e' la destinazione CRM futura concordata, ma il connettore
+non e' attivo: la coda interna non trasferisce dati a Brevo. Non sono ancora
+inviate email automatiche di conferma o notifiche al titolare. Il ricontatto
+deve quindi essere gestito dalle persone incaricate.
+
+**Scelte confermate dal titolare:** gestione personale delle richieste e dei
+diritti privacy, con eventuale persona incaricata e autorizzata, tramite
+`info@easy-batt.it`; conservazione delle richieste che non diventano lavori per
+12 mesi dall'ultimo contatto, poi cancellazione; nessuna raccolta del consenso
+marketing nella prima fase. Il collegamento a Brevo e' rinviato.
+
+**DA ATTUARE prima dell'attivazione:** registrazione della data dell'ultimo
+contatto effettivo e procedura di cancellazione allo scadere dei 12 mesi, comprese
+eventuali copie operative. La data di modifica di una nota o un ricontatto futuro
+non equivalgono a un contatto effettivo. Non dichiarare una cancellazione automatica:
+non e' implementata. I 12 mesi sono una scelta operativa del titolare, da verificare
+nel contesto complessivo dell'informativa, non un termine prescritto per legge.
+
+### Account clienti
 
 Con l'attivazione degli account saranno trattati:
 
@@ -91,14 +152,21 @@ dati restano disponibili le funzioni pubbliche; senza approvazione si applica
 il listino pubblico. L'indirizzo serve al calcolo automatico della trasferta;
 il preventivatore consente anche l'inserimento manuale dei chilometri.
 
-La scelta di ricevere email promozionali e' facoltativa, non preselezionata e
+Per il modulo Prova EasyBatt, nella prima fase, sono raccolte soltanto richieste
+di progetto: nessuna casella per novita' e offerte e nessuna iscrizione a campagne.
+I campi tecnici del database restano predisposti, ma i nuovi invii registrano
+`marketing_consent=false` e nessun testo di consenso. Non e' una revoca di eventuali
+consensi precedenti o di altri canali e non modifica i profili account.
+
+Nel distinto percorso account predisposto, la scelta di ricevere email promozionali e' facoltativa, non preselezionata e
 non condiziona account, approvazione professionale o listino. Puoi modificarla
 nell'area account o contattare il titolare. La revoca non pregiudica la liceita'
 del trattamento precedente. [Garante, consenso](https://www.garanteprivacy.it/web/guest/home/docweb/-/docweb-display/docweb/8981258).
 
 **DA DEFINIRE prima di qualsiasi campagna:** piattaforma di invio, gestione
 delle disiscrizioni dal messaggio e sincronizzazione delle revoche. Il sito
-attualmente registra la preferenza, ma non invia newsletter.
+predispone la preferenza per gli account, ma non invia newsletter. La raccolta
+dal modulo progetto e' invece rinviata a una fase successiva.
 
 ## Destinatari e servizi esterni
 
@@ -109,7 +177,7 @@ preferenza marketing; non rende pubblico l'elenco degli iscritti.
 Le integrazioni previste sono:
 
 - **Vercel:** hosting del sito ed esecuzione delle API.
-- **Supabase:** autenticazione e database dei profili; lo Storage immagini
+- **Supabase:** autenticazione, database dei profili e delle richieste progetto; lo Storage immagini
   del catalogo e' pubblico e non e' destinato a documenti o dati dei clienti.
 - **Google Maps Platform:** suggerimenti indirizzi e calcolo della trasferta.
 - **WhatsApp:** canale esterno di contatto aperto dall'utente.
@@ -140,6 +208,7 @@ ancora stabilite scadenze automatiche di cancellazione nel codice dell'app.
 | Account attivi o inattivi | Durata del rapporto, criterio di inattivita' e gestione della chiusura. |
 | Richieste professionali e storico approvazioni | Termine per richieste non approvate e durata dello storico necessario. |
 | Richieste di preventivo e messaggi email o WhatsApp | Periodo dalla conclusione del contatto e distinzione dai rapporti divenuti contrattuali. |
+| Richieste Prova EasyBatt che non diventano lavori | 12 mesi dall'ultimo contatto, poi cancellazione: scelta confermata; procedura operativa e gestione copie da attuare. |
 | Marketing e prove del consenso | Durata massima dell'uso promozionale, stop alla revoca, durata e base della conservazione delle prove. |
 | Log e backup | Tempi effettivi per ciascun fornitore, rotazione e trattamento delle copie. |
 
@@ -148,6 +217,18 @@ precisi; predisporre le corrispondenti operazioni di cancellazione. L'informativ
 deve indicare periodi o criteri di conservazione. [Garante, informazioni agli interessati](https://www.garanteprivacy.it/it/home/i-miei-diritti/diritti).
 
 ## Sessioni e strumenti di tracciamento
+
+Il modulo Prova EasyBatt predisposto imposta, solo dopo un invio ricevuto,
+il cookie `easybatt-project-receipt`, valido per 30 minuti e limitato alla pagina
+`/grazie-prova-easybatt`. Contiene identificativo, scadenza e firma della
+ricevuta, non nome, email o telefono. Serve a mostrare una conferma soltanto
+dopo il salvataggio; non viene usato per pubblicita' o profilazione.
+
+Per limitare invii ripetuti, il server deriva con HMAC identificatori da IP ed
+email. Il contatore antiabuso non conserva l'IP in chiaro; questo non esclude
+gli eventuali log tecnici dei fornitori. Le finestre di conteggio piu' vecchie
+di due giorni vengono rimosse al successivo nuovo invio, non da una cancellazione
+programmata a un'ora esatta. Descrivere e verificare separatamente i log e i backup.
 
 L'accesso clienti predisposto usa Supabase JS per conservare la sessione nella
 memoria locale del browser e rinnovare i token. Questo meccanismo non coincide
@@ -192,19 +273,22 @@ Questa sezione non va inclusa nel testo pubblico.
 Aggiornamento tecnico: e' ora predisposto anche il modulo Prova EasyBatt, disattivato
 per impostazione predefinita. Integrare la bozza per nome, azienda facoltativa, email,
 telefono, professione, comune/provincia, intervento, metri indicativi, tempi e note.
-La richiesta conserva versione/URL dell'informativa, data di presa visione e preferenza
-marketing; quest'ultima non verifica la titolarita' dell'indirizzo. Sono previsti note
+La richiesta conserva versione/URL dell'informativa e data di presa visione. Per
+questa prima fase il consenso marketing non e' raccolto. Sono previsti note
 interne, stato e data del ricontatto, tre etichette UTM e un percorso di provenienza
 dichiarato. I contatori antiabuso usano HMAC di IP/email con rimozione delle finestre
 piu' vecchie di due giorni al successivo invio nuovo. La conferma usa un cookie firmato,
 HttpOnly, di 30 minuti, limitato al percorso `/grazie-prova-easybatt` e privo di recapiti.
 E' predisposta una coda privata per Brevo, ma nessun dato viene ancora trasferito al
-fornitore e non sono inviate email automatiche. Definire conservazione delle richieste,
-revoche, verifica email e responsabilita' operative prima dell'attivazione. Gli allegati
+fornitore e non sono inviate email automatiche. Attuare la conservazione concordata
+di 12 mesi per richieste senza seguito; completare la verifica dell'informativa
+prima dell'attivazione. Revoche e verifica email restano da predisporre per una
+futura raccolta marketing. Gli allegati
 non sono accettati. Questa nota tecnica non approva o completa l'informativa.
 
-1. Confermare i dati del titolare e individuare il referente privacy della
-   casella condivisa gia' attiva su Microsoft 365.
+1. Il referente operativo confermato e' il titolare, con eventuale persona
+   incaricata e autorizzata, sulla casella condivisa Microsoft 365. Definire
+   gli accessi individuali e le relative istruzioni operative.
 2. Completare le parti evidenziate e far verificare il testo al consulente privacy.
 3. Configurare l'invio SMTP ed eventuale futuro servizio marketing, mantenendo
    la casella Microsoft 365 esistente;

@@ -109,8 +109,8 @@ Prima di attivare:
 1. Eseguire nel SQL Editor Supabase `supabase/migrations/202610060001_project_requests.sql`.
    Lo script crea archivio richieste, limiti di invio e coda Brevo, non tocca il catalogo.
    Il comando `supabase:migrate` del catalogo NON esegue automaticamente questo SQL.
-2. Completare e approvare l'informativa per questi dati, incluso il consenso email
-   facoltativo, i periodi di conservazione, la provenienza dichiarata e il cookie tecnico
+2. Completare e approvare l'informativa per questi dati, senza raccolta marketing
+   nella prima fase, con i periodi di conservazione, la provenienza dichiarata e il cookie tecnico
    di ricevuta (30 minuti). Pubblicare l'URL HTTPS e assegnare una versione al testo.
    La bozza interna non e' un'informativa pubblicabile.
 3. Rafforzare l'accesso amministrativo prima della raccolta di dati reali: l'attuale
@@ -147,13 +147,20 @@ La coda `easybatt_project_deliveries` contiene un riferimento alla richiesta, in
 nessuna email al cliente, nessuna notifica al titolare e nessun contatto creato in Brevo.
 Il prossimo intervento deve aggiungere elaborazione idempotente, retry, stato degli invii,
 conferme transazionali e notifiche; collegare un contatto a piu' progetti senza sovrascriverli.
-La preferenza marketing e' una dichiarazione su email non verificata: non iscrivere
+Per scelta del titolare, la prima fase raccoglie solo richieste di progetto:
+la casella marketing e' rimossa e il server forza `marketing_consent=false` e
+`marketing_text=''`, anche per vecchi client che inviano una scelta positiva.
+Non vengono alterati eventuali consensi storici o profili account.
+Per una futura raccolta, la preferenza sarebbe una dichiarazione su email non verificata: non iscrivere
 automaticamente il contatto a campagne, non sovrascrivere revoche precedenti, predisporre
 verifica dell'indirizzo, disiscrizioni e gestione delle revoche prima degli invii promozionali.
 Gli allegati non sono ancora accettati e non vanno caricati nel bucket pubblico dei prodotti.
 
-La conservazione/cancellazione automatica dei progetti non e' implementata: definire
-la procedura prima dell'attivazione. La cancellazione amministrativa di un progetto nel
+Il titolare seguira' personalmente le richieste, con eventuale persona incaricata
+e autorizzata. Ha confermato 12 mesi dall'ultimo contatto per le richieste che non
+diventano lavori, poi cancellazione. La conservazione/cancellazione automatica non
+e' implementata: attuare registrazione dell'ultimo contatto effettivo e procedura
+di cancellazione prima dell'attivazione. La cancellazione amministrativa di un progetto nel
 database elimina anche la relativa voce di coda. Non eseguire cancellazioni in massa
 senza una verifica delle richieste interessate e delle copie nei fornitori esterni.
 

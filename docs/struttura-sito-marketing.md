@@ -167,7 +167,7 @@ Il pulsante del modulo e' "Valuta il mio progetto". Prova non significa lavorazi
 | Periodo previsto | Appena possibile, entro 30 giorni, 1-3 mesi, oltre 3 mesi, non definito |
 | Note | Facoltative |
 | Planimetria o documento | Facoltativo; caricamento da attivare con la gestione protetta degli allegati |
-| Informativa e preferenza marketing | Gestione distinta, con testi approvati; marketing facoltativo |
+| Informativa | Presa visione con testo approvato. Nella prima fase non si raccoglie consenso marketing; casella e collegamento Brevo rinviati per scelta del titolare. |
 
 Il modulo deve gestire invio in corso, errori per campo, errore di ricezione e invio riuscito. Il messaggio di conferma compare soltanto dopo che la richiesta e' stata salvata. In una semplice anteprima non si simula un invio riuscito.
 

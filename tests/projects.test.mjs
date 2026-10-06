@@ -74,10 +74,20 @@ test("project data validates contacts and choices without requiring marketing or
     { province: "BSS" },
     { profession: "admin" },
     { privacy_acknowledged: false },
-    { marketing_consent: "true" },
     { notes: "x".repeat(3001) },
   ])
     assert.throws(() => projectData({ ...valid, ...patch }));
+});
+test("project enquiries ignore marketing consent from stale or forged clients", () => {
+  const withoutConsent = { ...valid };
+  delete withoutConsent.marketing_consent;
+  assert.equal(projectData(withoutConsent).marketing_consent, false);
+  for (const marketing_consent of [true, false, "true", null]) {
+    assert.equal(
+      projectData({ ...valid, marketing_consent }).marketing_consent,
+      false,
+    );
+  }
 });
 test("attribution drops raw URLs, unknown paths and unexpected values", () => {
   assert.deepEqual(
@@ -163,15 +173,24 @@ test("submission persists only normalized fields and confirms only committed res
       return { data: "created", error: null };
     },
   });
-  const result = await submitProject(request({ status: "customer" }), {
-    env,
-    createClient,
-  });
+  const result = await submitProject(
+    request({
+      status: "customer",
+      marketing_consent: true,
+      marketing_text: "forged",
+    }),
+    {
+      env,
+      createClient,
+    },
+  );
   assert.equal(result.status, 201);
   assert.ok(validProjectReceipt(result.receipt, env.EASYBATT_PROJECTS_SECRET));
   assert.equal(args.p_data.email, "mario@example.test");
   assert.equal(args.p_data.status, undefined);
   assert.equal(args.p_data.privacy_version, "test-v1");
+  assert.equal(args.p_data.marketing_consent, false);
+  assert.equal(args.p_data.marketing_text, "");
   assert.equal(
     args.p_email_key,
     privateDigest("email:mario@example.test", env.EASYBATT_PROJECTS_SECRET),

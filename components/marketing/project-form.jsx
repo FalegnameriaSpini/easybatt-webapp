@@ -9,7 +9,6 @@ import {
   PROJECT_INTERVENTIONS,
   PROJECT_METRES,
   PROJECT_TIMING,
-  PROJECT_MARKETING_TEXT,
 } from "@/lib/easybatt-projects.mjs";
 import { projectEmailHref } from "@/lib/easybatt-marketing.mjs";
 import styles from "./project-form.module.css";
@@ -55,7 +54,6 @@ export function ProjectForm() {
     if (!settings?.enabled || inFlight.current) return;
     const values = Object.fromEntries(new FormData(event.currentTarget));
     values.privacy_acknowledged = values.privacy_acknowledged === "on";
-    values.marketing_consent = values.marketing_consent === "on";
     try {
       projectData(values);
     } catch (err) {
@@ -295,19 +293,6 @@ export function ProjectForm() {
         {fields.privacy_acknowledged && (
           <p className={styles.fieldError} id="error-privacy_acknowledged">
             {fields.privacy_acknowledged}
-          </p>
-        )}
-        <label className={styles.checkbox}>
-          <input
-            {...fieldProps("marketing_consent")}
-            type="checkbox"
-            disabled={busy || !settings.enabled}
-          />
-          <span>{PROJECT_MARKETING_TEXT}</span>
-        </label>
-        {fields.marketing_consent && (
-          <p className={styles.fieldError} id="error-marketing_consent">
-            {fields.marketing_consent}
           </p>
         )}
       </div>
