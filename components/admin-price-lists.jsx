@@ -64,7 +64,7 @@ export function AdminPriceLists({ config, onChange, disabled }) {
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="min-w-0">
             <h2 id="price-lists-title" className="text-xl font-bold">Listini dedicati</h2>
-            <p className="mt-1 text-sm text-[#B6BDC6]">Assegnazione clienti non attiva</p>
+            <p className="mt-1 text-sm text-[#B6BDC6]">Condizioni per i professionisti approvati</p>
           </div>
           <Button type="button" className={eb.primaryButtonTeal} disabled={lists.length >= MAX_PRICE_LISTS} onClick={() => add()}><Plus className="mr-2 h-4 w-4" />Nuovo listino</Button>
         </div>

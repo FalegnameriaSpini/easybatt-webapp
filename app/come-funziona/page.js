@@ -1,184 +1,206 @@
-"use client";
-
-import React from "react";
 import Link from "next/link";
 import {
   ArrowRight,
-  Boxes,
-  CheckCircle2,
-  ChevronRight,
-  Cog,
-  Home,
+  PackageCheck,
+  Tag,
+  Map,
   ScanLine,
-  ShieldCheck,
   Workflow,
+  Settings2,
 } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { eb } from "@/app/easybatt-ui";
+import {
+  MarketingShell,
+  MarketingHero,
+  SectionHeading,
+  ProcessSteps,
+  Comparison,
+  FaqSection,
+  ProjectContact,
+} from "@/components/marketing/site-sections";
+import { methodFaqs } from "@/lib/easybatt-marketing.mjs";
+import styles from "@/components/marketing/marketing.module.css";
 
-const PROCESS_STEPS = [
-  {
-    number: "1",
-    title: "Rilievo preciso",
-    text: "Partiamo da un rilievo accurato della stanza, così il lavoro nasce già su basi affidabili.",
-    icon: ScanLine,
-  },
-  {
-    number: "2",
-    title: "Sviluppo del lavoro",
-    text: "Le misure vengono trasformate in lunghezze, angoli e sequenza dei pezzi in modo ordinato.",
-    icon: Workflow,
-  },
-  {
-    number: "3",
-    title: "Preparazione intelligente",
-    text: "I battiscopa vengono preparati con una logica chiara, per semplificare la gestione del lavoro.",
-    icon: Cog,
-  },
-  {
-    number: "4",
-    title: "Consegna pronta da gestire",
-    text: "Ricevi un materiale più ordinato e più semplice da portare in posa.",
-    icon: Boxes,
-  },
-];
-
-function TopNavCome() {
-  return (
-    <header className={eb.topNav}>
-      <div className="flex items-center gap-3">
-        <div className={eb.topNavIcon}>
-          <Home className="h-5 w-5 text-[#72E6E2]" />
-        </div>
-        <div>
-          <div className="text-sm font-semibold uppercase tracking-[0.18em] text-[#D8DDE3]">EasyBatt</div>
-          <div className="text-sm text-[#8F98A3]">Come funziona</div>
-        </div>
-      </div>
-
-      <nav className={eb.navGroup}>
-        <Button asChild variant="ghost" className={eb.navGhost}>
-          <Link href="/">Home</Link>
-        </Button>
-        <Button asChild variant="ghost" className={eb.navActiveTeal}>
-          <Link href="/come-funziona">Come funziona</Link>
-        </Button>
-        <Button asChild variant="ghost" className={eb.navGhost}>
-          <Link href="/perche-conviene">Perché conviene</Link>
-        </Button>
-        <Button asChild variant="ghost" className={eb.navGhost}>
-          <Link href="/quanto-mi-costa">Quanto mi costa</Link>
-        </Button>
-      </nav>
-    </header>
-  );
-}
+export const metadata = {
+  title: "Come funziona EasyBatt | Dal rilievo alla posa",
+  description:
+    "Scopri il metodo EasyBatt: rilievo laser, software proprietario, lavorazione CNC, codifica e planimetria. Battiscopa preparati prima del cantiere e pronti da posare.",
+};
 
 export function EasyBattComeFunzionaPage() {
   return (
-    <div className="min-h-screen bg-[#17191D] text-white">
-      <div className={eb.pageShell}>
-        <TopNavCome />
+    <MarketingShell>
+      <MarketingHero method />
+      <section className={styles.section}>
+        <div className={styles.container}>
+          <SectionHeading
+            eyebrow="Il principio"
+            title="Un processo diverso. Il tuo mestiere resta il tuo."
+          >
+            Misurazione, preparazione e taglio richiedono lavoro. EasyBatt li
+            organizza prima della posa, per permetterti di concentrarti sul
+            montaggio.
+          </SectionHeading>
+          <Comparison />
+        </div>
+      </section>
 
-        <section className={`${eb.hero} mb-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-end`}>
+      <section id="metodo" className={`${styles.section} ${styles.light}`}>
+        <div className={styles.container}>
+          <SectionHeading
+            eyebrow="Il metodo, in sei passaggi"
+            title="Dall'ambiente reale al battiscopa pronto per il montaggio."
+          >
+            Ogni fase prepara quella successiva. Dalle informazioni raccolte sul
+            posto ai pezzi che ricevi.
+          </SectionHeading>
+          <ProcessSteps detailed />
+        </div>
+      </section>
+
+      <section id="sistema" className={styles.section}>
+        <div className={`${styles.container} ${styles.systemLayout}`}>
           <div>
-            <div className="mb-3 flex flex-wrap items-center gap-2">
-              <Badge className={eb.badgeTeal}>
-                Come funziona
-              </Badge>
-              <Badge className={eb.badgeNeutral}>
-                Percorso chiaro e ordinato
-              </Badge>
-            </div>
-
-            <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl xl:text-6xl">
-              Dal rilievo alla consegna, senza passaggi confusi
-            </h1>
-            <p className="mt-4 max-w-3xl text-lg leading-8 text-[#B6BDC6] sm:text-xl">
-              EasyBatt trasforma il rilievo della stanza in un lavoro più semplice da gestire.
-              L’obiettivo non è solo tagliare il battiscopa, ma organizzare meglio tutto il flusso.
+            <SectionHeading
+              eyebrow="Il sistema EasyBatt"
+              title="Il cuore del metodo è il software."
+            >
+              Tra il rilievo dell&apos;ambiente e la lavorazione c&apos;è un
+              sistema sviluppato per elaborare e organizzare i dati. Non
+              soltanto un servizio di taglio, ma un processo che collega misure,
+              produzione, codifica e posa.
+            </SectionHeading>
+            <p className={styles.lead}>
+              Tecnologia dietro le quinte. Semplicità quando arriva il momento
+              di posare.
             </p>
           </div>
-
-          <div className={eb.cardInsetSoft}>
-            <div className="flex items-start gap-3">
-              <ShieldCheck className="mt-0.5 h-5 w-5 text-[#72E6E2]" />
-              <div className="text-sm leading-7 text-[#C6CCD4]">
-                Il risultato è un processo più lineare: meno improvvisazione in cantiere e più controllo sul lavoro finito.
+          <ul className={styles.systemList}>
+            <li>
+              <ScanLine aria-hidden="true" />
+              <div>
+                <h3>Dal rilievo</h3>
+                <p>
+                  Acquisiamo le informazioni dell&apos;ambiente in cui il
+                  battiscopa verrà installato.
+                </p>
               </div>
+            </li>
+            <li>
+              <Workflow aria-hidden="true" />
+              <div>
+                <h3>Al progetto</h3>
+                <p>
+                  Il software elabora i dati e organizza le informazioni
+                  necessarie per i singoli elementi.
+                </p>
+              </div>
+            </li>
+            <li>
+              <Settings2 aria-hidden="true" />
+              <div>
+                <h3>Alla produzione</h3>
+                <p>
+                  La lavorazione CNC prepara i pezzi sulla base del progetto.
+                </p>
+              </div>
+            </li>
+            <li>
+              <Map aria-hidden="true" />
+              <div>
+                <h3>Alla posa</h3>
+                <p>
+                  Codifica e planimetria collegano il singolo elemento alla sua
+                  posizione.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section className={`${styles.section} ${styles.light}`}>
+        <div className={`${styles.container} ${styles.sectionIntro}`}>
+          <SectionHeading
+            eyebrow="Esperienza e metodo"
+            title="EasyBatt nasce dal lavoro, prima ancora che dalla tecnologia."
+          />
+          <div>
+            <p className={styles.lead}>
+              L&apos;esperienza di Falegnameria Spini ha portato a una domanda:
+              possiamo preparare prima ciò che siamo abituati a fare sul posto?
+            </p>
+            <p className={styles.lead}>
+              Da questa ricerca nasce un metodo che unisce esperienza
+              artigianale, rilievo digitale, software proprietario e lavorazione
+              CNC.
+            </p>
+            <Link href="/#chi-siamo" className={styles.sectionLink}>
+              Da dove nasce EasyBatt <ArrowRight size={18} aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.section}>
+        <div className={styles.container}>
+          <SectionHeading
+            eyebrow="Cosa ricevi"
+            title="Un lavoro preparato. Non soltanto pezzi tagliati."
+          />
+          <div className={styles.benefits}>
+            <div>
+              <PackageCheck size={28} aria-hidden="true" />
+              <h3>Battiscopa preparati</h3>
+              <p>
+                Tagliati sulla base del rilievo e organizzati per il montaggio.
+              </p>
+            </div>
+            <div>
+              <Tag size={28} aria-hidden="true" />
+              <h3>Pezzi codificati</h3>
+              <p>
+                Ogni elemento ha un riferimento per facilitarne il
+                riconoscimento.
+              </p>
+            </div>
+            <div>
+              <Map size={28} aria-hidden="true" />
+              <h3>Planimetria di posa</h3>
+              <p>
+                Una guida per individuare la posizione dei pezzi
+                nell&apos;ambiente.
+              </p>
             </div>
           </div>
-        </section>
+          <p className={styles.supplyNote}>
+            La fornitura del battiscopa è opzionale. Se disponi già del
+            materiale, ne valutiamo compatibilità, ritiro e consegna prima di
+            confermare il lavoro.
+          </p>
+        </div>
+      </section>
 
-        <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {PROCESS_STEPS.map((step) => {
-            const Icon = step.icon;
-            return (
-              <Card key={step.number} className={eb.cardInteractive}>
-                <CardHeader className="pb-4">
-                  <div className="mb-4 flex items-center justify-between">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#10B7B3]/15 text-sm font-bold text-[#72E6E2]">
-                      {step.number}
-                    </div>
-                    <Icon className="h-5 w-5 text-[#F4CC18]" />
-                  </div>
-                  <CardTitle className="text-2xl text-white">{step.title}</CardTitle>
-                  <CardDescription className="text-base leading-7 text-[#B6BDC6]">
-                    {step.text}
-                  </CardDescription>
-                </CardHeader>
-              </Card>
-            );
-          })}
-        </section>
+      <section className={styles.section}>
+        <div className={styles.container}>
+          <SectionHeading
+            eyebrow="Il risultato sul posto"
+            title="Identifichi il pezzo. Ti concentri sulla posa."
+          >
+            Il lavoro svolto prima riduce le attività da organizzare in
+            cantiere. Niente normali operazioni di taglio del battiscopa
+            nell&apos;immobile significa evitare la polvere e il rumore generati
+            da questa lavorazione.
+          </SectionHeading>
+          <Link href="/quanto-mi-costa" className={styles.sectionLink}>
+            Calcola una stima per il tuo lavoro{" "}
+            <ArrowRight size={18} aria-hidden="true" />
+          </Link>
+        </div>
+      </section>
 
-        <section className="mt-6 grid gap-6 lg:grid-cols-[1fr_1fr]">
-          <Card className={eb.cardInteractive}>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-2xl text-white">
-                <CheckCircle2 className="h-5 w-5 text-[#F4CC18]" />
-                Cosa ricevi
-              </CardTitle>
-              <CardDescription className="text-base leading-7 text-[#B6BDC6]">
-                Un lavoro più ordinato, più leggibile e più semplice da gestire nella fase successiva.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="grid gap-3 text-[#C6CCD4]">
-              <div className={eb.cardInset}>Battiscopa preparato con una logica precisa.</div>
-              <div className={eb.cardInset}>Sequenza di lavoro più chiara e meno improvvisata.</div>
-              <div className={eb.cardInset}>Gestione più semplice del materiale durante la posa.</div>
-              <div className={eb.cardInset}>Meno incertezze e meno perdite di tempo in cantiere.</div>
-            </CardContent>
-          </Card>
-
-          <Card className={eb.cardInteractive}>
-            <CardHeader>
-              <CardTitle className="text-2xl text-white">Continua il percorso</CardTitle>
-              <CardDescription className="text-base leading-7 text-[#B6BDC6]">
-                Adesso puoi passare alla parte del valore oppure andare diretto alla stima del servizio.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="grid gap-3">
-              <Button asChild className={`${eb.primaryButtonTeal} h-12 text-base`}>
-                <Link href="/perche-conviene">
-                  Vai a Perché conviene
-                  <ChevronRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button asChild className={`${eb.primaryButtonYellow} h-12 text-base`}>
-                <Link href="/quanto-mi-costa">
-                  Vai a Quanto mi costa
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </CardContent>
-          </Card>
-        </section>
-      </div>
-    </div>
+      <FaqSection items={methodFaqs} title="Il metodo, senza dubbi." />
+      <ProjectContact />
+    </MarketingShell>
   );
 }
-
 export default EasyBattComeFunzionaPage;

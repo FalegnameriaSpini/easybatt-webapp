@@ -17,6 +17,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { eb } from "@/app/easybatt-ui";
+import { AccountLink } from "@/components/account-link";
 
 const DIFFERENTIATORS = [
   {
@@ -62,6 +63,7 @@ function TopNavPerche() {
         <Button asChild variant="ghost" className={eb.navGhost}>
           <Link href="/quanto-mi-costa">Quanto mi costa</Link>
         </Button>
+        <AccountLink />
       </nav>
     </header>
   );

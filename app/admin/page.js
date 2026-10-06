@@ -8,6 +8,7 @@ import { normalizeEasyBattConfig } from "@/lib/easybatt-config";
 import { mapBattiscopaCatalog } from "@/lib/easybatt-catalog.mjs";
 import { validatePriceLists } from "@/lib/easybatt-price-lists.mjs";
 import { AdminPriceLists } from "@/components/admin-price-lists";
+import { AdminCustomers } from "@/components/admin-customers";
 import { eb } from "@/app/easybatt-ui";
 
 function cloneConfig(config) {
@@ -332,6 +333,7 @@ function AdminEditor({ initialRecord, password, onLogout }) {
               <a className="rounded-xl bg-[#10B7B3]/12 px-3 py-2 font-semibold text-[#A7F3F0]" href="#accesso">Accesso</a>
               <a className="rounded-xl px-3 py-2 text-[#B9C1CA] hover:bg-white/[0.06]" href="#tariffe">Tariffe</a>
               <a className="rounded-xl px-3 py-2 text-[#B9C1CA] hover:bg-white/[0.06]" href="#listini">Listini dedicati</a>
+              <a className="rounded-xl px-3 py-2 text-[#B9C1CA] hover:bg-white/[0.06]" href="#clienti">Clienti</a>
               <a className="rounded-xl px-3 py-2 text-[#B9C1CA] hover:bg-white/[0.06]" href="#spedizioni">Spedizioni</a>
               <a className="rounded-xl px-3 py-2 text-[#B9C1CA] hover:bg-white/[0.06]" href="#modelli">Modelli</a>
               <a className="rounded-xl px-3 py-2 text-[#B9C1CA] hover:bg-white/[0.06]" href="#contatti">WhatsApp</a>
@@ -380,6 +382,7 @@ function AdminEditor({ initialRecord, password, onLogout }) {
             </section>
 
             <AdminPriceLists config={config} onChange={(priceLists) => updateValue("priceLists", priceLists)} disabled={status === "saving" || !initialRecord.writable} />
+            <AdminCustomers password={password} />
 
             <section id="spedizioni" className={eb.card}>
               <div className="grid gap-4 p-5">

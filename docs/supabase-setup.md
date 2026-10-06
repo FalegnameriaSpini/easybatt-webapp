@@ -5,13 +5,14 @@
 Questa integrazione salva catalogo e impostazioni in PostgreSQL e le immagini
 caricate dall'admin in Supabase Storage. Non attiva abbonamenti e non pubblica
 automaticamente su Vercel. L'admin gestisce ora bozze e listini dedicati;
-registrazione clienti, ruoli B2B e assegnazione dei listini restano una fase
-successiva e non sono ancora implementati.
+registrazione clienti e assegnazione dei listini sono predisposte ma disattivate
+finche' non si completa [l'attivazione degli account](customer-accounts.md).
 
 Il preventivatore resta pubblico. L'API pubblica espone solo prezzi di vendita,
 non costi di acquisto o margini. Il preventivo resta una stima lato browser:
-prima di introdurre ordini o listini riservati servira' un calcolo autorizzato
-sul server, senza fidarsi degli importi inviati dal cliente.
+le tariffe riservate vengono selezionate sul server dopo verifica dell'utente.
+Prima di introdurre ordini servira' ricalcolare anche il totale sul server,
+senza fidarsi degli importi inviati dal cliente.
 
 ## Configurazione iniziale
 
@@ -86,7 +87,8 @@ Supabase presenti, i suoi salvataggi modificano il database online.
   crea sempre una nuova bozza con identificativo distinto.
 - I listini dedicati, anche pubblicati, non modificano il preventivatore pubblico
   e non sono esposti dall'API anonima. L'anteprima nell'admin non e' un preventivo
-  autorizzato per un cliente; assegnazione e calcolo server arriveranno con Auth.
+  autorizzato per un cliente. Con Auth attivo, un professionista confermato e
+  approvato riceve dall'API soltanto le tariffe del listino assegnato.
 - L'importazione del catalogo non rimuove i listini dedicati. Vecchi client admin
   che omettono `priceLists` vengono respinti al salvataggio: ricaricare la pagina.
 - Non salvare listini di prova nel database condiviso. Prima di attivare questa
@@ -103,9 +105,9 @@ Supabase presenti, i suoi salvataggi modificano il database online.
 - In sviluppo (`npm run dev`), senza password configurata, resta disponibile
   `easybatt-admin`. Non e' ammessa come password implicita in produzione.
 - La password admin e' mantenuta solo in memoria fino a refresh o uscita.
-  Questo accesso transitorio non e' ancora Supabase Auth. Prima dell'apertura
-  degli account clienti andranno implementati sessioni, ruoli, limitazione dei
-  tentativi, recupero password e invio email.
+  Questo accesso transitorio non e' Supabase Auth e resta separato dagli account
+  clienti. Prima dell'apertura pubblica rafforzare l'accesso amministrativo
+  (identita' personali, MFA e limitazione dei tentativi).
 - Le immagini accettate sono JPG, PNG e WEBP, massimo 3 MB per rimanere sotto
   il limite del corpo delle richieste delle funzioni Vercel.
 - Le immagini vengono caricate subito; il collegamento al prodotto diventa

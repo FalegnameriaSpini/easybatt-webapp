@@ -24,6 +24,8 @@ import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import { eb } from "@/app/easybatt-ui";
 import { FINISH_FAMILY_ORDER } from "@/lib/easybatt-catalog.mjs";
+import { AccountLink } from "@/components/account-link";
+import { getCustomerAuth, customerHeaders } from "@/lib/easybatt-auth-client";
 
 const euro = new Intl.NumberFormat("it-IT", {
   style: "currency",
@@ -131,10 +133,11 @@ function BrandLockup() {
 
 function BrandHeader() {
   return (
-    <header className="mb-6">
+    <header className="mb-6 flex flex-wrap items-center justify-between gap-3">
       <Link href="/" aria-label="Torna alla home EasyBatt" className="block w-full max-w-[368px]">
         <BrandLockup />
       </Link>
+      <AccountLink />
     </header>
   );
 }
@@ -143,22 +146,44 @@ export function EasyBattQuantoMiCostaPage() {
   const [config, setConfig] = useState(null);
   const [error, setError] = useState("");
   const [attempt, setAttempt] = useState(0);
+  const [pricing, setPricing] = useState(null);
+
+  useEffect(() => {
+    let active = true;
+    let subscription;
+    const refresh = () => setAttempt((n) => n + 1);
+    window.addEventListener("focus", refresh);
+    getCustomerAuth().then(({ client }) => {
+      if (!active || !client) return;
+      subscription = client.auth.onAuthStateChange((event) => {
+        if (active && event !== "INITIAL_SESSION") {
+          if (event === "SIGNED_OUT") { setConfig(null); setPricing(null); }
+          refresh();
+        }
+      }).data.subscription;
+    }).catch(() => {});
+    return () => { active = false; subscription?.unsubscribe(); window.removeEventListener("focus", refresh); };
+  }, []);
 
   useEffect(() => {
     const controller = new AbortController();
-    fetch("/api/easybatt-config", { cache: "no-store", signal: controller.signal })
+    getCustomerAuth().then(async ({ client }) => fetch("/api/easybatt-config", { headers: await customerHeaders(client), cache: "no-store", signal: controller.signal }))
       .then(async (response) => {
         const payload = await response.json();
+        if (controller.signal.aborted) return;
+        if (response.status === 401) throw new Error("Sessione scaduta. Accedi nuovamente dal tuo account.");
         if (!response.ok || !payload?.config) throw new Error("Il listino non e' disponibile al momento. Riprova tra poco.");
         setConfig(payload.config);
+        setPricing(payload.pricing || null);
+        setError("");
       })
       .catch((error) => {
-        if (!controller.signal.aborted) setError(error.message || "Caricamento non riuscito.");
+        if (!controller.signal.aborted) { setConfig(null); setPricing(null); setError(error.message || "Caricamento non riuscito."); }
       });
     return () => controller.abort();
   }, [attempt]);
 
-  if (config) return <QuoteConfigurator pricingConfig={config} />;
+  if (config) return <QuoteConfigurator pricingConfig={config} pricing={pricing} />;
   return (
     <main className="min-h-screen bg-[#17191D] text-white">
       <div className={eb.pageShell}>
@@ -170,7 +195,7 @@ export function EasyBattQuantoMiCostaPage() {
   );
 }
 
-function QuoteConfigurator({ pricingConfig }) {
+function QuoteConfigurator({ pricingConfig, pricing }) {
   const [finishFamilyFilter, setFinishFamilyFilter] = useState("");
   const [finishImageFilter, setFinishImageFilter] = useState("");
   const [measureFilter, setMeasureFilter] = useState("");
@@ -468,6 +493,7 @@ function QuoteConfigurator({ pricingConfig }) {
     <div className="min-h-screen bg-[#17191D] text-white">
       <div className={`${eb.pageShell} lg:max-w-[1800px]`}>
         <BrandHeader />
+        {pricing?.kind === "dedicated" && <p className="mb-5 text-sm text-[#72E6E2]">Listino applicato: <strong>{pricing.name}</strong></p>}
 
         <div className="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(320px,1fr)]">
           <div className="grid min-w-0 gap-6">

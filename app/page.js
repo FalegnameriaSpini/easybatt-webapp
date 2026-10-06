@@ -1,147 +1,280 @@
-"use client";
-
-import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 import {
-  BadgeCheck,
-  Calculator,
-  ChevronRight,
+  ArrowRight,
+  ScanLine,
   Workflow,
+  Settings2,
+  Check,
+  Tag,
+  PackageCheck,
+  MapPin,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { eb } from "@/app/easybatt-ui";
+import {
+  MarketingShell,
+  MarketingHero,
+  SectionHeading,
+  ProcessSteps,
+  FaqSection,
+  ProjectContact,
+} from "@/components/marketing/site-sections";
+import { homeFaqs, marketingMedia } from "@/lib/easybatt-marketing.mjs";
+import styles from "@/components/marketing/marketing.module.css";
 
-const ENTRY_POINTS = [
-  {
-    title: "Come funziona",
-    description:
-      "Vedi il processo: dal rilievo alla preparazione del battiscopa pronto da posare.",
-    href: "/come-funziona",
-    cta: "Vedi il processo",
-    icon: Workflow,
-    accent: "teal",
-  },
-  {
-    title: "Perché conviene",
-    description:
-      "Scopri i vantaggi: meno errori, meno tempo perso, più ordine nel lavoro.",
-    href: "/perche-conviene",
-    cta: "Vedi i vantaggi",
-    icon: BadgeCheck,
-    accent: "slate",
-  },
-  {
-    title: "Quanto mi costa",
-    description:
-      "Vai al punto e ottieni una stima rapida del servizio EasyBatt.",
-    href: "/quanto-mi-costa",
-    cta: "Vai al costo",
-    icon: Calculator,
-    accent: "yellow",
-  },
+export const metadata = {
+  title: "EasyBatt | Battiscopa su misura, pronti da posare",
+  description:
+    "Rilievo, taglio, codifica e planimetria: EasyBatt prepara il battiscopa prima del cantiere. Un servizio per professionisti a Brescia e provincia, con fornitura opzionale.",
+};
+
+const professions = [
+  [
+    "posatori",
+    "Posatori e parquetisti",
+    "Meno tempo dedicato alla preparazione, più tempo per la posa. La tua esperienza resta al centro del risultato.",
+  ],
+  [
+    "falegnami",
+    "Falegnami",
+    "Battiscopa preparati sulle misure dell'ambiente e organizzati per il montaggio, anche quando sono solo una parte del tuo lavoro.",
+  ],
+  [
+    "imprese",
+    "Imprese e ristrutturatori",
+    "Una fase di finitura più organizzata e meno lavorazioni da coordinare all'interno dell'immobile.",
+  ],
+  [
+    "rivenditori",
+    "Rivenditori e showroom",
+    "Un servizio di preparazione su misura da affiancare alla fornitura del battiscopa. Le modalità di collaborazione si valutano insieme.",
+  ],
 ];
-
-function BrandLockup() {
-  return (
-    <div className="rounded-[20px] border border-white/10 bg-[radial-gradient(circle_at_top_left,_rgba(15,175,169,0.1),_transparent_32%),linear-gradient(135deg,_rgba(20,23,29,0.98),_rgba(29,32,38,0.98))] px-3 py-2 shadow-[0_18px_50px_rgba(0,0,0,0.28)] sm:px-4">
-      <div className="flex items-center">
-        <img
-          src="/Logo_easybatt_trasp.png"
-          alt="EasyBatt - Battiscopa pronti da posare senza tagli sul posto"
-          className="h-auto max-h-[108px] w-full max-w-[300px] object-contain object-left sm:max-w-[328px] lg:max-w-[352px] xl:max-w-[368px]"
-        />
-      </div>
-    </div>
-  );
-}
-
-function FixedBrandLockup() {
-  return (
-    <>
-      <div className="fixed inset-x-0 top-0 z-40 lg:hidden">
-        <div className="mx-auto w-full max-w-7xl px-4 pt-4 sm:px-6 sm:pt-5">
-          <BrandLockup />
-        </div>
-      </div>
-
-      <div className="pointer-events-none fixed inset-0 z-40 hidden lg:flex lg:items-center">
-        <div className="mx-auto flex w-full max-w-7xl px-6">
-          <div className="pointer-events-auto w-full max-w-[368px]">
-            <BrandLockup />
-          </div>
-        </div>
-      </div>
-    </>
-  );
-}
-
-function EntryCard({ item }) {
-  const Icon = item.icon;
-
-  const accentStyles = {
-    teal: {
-      iconWrap: "bg-[#10B7B3]/12 text-[#72E6E2] border-[#10B7B3]/25",
-      button: eb.primaryButtonTeal,
-      glow: "from-[#10B7B3]/18",
-    },
-    slate: {
-      iconWrap: "bg-white/6 text-[#D0D5DB] border-white/10",
-      button:
-        "h-11 rounded-2xl border border-white/10 bg-[#BFC3C8] text-sm font-semibold text-slate-950 transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#D4D8DD] sm:text-[15px]",
-      glow: "from-white/10",
-    },
-    yellow: {
-      iconWrap: "bg-[#F4CC18]/12 text-[#F7DA57] border-[#F4CC18]/25",
-      button: eb.primaryButtonYellow,
-      glow: "from-[#F4CC18]/18",
-    },
-  };
-
-  const styles = accentStyles[item.accent];
-
-  return (
-    <div>
-      <Card className={`group h-full overflow-hidden ${eb.cardInteractive} bg-gradient-to-b ${styles.glow} to-transparent`}>
-        <CardHeader className="space-y-3 pb-3">
-          <div className={`flex h-11 w-11 items-center justify-center rounded-2xl border ${styles.iconWrap}`}>
-            <Icon className="h-5 w-5" />
-          </div>
-          <CardTitle className="text-xl text-white">{item.title}</CardTitle>
-          <CardDescription className="text-sm leading-6 text-[#B6BDC6] sm:text-[15px]">
-            {item.description}
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="pt-0">
-          <Button asChild className={`w-full ${styles.button}`}>
-            <a href={item.href}>
-              {item.cta}
-              <ChevronRight className="ml-2 h-4 w-4" />
-            </a>
-          </Button>
-        </CardContent>
-      </Card>
-    </div>
-  );
-}
 
 export default function EasyBattHomePage() {
   return (
-    <div className="bg-[#17191D] text-white">
-      <FixedBrandLockup />
-
-      <div className={`flex min-h-screen flex-col ${eb.pageShell} pt-[144px] sm:pt-[158px] lg:py-5`}>
-        <main className="flex flex-1 items-start lg:items-center">
-          <section className="grid w-full items-center gap-6 lg:grid-cols-[0.92fr_1.08fr] lg:gap-8">
-            <div aria-hidden="true" className="hidden lg:block" />
-
-            <div className="grid gap-3 lg:gap-4">
-              {ENTRY_POINTS.map((item) => (
-                <EntryCard key={item.title} item={item} />
-              ))}
-            </div>
-          </section>
-        </main>
+    <MarketingShell>
+      <MarketingHero />
+      <div className={styles.promiseStrip}>
+        <div className={`${styles.container} ${styles.promiseInner}`}>
+          <span>
+            <Check size={18} aria-hidden="true" /> Preparati prima del cantiere
+          </span>
+          <span>
+            <Tag size={18} aria-hidden="true" /> Codifica e planimetria di posa
+          </span>
+          <span>
+            <MapPin size={18} aria-hidden="true" /> Brescia e provincia
+          </span>
+        </div>
       </div>
-    </div>
+
+      <section className={styles.section}>
+        <div className={styles.container}>
+          <div className={styles.sectionIntro}>
+            <SectionHeading
+              eyebrow="Il lavoro prima della posa"
+              title="Prima di posare, c'è tutto il lavoro per preparare."
+            />
+            <div>
+              <p className={styles.lead}>
+                Misurare. Segnare. Tagliare. Organizzare i pezzi.
+              </p>
+              <p className={styles.lead}>
+                Sono operazioni che conosci bene. Richiedono tempo, attrezzatura
+                e lavorazioni sul posto. Con EasyBatt, questa parte del lavoro
+                avviene prima del cantiere.
+              </p>
+              <Link href="#benefici" className={styles.sectionLink}>
+                Vedi cosa cambia <ArrowRight size={18} aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="benefici" className={`${styles.section} ${styles.light}`}>
+        <div className={styles.container}>
+          <SectionHeading
+            eyebrow="Il risultato"
+            title="Meno tempo a preparare. Più tempo a posare."
+          />
+          <div className={styles.benefits}>
+            <div>
+              <PackageCheck size={28} aria-hidden="true" />
+              <h3>Pronti da posare</h3>
+              <p>
+                I battiscopa arrivano già tagliati sulle misure rilevate
+                nell&apos;ambiente.
+              </p>
+            </div>
+            <div>
+              <Tag size={28} aria-hidden="true" />
+              <h3>Tutto al suo posto</h3>
+              <p>
+                Ogni pezzo è codificato e associato alla planimetria di posa.
+              </p>
+            </div>
+            <div>
+              <Check size={28} aria-hidden="true" />
+              <h3>Meno lavoro sul posto</h3>
+              <p>
+                Il taglio del battiscopa avviene prima. Meno attività da gestire
+                all&apos;interno dell&apos;immobile.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className={`${styles.section} ${styles.light}`}>
+        <div className={styles.container}>
+          <SectionHeading
+            eyebrow="Come funziona"
+            title="La semplicità in cantiere nasce dal lavoro fatto prima."
+          />
+          <ProcessSteps />
+          <Link className={styles.sectionLink} href="/come-funziona">
+            Scopri il metodo, passo dopo passo{" "}
+            <ArrowRight size={18} aria-hidden="true" />
+          </Link>
+        </div>
+      </section>
+
+      <section className={styles.section}>
+        <div className={`${styles.container} ${styles.systemLayout}`}>
+          <div>
+            <SectionHeading
+              eyebrow="Il sistema EasyBatt"
+              title="Precisione prima. Semplicità dopo."
+            >
+              Rilievo laser, software proprietario e lavorazione CNC fanno parte
+              di un unico processo. La tecnologia ha uno scopo concreto:
+              consegnare un lavoro organizzato.
+            </SectionHeading>
+            <Link href="/come-funziona#sistema" className={styles.sectionLink}>
+              Entra nel sistema EasyBatt{" "}
+              <ArrowRight size={18} aria-hidden="true" />
+            </Link>
+          </div>
+          <ul className={styles.systemList}>
+            <li>
+              <ScanLine aria-hidden="true" />
+              <div>
+                <h3>Rilievo laser</h3>
+                <p>Il punto di partenza è l&apos;ambiente reale.</p>
+              </div>
+            </li>
+            <li>
+              <Workflow aria-hidden="true" />
+              <div>
+                <h3>Software proprietario</h3>
+                <p>
+                  Le misure diventano informazioni per preparare e organizzare i
+                  pezzi.
+                </p>
+              </div>
+            </li>
+            <li>
+              <Settings2 aria-hidden="true" />
+              <div>
+                <h3>Lavorazione CNC</h3>
+                <p>Il progetto guida la preparazione dei singoli elementi.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section
+        id="professionisti"
+        className={`${styles.section} ${styles.light}`}
+      >
+        <div className={styles.container}>
+          <SectionHeading
+            eyebrow="Per i professionisti"
+            title="Un sistema. Diversi modi di lavorare meglio."
+          >
+            Non cambiamo il tuo mestiere. Prepariamo quello che viene prima.
+          </SectionHeading>
+          <div className={styles.professionGrid}>
+            {professions.map(([id, title, text]) => (
+              <article key={id} id={id}>
+                <h3>{title}</h3>
+                <p>{text}</p>
+                <Link href="#prova">
+                  Valutiamolo sul tuo lavoro{" "}
+                  <ArrowRight size={16} aria-hidden="true" />
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.imageBand}>
+        <figure>
+          <Image
+            src={marketingMedia.hero.src}
+            alt={marketingMedia.hero.alt}
+            fill
+            sizes="(max-width: 767px) 100vw, 50vw"
+          />
+          <figcaption className={styles.mediaCaption}>
+            {marketingMedia.hero.caption}
+          </figcaption>
+        </figure>
+        <div className={styles.imageBandText}>
+          <p className={styles.eyebrow}>Anche per chi vive gli spazi</p>
+          <h2>
+            Il taglio resta fuori.
+            <br />
+            Anche polvere e rumore.
+          </h2>
+          <p>
+            Quando il battiscopa arriva già preparato, non serve eseguire le
+            normali operazioni di taglio sul posto. Si evitano così polvere e
+            rumore generati da questa lavorazione: un vantaggio per chi posa e
+            per il suo cliente.
+          </p>
+        </div>
+      </section>
+
+      <FaqSection items={homeFaqs} />
+
+      <section id="chi-siamo" className={`${styles.section} ${styles.story}`}>
+        <div className={`${styles.container} ${styles.sectionIntro}`}>
+          <SectionHeading
+            eyebrow="Da Falegnameria Spini a EasyBatt"
+            title="Un marchio nuovo. Un'esperienza concreta."
+          />
+          <div className={styles.storyBody}>
+            <p>
+              <strong>
+                Perché continuare a fare sul posto ciò che possiamo preparare
+                prima?
+              </strong>
+            </p>
+            <p>
+              EasyBatt nasce dall&apos;esperienza di Falegnameria Spini a
+              Gussago, dall&apos;osservazione del lavoro e dalla volontà di
+              organizzarlo meglio.
+            </p>
+            <p>
+              Non per cambiare il mestiere di chi posa, ma per mettere
+              esperienza e tecnologia al servizio della preparazione.
+            </p>
+            <a
+              href="https://www.falegnameriaspini.it"
+              className={styles.sectionLink}
+            >
+              Scopri Falegnameria Spini{" "}
+              <ArrowRight size={18} aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <ProjectContact />
+    </MarketingShell>
   );
 }
