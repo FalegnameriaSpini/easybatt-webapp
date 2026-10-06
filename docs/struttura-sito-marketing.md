@@ -181,6 +181,13 @@ Brevo e' stato confermato dal titolare come destinazione futura. La configurazio
 
 L'admin comprende l'elenco richieste, filtro per stato, dettagli, note interne e data di ricontatto. Gli aggiornamenti verificano la revisione per non sovrascrivere modifiche concorrenti e sono separati da Salva e pubblica del catalogo. La conferma `/grazie-prova-easybatt` richiede una ricevuta firmata, generata solo dopo il salvataggio; non e' una conferma dell'invio di un'email. Attivazione e limiti sono descritti in `docs/supabase-setup.md`, sezione Richieste progetto.
 
+La gestione dei 12 mesi per le richieste senza seguito comprende data dell'ultimo
+contatto effettivo, termine calcolato dal database, filtri per scadenza e date da
+verificare, cancellazione singola con conferma. Note e appuntamenti futuri non
+riavviano il termine. Non sono previste cancellazioni automatiche e i rapporti
+diventati lavori restano fuori da questo specifico comando. Applicare la migrazione
+`202610060002_project_retention.sql` prima del nuovo admin.
+
 Il percorso previsto e': richiesta ricevuta, registrazione del progetto, creazione o aggiornamento del contatto nel CRM, conferma al richiedente, notifica al titolare e attivita' di ricontatto. Piu' richieste della stessa persona devono rimanere progetti distinti, non sovrascriversi.
 
 Conservare provenienza, professione, territorio, tempi, stato della richiesta e preferenze di contatto. La registrazione di un account e l'assegnazione dei listini rimangono processi separati. Gli allegati dei clienti non vanno nel contenitore pubblico delle fotografie dei battiscopa.

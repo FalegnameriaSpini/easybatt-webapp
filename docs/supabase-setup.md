@@ -158,9 +158,29 @@ Gli allegati non sono ancora accettati e non vanno caricati nel bucket pubblico 
 
 Il titolare seguira' personalmente le richieste, con eventuale persona incaricata
 e autorizzata. Ha confermato 12 mesi dall'ultimo contatto per le richieste che non
-diventano lavori, poi cancellazione. La conservazione/cancellazione automatica non
-e' implementata: attuare registrazione dell'ultimo contatto effettivo e procedura
-di cancellazione prima dell'attivazione. La cancellazione amministrativa di un progetto nel
+diventano lavori, poi cancellazione. La gestione manuale e' predisposta nell'admin
+con la migrazione `supabase/migrations/202610060002_project_retention.sql`:
+
+- Applicare la migrazione DOPO quella delle richieste e PRIMA di distribuire
+  il nuovo admin. Non elimina righe e non programma lavori automatici.
+- Per nuove richieste, l'ultimo contatto iniziale e' il giorno di ricezione
+  (fuso Europe/Rome). Registrare poi solo contatti realmente avvenuti nel campo
+  Ultimo contatto effettivo, non semplici note o appuntamenti futuri.
+- Le richieste preesistenti restano con data da verificare: non viene inventata
+  una data sulla base dell'ultima modifica. Il filtro corrispondente le individua.
+- Il termine e' calcolato dal database aggiungendo 12 mesi di calendario alla
+  data dell'ultimo contatto. Il 29 febbraio scade il 28 febbraio dell'anno seguente.
+- Controllare regolarmente il filtro 12 mesi trascorsi e verificare che il
+  progetto non sia diventato un lavoro. Il titolare deve assegnare e presidiare
+  questa attivita': nessun processo automatico cancella al suo posto.
+- Solo una richiesta scaduta, non in stato Cliente e con data nota puo' essere
+  eliminata da questo comando. Checkbox di verifica e conferma finale precedono
+  la cancellazione singola. Modifiche concorrenti impediscono la cancellazione
+  di una versione non piu' attuale. Non e' una funzione di cancellazione in massa.
+- La data non viene aggiornata salvando note, stato o un ricontatto futuro.
+  Il periodo dei rapporti divenuti contrattuali deve essere definito separatamente.
+
+La cancellazione automatica non e' implementata. La cancellazione di un progetto nel
 database elimina anche la relativa voce di coda. Non eseguire cancellazioni in massa
 senza una verifica delle richieste interessate e delle copie nei fornitori esterni.
 

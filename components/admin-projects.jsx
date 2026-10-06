@@ -9,6 +9,7 @@ import {
   Mail,
   Phone,
   X,
+  Trash2,
 } from "lucide-react";
 import {
   PROJECT_STATES,
@@ -17,6 +18,10 @@ import {
   PROJECT_METRES,
   PROJECT_TIMING,
 } from "@/lib/easybatt-projects.mjs";
+import {
+  projectCanExpire,
+  romeDate,
+} from "@/lib/easybatt-project-retention.mjs";
 
 const input =
   "min-h-11 min-w-0 rounded border border-white/20 bg-[#22282a] px-3 py-2 text-sm text-white";
@@ -34,6 +39,7 @@ export function AdminProjects({ password }) {
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
   const [status, setStatus] = useState("");
+  const [retention, setRetention] = useState("");
   const [page, setPage] = useState(0);
   const [refresh, setRefresh] = useState(0);
   const [selectedId, setSelectedId] = useState("");
@@ -46,7 +52,7 @@ export function AdminProjects({ password }) {
       setData(null);
       try {
         const response = await fetch(
-          `/api/admin/project-requests?page=${page}&status=${status}`,
+          `/api/admin/project-requests?page=${page}&status=${status}&retention=${retention}`,
           {
             headers: { "x-admin-password": password },
             cache: "no-store",
@@ -65,7 +71,7 @@ export function AdminProjects({ password }) {
     }
     void load();
     return () => controller.abort();
-  }, [password, page, status, refresh]);
+  }, [password, page, status, retention, refresh]);
   useEffect(() => {
     if (selectedId) detail.current?.focus();
   }, [selectedId]);
@@ -92,6 +98,42 @@ export function AdminProjects({ password }) {
         throw new Error(result.error || "Salvataggio non riuscito.");
       setMessage("Richiesta aggiornata.");
       setSelectedId("");
+      setRefresh((n) => n + 1);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setBusy(false);
+    }
+  }
+  async function remove(current) {
+    if (
+      !window.confirm(
+        `Eliminare definitivamente la richiesta di ${current.full_name}? Saranno eliminati recapiti, note e la coda interna Brevo. Questa azione non elimina eventuali email, copie esterne o backup.`,
+      )
+    )
+      return;
+    setBusy(true);
+    setError("");
+    setMessage("");
+    try {
+      const response = await fetch("/api/admin/project-requests", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "x-admin-password": password,
+        },
+        body: JSON.stringify({
+          id: current.id,
+          revision: current.revision,
+          confirmed: true,
+        }),
+      });
+      const result = await response.json();
+      if (!response.ok || !result.deleted)
+        throw new Error(result.error || "Cancellazione non confermata.");
+      setMessage("Richiesta eliminata dall'archivio e dalla coda interna.");
+      setSelectedId("");
+      setPage(0);
       setRefresh((n) => n + 1);
     } catch (err) {
       setError(err.message);
@@ -170,6 +212,23 @@ export function AdminProjects({ password }) {
               ))}
             </select>
           </label>
+          <label className="mb-4 grid max-w-sm gap-2 text-sm">
+            Conservazione richieste
+            <select
+              className={input}
+              value={retention}
+              disabled={busy}
+              onChange={(event) => {
+                setRetention(event.target.value);
+                setPage(0);
+                setSelectedId("");
+              }}
+            >
+              <option value="">Tutte</option>
+              <option value="due">12 mesi trascorsi</option>
+              <option value="unverified">Ultimo contatto da verificare</option>
+            </select>
+          </label>
           <div className="max-w-full overflow-x-auto">
             <table className="w-full min-w-[780px] text-left text-sm">
               <thead>
@@ -180,6 +239,7 @@ export function AdminProjects({ password }) {
                     "Cantiere",
                     "Tempi / metri",
                     "Stato",
+                    "Conservazione",
                     "",
                   ].map((label, i) => (
                     <th key={i} scope="col" className="px-2 py-3 font-medium">
@@ -217,6 +277,33 @@ export function AdminProjects({ password }) {
                           Ricontatto:{" "}
                           {item.follow_up_on.split("-").reverse().join("/")}
                         </span>
+                      )}
+                    </td>
+                    <td className="px-2 py-3">
+                      {item.status === "customer" ? (
+                        "Rapporto cliente"
+                      ) : !item.last_contact_on ? (
+                        "Ultimo contatto da verificare"
+                      ) : (
+                        <>
+                          <span
+                            className={
+                              projectCanExpire(item, data.today)
+                                ? "text-[#fcc719]"
+                                : "text-[#bbc2c6]"
+                            }
+                          >
+                            {projectCanExpire(item, data.today)
+                              ? "Da eliminare dopo verifica"
+                              : "Termine 12 mesi"}
+                          </span>
+                          <span className="block">
+                            {item.retention_due_on
+                              ?.split("-")
+                              .reverse()
+                              .join("/")}
+                          </span>
+                        </>
                       )}
                     </td>
                     <td className="px-2 py-3">
@@ -276,6 +363,8 @@ export function AdminProjects({ password }) {
                 project={selected}
                 busy={busy}
                 onSave={save}
+                onRemove={remove}
+                today={data.today || romeDate()}
                 onClose={() => setSelectedId("")}
               />
             </div>
@@ -286,10 +375,17 @@ export function AdminProjects({ password }) {
   );
 }
 
-function ProjectReview({ project, busy, onSave, onClose }) {
+function ProjectReview({ project, busy, onSave, onClose, onRemove, today }) {
   const [status, setStatus] = useState(project.status);
   const [notes, setNotes] = useState(project.staff_notes);
   const [followUp, setFollowUp] = useState(project.follow_up_on || "");
+  const [lastContact, setLastContact] = useState(project.last_contact_on || "");
+  const [confirmed, setConfirmed] = useState(false);
+  const dirty =
+    status !== project.status ||
+    notes !== project.staff_notes ||
+    followUp !== (project.follow_up_on || "") ||
+    lastContact !== (project.last_contact_on || "");
   return (
     <div className="grid min-w-0 gap-5 border-t border-white/20 pt-6">
       <div className="flex items-start justify-between gap-4">
@@ -392,7 +488,26 @@ function ProjectReview({ project, busy, onSave, onClose }) {
             onChange={(event) => setFollowUp(event.target.value)}
           />
         </label>
+        <label className="grid gap-2 text-sm">
+          Ultimo contatto effettivo
+          <input
+            type="date"
+            className={input}
+            value={lastContact}
+            min={romeDate(new Date(project.created_at))}
+            max={today}
+            disabled={busy}
+            onChange={(event) => setLastContact(event.target.value)}
+          />
+        </label>
       </div>
+      {project.status !== "customer" && (
+        <p className="text-sm text-[#bbc2c6]">
+          {project.retention_due_on
+            ? `Termine di conservazione: ${project.retention_due_on.split("-").reverse().join("/")}.`
+            : "Data dell'ultimo contatto da verificare: termine non ancora determinato."}
+        </p>
+      )}
       <label className="grid gap-2 text-sm">
         Note interne
         <textarea
@@ -412,12 +527,54 @@ function ProjectReview({ project, busy, onSave, onClose }) {
             status,
             staff_notes: notes,
             follow_up_on: followUp || null,
+            ...(lastContact !== (project.last_contact_on || "")
+              ? { last_contact_on: lastContact }
+              : {}),
           })
         }
       >
         <Save size={16} />
         Salva richiesta
       </button>
+      {projectCanExpire(project, today) && (
+        <div className="grid gap-4 border-t border-white/20 pt-5">
+          <h4 className="font-semibold text-[#fcc719]">
+            Richiesta oltre il termine di conservazione
+          </h4>
+          <label className="flex items-start gap-3 text-sm">
+            <input
+              type="checkbox"
+              className="mt-1 size-5 shrink-0 accent-[#3a958e]"
+              checked={confirmed}
+              disabled={busy || dirty}
+              onChange={(event) => setConfirmed(event.target.checked)}
+            />
+            <span>
+              Confermo che la richiesta non è diventata un lavoro e che la data
+              dell&apos;ultimo contatto è corretta.
+            </span>
+          </label>
+          <p className="text-sm text-[#bbc2c6]">
+            La cancellazione riguarda l&apos;archivio richieste e la coda
+            interna. Eventuali email, copie esterne e backup richiedono una
+            gestione separata.
+          </p>
+          {dirty && (
+            <p className="text-sm text-[#fcc719]">
+              Sono presenti modifiche non salvate.
+            </p>
+          )}
+          <button
+            type="button"
+            className={`${button} w-fit border-[#ffb4b4]/50 text-[#ffb4b4]`}
+            disabled={busy || dirty || !confirmed}
+            onClick={() => onRemove(project)}
+          >
+            <Trash2 size={18} />
+            Elimina richiesta scaduta
+          </button>
+        </div>
+      )}
     </div>
   );
 }

@@ -85,11 +85,16 @@ diritti privacy, con eventuale persona incaricata e autorizzata, tramite
 12 mesi dall'ultimo contatto, poi cancellazione; nessuna raccolta del consenso
 marketing nella prima fase. Il collegamento a Brevo e' rinviato.
 
-**DA ATTUARE prima dell'attivazione:** registrazione della data dell'ultimo
-contatto effettivo e procedura di cancellazione allo scadere dei 12 mesi, comprese
-eventuali copie operative. La data di modifica di una nota o un ricontatto futuro
-non equivalgono a un contatto effettivo. Non dichiarare una cancellazione automatica:
-non e' implementata. I 12 mesi sono una scelta operativa del titolare, da verificare
+**Predisposizione tecnica:** l'admin permette di registrare l'ultimo contatto
+effettivo, filtrare i progetti oltre il termine e cancellarli singolarmente dopo
+verifica e conferma. Per nuove richieste la data iniziale e' quella di ricezione;
+per quelle preesistenti deve essere verificata. La modifica di una nota o un
+ricontatto futuro non fanno ripartire i 12 mesi. I progetti in stato Cliente
+sono esclusi da questa procedura, non da qualsiasi obbligo di conservazione limitata.
+**DA ATTUARE prima dell'attivazione:** migrazione e distribuzione del codice,
+collaudo e controllo periodico affidato al titolare o a persona incaricata,
+gestione delle eventuali copie operative. Non dichiarare una cancellazione
+automatica: non e' implementata. I 12 mesi sono una scelta operativa del titolare, da verificare
 nel contesto complessivo dell'informativa, non un termine prescritto per legge.
 
 ### Account clienti
@@ -208,7 +213,7 @@ ancora stabilite scadenze automatiche di cancellazione nel codice dell'app.
 | Account attivi o inattivi | Durata del rapporto, criterio di inattivita' e gestione della chiusura. |
 | Richieste professionali e storico approvazioni | Termine per richieste non approvate e durata dello storico necessario. |
 | Richieste di preventivo e messaggi email o WhatsApp | Periodo dalla conclusione del contatto e distinzione dai rapporti divenuti contrattuali. |
-| Richieste Prova EasyBatt che non diventano lavori | 12 mesi dall'ultimo contatto, poi cancellazione: scelta confermata; procedura operativa e gestione copie da attuare. |
+| Richieste Prova EasyBatt che non diventano lavori | 12 mesi dall'ultimo contatto, poi cancellazione: scelta confermata; strumenti manuali predisposti nell'admin, da distribuire e presidiare insieme alla gestione delle copie. |
 | Marketing e prove del consenso | Durata massima dell'uso promozionale, stop alla revoca, durata e base della conservazione delle prove. |
 | Log e backup | Tempi effettivi per ciascun fornitore, rotazione e trattamento delle copie. |
 
