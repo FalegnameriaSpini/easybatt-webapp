@@ -65,9 +65,7 @@ export function SiteHeader({ mobileContact = false }) {
               {label}
             </Link>
           ))}
-          <Link href="/quanto-mi-costa" className={styles.priceLink}>
-            Calcola il prezzo
-          </Link>
+          <Link href="/quanto-mi-costa">Calcola il prezzo</Link>
           <AccountLink />
           <Link
             href={`/prova-easybatt?from=${encodeURIComponent(pathname)}`}

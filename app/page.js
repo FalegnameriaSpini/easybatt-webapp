@@ -32,21 +32,25 @@ const professions = [
     "posatori",
     "Posatori e parquetisti",
     "Meno tempo dedicato alla preparazione, più tempo per la posa. La tua esperienza resta al centro del risultato.",
+    "Scopri EasyBatt per posatori",
   ],
   [
     "falegnami",
     "Falegnami",
     "Battiscopa preparati sulle misure dell'ambiente e organizzati per il montaggio, anche quando sono solo una parte del tuo lavoro.",
+    "Scopri EasyBatt per falegnami",
   ],
   [
     "imprese",
     "Imprese e ristrutturatori",
     "Una fase di finitura più organizzata e meno lavorazioni da coordinare all'interno dell'immobile.",
+    "Scopri EasyBatt per le imprese",
   ],
   [
     "rivenditori",
     "Rivenditori e showroom",
-    "Un servizio di preparazione su misura da affiancare alla fornitura del battiscopa. Le modalità di collaborazione si valutano insieme.",
+    "Un servizio specializzato da integrare nella relazione con clienti e professionisti.",
+    "Scopri le opportunità",
   ],
 ];
 
@@ -92,7 +96,7 @@ export default function EasyBattHomePage() {
         </div>
       </section>
 
-      <section id="benefici" className={`${styles.section} ${styles.light}`}>
+      <section id="benefici" className={`${styles.section} ${styles.brand}`}>
         <div className={styles.container}>
           <SectionHeading
             eyebrow="Il risultato"
@@ -197,13 +201,12 @@ export default function EasyBattHomePage() {
             Non cambiamo il tuo mestiere. Prepariamo quello che viene prima.
           </SectionHeading>
           <div className={styles.professionGrid}>
-            {professions.map(([id, title, text]) => (
+            {professions.map(([id, title, text, action]) => (
               <article key={id} id={id}>
                 <h3>{title}</h3>
                 <p>{text}</p>
                 <Link href={`/per-professionisti#${id}`}>
-                  Scopri cosa cambia per te{" "}
-                  <ArrowRight size={16} aria-hidden="true" />
+                  {action} <ArrowRight size={16} aria-hidden="true" />
                 </Link>
               </article>
             ))}
@@ -231,10 +234,9 @@ export default function EasyBattHomePage() {
             Anche polvere e rumore.
           </h2>
           <p>
-            Quando il battiscopa arriva già preparato, non serve eseguire le
-            normali operazioni di taglio sul posto. Si evitano così polvere e
-            rumore generati da questa lavorazione: un vantaggio per chi posa e
-            per il suo cliente.
+            Quando il battiscopa arriva già preparato, non serve tagliarlo sul
+            posto. Un vantaggio per chi posa e un&apos;esperienza migliore per
+            chi vive o utilizza l&apos;immobile.
           </p>
         </div>
       </section>

@@ -65,7 +65,7 @@ const faqs = [
   {
     question: "Qual è il vantaggio economico?",
     answer:
-      "Il servizio va valutato insieme al tempo normalmente dedicato a misurare, tagliare e organizzare il materiale sul posto. Il beneficio dipende dal lavoro: lo valutiamo sul progetto, senza promettere percentuali di risparmio uguali per tutti.",
+      "Il valore va considerato insieme alle attività che normalmente precedono la posa. Con EasyBatt parte del tempo dedicato a misurare, tagliare e organizzare viene spostato prima del cantiere. Quanto incide dipende dal lavoro: ne parliamo sul tuo progetto.",
   },
   {
     question: "Posso fornire io il battiscopa?",
@@ -80,7 +80,7 @@ const faqs = [
   {
     question: "In quali zone è disponibile?",
     answer:
-      "La fase iniziale è rivolta prioritariamente ai professionisti con lavori a Brescia e provincia. Il singolo progetto viene valutato prima di confermare il servizio.",
+      "Nella fase di lancio il servizio è rivolto prioritariamente ai professionisti con lavori a Brescia e provincia.",
   },
   {
     question: "Posso partire da un singolo lavoro?",
@@ -95,12 +95,14 @@ export default function ProfessionalsPage() {
       <MarketingHero
         content={{
           eyebrow: "Posatori / Falegnami / Imprese / Rivenditori",
-          title: "EasyBatt per professionisti",
-          statement: "Battiscopa su misura, pronti da posare.",
+          title:
+            "Battiscopa su misura per professionisti, già pronti da posare.",
           description:
-            "Meno lavoro di preparazione sul posto. Più tempo per ciò che sai fare meglio.",
+            "Rileviamo l'ambiente, prepariamo ogni elemento su misura e ti consegniamo battiscopa già tagliati, codificati e con la planimetria di posa. Meno lavoro di preparazione sul posto. Più tempo per ciò che sai fare meglio.",
           href: "#benefici",
           action: "Scopri cosa cambia",
+          ctaLabel: "Prova EasyBatt sul tuo prossimo lavoro",
+          ctaFirst: true,
         }}
       />
 
@@ -114,6 +116,10 @@ export default function ProfessionalsPage() {
             restano nelle tue mani. EasyBatt interviene prima: rilievo,
             elaborazione delle misure, taglio, codifica e organizzazione.
           </SectionHeading>
+          <p className={styles.keyLine}>
+            Non sostituiamo il professionista. Gli togliamo lavoro prima del
+            lavoro.
+          </p>
           <h3>Prima di montare, quante cose devi ancora fare?</h3>
           <Comparison />
         </div>
@@ -183,16 +189,16 @@ export default function ProfessionalsPage() {
         <div className={styles.container}>
           <SectionHeading
             eyebrow="Un vantaggio anche per il tuo cliente"
-            title="Meno lavorazioni dentro l'immobile."
+            title="Niente taglio sul posto. Niente polvere e rumore generati dal taglio."
           >
-            Il taglio eseguito prima della consegna evita la polvere e il rumore
-            generati da questa lavorazione sul posto. Un beneficio concreto in
-            case abitate, uffici, negozi e immobili in ristrutturazione.
+            Quando i battiscopa arrivano già preparati, nell&apos;immobile non
+            serve la postazione di taglio. Un vantaggio per chi posa e un
+            beneficio evidente in case abitate, uffici, negozi e immobili in
+            ristrutturazione.
           </SectionHeading>
           <p>
-            Non serve organizzare nell&apos;immobile la postazione per il
-            normale taglio del battiscopa. Puoi concentrarti sul montaggio del
-            materiale già preparato.
+            Meno lavorazioni invasive. Un&apos;esperienza migliore anche per il
+            tuo cliente.
           </p>
         </div>
       </section>
@@ -277,7 +283,12 @@ export default function ProfessionalsPage() {
         </div>
       </section>
       <FaqSection items={faqs} title="Le domande dei professionisti." />
-      <ProjectContact />
+      <ProjectContact
+        title="Il modo migliore per capire EasyBatt? Provarlo sul tuo lavoro."
+        lead="Posatori, parquetisti, falegnami, imprese, ristrutturatori, rivenditori e showroom di Brescia e provincia: se hai un lavoro in programma, raccontacelo."
+        text="Valutiamo insieme il progetto e capiamo se EasyBatt può semplificare la gestione del battiscopa."
+        action="Prova EasyBatt sul tuo prossimo lavoro"
+      />
     </MarketingShell>
   );
 }

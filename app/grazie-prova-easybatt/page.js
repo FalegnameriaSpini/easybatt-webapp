@@ -68,6 +68,9 @@ export default async function ProjectThanksPage() {
               Il processo passo dopo passo
             </ActionLink>
           </div>
+          <p className={styles.lead}>
+            A presto. EasyBatt: prepariamo prima, tu pensi alla posa.
+          </p>
         </div>
       </section>
     </MarketingShell>

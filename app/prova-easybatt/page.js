@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, ClipboardCheck, PackageCheck, Timer } from "lucide-react";
+import { ArrowRight, House, PackageCheck, Timer } from "lucide-react";
 import {
   MarketingShell,
   MarketingHero,
@@ -16,11 +16,6 @@ export const metadata = {
     "Un lavoro concreto da valutare insieme: rilievo e preparazione del battiscopa per professionisti e privati, con fornitura opzionale. Brescia e provincia.",
 };
 const faqs = [
-  {
-    question: "Che differenza c'è rispetto a Calcola il prezzo?",
-    answer:
-      "Calcola il prezzo ti dà una stima indicativa in autonomia, senza lasciare contatti. Prova EasyBatt serve invece a raccontarci un lavoro concreto: ti ricontattiamo per verificarne insieme la fattibilità. Puoi partire da qui anche senza aver calcolato il prezzo.",
-  },
   {
     question: "Il primo contatto mi impegna ad acquistare?",
     answer:
@@ -44,12 +39,17 @@ const faqs = [
   {
     question: "In quali zone è disponibile il servizio?",
     answer:
-      "Nella prima fase ci rivolgiamo prioritariamente a chi ha lavori a Brescia e provincia. La disponibilità viene verificata sul singolo progetto.",
+      "Nella fase di lancio ci rivolgiamo prioritariamente a chi ha lavori a Brescia e provincia.",
   },
   {
     question: "Devo acquistare anche il battiscopa?",
     answer:
       "No, la fornitura è opzionale. Possiamo valutare il tuo materiale e concordare insieme compatibilità, ritiro e consegna.",
+  },
+  {
+    question: "Che differenza c'è rispetto a Calcola il prezzo?",
+    answer:
+      "Calcola il prezzo ti dà una stima indicativa in autonomia, senza lasciare contatti. Prova EasyBatt serve invece a raccontarci un lavoro concreto: ti ricontattiamo per verificarne insieme la fattibilità. Puoi partire da qui anche senza aver calcolato il prezzo.",
   },
 ];
 export default function ProjectPage() {
@@ -58,47 +58,49 @@ export default function ProjectPage() {
       <MarketingHero
         content={{
           eyebrow: "Parti da un lavoro reale",
-          title: "Prova EasyBatt",
-          statement: "Valutiamo insieme il tuo prossimo lavoro.",
+          title: "Prova EasyBatt sul tuo prossimo lavoro.",
           description:
-            "Raccontaci il progetto. Ti ricontattiamo per capire se EasyBatt è adatto al tuo lavoro, anche senza misure esatte o una stima già calcolata.",
-          href: "#progetto",
-          action: "Raccontaci il progetto",
-          secondaryHref: "/come-funziona",
-          secondaryLabel: "Come funziona",
+            "Raccontaci il lavoro: valutiamo insieme se EasyBatt può farti arrivare sul posto con battiscopa già tagliati, codificati e pronti da posare. Non devi cambiare il tuo modo di lavorare: parti da un lavoro e giudica il risultato.",
+          href: "/come-funziona",
+          action: "Come funziona",
+          ctaHref: "#progetto",
+          ctaLabel: "Raccontaci il progetto",
+          ctaFirst: true,
         }}
       />
-      <section className={styles.section}>
+      <section className={`${styles.section} ${styles.brand}`}>
         <div className={styles.container}>
           <SectionHeading
             eyebrow="Cosa cambia per te"
-            title="Meno preparazione. Più tempo per la posa."
+            title="Meno tempo a preparare. Più tempo a posare."
           >
-            Rilievo, elaborazione, taglio e organizzazione avvengono prima del
-            cantiere. Il mestiere di chi posa resta centrale.
+            EasyBatt sposta prima del cantiere una parte del lavoro che
+            normalmente fai sul posto. Tu ricevi i battiscopa preparati per il
+            tuo ambiente.
           </SectionHeading>
           <div className={styles.benefits}>
             <div>
               <Timer aria-hidden="true" />
-              <h3>Meno lavoro sul posto</h3>
+              <h3>Meno preparazione</h3>
               <p>
-                Le attività di preparazione del battiscopa vengono anticipate.
+                Misurazione e taglio del battiscopa vengono fatti prima del
+                cantiere.
               </p>
             </div>
             <div>
               <PackageCheck aria-hidden="true" />
               <h3>Materiale organizzato</h3>
               <p>
-                Pezzi preparati, codificati e accompagnati dalla planimetria di
+                Pezzi tagliati, codificati e accompagnati dalla planimetria di
                 posa.
               </p>
             </div>
             <div>
-              <ClipboardCheck aria-hidden="true" />
-              <h3>Più attenzione al montaggio</h3>
+              <House aria-hidden="true" />
+              <h3>Meno polvere e rumore</h3>
               <p>
-                Meno polvere e rumore nell&apos;immobile, riferiti alle
-                operazioni di taglio del battiscopa.
+                Niente taglio nell&apos;immobile. Soprattutto quando il cantiere
+                è la casa di qualcuno.
               </p>
             </div>
           </div>
@@ -114,8 +116,8 @@ export default function ProjectPage() {
             <p>
               Rilievo laser, software proprietario, lavorazione CNC, codifica e
               planimetria collegano l&apos;ambiente reale ai singoli pezzi. Il
-              servizio viene prima del materiale: la fornitura del battiscopa
-              resta opzionale.
+              risultato: battiscopa su misura dell&apos;ambiente, già tagliati,
+              codificati e accompagnati dalla planimetria di posa.
             </p>
             <Link href="/il-sistema" className={styles.textLink}>
               Entra nel sistema EasyBatt{" "}

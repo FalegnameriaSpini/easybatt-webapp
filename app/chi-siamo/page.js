@@ -70,7 +70,7 @@ const faqs = [
   {
     question: "In quale territorio opera?",
     answer:
-      "Nella fase iniziale il servizio è rivolto prioritariamente ai professionisti di Brescia e provincia. Le condizioni del singolo progetto vengono valutate insieme.",
+      "Nella fase di lancio il servizio è rivolto prioritariamente ai professionisti di Brescia e provincia.",
   },
 ];
 
@@ -79,13 +79,12 @@ export default function AboutPage() {
     <MarketingShell>
       <MarketingHero
         content={{
-          eyebrow: "Falegnameria Spini / Gussago, Brescia",
-          title: "Chi siamo",
-          statement: "EasyBatt nasce dal lavoro su misura.",
+          eyebrow: "Chi siamo / Falegnameria Spini, Gussago (BS)",
+          title: "EasyBatt nasce da un'esperienza reale nel lavoro su misura.",
           description:
-            "Un marchio nuovo. L'esperienza concreta di chi progetta, produce e risolve problemi ogni giorno.",
+            "Un marchio nuovo, nato dall'esperienza di chi progetta e produce su misura ogni giorno. E da una convinzione: anche in un mestiere tradizionale c'è sempre un modo per lavorare meglio.",
           href: "#origine",
-          action: "Scopri le nostre origini",
+          action: "Scopri da dove nasce EasyBatt",
         }}
       />
 
@@ -132,10 +131,15 @@ export default function AboutPage() {
             modo migliore di organizzarlo e dalla volontà di non fermarsi a come
             è sempre stato fatto.
           </SectionHeading>
+          <p className={styles.keyLine}>
+            Non guardare il lavoro solo per quello che è oggi, ma alzare lo
+            sguardo e chiedersi: possiamo farlo meglio?
+          </p>
           <p>
-            Rilievo laser, software proprietario, lavorazione CNC, codifica e
-            planimetria diventano parti di un unico sistema: portare in cantiere
-            un battiscopa già preparato per la posa.
+            Da questa domanda nasce l&apos;idea di ripensare la preparazione del
+            battiscopa. Rilievo laser, software proprietario, lavorazione CNC,
+            codifica e planimetria diventano parti di un unico sistema: portare
+            in cantiere un battiscopa già preparato per la posa.
           </p>
         </div>
       </section>
@@ -284,7 +288,12 @@ export default function AboutPage() {
         </div>
       </section>
       <FaqSection items={faqs} title="Conosciamo meglio EasyBatt." />
-      <ProjectContact />
+      <ProjectContact
+        title="L'esperienza ci ha portati fin qui. Ora vogliamo portarla sul tuo prossimo lavoro."
+        lead="Sei un professionista di Brescia o provincia? Scopri cosa cambia quando il battiscopa arriva già preparato, partendo da un progetto reale."
+        text=""
+        action="Prova EasyBatt sul tuo prossimo lavoro"
+      />
     </MarketingShell>
   );
 }

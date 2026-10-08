@@ -60,25 +60,37 @@ export function SectionHeading({ eyebrow, title, children }) {
     </div>
   );
 }
-export function MarketingHero({ method = false, content }) {
+// The H1 carries the promise of the page; yellow is reserved for the
+// conversion action, so the explore link always uses the secondary style.
+const homeHero = {
+  eyebrow: "Brescia e provincia / Professionisti e imprese",
+  title: "Battiscopa su misura, già tagliati e pronti da posare.",
+  description: (
+    <>
+      EasyBatt prepara i battiscopa sulle misure del tuo ambiente, li taglia,
+      li codifica e li consegna con la planimetria di posa. In cantiere non
+      devi più misurare e tagliare. <strong>Monti e basta.</strong>
+    </>
+  ),
+  href: "/come-funziona",
+  action: "Scopri come funziona",
+};
+export function MarketingHero({ content }) {
   const media = marketingMedia.hero;
-  const copy = content ?? {
-    eyebrow: method
-      ? "Il metodo EasyBatt"
-      : "Brescia e provincia / Professionisti e imprese",
-    title: method ? "Come funziona EasyBatt" : "EasyBatt",
-    statement: method
-      ? "Dal rilievo al battiscopa pronto da posare."
-      : "Battiscopa su misura, già tagliati e pronti da posare.",
-    description: method
-      ? "Rileviamo, elaboriamo, prepariamo. Tu arrivi in cantiere e pensi alla posa."
-      : "Prepariamo i battiscopa sulle misure del tuo ambiente. Tagliati, codificati e accompagnati dalla planimetria di posa.",
-    href: method ? "#metodo" : "/come-funziona",
-    action: method ? "Scopri il metodo" : "Scopri come funziona",
-  };
+  const copy = content ?? homeHero;
+  const explore = (
+    <ActionLink href={copy.href} secondary>
+      {copy.action}
+    </ActionLink>
+  );
+  const cta = (
+    <ActionLink href={copy.ctaHref || "/prova-easybatt"}>
+      {copy.ctaLabel || "Prova EasyBatt"}
+    </ActionLink>
+  );
   return (
     <section
-      className={`${styles.hero} ${method || content ? styles.methodHero : ""}`}
+      className={`${styles.hero} ${content ? styles.pageHero : ""}`}
       aria-labelledby="hero-title"
     >
       <Image
@@ -92,13 +104,10 @@ export function MarketingHero({ method = false, content }) {
       <div className={`${styles.container} ${styles.heroContent}`}>
         <p className={styles.eyebrow}>{copy.eyebrow}</p>
         <h1 id="hero-title">{copy.title}</h1>
-        <p className={styles.heroStatement}>{copy.statement}</p>
         <p className={styles.heroDescription}>{copy.description}</p>
         <div className={styles.actions}>
-          <ActionLink href={copy.href}>{copy.action}</ActionLink>
-          <ActionLink href={copy.secondaryHref || "/prova-easybatt"} secondary>
-            {copy.secondaryLabel || "Prova EasyBatt"}
-          </ActionLink>
+          {copy.ctaFirst ? cta : explore}
+          {copy.ctaFirst ? explore : cta}
         </div>
       </div>
       <span className={styles.mediaCaption}>{media.caption}</span>
@@ -172,31 +181,29 @@ export function FaqSection({
     </section>
   );
 }
-export function ProjectContact() {
+export function ProjectContact({
+  title = "Hai un lavoro in programma?",
+  lead = "Prova EasyBatt sul tuo prossimo battiscopa.",
+  text = "Raccontaci il progetto e verifichiamo insieme se EasyBatt è adatto al lavoro che devi realizzare. Non servono già tutte le misure.",
+  action = "Parlaci del tuo prossimo lavoro",
+}) {
   return (
     <section id="prova" className={`${styles.section} ${styles.contact}`}>
       <div className={`${styles.container} ${styles.contactLayout}`}>
         <div>
           <p className={styles.eyebrow}>Prova EasyBatt</p>
-          <h2>Hai un lavoro in programma?</h2>
-          <p className={styles.lead}>
-            Raccontaci il tuo lavoro. Ti ricontattiamo per valutare insieme
-            se EasyBatt è la soluzione adatta.
-          </p>
-          <p>
-            Partiamo da dove si trova il cantiere, dal tipo di intervento e dai
-            tempi previsti. Non serve avere già tutte le misure.
-          </p>
+          <h2>{title}</h2>
+          <p className={styles.lead}>{lead}</p>
+          {text && <p>{text}</p>}
         </div>
         <div className={styles.contactActions}>
-          <ActionLink href="/prova-easybatt">
-            Parlaci del tuo progetto
-          </ActionLink>
+          <ActionLink href="/prova-easybatt">{action}</ActionLink>
           <a className={styles.textLink} href={`mailto:${projectEmail}`}>
             {projectEmail}
           </a>
           <p>
-            Un primo contatto per valutare il lavoro, senza impegno di acquisto.
+            Raccontaci il progetto: non serve aver già deciso e non ti impegni
+            ad acquistare.
           </p>
           <Link className={styles.textLink} href="/quanto-mi-costa">
             Cerchi solo una stima? Calcola il prezzo{" "}

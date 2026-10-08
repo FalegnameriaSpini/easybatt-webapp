@@ -29,7 +29,17 @@ export const metadata = {
 export function EasyBattComeFunzionaPage() {
   return (
     <MarketingShell>
-      <MarketingHero method />
+      <MarketingHero
+        content={{
+          eyebrow: "Il metodo EasyBatt",
+          title:
+            "Come funziona EasyBatt: dal rilievo al battiscopa pronto da posare.",
+          description:
+            "Rileviamo l'ambiente, elaboriamo le misure con il nostro software proprietario, lavoriamo i battiscopa al CNC e li consegniamo già tagliati, codificati e con la planimetria di posa. Tu arrivi in cantiere e monti.",
+          href: "#metodo",
+          action: "Scopri il metodo",
+        }}
+      />
       <section className={styles.section}>
         <div className={styles.container}>
           <SectionHeading
@@ -190,10 +200,9 @@ export function EasyBattComeFunzionaPage() {
             eyebrow="Il risultato sul posto"
             title="Identifichi il pezzo. Ti concentri sulla posa."
           >
-            Il lavoro svolto prima riduce le attività da organizzare in
-            cantiere. Niente normali operazioni di taglio del battiscopa
-            nell&apos;immobile significa evitare la polvere e il rumore generati
-            da questa lavorazione.
+            Il lavoro svolto prima riduce le lavorazioni necessarie sul posto.
+            Niente taglio del battiscopa nell&apos;immobile significa anche
+            niente polvere e rumore generati da questa lavorazione.
           </SectionHeading>
           <Link href="/quanto-mi-costa" className={styles.sectionLink}>
             Calcola una stima per il tuo lavoro{" "}
@@ -203,7 +212,12 @@ export function EasyBattComeFunzionaPage() {
       </section>
 
       <FaqSection items={methodFaqs} title="Il metodo, senza dubbi." />
-      <ProjectContact />
+      <ProjectContact
+        title="Ora che sai come funziona, vediamolo sul tuo lavoro."
+        lead="Hai un cantiere o una ristrutturazione in programma a Brescia o provincia?"
+        text="Raccontaci il progetto e verifichiamo insieme come applicare il metodo EasyBatt al battiscopa del tuo ambiente."
+        action="Prova EasyBatt sul tuo prossimo lavoro"
+      />
     </MarketingShell>
   );
 }

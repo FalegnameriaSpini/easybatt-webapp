@@ -86,9 +86,6 @@
 .navigation > a[aria-current] {
   color: #83cdc6;
 }
-.navigation .priceLink {
-  color: var(--yellow);
-}
 .headerCta {
   display: inline-flex;
   align-items: center;
@@ -154,22 +151,19 @@
   color: #244b48;
 }
 .hero h1 {
-  font-size: 66px;
+  max-width: 780px;
+  font-size: 58px;
   font-weight: 700;
-  line-height: 1.04;
-}
-.heroStatement {
-  max-width: 655px;
-  font-size: 34px;
-  font-weight: 600;
-  line-height: 1.2;
-  margin-top: 15px !important;
+  line-height: 1.06;
 }
 .heroDescription {
-  max-width: 590px;
-  margin-top: 18px !important;
+  max-width: 620px;
+  margin-top: 22px !important;
   font-size: 17px;
   line-height: 1.65;
+}
+.heroDescription strong {
+  font-weight: 650;
 }
 .actions {
   display: flex;
@@ -280,7 +274,7 @@
   border-top: 1px solid #ffffff33;
 }
 .benefits svg {
-  color: var(--yellow);
+  color: #83cdc6;
   margin-bottom: 20px;
 }
 .benefits p {
@@ -295,6 +289,44 @@
 }
 .light .benefits p {
   color: #505e60;
+}
+/* Brand teal surface for the core message. Body text stays ink:
+   white on #3a958e is below 4.5:1, ink is about 4.9:1. */
+.brand {
+  color: var(--ink);
+  background: var(--teal);
+}
+.brand h2 {
+  max-width: 820px;
+  font-size: 52px;
+  line-height: 1.08;
+}
+.brand .eyebrow,
+.brand .lead,
+.brand .benefits p,
+.brand .benefits svg {
+  color: var(--ink);
+}
+.brand .benefits > div {
+  border-color: #17191d4d;
+}
+.brand a:focus-visible {
+  outline-color: var(--ink);
+}
+.keyLine {
+  max-width: 760px;
+  margin-bottom: 48px !important;
+  color: #83cdc6;
+  font-size: 24px;
+  line-height: 1.35;
+  font-weight: 600;
+  text-wrap: balance;
+}
+.light .keyLine {
+  color: #286a65;
+}
+.keyLine + p {
+  max-width: 760px;
 }
 .processGrid,
 .processDetailed {
@@ -547,12 +579,12 @@
   padding-top: 24px;
   font-size: 12px;
 }
-.methodHero .heroContent {
+.pageHero .heroContent {
   padding-bottom: 210px;
 }
-.methodHero h1 {
-  font-size: 50px;
-  max-width: 680px;
+.pageHero h1 {
+  font-size: 46px;
+  line-height: 1.1;
 }
 .comparison {
   display: grid;
@@ -624,7 +656,7 @@
   padding-block: 24px;
 }
 .processIndex a:hover {
-  border-color: var(--yellow);
+  border-color: #83cdc6;
 }
 .processIndex svg,
 .processIndex span {
@@ -799,15 +831,17 @@
     padding-bottom: 180px;
   }
   .hero h1 {
-    font-size: 49px;
-  }
-  .heroStatement {
-    font-size: 28px;
-    max-width: 490px;
+    font-size: 38px;
   }
   .heroDescription {
     font-size: 16px;
     max-width: 460px;
+  }
+  .brand h2 {
+    font-size: 36px;
+  }
+  .keyLine {
+    font-size: 21px;
   }
   .hero .eyebrow {
     font-size: 10px;
@@ -902,13 +936,10 @@
   .footerLegal p + p {
     margin-top: 10px;
   }
-  .methodHero h1 {
-    font-size: 38px;
+  .pageHero h1 {
+    font-size: 31px;
   }
-  .methodHero .heroStatement {
-    font-size: 27px;
-  }
-  .methodHero .heroContent {
+  .pageHero .heroContent {
     padding-bottom: 190px;
   }
   .comparison {
@@ -918,10 +949,7 @@
 }
 @media (max-width: 380px) {
   .hero h1 {
-    font-size: 44px;
-  }
-  .heroStatement {
-    font-size: 25px;
+    font-size: 34px;
   }
   .heroDescription {
     font-size: 15px;
@@ -934,8 +962,8 @@
   .hero .secondaryButton {
     min-height: 44px;
   }
-  .methodHero h1 {
-    font-size: 34px;
+  .pageHero h1 {
+    font-size: 28px;
   }
 }
 @media (max-height: 800px) and (min-width: 768px) {
@@ -943,7 +971,7 @@
     min-height: 520px;
   }
   .heroContent,
-  .methodHero .heroContent {
+  .pageHero .heroContent {
     padding-top: 36px;
     padding-bottom: 90px;
   }
@@ -953,23 +981,19 @@
     min-height: 0;
   }
   .heroContent,
-  .methodHero .heroContent {
+  .pageHero .heroContent {
     padding-top: 24px;
     padding-bottom: 85px;
   }
   .hero h1 {
-    font-size: 40px;
-  }
-  .heroStatement,
-  .methodHero .heroStatement {
-    font-size: 24px;
+    font-size: 33px;
   }
   .heroDescription {
     font-size: 15px;
     line-height: 1.5;
   }
-  .methodHero h1 {
-    font-size: 32px;
+  .pageHero h1 {
+    font-size: 27px;
   }
   .hero .actions {
     margin-top: 18px;

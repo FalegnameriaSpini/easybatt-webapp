@@ -114,10 +114,10 @@ export default function SystemPage() {
       <MarketingHero
         content={{
           eyebrow: "Tecnologia al servizio del lavoro",
-          title: "Il sistema EasyBatt",
-          statement: "Precisione nel processo. Semplicità nella posa.",
+          title:
+            "Il sistema EasyBatt: dalla precisione del rilievo alla semplicità della posa.",
           description:
-            "Rilievo, software, CNC, codifica e planimetria. Non tecnologie isolate: un unico sistema.",
+            "Rilievo laser, software proprietario, lavorazione CNC, codifica e planimetria. Non tecnologie isolate: un unico sistema per preparare il battiscopa prima che arrivi in cantiere.",
           href: "#processo",
           action: "Entra nel sistema",
         }}
@@ -187,11 +187,6 @@ export default function SystemPage() {
             materiale in elementi preparati per la posa. Il valore nasce da
             tutto ciò che accade prima della consegna.
           </SectionHeading>
-          <p className={styles.supplyNote}>
-            La fornitura del battiscopa resta opzionale. L&apos;eventuale
-            materiale del cliente e la relativa logistica vengono valutati prima
-            della conferma.
-          </p>
         </div>
       </section>
 
@@ -225,9 +220,8 @@ export default function SystemPage() {
               <Check size={28} aria-hidden="true" />
               <h3>Meno preparazione sul posto</h3>
               <p>
-                Le normali operazioni di taglio avvengono prima, evitando
-                polvere e rumore generati nell&apos;immobile da questa
-                lavorazione.
+                Il taglio avviene prima dell&apos;arrivo in cantiere: niente
+                polvere e rumore da questa lavorazione nell&apos;immobile.
               </p>
             </div>
             <div>
@@ -251,7 +245,12 @@ export default function SystemPage() {
         </div>
       </section>
       <FaqSection items={faqs} title="Dentro il sistema EasyBatt." />
-      <ProjectContact />
+      <ProjectContact
+        title="Dalla tecnologia al tuo prossimo lavoro."
+        lead="Il modo migliore per comprendere il sistema EasyBatt è vederlo applicato a un ambiente reale."
+        text="Hai un lavoro in programma a Brescia o provincia? Raccontaci il progetto e vediamo insieme come preparare il battiscopa prima dell'arrivo in cantiere."
+        action="Prova il sistema EasyBatt"
+      />
     </MarketingShell>
   );
 }
