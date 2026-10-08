@@ -71,8 +71,8 @@ export default function ProjectPage() {
       <section className={`${styles.section} ${styles.brand}`}>
         <div className={styles.container}>
           <SectionHeading
-            eyebrow="Cosa cambia per te"
-            title="Meno tempo a preparare. Più tempo a posare."
+            eyebrow="Il risultato"
+            title="Preparato prima. Pronto da posare."
           >
             EasyBatt sposta prima del cantiere una parte del lavoro che
             normalmente fai sul posto. Tu ricevi i battiscopa preparati per il
@@ -81,7 +81,7 @@ export default function ProjectPage() {
           <div className={styles.benefits}>
             <div>
               <Timer aria-hidden="true" />
-              <h3>Meno preparazione</h3>
+              <h3>Niente taglio sul posto</h3>
               <p>
                 Misurazione e taglio del battiscopa vengono fatti prima del
                 cantiere.

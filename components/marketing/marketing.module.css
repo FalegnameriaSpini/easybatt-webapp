@@ -592,6 +592,9 @@
   margin-top: 36px;
   gap: 40px;
 }
+.comparisonSteps {
+  grid-template-columns: 1.4fr 1fr;
+}
 .comparison > div {
   border-top: 1px solid #ffffff33;
   padding-top: 25px;

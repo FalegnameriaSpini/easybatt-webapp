@@ -76,17 +76,18 @@ export default function EasyBattHomePage() {
         <div className={styles.container}>
           <div className={styles.sectionIntro}>
             <SectionHeading
-              eyebrow="Il lavoro prima della posa"
-              title="Prima di posare, c'è tutto il lavoro per preparare."
+              eyebrow="Il lavoro dietro ogni pezzo"
+              title="Un pezzo alla volta. E per ogni pezzo, si ricomincia."
             />
             <div>
               <p className={styles.lead}>
-                Misurare. Segnare. Tagliare. Organizzare i pezzi.
+                Misurare. Segnare. Tagliare. Verificare. Ritoccare.
               </p>
               <p className={styles.lead}>
-                Sono operazioni che conosci bene. Richiedono tempo, attrezzatura
-                e lavorazioni sul posto. Con EasyBatt, questa parte del lavoro
-                avviene prima del cantiere.
+                Sono operazioni che conosci bene e che si ripetono fino
+                all&apos;ultimo angolo. Richiedono attrezzatura sul posto, tempo
+                e fatica. Con EasyBatt, questa parte del lavoro avviene prima
+                del cantiere.
               </p>
               <Link href="#benefici" className={styles.sectionLink}>
                 Vedi cosa cambia <ArrowRight size={18} aria-hidden="true" />
@@ -100,12 +101,12 @@ export default function EasyBattHomePage() {
         <div className={styles.container}>
           <SectionHeading
             eyebrow="Il risultato"
-            title="Meno tempo a preparare. Più tempo a posare."
+            title="Preparato prima. Pronto da posare."
           />
           <div className={styles.benefits}>
             <div>
               <PackageCheck size={28} aria-hidden="true" />
-              <h3>Pronti da posare</h3>
+              <h3>Già tagliati su misura</h3>
               <p>
                 I battiscopa arrivano già tagliati sulle misure rilevate
                 nell&apos;ambiente.
@@ -120,7 +121,7 @@ export default function EasyBattHomePage() {
             </div>
             <div>
               <Check size={28} aria-hidden="true" />
-              <h3>Meno lavoro sul posto</h3>
+              <h3>Niente taglio sul posto</h3>
               <p>
                 Il taglio del battiscopa avviene prima. Meno attività da gestire
                 all&apos;interno dell&apos;immobile.

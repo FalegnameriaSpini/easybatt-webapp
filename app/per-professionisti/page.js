@@ -120,7 +120,7 @@ export default function ProfessionalsPage() {
             Non sostituiamo il professionista. Gli togliamo lavoro prima del
             lavoro.
           </p>
-          <h3>Prima di montare, quante cose devi ancora fare?</h3>
+          <h3>Per ogni pezzo, quante cose devi fare prima di montarlo?</h3>
           <Comparison />
         </div>
       </section>

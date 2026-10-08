@@ -218,7 +218,7 @@ export default function SystemPage() {
           <div className={styles.benefits}>
             <div>
               <Check size={28} aria-hidden="true" />
-              <h3>Meno preparazione sul posto</h3>
+              <h3>Niente taglio sul posto</h3>
               <p>
                 Il taglio avviene prima dell&apos;arrivo in cantiere: niente
                 polvere e rumore da questa lavorazione nell&apos;immobile.

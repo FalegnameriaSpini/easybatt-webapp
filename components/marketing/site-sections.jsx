@@ -136,22 +136,26 @@ export function ProcessSteps({ detailed = false }) {
 }
 export function Comparison() {
   return (
-    <div className={styles.comparison}>
+    <div className={`${styles.comparison} ${styles.comparisonSteps}`}>
       <div>
-        <p className={styles.eyebrow}>Sul posto, tradizionalmente</p>
+        <p className={styles.eyebrow}>Oggi, per ogni pezzo</p>
         <p className={styles.comparisonFlow}>
-          Misurare <ArrowRight aria-hidden="true" /> Preparare{" "}
+          Misurare <ArrowRight aria-hidden="true" /> Segnare{" "}
           <ArrowRight aria-hidden="true" /> Tagliare{" "}
-          <ArrowRight aria-hidden="true" /> Organizzare{" "}
+          <ArrowRight aria-hidden="true" /> Verificare{" "}
+          <ArrowRight aria-hidden="true" /> Ritoccare{" "}
           <ArrowRight aria-hidden="true" /> Posare
         </p>
+        <p>E poi si ricomincia con il pezzo successivo.</p>
       </div>
       <div>
-        <p className={styles.eyebrow}>Sul posto, con EasyBatt</p>
+        <p className={styles.eyebrow}>Con EasyBatt, per ogni pezzo</p>
         <p className={styles.comparisonFlow}>
           Identificare <ArrowRight aria-hidden="true" /> Posare
         </p>
-        <p>Il lavoro di preparazione avviene prima.</p>
+        <p>
+          Il taglio è già fatto. Codice e planimetria ti dicono dove va.
+        </p>
       </div>
     </div>
   );
