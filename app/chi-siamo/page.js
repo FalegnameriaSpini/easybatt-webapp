@@ -45,12 +45,12 @@ const faqs = [
   {
     question: "Chi è EasyBatt?",
     answer:
-      "EasyBatt è un marchio specializzato nella preparazione di battiscopa su misura, già tagliati, codificati e organizzati per la posa tramite un processo dedicato.",
+      "È un marchio che prepara battiscopa su misura: già tagliati, codificati e pronti da posare.",
   },
   {
     question: "Qual è il legame con Falegnameria Spini?",
     answer:
-      "EasyBatt è un marchio di Falegnameria Spini Gianluca e Marco snc. Nasce dall'esperienza della falegnameria nella progettazione e nelle lavorazioni su misura.",
+      "EasyBatt è un marchio di Falegnameria Spini Gianluca e Marco snc. Nasce dall'esperienza della falegnameria nella progettazione e nelle lavorazioni su misura, e da quella maturata nell'uso delle tecnologie digitali.",
   },
   {
     question: "Dove nasce il progetto?",
@@ -60,17 +60,17 @@ const faqs = [
   {
     question: "Perché è nato EasyBatt?",
     answer:
-      "Dall'osservazione delle attività che precedono la posa e dalla volontà di preparare prima ciò che normalmente viene eseguito sul posto.",
+      "Dall'idea di usare tecnologie moderne in un lavoro tradizionale come la posa del battiscopa, per renderlo più efficiente e meno faticoso. Per questo abbiamo creato una filiera digitale: laser, software, troncatrice a controllo numerico, codici e planimetria di posa.",
   },
   {
     question: "EasyBatt è una falegnameria?",
     answer:
-      "Nasce dall'esperienza di una falegnameria, ma ha una specializzazione precisa: preparare battiscopa su misura e organizzati per la posa attraverso un sistema dedicato.",
+      "Nasce dall'esperienza di una falegnameria, ma ha una specializzazione precisa: il battiscopa. Dal rilievo dell'ambiente ai pezzi già tagliati e codificati, pronti da posare.",
   },
   {
-    question: "In quale territorio opera?",
+    question: "In quali zone lavorate?",
     answer:
-      "Nella fase di lancio il servizio è rivolto prioritariamente ai professionisti di Brescia e provincia.",
+      "Per ora lavoriamo soprattutto a Brescia e provincia. Se il tuo lavoro è fuori zona, scrivici comunque: vediamo insieme se si può fare.",
   },
 ];
 
@@ -137,9 +137,10 @@ export default function AboutPage() {
           </p>
           <p>
             Da questa domanda nasce l&apos;idea di ripensare la preparazione del
-            battiscopa. Rilievo laser, software proprietario, lavorazione CNC,
-            codifica e planimetria diventano parti di un unico sistema: portare
-            in cantiere un battiscopa già preparato per la posa.
+            battiscopa. Rilievo laser, software proprietario, troncatrice a
+            controllo numerico, codifica e planimetria diventano parti di un
+            unico sistema: portare in cantiere un battiscopa già preparato per
+            la posa.
           </p>
         </div>
       </section>
@@ -164,7 +165,7 @@ export default function AboutPage() {
               <h3>EasyBatt</h3>
               <ul className={styles.plainList}>
                 <li>Rilievo laser dello specifico ambiente.</li>
-                <li>Elaborazione e preparazione CNC.</li>
+                <li>Software proprietario e troncatrice a controllo numerico.</li>
                 <li>Codifica e planimetria.</li>
                 <li>Battiscopa pronti da posare.</li>
               </ul>

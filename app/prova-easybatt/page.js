@@ -17,39 +17,38 @@ export const metadata = {
 };
 const faqs = [
   {
-    question: "Il primo contatto mi impegna ad acquistare?",
+    question: "Se vi scrivo, devo comprare per forza?",
     answer:
-      "No. Serve a comprendere il progetto e verificare se EasyBatt è adatto al lavoro. Prova non significa lavorazione gratuita: modalità e costi vengono concordati prima di procedere.",
+      "No. Prima guardiamo insieme il tuo lavoro e vediamo se EasyBatt va bene. Prova non vuol dire gratis: prezzo e condizioni li decidiamo insieme prima di iniziare.",
   },
   {
-    question: "Devo conoscere già i metri esatti?",
-    answer:
-      "No. Puoi indicare che non li conosci ancora. Partiamo dalle informazioni disponibili.",
+    question: "Devo sapere già i metri esatti?",
+    answer: "No. Se non li sai, nel modulo scegli «Non lo so ancora».",
   },
   {
     question: "Serve una planimetria?",
     answer:
-      "Non è necessaria per il primo contatto. Se hai documenti utili, concordiamo insieme come condividerli durante la valutazione.",
+      "No. Le misure le prendiamo noi con il laser. Se hai già una planimetria della casa, puoi mandarcela quando ci sentiamo.",
   },
   {
-    question: "Posso partire da un singolo lavoro?",
+    question: "Posso provarlo su un solo lavoro?",
     answer:
-      "Sì. Raccontaci il progetto: lo valutiamo prima di confermare se il sistema è adatto.",
+      "Sì. Raccontaci il lavoro e vediamo insieme se va bene per EasyBatt.",
   },
   {
-    question: "In quali zone è disponibile il servizio?",
+    question: "In quali zone lavorate?",
     answer:
-      "Nella fase di lancio ci rivolgiamo prioritariamente a chi ha lavori a Brescia e provincia.",
+      "Per ora lavoriamo soprattutto a Brescia e provincia. Se il tuo lavoro è fuori zona, scrivici comunque: vediamo insieme se si può fare.",
   },
   {
-    question: "Devo acquistare anche il battiscopa?",
+    question: "Devo comprare anche il battiscopa?",
     answer:
-      "No, la fornitura è opzionale. Possiamo valutare il tuo materiale e concordare insieme compatibilità, ritiro e consegna.",
+      "No. Puoi comprarlo da noi oppure usare il tuo. Se usi il tuo, prima controlliamo insieme che vada bene e come farlo arrivare da noi.",
   },
   {
-    question: "Che differenza c'è rispetto a Calcola il prezzo?",
+    question: "Che differenza c'è con Calcola il prezzo?",
     answer:
-      "Calcola il prezzo ti dà una stima indicativa in autonomia, senza lasciare contatti. Prova EasyBatt serve invece a raccontarci un lavoro concreto: ti ricontattiamo per verificarne insieme la fattibilità. Puoi partire da qui anche senza aver calcolato il prezzo.",
+      "Calcola il prezzo ti dà un prezzo indicativo, da solo, senza lasciare i tuoi dati. Con Prova EasyBatt ci racconti un lavoro vero e ti ricontattiamo noi. Non serve aver calcolato il prezzo prima.",
   },
 ];
 export default function ProjectPage() {
@@ -114,8 +113,9 @@ export default function ProjectPage() {
           />
           <div>
             <p>
-              Rilievo laser, software proprietario, lavorazione CNC, codifica e
-              planimetria collegano l&apos;ambiente reale ai singoli pezzi. Il
+              Rilievo laser, software proprietario, troncatrice a controllo
+              numerico, codifica e planimetria collegano l&apos;ambiente reale
+              ai singoli pezzi. Il
               risultato: battiscopa su misura dell&apos;ambiente, già tagliati,
               codificati e accompagnati dalla planimetria di posa.
             </p>

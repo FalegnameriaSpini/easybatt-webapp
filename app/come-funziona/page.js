@@ -23,7 +23,7 @@ import styles from "@/components/marketing/marketing.module.css";
 export const metadata = {
   title: "Come funziona EasyBatt | Dal rilievo alla posa",
   description:
-    "Scopri il metodo EasyBatt: rilievo laser, software proprietario, lavorazione CNC, codifica e planimetria. Battiscopa preparati prima del cantiere e pronti da posare.",
+    "Scopri il metodo EasyBatt: rilievo laser, software proprietario, troncatrice a controllo numerico (CNC), codifica e planimetria. Battiscopa preparati prima del cantiere e pronti da posare.",
 };
 
 export function EasyBattComeFunzionaPage() {
@@ -35,7 +35,7 @@ export function EasyBattComeFunzionaPage() {
           title:
             "Come funziona EasyBatt: dal rilievo al battiscopa pronto da posare.",
           description:
-            "Rileviamo l'ambiente, elaboriamo le misure con il nostro software proprietario, lavoriamo i battiscopa al CNC e li consegniamo già tagliati, codificati e con la planimetria di posa. Tu arrivi in cantiere e monti.",
+            "Rileviamo l'ambiente, elaboriamo le misure con il nostro software proprietario, tagliamo i battiscopa con una troncatrice a controllo numerico e li consegniamo codificati e con la planimetria di posa. Tu arrivi in cantiere e monti.",
           href: "#metodo",
           action: "Scopri il metodo",
         }}
@@ -114,7 +114,8 @@ export function EasyBattComeFunzionaPage() {
               <div>
                 <h3>Alla produzione</h3>
                 <p>
-                  La lavorazione CNC prepara i pezzi sulla base del progetto.
+                  La troncatrice a controllo numerico taglia i pezzi sulla base
+                  del progetto.
                 </p>
               </div>
             </li>
@@ -145,8 +146,8 @@ export function EasyBattComeFunzionaPage() {
             </p>
             <p className={styles.lead}>
               Da questa ricerca nasce un metodo che unisce esperienza
-              artigianale, rilievo digitale, software proprietario e lavorazione
-              CNC.
+              artigianale, rilievo digitale, software proprietario e
+              troncatrice a controllo numerico.
             </p>
             <Link href="/chi-siamo" className={styles.sectionLink}>
               Da dove nasce EasyBatt <ArrowRight size={18} aria-hidden="true" />

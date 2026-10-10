@@ -19,9 +19,9 @@ import {
 import styles from "@/components/marketing/marketing.module.css";
 
 export const metadata = {
-  title: "Il sistema EasyBatt | Rilievo, software e preparazione CNC",
+  title: "Il sistema EasyBatt | Rilievo laser, software e troncatrice CNC",
   description:
-    "Un sistema integrato: rilievo laser, software proprietario, CNC, codifica e planimetria di posa. Scopri come EasyBatt prepara il battiscopa per il tuo ambiente.",
+    "Un sistema integrato: rilievo laser, software proprietario, troncatrice a controllo numerico (CNC), codifica e planimetria di posa. Scopri come EasyBatt prepara il battiscopa per il tuo ambiente.",
 };
 const stages = [
   {
@@ -46,8 +46,8 @@ const stages = [
     id: "cnc",
     Icon: Settings2,
     title: "Dal dato al battiscopa.",
-    label: "Lavorazione CNC",
-    text: "Il progetto entra nella fase produttiva. La lavorazione CNC prepara i singoli elementi sulla base dei dati elaborati dal sistema.",
+    label: "Troncatrice a controllo numerico",
+    text: "Il progetto passa in laboratorio. La troncatrice a controllo numerico taglia ogni pezzo con le misure calcolate dal software.",
     reason:
       "L'informazione digitale diventa un elemento fisico destinato a quello specifico ambiente.",
   },
@@ -74,37 +74,36 @@ const faqs = [
   {
     question: "Che cos'è il sistema EasyBatt?",
     answer:
-      "È un sistema di preparazione del battiscopa che integra rilievo laser, elaborazione con software proprietario, lavorazione CNC, codifica dei pezzi e planimetria di posa.",
+      "È il nostro modo di preparare il battiscopa. Misuriamo la stanza con un misuratore laser robotico, il software calcola i tagli e la troncatrice a controllo numerico taglia i pezzi. Ogni pezzo ha un codice e arriva con la planimetria di posa.",
   },
   {
-    question: "Perché viene utilizzato il rilievo laser?",
+    question: "Perché usate il laser?",
     answer:
-      "Per acquisire le informazioni dell'ambiente necessarie alle successive fasi di elaborazione e preparazione. Il progetto parte dallo spazio reale.",
+      "Perché misura la stanza com'è davvero, angoli compresi. Da queste misure partono tutti i tagli.",
   },
   {
-    question: "Il software EasyBatt è proprietario?",
+    question: "Il software è vostro?",
     answer:
-      "Sì. È stato sviluppato per elaborare e organizzare i dati del processo produttivo EasyBatt, collegando il rilievo alle fasi di preparazione e identificazione dei pezzi.",
+      "Sì, l'abbiamo sviluppato noi, apposta per EasyBatt. Collega le misure, i tagli e i codici dei pezzi.",
   },
   {
     question: "Devo imparare a usare il software?",
     answer:
-      "Il software governa la preparazione del lavoro. Il professionista riceve i pezzi codificati e la planimetria di posa: non deve gestire il software produttivo per identificare e montare gli elementi.",
+      "No. Il software lo usiamo noi. Tu ricevi i pezzi codificati e la planimetria di posa su carta. Per montarli non serve nessun programma: basta guardare sulla planimetria dove va il codice del pezzo.",
   },
   {
-    question: "Qual è il ruolo della lavorazione CNC?",
+    question: "A cosa serve la troncatrice a controllo numerico?",
     answer:
-      "Trasferisce alla preparazione fisica dei battiscopa le informazioni definite dal progetto, per realizzare gli elementi destinati allo specifico ambiente.",
+      "Taglia ogni pezzo con le misure calcolate dal software. Il taglio si fa in laboratorio, non in cantiere.",
   },
   {
     question: "A cosa servono codici e planimetria?",
     answer:
-      "Il codice identifica il pezzo, la planimetria indica dove va posizionato. Insieme permettono di passare dal materiale preparato all'organizzazione della posa.",
+      "Il codice ti dice qual è il pezzo. La planimetria ti dice dove va. Così monti un pezzo dopo l'altro, senza misurare.",
   },
   {
-    question: "Il sistema sostituisce il posatore?",
-    answer:
-      "No. Interviene nella preparazione del lavoro. La posa resta affidata alla competenza del professionista.",
+    question: "Il sistema fa il lavoro del posatore?",
+    answer: "No. Il sistema prepara i pezzi. La posa la fai tu.",
   },
 ];
 
@@ -117,7 +116,7 @@ export default function SystemPage() {
           title:
             "Il sistema EasyBatt: dalla precisione del rilievo alla semplicità della posa.",
           description:
-            "Rilievo laser, software proprietario, lavorazione CNC, codifica e planimetria. Non tecnologie isolate: un unico sistema per preparare il battiscopa prima che arrivi in cantiere.",
+            "Rilievo laser, software proprietario, troncatrice a controllo numerico (CNC), codifica e planimetria. Non tecnologie isolate: un unico sistema per preparare il battiscopa prima che arrivi in cantiere.",
           href: "#processo",
           action: "Entra nel sistema",
         }}
@@ -128,9 +127,9 @@ export default function SystemPage() {
             eyebrow="Un unico processo"
             title="Ogni fase prepara quella successiva."
           >
-            Il rilievo raccoglie i dati, il software li elabora, la CNC li
-            trasforma in elementi fisici. Codifica e planimetria organizzano ciò
-            che arriverà sul posto.
+            Il rilievo raccoglie i dati, il software li elabora, la troncatrice
+            a controllo numerico taglia i pezzi. Codifica e planimetria
+            organizzano ciò che arriverà sul posto.
           </SectionHeading>
           <nav className={styles.processIndex} aria-label="Fasi del sistema">
             {stages.map(({ id, label, Icon }, index) => (

@@ -53,39 +53,39 @@ const professions = [
 ];
 const faqs = [
   {
-    question: "EasyBatt è rivolto solo ai posatori?",
+    question: "EasyBatt è solo per i posatori?",
     answer:
-      "No. Il servizio è pensato anche per parquetisti, falegnami, imprese di ristrutturazione, rivenditori e showroom che gestiscono la fornitura o la posa del battiscopa.",
+      "No. È anche per parquetisti, falegnami, imprese di ristrutturazione, rivenditori e showroom: per chi posa il battiscopa e per chi lo vende.",
   },
   {
     question: "Devo cambiare il mio modo di posare?",
     answer:
-      "EasyBatt interviene soprattutto prima della posa: rilievo, preparazione, taglio, codifica e organizzazione. Il montaggio rimane affidato alla competenza del professionista.",
+      "No. Noi lavoriamo prima: misure, taglio, codici. La posa la fai tu, come sempre.",
   },
   {
-    question: "Qual è il vantaggio economico?",
+    question: "Mi conviene?",
     answer:
-      "Il valore va considerato insieme alle attività che normalmente precedono la posa. Con EasyBatt parte del tempo dedicato a misurare, tagliare e organizzare viene spostato prima del cantiere. Quanto incide dipende dal lavoro: ne parliamo sul tuo progetto.",
+      "Dipende dal lavoro. Quando fai i conti, non guardare solo il prezzo del battiscopa: conta anche il tempo per misurare, tagliare e ritoccare in cantiere. Con EasyBatt quel tempo lo usi per posare.",
   },
   {
-    question: "Posso fornire io il battiscopa?",
+    question: "Posso usare il mio battiscopa?",
     answer:
-      "La fornitura è opzionale. Se hai già il materiale, ne valutiamo la compatibilità con la lavorazione e concordiamo ritiro, consegna ed eventuali costi di trasporto.",
+      "Sì. Prima controlliamo insieme che vada bene e come farlo arrivare da noi. Ti diciamo anche se ci sono costi di trasporto.",
   },
   {
-    question: "Un rivenditore può proporre EasyBatt ai propri clienti?",
+    question: "Sono un rivenditore: posso proporre EasyBatt ai miei clienti?",
     answer:
-      "Sì, come servizio complementare alla fornitura del battiscopa. Le modalità di collaborazione vanno definite in base al rivenditore e al progetto.",
+      "Sì. Puoi offrire ai tuoi clienti il battiscopa già tagliato e pronto da posare. Come collaborare lo decidiamo insieme.",
   },
   {
-    question: "In quali zone è disponibile?",
+    question: "In quali zone lavorate?",
     answer:
-      "Nella fase di lancio il servizio è rivolto prioritariamente ai professionisti con lavori a Brescia e provincia.",
+      "Per ora lavoriamo soprattutto a Brescia e provincia. Se il tuo lavoro è fuori zona, scrivici comunque: vediamo insieme se si può fare.",
   },
   {
-    question: "Posso partire da un singolo lavoro?",
+    question: "Posso provarlo su un solo lavoro?",
     answer:
-      "Sì. Raccontaci il lavoro in programma e verifichiamo insieme se presenta le condizioni adatte. Il primo contatto non ti impegna ad acquistare e non richiede la registrazione di un account.",
+      "Sì. Raccontaci il lavoro e vediamo insieme se va bene per EasyBatt. Non devi comprare niente e non devi registrarti.",
   },
 ];
 
@@ -262,8 +262,8 @@ export default function ProfessionalsPage() {
               ],
               [
                 Settings2,
-                "Lavorazione CNC",
-                "Preparazione dei singoli elementi.",
+                "Troncatrice a controllo numerico",
+                "Taglia ogni pezzo in laboratorio.",
               ],
               [
                 Map,

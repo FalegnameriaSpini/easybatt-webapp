@@ -152,8 +152,8 @@ export default function EasyBattHomePage() {
               eyebrow="Il sistema EasyBatt"
               title="Precisione prima. Semplicità dopo."
             >
-              Rilievo laser, software proprietario e lavorazione CNC fanno parte
-              di un unico processo. La tecnologia ha uno scopo concreto:
+              Rilievo laser, software proprietario e troncatrice a controllo
+              numerico fanno parte di un unico processo. La tecnologia ha uno scopo concreto:
               consegnare un lavoro organizzato.
             </SectionHeading>
             <Link href="/il-sistema" className={styles.sectionLink}>
@@ -182,8 +182,8 @@ export default function EasyBattHomePage() {
             <li>
               <Settings2 aria-hidden="true" />
               <div>
-                <h3>Lavorazione CNC</h3>
-                <p>Il progetto guida la preparazione dei singoli elementi.</p>
+                <h3>Troncatrice a controllo numerico</h3>
+                <p>Taglia ogni pezzo con le misure calcolate dal software.</p>
               </div>
             </li>
           </ul>
