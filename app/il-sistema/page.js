@@ -31,7 +31,7 @@ const stages = [
     label: "Rilievo laser",
     text: "Ogni lavoro inizia dallo spazio nel quale il battiscopa dovrà essere installato. Il rilievo laser raccoglie le informazioni necessarie alle fasi successive.",
     reason:
-      "Non una misura standard: la base del progetto è l'ambiente in cui ogni elemento troverà la sua posizione.",
+      "Non una misura standard: il laser rileva anche gli angoli come sono davvero, per esempio 93° invece di 90°. Il software calcola il taglio al decimo di grado.",
   },
   {
     id: "software",

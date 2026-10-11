@@ -1,20 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowRight,
-  ScanLine,
-  Workflow,
-  Settings2,
-  Check,
-  Tag,
-  PackageCheck,
-  MapPin,
-} from "lucide-react";
+import { ArrowRight, Check, Tag, PackageCheck, MapPin } from "lucide-react";
 import {
   MarketingShell,
   MarketingHero,
   SectionHeading,
   ProcessSteps,
+  AngleDiagram,
   FaqSection,
   ProjectContact,
 } from "@/components/marketing/site-sections";
@@ -31,25 +23,25 @@ const professions = [
   [
     "posatori",
     "Posatori e parquetisti",
-    "Meno tempo dedicato alla preparazione, più tempo per la posa. La tua esperienza resta al centro del risultato.",
+    "Niente misure e tagli pezzo per pezzo: in cantiere pensi solo alla posa.",
     "Scopri EasyBatt per posatori",
   ],
   [
     "falegnami",
     "Falegnami",
-    "Battiscopa preparati sulle misure dell'ambiente e organizzati per il montaggio, anche quando sono solo una parte del tuo lavoro.",
+    "Il battiscopa è solo una parte del tuo lavoro? Lo prepariamo noi, pronto da montare.",
     "Scopri EasyBatt per falegnami",
   ],
   [
     "imprese",
     "Imprese e ristrutturatori",
-    "Una fase di finitura più organizzata e meno lavorazioni da coordinare all'interno dell'immobile.",
+    "Una finitura più semplice da organizzare. Meno lavori da fare dentro casa.",
     "Scopri EasyBatt per le imprese",
   ],
   [
     "rivenditori",
     "Rivenditori e showroom",
-    "Un servizio specializzato da integrare nella relazione con clienti e professionisti.",
+    "Ai tuoi clienti puoi offrire il battiscopa già tagliato e pronto da posare.",
     "Scopri le opportunità",
   ],
 ];
@@ -76,8 +68,8 @@ export default function EasyBattHomePage() {
         <div className={styles.container}>
           <div className={styles.sectionIntro}>
             <SectionHeading
-              eyebrow="Il lavoro dietro ogni pezzo"
-              title="Un pezzo alla volta. E per ogni pezzo, si ricomincia."
+              eyebrow="Il metodo tradizionale"
+              title="Oggi si lavora un pezzo alla volta. E per ogni pezzo, si ricomincia."
             />
             <div>
               <p className={styles.lead}>
@@ -100,31 +92,28 @@ export default function EasyBattHomePage() {
       <section id="benefici" className={`${styles.section} ${styles.brand}`}>
         <div className={styles.container}>
           <SectionHeading
-            eyebrow="Il risultato"
+            eyebrow="Con EasyBatt"
             title="Preparato prima. Pronto da posare."
           />
           <div className={styles.benefits}>
             <div>
               <PackageCheck size={28} aria-hidden="true" />
               <h3>Già tagliati su misura</h3>
-              <p>
-                I battiscopa arrivano già tagliati sulle misure rilevate
-                nell&apos;ambiente.
-              </p>
+              <p>I battiscopa arrivano tagliati sulle misure della stanza.</p>
             </div>
             <div>
               <Tag size={28} aria-hidden="true" />
               <h3>Tutto al suo posto</h3>
               <p>
-                Ogni pezzo è codificato e associato alla planimetria di posa.
+                Ogni pezzo ha un codice. La planimetria che ti forniamo ti dice dove va posizionato.
               </p>
             </div>
             <div>
               <Check size={28} aria-hidden="true" />
               <h3>Niente taglio sul posto</h3>
               <p>
-                Il taglio del battiscopa avviene prima. Meno attività da gestire
-                all&apos;interno dell&apos;immobile.
+                Il taglio lo facciamo noi, in laboratorio. Meno attrezzi da
+                portare in cantiere.
               </p>
             </div>
           </div>
@@ -135,7 +124,7 @@ export default function EasyBattHomePage() {
         <div className={styles.container}>
           <SectionHeading
             eyebrow="Come funziona"
-            title="La semplicità in cantiere nasce dal lavoro fatto prima."
+            title="Sei passaggi, dalle misure alla posa."
           />
           <ProcessSteps />
           <Link className={styles.sectionLink} href="/come-funziona">
@@ -149,44 +138,27 @@ export default function EasyBattHomePage() {
         <div className={`${styles.container} ${styles.systemLayout}`}>
           <div>
             <SectionHeading
-              eyebrow="Il sistema EasyBatt"
-              title="Precisione prima. Semplicità dopo."
+              eyebrow="La domanda che ci fanno tutti"
+              title="«Sì, ma gli angoli non sono tutti a 90°.»"
             >
-              Rilievo laser, software proprietario e troncatrice a controllo
-              numerico fanno parte di un unico processo. La tecnologia ha uno scopo concreto:
-              consegnare un lavoro organizzato.
+              Lo sappiamo. Per questo il laser misura ogni angolo com&apos;è
+              davvero. Il software calcola il taglio al decimo di grado e la
+              troncatrice lo esegue.
             </SectionHeading>
+            <p className={styles.keyLine}>
+              Angolo di 93°? Ogni pezzo viene tagliato in bisettrice a 46,5°.
+            </p>
             <Link href="/il-sistema" className={styles.sectionLink}>
               Entra nel sistema EasyBatt{" "}
               <ArrowRight size={18} aria-hidden="true" />
             </Link>
           </div>
-          <ul className={styles.systemList}>
-            <li>
-              <ScanLine aria-hidden="true" />
-              <div>
-                <h3>Rilievo laser</h3>
-                <p>Il punto di partenza è l&apos;ambiente reale.</p>
-              </div>
-            </li>
-            <li>
-              <Workflow aria-hidden="true" />
-              <div>
-                <h3>Software proprietario</h3>
-                <p>
-                  Le misure diventano informazioni per preparare e organizzare i
-                  pezzi.
-                </p>
-              </div>
-            </li>
-            <li>
-              <Settings2 aria-hidden="true" />
-              <div>
-                <h3>Troncatrice a controllo numerico</h3>
-                <p>Taglia ogni pezzo con le misure calcolate dal software.</p>
-              </div>
-            </li>
-          </ul>
+          <figure className={styles.angleFigure}>
+            <AngleDiagram />
+            <figcaption>
+              Schema: angolo interno rilevato a 93°, taglio in bisettrice.
+            </figcaption>
+          </figure>
         </div>
       </section>
 
@@ -197,9 +169,9 @@ export default function EasyBattHomePage() {
         <div className={styles.container}>
           <SectionHeading
             eyebrow="Per i professionisti"
-            title="Un sistema. Diversi modi di lavorare meglio."
+            title="Diverse esigenze. Un solo sistema."
           >
-            Non cambiamo il tuo mestiere. Prepariamo quello che viene prima.
+            Non cambiamo il tuo mestiere. Lo semplifichiamo.
           </SectionHeading>
           <div className={styles.professionGrid}>
             {professions.map(([id, title, text, action]) => (
@@ -228,16 +200,15 @@ export default function EasyBattHomePage() {
           </figcaption>
         </figure>
         <div className={styles.imageBandText}>
-          <p className={styles.eyebrow}>Anche per chi vive gli spazi</p>
+          <p className={styles.eyebrow}>Anche per il tuo cliente</p>
           <h2>
             Il taglio resta fuori.
             <br />
             Anche polvere e rumore.
           </h2>
           <p>
-            Quando il battiscopa arriva già preparato, non serve tagliarlo sul
-            posto. Un vantaggio per chi posa e un&apos;esperienza migliore per
-            chi vive o utilizza l&apos;immobile.
+            Il battiscopa arriva già tagliato: in casa del cliente non si
+            taglia. Meno polvere e meno rumore, per te e per chi ci vive.
           </p>
         </div>
       </section>
@@ -253,18 +224,16 @@ export default function EasyBattHomePage() {
           <div className={styles.storyBody}>
             <p>
               <strong>
-                Perché continuare a fare sul posto ciò che possiamo preparare
-                prima?
+                Perché fare in cantiere quello che possiamo preparare prima?
               </strong>
             </p>
             <p>
-              EasyBatt nasce dall&apos;esperienza di Falegnameria Spini a
-              Gussago, dall&apos;osservazione del lavoro e dalla volontà di
-              organizzarlo meglio.
+              EasyBatt nasce da Falegnameria Spini, a Gussago, e dall&apos;idea
+              di usare tecnologie moderne in un lavoro tradizionale.
             </p>
             <p>
-              Non per cambiare il mestiere di chi posa, ma per mettere
-              esperienza e tecnologia al servizio della preparazione.
+              Usiamo la nostra esperienza nel su misura per rendere più semplice
+              il lavoro di chi posa.
             </p>
             <Link href="/chi-siamo" className={styles.sectionLink}>
               Scopri da dove nasce EasyBatt{" "}

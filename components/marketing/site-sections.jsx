@@ -67,9 +67,9 @@ const homeHero = {
   title: "Battiscopa su misura, già tagliati e pronti da posare.",
   description: (
     <>
-      EasyBatt prepara i battiscopa sulle misure del tuo ambiente, li taglia,
-      li codifica e li consegna con la planimetria di posa. In cantiere non
-      devi più misurare e tagliare. <strong>Monti e basta.</strong>
+      EasyBatt rileva le stanze con il laser, taglia i battiscopa, li codifica
+      e te li consegna con la planimetria di posa. In cantiere non devi più
+      misurare e tagliare. <strong>Monti e basta.</strong>
     </>
   ),
   href: "/come-funziona",
@@ -160,6 +160,62 @@ export function Comparison() {
     </div>
   );
 }
+// Plan view of an internal corner measured at 93°: the two boards meet on
+// the bisector, so each piece is cut at 46.5°. Coordinates are computed for
+// walls at 180° and 87° from the corner at (400, 70), boards 18 units thick.
+export function AngleDiagram() {
+  return (
+    <svg
+      viewBox="0 0 480 400"
+      role="img"
+      aria-labelledby="angle-diagram-title"
+      className={styles.angleDiagram}
+    >
+      <title id="angle-diagram-title">
+        Schema: angolo interno di 93 gradi tra due muri. I due battiscopa si
+        incontrano con un taglio in bisettrice di 46,5 gradi ciascuno.
+      </title>
+      <polygon
+        className={styles.angleWall}
+        points="20,40 428.5,40 446.8,390 416.8,390 400,70 20,70"
+      />
+      <polygon
+        className={styles.angleBoard}
+        points="40,70 400,70 382.9,88 40,88"
+      />
+      <polygon
+        className={styles.angleBoard}
+        points="400,70 415.7,369.6 397.7,370.5 382.9,88"
+      />
+      <path
+        className={styles.angleArc}
+        d="M 280 70 A 120 120 0 0 0 406.3 189.8"
+      />
+      <line
+        className={styles.angleBisector}
+        x1="400"
+        y1="70"
+        x2="241.7"
+        y2="236.8"
+      />
+      <text x="236" y="172" textAnchor="middle" className={styles.angleValue}>
+        93°
+      </text>
+      <text x="318" y="112" textAnchor="middle" className={styles.angleHalf}>
+        46,5°
+      </text>
+      <text x="382" y="162" textAnchor="end" className={styles.angleHalf}>
+        46,5°
+      </text>
+      <text x="44" y="60" className={styles.angleLabel}>
+        muro
+      </text>
+      <text x="44" y="106" className={styles.angleLabel}>
+        battiscopa
+      </text>
+    </svg>
+  );
+}
 export function FaqSection({
   items,
   title = "Prima di iniziare, le tue domande.",
@@ -188,7 +244,7 @@ export function FaqSection({
 export function ProjectContact({
   title = "Hai un lavoro in programma?",
   lead = "Prova EasyBatt sul tuo prossimo battiscopa.",
-  text = "Raccontaci il progetto e verifichiamo insieme se EasyBatt è adatto al lavoro che devi realizzare. Non servono già tutte le misure.",
+  text = "Raccontaci il lavoro e vediamo insieme se EasyBatt va bene. Non servono le misure.",
   action = "Parlaci del tuo prossimo lavoro",
 }) {
   return (
@@ -205,10 +261,7 @@ export function ProjectContact({
           <a className={styles.textLink} href={`mailto:${projectEmail}`}>
             {projectEmail}
           </a>
-          <p>
-            Raccontaci il progetto: non serve aver già deciso e non ti impegni
-            ad acquistare.
-          </p>
+          <p>Non devi aver già deciso e non devi comprare niente.</p>
           <Link className={styles.textLink} href="/quanto-mi-costa">
             Cerchi solo una stima? Calcola il prezzo{" "}
             <ArrowRight size={16} aria-hidden="true" />

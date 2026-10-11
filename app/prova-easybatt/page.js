@@ -70,7 +70,7 @@ export default function ProjectPage() {
       <section className={`${styles.section} ${styles.brand}`}>
         <div className={styles.container}>
           <SectionHeading
-            eyebrow="Il risultato"
+            eyebrow="Con EasyBatt"
             title="Preparato prima. Pronto da posare."
           >
             EasyBatt sposta prima del cantiere una parte del lavoro che
