@@ -1,13 +1,5 @@
 import Link from "next/link";
-import {
-  ArrowRight,
-  PackageCheck,
-  Tag,
-  Map,
-  ScanLine,
-  Workflow,
-  Settings2,
-} from "lucide-react";
+import { ArrowRight, PackageCheck, Tag, Map } from "lucide-react";
 import {
   MarketingShell,
   MarketingHero,
@@ -35,7 +27,7 @@ export function EasyBattComeFunzionaPage() {
           title:
             "Come funziona EasyBatt: dal rilievo al battiscopa pronto da posare.",
           description:
-            "Rileviamo l'ambiente, elaboriamo le misure con il nostro software proprietario, tagliamo i battiscopa con una troncatrice a controllo numerico e li consegniamo codificati e con la planimetria di posa. Tu arrivi in cantiere e monti.",
+            "Rileviamo le stanze con il laser, il nostro software calcola i tagli e una troncatrice a controllo numerico taglia i battiscopa. Te li consegniamo codificati, con la planimetria di posa. Tu arrivi in cantiere e monti.",
           href: "#metodo",
           action: "Scopri il metodo",
         }}
@@ -44,11 +36,11 @@ export function EasyBattComeFunzionaPage() {
         <div className={styles.container}>
           <SectionHeading
             eyebrow="Il principio"
-            title="Un processo diverso. Il tuo mestiere resta il tuo."
+            title="Il tuo mestiere non cambia. La parte più lunga e faticosa la facciamo noi."
           >
-            Misurazione, preparazione e taglio richiedono lavoro. EasyBatt li
-            organizza prima della posa, per permetterti di concentrarti sul
-            montaggio.
+            Misurare, segnare, tagliare, verificare, ritoccare: oggi lo fai in
+            cantiere, un pezzo alla volta. Con EasyBatt lo facciamo noi, prima,
+            in laboratorio. A te resta la posa.
           </SectionHeading>
           <Comparison />
         </div>
@@ -68,68 +60,26 @@ export function EasyBattComeFunzionaPage() {
       </section>
 
       <section id="sistema" className={styles.section}>
-        <div className={`${styles.container} ${styles.systemLayout}`}>
+        <div className={`${styles.container} ${styles.sectionIntro}`}>
+          <SectionHeading
+            eyebrow="Il sistema EasyBatt"
+            title="Il cuore del metodo è il software."
+          />
           <div>
-            <SectionHeading
-              eyebrow="Il sistema EasyBatt"
-              title="Il cuore del metodo è il software."
-            >
-              Tra il rilievo dell&apos;ambiente e la lavorazione c&apos;è un
-              sistema sviluppato per elaborare e organizzare i dati. Non
-              soltanto un servizio di taglio, ma un processo che collega misure,
-              produzione, codifica e posa.
-            </SectionHeading>
             <p className={styles.lead}>
-              Tecnologia dietro le quinte. Semplicità quando arriva il momento
-              di posare.
+              L&apos;abbiamo sviluppato noi. Prende le misure del laser, calcola
+              ogni taglio al decimo di grado, dà un codice a ogni pezzo e
+              prepara la planimetria di posa.
+            </p>
+            <p className={styles.keyLine}>
+              Il sistema è digitale. Il risultato è analogico: pezzi tagliati e
+              una planimetria su carta.
             </p>
             <Link href="/il-sistema" className={styles.sectionLink}>
               Approfondisci il sistema EasyBatt{" "}
               <ArrowRight size={18} aria-hidden="true" />
             </Link>
           </div>
-          <ul className={styles.systemList}>
-            <li>
-              <ScanLine aria-hidden="true" />
-              <div>
-                <h3>Dal rilievo</h3>
-                <p>
-                  Acquisiamo le informazioni dell&apos;ambiente in cui il
-                  battiscopa verrà installato.
-                </p>
-              </div>
-            </li>
-            <li>
-              <Workflow aria-hidden="true" />
-              <div>
-                <h3>Al progetto</h3>
-                <p>
-                  Il software elabora i dati e organizza le informazioni
-                  necessarie per i singoli elementi.
-                </p>
-              </div>
-            </li>
-            <li>
-              <Settings2 aria-hidden="true" />
-              <div>
-                <h3>Alla produzione</h3>
-                <p>
-                  La troncatrice a controllo numerico taglia i pezzi sulla base
-                  del progetto.
-                </p>
-              </div>
-            </li>
-            <li>
-              <Map aria-hidden="true" />
-              <div>
-                <h3>Alla posa</h3>
-                <p>
-                  Codifica e planimetria collegano il singolo elemento alla sua
-                  posizione.
-                </p>
-              </div>
-            </li>
-          </ul>
         </div>
       </section>
 
@@ -165,32 +115,23 @@ export function EasyBattComeFunzionaPage() {
           <div className={styles.benefits}>
             <div>
               <PackageCheck size={28} aria-hidden="true" />
-              <h3>Battiscopa preparati</h3>
-              <p>
-                Tagliati sulla base del rilievo e organizzati per il montaggio.
-              </p>
+              <h3>Battiscopa già tagliati</h3>
+              <p>Sulle misure della stanza, angoli compresi.</p>
             </div>
             <div>
               <Tag size={28} aria-hidden="true" />
               <h3>Pezzi codificati</h3>
-              <p>
-                Ogni elemento ha un riferimento per facilitarne il
-                riconoscimento.
-              </p>
+              <p>Ogni pezzo ha il suo codice.</p>
             </div>
             <div>
               <Map size={28} aria-hidden="true" />
               <h3>Planimetria di posa</h3>
-              <p>
-                Una guida per individuare la posizione dei pezzi
-                nell&apos;ambiente.
-              </p>
+              <p>Su carta. Ti dice dove va ogni pezzo.</p>
             </div>
           </div>
           <p className={styles.supplyNote}>
-            La fornitura del battiscopa è opzionale. Se disponi già del
-            materiale, ne valutiamo compatibilità, ritiro e consegna prima di
-            confermare il lavoro.
+            Il battiscopa puoi comprarlo da noi oppure usare il tuo. Se usi il
+            tuo, prima di tagliarlo controlliamo insieme che vada bene.
           </p>
         </div>
       </section>
@@ -201,9 +142,8 @@ export function EasyBattComeFunzionaPage() {
             eyebrow="Il risultato sul posto"
             title="Identifichi il pezzo. Ti concentri sulla posa."
           >
-            Il lavoro svolto prima riduce le lavorazioni necessarie sul posto.
-            Niente taglio del battiscopa nell&apos;immobile significa anche
-            niente polvere e rumore generati da questa lavorazione.
+            In cantiere non tagli: leggi il codice, guardi la planimetria e
+            posi. E dentro casa niente polvere e rumore del taglio.
           </SectionHeading>
           <Link href="/quanto-mi-costa" className={styles.sectionLink}>
             Calcola una stima per il tuo lavoro{" "}

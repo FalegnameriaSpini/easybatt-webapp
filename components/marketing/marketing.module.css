@@ -331,6 +331,9 @@
 .keyLine + .sectionLink {
   margin-top: 0;
 }
+.lead + .keyLine {
+  margin-top: 28px;
+}
 .processGrid,
 .processDetailed {
   list-style: none;
