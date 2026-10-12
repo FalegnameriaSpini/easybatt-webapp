@@ -63,7 +63,7 @@ export function SectionHeading({ eyebrow, title, children }) {
 // The H1 carries the promise of the page; yellow is reserved for the
 // conversion action, so the explore link always uses the secondary style.
 const homeHero = {
-  eyebrow: "Brescia e provincia / Professionisti e imprese",
+  eyebrow: "Per professionisti e imprese",
   title: "Battiscopa su misura, già tagliati e pronti da posare.",
   description: (
     <>
@@ -214,6 +214,38 @@ export function AngleDiagram() {
         battiscopa
       </text>
     </svg>
+  );
+}
+// The first objection posatori raise: real corners are rarely 90°.
+export function AngleSection() {
+  return (
+    <section className={styles.section}>
+      <div className={`${styles.container} ${styles.systemLayout}`}>
+        <div>
+          <SectionHeading
+            eyebrow="La domanda che ci fanno tutti"
+            title="«Sì, ma gli angoli non sono tutti a 90°.»"
+          >
+            Lo sappiamo. Per questo il laser misura ogni angolo com&apos;è
+            davvero. Il software calcola il taglio al decimo di grado e la
+            troncatrice lo esegue.
+          </SectionHeading>
+          <p className={styles.keyLine}>
+            Angolo di 93°? Ogni pezzo viene tagliato in bisettrice a 46,5°.
+          </p>
+          <Link href="/il-sistema" className={styles.sectionLink}>
+            Entra nel sistema EasyBatt{" "}
+            <ArrowRight size={18} aria-hidden="true" />
+          </Link>
+        </div>
+        <figure className={styles.angleFigure}>
+          <AngleDiagram />
+          <figcaption>
+            Schema: angolo interno rilevato a 93°, taglio in bisettrice.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
   );
 }
 export function FaqSection({

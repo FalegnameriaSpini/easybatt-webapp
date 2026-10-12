@@ -6,7 +6,7 @@ import {
   MarketingHero,
   SectionHeading,
   ProcessSteps,
-  AngleDiagram,
+  AngleSection,
   FaqSection,
   ProjectContact,
 } from "@/components/marketing/site-sections";
@@ -16,7 +16,7 @@ import styles from "@/components/marketing/marketing.module.css";
 export const metadata = {
   title: "EasyBatt | Battiscopa su misura, pronti da posare",
   description:
-    "Rilievo, taglio, codifica e planimetria: EasyBatt prepara il battiscopa prima del cantiere. Un servizio per professionisti a Brescia e provincia, con fornitura opzionale.",
+    "Rilievo, taglio, codifica e planimetria: EasyBatt prepara il battiscopa prima del cantiere. Un servizio per professionisti con sede a Gussago (Brescia). Fornitura del battiscopa opzionale.",
 };
 
 const professions = [
@@ -59,7 +59,7 @@ export default function EasyBattHomePage() {
             <Tag size={18} aria-hidden="true" /> Codifica e planimetria di posa
           </span>
           <span>
-            <MapPin size={18} aria-hidden="true" /> Brescia e provincia
+            <MapPin size={18} aria-hidden="true" /> Sede a Gussago (BS)
           </span>
         </div>
       </div>
@@ -134,33 +134,7 @@ export default function EasyBattHomePage() {
         </div>
       </section>
 
-      <section className={styles.section}>
-        <div className={`${styles.container} ${styles.systemLayout}`}>
-          <div>
-            <SectionHeading
-              eyebrow="La domanda che ci fanno tutti"
-              title="«Sì, ma gli angoli non sono tutti a 90°.»"
-            >
-              Lo sappiamo. Per questo il laser misura ogni angolo com&apos;è
-              davvero. Il software calcola il taglio al decimo di grado e la
-              troncatrice lo esegue.
-            </SectionHeading>
-            <p className={styles.keyLine}>
-              Angolo di 93°? Ogni pezzo viene tagliato in bisettrice a 46,5°.
-            </p>
-            <Link href="/il-sistema" className={styles.sectionLink}>
-              Entra nel sistema EasyBatt{" "}
-              <ArrowRight size={18} aria-hidden="true" />
-            </Link>
-          </div>
-          <figure className={styles.angleFigure}>
-            <AngleDiagram />
-            <figcaption>
-              Schema: angolo interno rilevato a 93°, taglio in bisettrice.
-            </figcaption>
-          </figure>
-        </div>
-      </section>
+      <AngleSection />
 
       <section
         id="professionisti"
@@ -200,7 +174,7 @@ export default function EasyBattHomePage() {
           </figcaption>
         </figure>
         <div className={styles.imageBandText}>
-          <p className={styles.eyebrow}>Anche per il tuo cliente</p>
+          <p className={styles.eyebrow}>Un vantaggio anche per il tuo cliente</p>
           <h2>
             Il taglio resta fuori.
             <br />

@@ -1,19 +1,11 @@
 import Link from "next/link";
-import {
-  ArrowRight,
-  Clock3,
-  PackageCheck,
-  Tag,
-  Map,
-  ScanLine,
-  Workflow,
-  Settings2,
-} from "lucide-react";
+import { ArrowRight, Clock3, PackageCheck, Tag, Map } from "lucide-react";
 import {
   MarketingShell,
   MarketingHero,
   SectionHeading,
   Comparison,
+  AngleSection,
   FaqSection,
   ProjectContact,
 } from "@/components/marketing/site-sections";
@@ -22,33 +14,33 @@ import styles from "@/components/marketing/marketing.module.css";
 export const metadata = {
   title: "EasyBatt per professionisti | Battiscopa pronti da posare",
   description:
-    "Per posatori, parquetisti, falegnami, imprese e rivenditori di Brescia e provincia. Rilievo e preparazione del battiscopa prima del cantiere, con fornitura opzionale.",
+    "Per posatori, parquetisti, falegnami, imprese e rivenditori. Rilievo e preparazione del battiscopa prima del cantiere, con fornitura opzionale. Sede a Gussago (Brescia).",
 };
 
 const professions = [
   {
     id: "posatori",
     title: "Posatori e parquetisti",
-    benefit: "Più tempo dedicato alla posa.",
-    text: "Quando il battiscopa arriva già tagliato, codificato e organizzato, diminuiscono le attività di preparazione da svolgere sul posto. Puoi concentrare tempo e competenza nella fase in cui il tuo lavoro crea più valore: la posa.",
+    benefit: "Più tempo per la posa.",
+    text: "Il battiscopa arriva già tagliato e codificato. Niente misure e tagli pezzo per pezzo: in cantiere pensi solo alla posa.",
   },
   {
     id: "falegnami",
     title: "Falegnami",
-    benefit: "Il lavoro arriva già organizzato.",
-    text: "EasyBatt prepara i battiscopa sulla base del rilievo dell'ambiente, gestendo prima lavorazione e codifica. Meno operazioni sul posto e un processo più ordinato fino al montaggio, anche quando il battiscopa è soltanto una parte del tuo lavoro.",
+    benefit: "Il battiscopa lo prepariamo noi.",
+    text: "Spesso il battiscopa è solo una parte del tuo lavoro. Noi misuriamo, tagliamo e codifichiamo i pezzi: tu li monti e passi al resto.",
   },
   {
     id: "imprese",
     title: "Imprese e ristrutturatori",
     benefit: "Una finitura più semplice da gestire.",
-    text: "In una ristrutturazione ogni lavorazione deve inserirsi tra tempi, persone e attività diverse. Ricevere battiscopa già preparati significa ridurre una parte delle lavorazioni nell'immobile e rendere più organizzata la fase di posa.",
+    text: "In una ristrutturazione lavorano tante persone, con tempi stretti. Con i battiscopa già tagliati, dentro casa c'è un lavoro in meno da organizzare.",
   },
   {
     id: "rivenditori",
     title: "Rivenditori e showroom",
-    benefit: "Un servizio da affiancare al prodotto.",
-    text: "Alla vendita del battiscopa puoi affiancare la preparazione su misura dell'ambiente. Un modo per ampliare la proposta a professionisti e clienti: non soltanto materiale, ma un lavoro organizzato per la posa. Le modalità di collaborazione si definiscono insieme.",
+    benefit: "Un servizio in più per i tuoi clienti.",
+    text: "Oltre al battiscopa, puoi offrire la misura e il taglio. Il tuo cliente riceve i pezzi pronti da posare. Come collaborare lo decidiamo insieme.",
   },
 ];
 const faqs = [
@@ -80,7 +72,7 @@ const faqs = [
   {
     question: "In quali zone lavorate?",
     answer:
-      "Per ora lavoriamo soprattutto a Brescia e provincia. Se il tuo lavoro è fuori zona, scrivici comunque: vediamo insieme se si può fare.",
+      "Siamo a Gussago, in provincia di Brescia. Lavoriamo soprattutto in zona, ma per i lavori più grandi andiamo volentieri anche più lontano: scrivici e vediamo insieme.",
   },
   {
     question: "Posso provarlo su un solo lavoro?",
@@ -98,7 +90,7 @@ export default function ProfessionalsPage() {
           title:
             "Battiscopa su misura per professionisti, già pronti da posare.",
           description:
-            "Rileviamo l'ambiente, prepariamo ogni elemento su misura e ti consegniamo battiscopa già tagliati, codificati e con la planimetria di posa. Meno lavoro di preparazione sul posto. Più tempo per ciò che sai fare meglio.",
+            "Rileviamo le stanze con il laser, tagliamo i battiscopa, li codifichiamo e te li consegniamo con la planimetria di posa. In cantiere pensi solo a quello che sai fare meglio: posare.",
           href: "#benefici",
           action: "Scopri cosa cambia",
           ctaLabel: "Prova EasyBatt sul tuo prossimo lavoro",
@@ -110,15 +102,13 @@ export default function ProfessionalsPage() {
         <div className={styles.container}>
           <SectionHeading
             eyebrow="Non cambiamo il tuo mestiere"
-            title="Il tuo lavoro resta il tuo. Prepariamo quello che viene prima."
+            title="La posa resta tua. Il taglio lo facciamo noi."
           >
-            La competenza nella posa, l&apos;esperienza e la qualità del lavoro
-            restano nelle tue mani. EasyBatt interviene prima: rilievo,
-            elaborazione delle misure, taglio, codifica e organizzazione.
+            L&apos;esperienza e la qualità del lavoro restano nelle tue mani. Noi
+            prepariamo i pezzi: misure, tagli, codici e planimetria di posa.
           </SectionHeading>
           <p className={styles.keyLine}>
-            Non sostituiamo il professionista. Gli togliamo lavoro prima del
-            lavoro.
+            Non ti sostituiamo. Ti semplifichiamo il lavoro.
           </p>
           <h3>Per ogni pezzo, quante cose devi fare prima di montarlo?</h3>
           <Comparison />
@@ -129,7 +119,7 @@ export default function ProfessionalsPage() {
         <div className={styles.container}>
           <SectionHeading
             eyebrow="Per il tuo mestiere"
-            title="Lo stesso sistema. Un vantaggio concreto per ogni professionista."
+            title="Diverse esigenze. Un solo sistema."
           />
           <nav
             aria-label="Categorie professionali"
@@ -169,16 +159,15 @@ export default function ProfessionalsPage() {
           <div className={styles.storyBody}>
             <Clock3 size={30} aria-hidden="true" />
             <p className={styles.lead}>
-              Misurare, tagliare e organizzare richiede tempo. Anche quello è
-              una parte del costo del lavoro.
+              Misurare, segnare, tagliare, verificare, ritoccare: per ogni pezzo
+              ci vuole tempo. E il tempo è un costo.
             </p>
             <p>
-              EasyBatt permette di valutare la preparazione non soltanto in base
-              al prezzo del materiale, ma anche in relazione alle attività che
-              non dovrai più svolgere sul posto.
+              Quando confronti i prezzi, conta anche il tempo che con EasyBatt
+              non passi più a tagliare in cantiere.
             </p>
-            <Link href="/quanto-mi-costa" className={styles.sectionLink}>
-              Calcola una stima per il tuo progetto{" "}
+            <Link href="/prova-easybatt" className={styles.sectionLink}>
+              Vediamolo sul tuo prossimo lavoro{" "}
               <ArrowRight size={18} aria-hidden="true" />
             </Link>
           </div>
@@ -189,17 +178,13 @@ export default function ProfessionalsPage() {
         <div className={styles.container}>
           <SectionHeading
             eyebrow="Un vantaggio anche per il tuo cliente"
-            title="Niente taglio sul posto. Niente polvere e rumore generati dal taglio."
+            title="Il taglio resta fuori. Anche polvere e rumore."
           >
-            Quando i battiscopa arrivano già preparati, nell&apos;immobile non
-            serve la postazione di taglio. Un vantaggio per chi posa e un
-            beneficio evidente in case abitate, uffici, negozi e immobili in
-            ristrutturazione.
+            Il battiscopa arriva già tagliato: non serve la zona di taglio
+            dentro casa. È un vantaggio che il tuo cliente vede, soprattutto in
+            case abitate, uffici e negozi.
           </SectionHeading>
-          <p>
-            Meno lavorazioni invasive. Un&apos;esperienza migliore anche per il
-            tuo cliente.
-          </p>
+          <p>Meno polvere, meno rumore, meno disagio.</p>
         </div>
       </section>
 
@@ -207,29 +192,28 @@ export default function ProfessionalsPage() {
         <div className={styles.container}>
           <SectionHeading
             eyebrow="Cosa ricevi"
-            title="Tutto organizzato per arrivare alla posa."
+            title="Tutto pronto per la posa."
           />
           <div className={styles.benefits}>
             <div>
               <PackageCheck size={28} aria-hidden="true" />
-              <h3>Battiscopa preparati</h3>
-              <p>Tagliati sulla base del rilievo dello specifico ambiente.</p>
+              <h3>Battiscopa già tagliati</h3>
+              <p>Sulle misure della stanza, angoli compresi.</p>
             </div>
             <div>
               <Tag size={28} aria-hidden="true" />
               <h3>Pezzi codificati</h3>
-              <p>Riferimenti per identificare i singoli elementi.</p>
+              <p>Ogni pezzo ha il suo codice.</p>
             </div>
             <div>
               <Map size={28} aria-hidden="true" />
               <h3>Planimetria di posa</h3>
-              <p>Una guida per collegare ogni codice alla sua posizione.</p>
+              <p>Su carta. Ti dice dove va ogni pezzo.</p>
             </div>
           </div>
           <p className={styles.supplyNote}>
-            Il servizio viene prima del materiale. Puoi richiedere anche la
-            fornitura del battiscopa oppure proporre il tuo materiale, da
-            valutare prima della lavorazione.
+            Il battiscopa puoi comprarlo da noi oppure usare il tuo. Se usi il
+            tuo, prima di tagliarlo controlliamo insieme che vada bene.
           </p>
           <Link href="/come-funziona" className={styles.sectionLink}>
             Scopri come funziona <ArrowRight size={18} aria-hidden="true" />
@@ -237,56 +221,12 @@ export default function ProfessionalsPage() {
         </div>
       </section>
 
-      <section className={styles.section}>
-        <div className={`${styles.container} ${styles.systemLayout}`}>
-          <div>
-            <SectionHeading
-              eyebrow="Perché EasyBatt può farlo"
-              title="Dietro un battiscopa pronto c'è un sistema."
-            >
-              Un processo sviluppato a partire dall&apos;esperienza nelle
-              lavorazioni su misura. Ogni fase prepara quella successiva.
-            </SectionHeading>
-            <Link href="/il-sistema" className={styles.sectionLink}>
-              Entra nel sistema EasyBatt{" "}
-              <ArrowRight size={18} aria-hidden="true" />
-            </Link>
-          </div>
-          <ul className={styles.systemList}>
-            {[
-              [ScanLine, "Rilievo laser", "Le informazioni dell'ambiente."],
-              [
-                Workflow,
-                "Software proprietario",
-                "Elaborazione e organizzazione dei dati.",
-              ],
-              [
-                Settings2,
-                "Troncatrice a controllo numerico",
-                "Taglia ogni pezzo in laboratorio.",
-              ],
-              [
-                Map,
-                "Codifica e planimetria",
-                "Riferimenti per organizzare la posa.",
-              ],
-            ].map(([Icon, title, text]) => (
-              <li key={title}>
-                <Icon aria-hidden="true" />
-                <div>
-                  <h3>{title}</h3>
-                  <p>{text}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+      <AngleSection />
       <FaqSection items={faqs} title="Le domande dei professionisti." />
       <ProjectContact
         title="Il modo migliore per capire EasyBatt? Provarlo sul tuo lavoro."
-        lead="Posatori, parquetisti, falegnami, imprese, ristrutturatori, rivenditori e showroom di Brescia e provincia: se hai un lavoro in programma, raccontacelo."
-        text="Valutiamo insieme il progetto e capiamo se EasyBatt può semplificare la gestione del battiscopa."
+        lead="Hai un lavoro in programma? Raccontacelo."
+        text="Vediamo insieme se EasyBatt va bene per il tuo lavoro. Non servono le misure."
         action="Prova EasyBatt sul tuo prossimo lavoro"
       />
     </MarketingShell>

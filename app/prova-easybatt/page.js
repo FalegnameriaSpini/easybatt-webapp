@@ -13,7 +13,7 @@ import formStyles from "@/components/marketing/project-form.module.css";
 export const metadata = {
   title: "Prova EasyBatt | Raccontaci il tuo progetto",
   description:
-    "Un lavoro concreto da valutare insieme: rilievo e preparazione del battiscopa per professionisti e privati, con fornitura opzionale. Brescia e provincia.",
+    "Un lavoro concreto da valutare insieme: rilievo e preparazione del battiscopa per professionisti e privati, con fornitura opzionale. Sede a Gussago (Brescia).",
 };
 const faqs = [
   {
@@ -38,7 +38,7 @@ const faqs = [
   {
     question: "In quali zone lavorate?",
     answer:
-      "Per ora lavoriamo soprattutto a Brescia e provincia. Se il tuo lavoro è fuori zona, scrivici comunque: vediamo insieme se si può fare.",
+      "Siamo a Gussago, in provincia di Brescia. Lavoriamo soprattutto in zona, ma per i lavori più grandi andiamo volentieri anche più lontano: scrivici e vediamo insieme.",
   },
   {
     question: "Devo comprare anche il battiscopa?",

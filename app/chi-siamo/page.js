@@ -70,7 +70,7 @@ const faqs = [
   {
     question: "In quali zone lavorate?",
     answer:
-      "Per ora lavoriamo soprattutto a Brescia e provincia. Se il tuo lavoro è fuori zona, scrivici comunque: vediamo insieme se si può fare.",
+      "Siamo a Gussago, in provincia di Brescia. Lavoriamo soprattutto in zona, ma per i lavori più grandi andiamo volentieri anche più lontano: scrivici e vediamo insieme.",
   },
 ];
 
@@ -270,8 +270,8 @@ export default function AboutPage() {
             eyebrow="Il nostro territorio"
             title="A Gussago, nel cuore della provincia di Brescia."
           >
-            Da qui parte la prima fase di EasyBatt, dedicata ai professionisti
-            di Brescia e provincia.
+            Da qui partiamo per i tuoi cantieri: in provincia di Brescia e, per
+            i lavori più grandi, anche più lontano.
           </SectionHeading>
           <div>
             <MapPin size={28} aria-hidden="true" />
@@ -291,7 +291,7 @@ export default function AboutPage() {
       <FaqSection items={faqs} title="Conosciamo meglio EasyBatt." />
       <ProjectContact
         title="L'esperienza ci ha portati fin qui. Ora vogliamo portarla sul tuo prossimo lavoro."
-        lead="Sei un professionista di Brescia o provincia? Scopri cosa cambia quando il battiscopa arriva già preparato, partendo da un progetto reale."
+        lead="Hai un lavoro in programma? Scopri cosa cambia quando il battiscopa arriva già preparato."
         text=""
         action="Prova EasyBatt sul tuo prossimo lavoro"
       />

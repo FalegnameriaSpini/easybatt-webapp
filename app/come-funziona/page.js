@@ -215,7 +215,7 @@ export function EasyBattComeFunzionaPage() {
       <FaqSection items={methodFaqs} title="Il metodo, senza dubbi." />
       <ProjectContact
         title="Ora che sai come funziona, vediamolo sul tuo lavoro."
-        lead="Hai un cantiere o una ristrutturazione in programma a Brescia o provincia?"
+        lead="Hai un cantiere o una ristrutturazione in programma?"
         text="Raccontaci il progetto e verifichiamo insieme come applicare il metodo EasyBatt al battiscopa del tuo ambiente."
         action="Prova EasyBatt sul tuo prossimo lavoro"
       />

@@ -247,7 +247,7 @@ export default function SystemPage() {
       <ProjectContact
         title="Dalla tecnologia al tuo prossimo lavoro."
         lead="Il modo migliore per comprendere il sistema EasyBatt è vederlo applicato a un ambiente reale."
-        text="Hai un lavoro in programma a Brescia o provincia? Raccontaci il progetto e vediamo insieme come preparare il battiscopa prima dell'arrivo in cantiere."
+        text="Hai un lavoro in programma? Raccontacelo e vediamo insieme come preparare il battiscopa prima del cantiere."
         action="Prova il sistema EasyBatt"
       />
     </MarketingShell>
