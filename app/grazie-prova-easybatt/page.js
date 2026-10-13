@@ -33,9 +33,8 @@ export default async function ProjectThanksPage() {
             <p className={styles.eyebrow}>Il primo passo è fatto</p>
             <h1>Abbiamo ricevuto il tuo progetto.</h1>
             <p className={styles.lead}>
-              Grazie per averci raccontato il tuo prossimo lavoro. Leggeremo le
-              informazioni che hai condiviso per capire cosa approfondire
-              insieme.
+              Grazie per averci raccontato il tuo prossimo lavoro. Leggiamo
+              quello che ci hai scritto e ti ricontattiamo.
             </p>
           </div>
           <ol className={formStyles.steps}>
@@ -47,14 +46,12 @@ export default async function ProjectThanksPage() {
             <li>
               <span>02</span>
               <h3>Ti ricontattiamo</h3>
-              <p>
-                Approfondiamo gli elementi necessari alla prima valutazione.
-              </p>
+              <p>Ti chiediamo quello che serve per capire il lavoro.</p>
             </li>
             <li>
               <span>03</span>
               <h3>Valutiamo il progetto</h3>
-              <p>Se ci sono le condizioni, definiamo insieme come procedere.</p>
+              <p>Se il lavoro va bene, decidiamo insieme come procedere.</p>
             </li>
           </ol>
         </div>

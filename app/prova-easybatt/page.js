@@ -59,7 +59,7 @@ export default function ProjectPage() {
           eyebrow: "Parti da un lavoro reale",
           title: "Prova EasyBatt sul tuo prossimo lavoro.",
           description:
-            "Raccontaci il lavoro: valutiamo insieme se EasyBatt può farti arrivare sul posto con battiscopa già tagliati, codificati e pronti da posare. Non devi cambiare il tuo modo di lavorare: parti da un lavoro e giudica il risultato.",
+            "Raccontaci il lavoro e vediamo insieme se EasyBatt va bene. Non devi cambiare il tuo modo di lavorare: parti da un lavoro e giudica il risultato.",
           href: "/come-funziona",
           action: "Come funziona",
           ctaHref: "#progetto",
@@ -73,34 +73,27 @@ export default function ProjectPage() {
             eyebrow="Con EasyBatt"
             title="Preparato prima. Pronto da posare."
           >
-            EasyBatt sposta prima del cantiere una parte del lavoro che
-            normalmente fai sul posto. Tu ricevi i battiscopa preparati per il
-            tuo ambiente.
+            Il taglio lo facciamo noi, in laboratorio. Tu ricevi i battiscopa
+            pronti per le tue stanze.
           </SectionHeading>
           <div className={styles.benefits}>
             <div>
               <Timer aria-hidden="true" />
               <h3>Niente taglio sul posto</h3>
-              <p>
-                Misurazione e taglio del battiscopa vengono fatti prima del
-                cantiere.
-              </p>
+              <p>Misure e tagli li facciamo noi, prima del cantiere.</p>
             </div>
             <div>
               <PackageCheck aria-hidden="true" />
               <h3>Materiale organizzato</h3>
               <p>
-                Pezzi tagliati, codificati e accompagnati dalla planimetria di
-                posa.
+                Ogni pezzo ha il suo codice. La planimetria di posa ti dice dove
+                va.
               </p>
             </div>
             <div>
               <House aria-hidden="true" />
               <h3>Meno polvere e rumore</h3>
-              <p>
-                Niente taglio nell&apos;immobile. Soprattutto quando il cantiere
-                è la casa di qualcuno.
-              </p>
+              <p>Conta soprattutto quando il cantiere è la casa di qualcuno.</p>
             </div>
           </div>
         </div>
@@ -113,11 +106,9 @@ export default function ProjectPage() {
           />
           <div>
             <p>
-              Rilievo laser, software proprietario, troncatrice a controllo
-              numerico, codifica e planimetria collegano l&apos;ambiente reale
-              ai singoli pezzi. Il
-              risultato: battiscopa su misura dell&apos;ambiente, già tagliati,
-              codificati e accompagnati dalla planimetria di posa.
+              Il laser misura, il software calcola, la troncatrice taglia. Tu
+              ricevi i battiscopa già tagliati e codificati, con la planimetria
+              di posa.
             </p>
             <Link href="/il-sistema" className={styles.textLink}>
               Entra nel sistema EasyBatt{" "}
@@ -136,19 +127,17 @@ export default function ProjectPage() {
             <li>
               <span>01</span>
               <h3>Raccontaci il progetto</h3>
-              <p>Partiamo dalle informazioni che hai già a disposizione.</p>
+              <p>Bastano poche cose: dove, che lavoro e quando.</p>
             </li>
             <li>
               <span>02</span>
               <h3>Lo valutiamo insieme</h3>
-              <p>
-                Approfondiamo il lavoro e verifichiamo se è adatto a EasyBatt.
-              </p>
+              <p>Ti ricontattiamo e vediamo se il lavoro va bene per EasyBatt.</p>
             </li>
             <li>
               <span>03</span>
-              <h3>Organizziamo i passaggi</h3>
-              <p>Se ci sono le condizioni, concordiamo come procedere.</p>
+              <h3>Partiamo</h3>
+              <p>Se va bene, decidiamo insieme come procedere.</p>
             </li>
           </ol>
         </div>
@@ -159,15 +148,9 @@ export default function ProjectPage() {
             eyebrow="Non servono tutte le risposte"
             title="Raccontaci il progetto."
           >
-            Lasciaci i tuoi recapiti e le informazioni che hai: ti ricontattiamo
-            per una prima valutazione. Non serve registrarsi.
+            Lasciaci i tuoi dati e quello che sai del lavoro. Ti ricontattiamo
+            noi. Non serve registrarsi.
           </SectionHeading>
-          <div className="mb-8">
-            <Link href="/quanto-mi-costa" className={styles.textLink}>
-              Cerchi solo una stima? Calcola il prezzo{" "}
-              <ArrowRight size={16} aria-hidden="true" />
-            </Link>
-          </div>
           <ProjectForm />
         </div>
       </section>
@@ -181,7 +164,8 @@ export default function ProjectPage() {
           <div>
             <p>
               Nella fase di lancio le richieste sono seguite direttamente dal
-              titolare. EasyBatt nasce dall&apos;esperienza di Falegnameria
+              titolare, <strong>Gianluca Spini</strong>. EasyBatt nasce
+              dall&apos;esperienza di Falegnameria
               Spini: il tuo progetto viene valutato da chi conosce il sistema e
               il lavoro sul campo.
             </p>
