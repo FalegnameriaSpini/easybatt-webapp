@@ -18,27 +18,27 @@ const values = [
   [
     "Onestà",
     "Dire le cose come stanno.",
-    "Essere chiari su ciò che possiamo fare, sui limiti e su ciò che è realmente utile al cliente. Una relazione di fiducia viene prima di una promessa fatta soltanto per vendere.",
+    "Ti diciamo cosa possiamo fare e cosa no. Preferiamo la tua fiducia a una vendita in più.",
   ],
   [
     "Miglioramento continuo",
     "Chiederci se esiste un modo migliore.",
-    "Osservare, provare, imparare e migliorare. Anche un mestiere tradizionale può evolvere senza perdere la propria esperienza.",
+    "Guardiamo, proviamo, impariamo. Anche un mestiere tradizionale può crescere.",
   ],
   [
     "Collaborazione",
-    "Il valore deve essere reciproco.",
-    "EasyBatt non nasce per sostituire il professionista, ma per lavorare insieme a lui. Competenze diverse possono aiutarsi e migliorare il risultato finale.",
+    "Lavorare insieme.",
+    "EasyBatt non sostituisce il professionista: lavora con lui. Ognuno fa la parte che sa fare meglio.",
   ],
   [
     "Rispetto",
-    "Per il lavoro, le persone e gli ambienti.",
-    "Attenzione per chi lavora, per chi vive gli spazi e per chi ci affida il progetto. Anche ridurre le lavorazioni evitabili è una forma di rispetto.",
+    "Per il lavoro, le persone e le case.",
+    "Rispettiamo chi lavora e chi vive in casa. Togliere fatica, ma anche polvere e rumore, è una forma di rispetto.",
   ],
   [
     "Responsabilità",
     "Mantenere gli impegni presi.",
-    "Ogni elemento preparato entra nel lavoro di un altro professionista. Precisione, organizzazione e affidabilità sono una responsabilità verso chi viene dopo di noi.",
+    "Ogni pezzo che prepariamo entra nel lavoro di un altro professionista. Per questo, per noi, la precisione è una responsabilità.",
   ],
 ];
 const faqs = [
@@ -101,15 +101,11 @@ export default function AboutPage() {
               Gussago, in provincia di Brescia.
             </p>
             <p>
-              Progettazione, produzione e installazione fanno parte di un
-              percorso che parte dall&apos;ambiente e arriva al risultato
-              finito. Alla competenza artigianale si affiancano misurazione
-              professionale, progettazione digitale e tecnologia applicata alla
-              produzione.
+              In falegnameria progettiamo e produciamo arredamenti su misura:
+              dalle misure al lavoro finito. Al lavoro artigiano abbiamo unito
+              misure digitali, progettazione al computer e macchine moderne.
             </p>
-            <p>
-              È all&apos;interno di questa cultura che prende forma EasyBatt.
-            </p>
+            <p>Da qui nasce EasyBatt.</p>
             <a
               href="https://www.falegnameriaspini.it"
               className={styles.sectionLink}
@@ -125,22 +121,19 @@ export default function AboutPage() {
         <div className={styles.container}>
           <SectionHeading
             eyebrow="La domanda iniziale"
-            title="Perché fare sul posto ciò che possiamo preparare prima?"
+            title="Perché fare in cantiere quello che possiamo preparare prima?"
           >
-            EasyBatt nasce osservando il lavoro. Dalla passione per cercare un
-            modo migliore di organizzarlo e dalla volontà di non fermarsi a come
-            è sempre stato fatto.
+            EasyBatt nasce guardando il lavoro di tutti i giorni, e dalla voglia
+            di non fermarsi a &quot;si è sempre fatto così&quot;.
           </SectionHeading>
           <p className={styles.keyLine}>
             Non guardare il lavoro solo per quello che è oggi, ma alzare lo
             sguardo e chiedersi: possiamo farlo meglio?
           </p>
           <p>
-            Da questa domanda nasce l&apos;idea di ripensare la preparazione del
-            battiscopa. Rilievo laser, software proprietario, troncatrice a
-            controllo numerico, codifica e planimetria diventano parti di un
-            unico sistema: portare in cantiere un battiscopa già preparato per
-            la posa.
+            Da questa domanda è nato EasyBatt: laser, software, troncatrice a
+            controllo numerico, codici e planimetria di posa, per portare in
+            cantiere il battiscopa già pronto.
           </p>
         </div>
       </section>
@@ -155,18 +148,18 @@ export default function AboutPage() {
             <div>
               <h3>Falegnameria Spini</h3>
               <ul className={styles.plainList}>
-                <li>Lavorazioni su misura e conoscenza degli ambienti.</li>
-                <li>Progettazione prima della produzione.</li>
-                <li>Tecnologia applicata al lavoro.</li>
-                <li>Attenzione alla fase di installazione.</li>
+                <li>Arredamenti su misura.</li>
+                <li>Prima si progetta, poi si produce.</li>
+                <li>Misure digitali e macchine moderne.</li>
+                <li>Cura del montaggio.</li>
               </ul>
             </div>
             <div>
               <h3>EasyBatt</h3>
               <ul className={styles.plainList}>
-                <li>Rilievo laser dello specifico ambiente.</li>
+                <li>Rilievo laser di ogni stanza.</li>
                 <li>Software proprietario e troncatrice a controllo numerico.</li>
-                <li>Codifica e planimetria.</li>
+                <li>Pezzi codificati e planimetria di posa.</li>
                 <li>Battiscopa pronti da posare.</li>
               </ul>
             </div>
@@ -184,13 +177,12 @@ export default function AboutPage() {
             eyebrow="La nostra idea di innovazione"
             title="Innovare non significa complicare."
           >
-            La tecnologia ha valore quando evita un&apos;attività ripetitiva,
-            permette di preparare prima e lascia al professionista più tempo per
-            il lavoro in cui conta la sua competenza.
+            La tecnologia serve quando toglie la fatica di un lavoro ripetitivo
+            e lascia più tempo per quello che conta: la posa.
           </SectionHeading>
           <p>
-            Non la utilizziamo per rendere il battiscopa più complesso. La
-            utilizziamo per renderne più semplice la posa.
+            Non la usiamo per complicare il battiscopa. La usiamo per
+            semplificarti il lavoro.
           </p>
         </div>
       </section>
@@ -224,11 +216,11 @@ export default function AboutPage() {
         <div className={styles.container}>
           <SectionHeading
             eyebrow="Il nostro scopo"
-            title="Rendere più semplice il lavoro che può essere preparato meglio."
+            title="Migliorare il modo di lavorare delle persone."
           >
-            Mettere tecnologia, esperienza e organizzazione al servizio del
-            lavoro reale. Togliere complessità dove è possibile, per lasciare ai
-            professionisti tempo ed energie per la propria competenza.
+            Mettiamo tecnologia ed esperienza al servizio di chi lavora.
+            Togliamo fatica dove si può, per lasciare tempo ed energie al tuo
+            mestiere.
           </SectionHeading>
           <p>
             Non vogliamo cambiare il mestiere. Vogliamo migliorare ciò che può
@@ -245,20 +237,17 @@ export default function AboutPage() {
           />
           <div className={styles.storyBody}>
             <p>
-              EasyBatt nasce da persone abituate a progettare, produrre,
-              risolvere problemi e confrontarsi con ambienti reali.
+              Dietro EasyBatt ci sono persone che ogni giorno progettano,
+              producono e risolvono problemi nei cantieri.
             </p>
             <p>
-              Dietro il rilievo, il software e ogni decisione rimane{" "}
-              <strong>
-                la responsabilità di chi mette il proprio nome sul lavoro
-              </strong>
-              .
+              Dietro il laser, il software e ogni scelta c&apos;è sempre{" "}
+              <strong>una persona che risponde del lavoro</strong>.
             </p>
             <p>
-              Nella fase iniziale, le richieste vengono seguite direttamente dal
-              titolare per valutare il progetto con chi conosce il sistema e le
-              lavorazioni.
+              Per ora le richieste le segue direttamente{" "}
+              <strong>Gianluca Spini</strong>, titolare di Falegnameria Spini:
+              parli con chi conosce il sistema e il lavoro.
             </p>
           </div>
         </div>
