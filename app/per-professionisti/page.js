@@ -77,7 +77,7 @@ const faqs = [
   {
     question: "Posso provarlo su un solo lavoro?",
     answer:
-      "Sì. Raccontaci il lavoro e vediamo insieme se va bene per EasyBatt. Non devi comprare niente e non devi registrarti.",
+      "Sì. Raccontaci il lavoro e vediamo insieme se va bene per EasyBatt. Scriverci non ti impegna ad acquistare e non serve registrarti. Prima valutiamo il lavoro e concordiamo il prezzo.",
   },
 ];
 

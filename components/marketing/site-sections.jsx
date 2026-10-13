@@ -68,8 +68,8 @@ const homeHero = {
   description: (
     <>
       EasyBatt rileva le stanze con il laser, taglia i battiscopa, li codifica
-      e te li consegna con la planimetria di posa. In cantiere non devi più
-      misurare e tagliare. <strong>Monti e basta.</strong>
+      e te li consegna con la planimetria di posa: la pianta delle stanze con
+      i codici dei pezzi. <strong>Tu ti occupi della posa.</strong>
     </>
   ),
   href: "/come-funziona",
@@ -293,7 +293,10 @@ export function ProjectContact({
           <a className={styles.textLink} href={`mailto:${projectEmail}`}>
             {projectEmail}
           </a>
-          <p>Non devi aver già deciso e non devi comprare niente.</p>
+          <p>
+            Scriverci non ti impegna ad acquistare. Prima valutiamo il lavoro e
+            concordiamo il prezzo.
+          </p>
           <Link className={styles.textLink} href="/quanto-mi-costa">
             Cerchi solo una stima? Calcola il prezzo{" "}
             <ArrowRight size={16} aria-hidden="true" />

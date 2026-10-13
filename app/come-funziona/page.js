@@ -27,7 +27,7 @@ export function EasyBattComeFunzionaPage() {
           title:
             "Come funziona EasyBatt: dal rilievo al battiscopa pronto da posare.",
           description:
-            "Rileviamo le stanze con il laser, il nostro software calcola i tagli e una troncatrice a controllo numerico taglia i battiscopa. Te li consegniamo codificati, con la planimetria di posa. Tu arrivi in cantiere e monti.",
+            "Rileviamo le stanze con il laser, il nostro software calcola i tagli e una troncatrice a controllo numerico taglia i battiscopa. Te li consegniamo codificati, con la planimetria di posa: la pianta delle stanze con i codici dei pezzi. Tu ti occupi della posa.",
           href: "#metodo",
           action: "Scopri il metodo",
         }}
@@ -72,8 +72,8 @@ export function EasyBattComeFunzionaPage() {
               prepara la planimetria di posa.
             </p>
             <p className={styles.keyLine}>
-              Il sistema è digitale. Il risultato è analogico: pezzi tagliati e
-              una planimetria su carta.
+              Il software lo usiamo noi. Tu ricevi i pezzi pronti e la pianta
+              delle stanze su carta.
             </p>
             <Link href="/il-sistema" className={styles.sectionLink}>
               Approfondisci il sistema EasyBatt{" "}
@@ -142,8 +142,8 @@ export function EasyBattComeFunzionaPage() {
             eyebrow="Il risultato sul posto"
             title="Identifichi il pezzo. Ti concentri sulla posa."
           >
-            In cantiere non tagli: leggi il codice, guardi la planimetria e
-            posi. E dentro casa niente polvere e rumore del taglio.
+            Ricevi i pezzi già tagliati: leggi il codice, guardi la planimetria e
+            posi. Meno tagli in cantiere, meno polvere e meno rumore.
           </SectionHeading>
           <Link href="/quanto-mi-costa" className={styles.sectionLink}>
             Calcola una stima per il tuo lavoro{" "}
