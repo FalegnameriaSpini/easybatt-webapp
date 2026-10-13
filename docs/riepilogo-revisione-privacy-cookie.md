@@ -122,7 +122,9 @@ La verifica richiesta deve riguardare anche le procedure reali, non solo il test
 
 ## Materiale disponibile
 
-Sono disponibili la [bozza tecnica EasyBatt](privacy-policy-draft.md) e le
+Sono disponibili la [bozza tecnica EasyBatt](privacy-policy-draft.md), una
+[prima versione pubblica dell'informativa](informativa-privacy-pubblica.md) da
+correggere, con i punti aperti segnati "DA CONFERMARE", e le
 informative Word del sito Falegnameria Spini. Queste ultime riguardano un sito
 diverso, con plugin WordPress, e non vanno trasferite senza adattamento.
 Per documentare le configurazioni si possono fornire schermate prive di segreti;
@@ -136,6 +138,6 @@ Buongiorno, stiamo preparando EasyBatt, marchio della Falegnameria Spini, per
 l'avvio a inizio 2027. Il sito e il preventivatore sono gia' online; prima di
 aprire il modulo di richiesta progetto desideriamo completare la revisione
 Privacy e Cookie. Allego il riepilogo del funzionamento e delle scelte gia'
-definite. Potete indicarci tempi e costo della revisione, i documenti che vi
+definite, e una prima versione dell'informativa pubblica da correggere. Potete indicarci tempi e costo della revisione, i documenti che vi
 servono e gli eventuali interventi necessari? Account e marketing sono rinviati.
 Grazie, Gianluca Spini.
