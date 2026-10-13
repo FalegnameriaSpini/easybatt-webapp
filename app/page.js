@@ -99,7 +99,7 @@ export default function EasyBattHomePage() {
             <div>
               <PackageCheck size={28} aria-hidden="true" />
               <h3>Già tagliati su misura</h3>
-              <p>I battiscopa arrivano tagliati sulle misure della stanza.</p>
+              <p>I battiscopa arrivano tagliati sulle misure di ogni stanza.</p>
             </div>
             <div>
               <Tag size={28} aria-hidden="true" />

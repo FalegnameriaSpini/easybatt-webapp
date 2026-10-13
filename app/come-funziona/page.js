@@ -116,7 +116,7 @@ export function EasyBattComeFunzionaPage() {
             <div>
               <PackageCheck size={28} aria-hidden="true" />
               <h3>Battiscopa già tagliati</h3>
-              <p>Sulle misure della stanza, angoli compresi.</p>
+              <p>Sulle misure di ogni stanza, angoli compresi.</p>
             </div>
             <div>
               <Tag size={28} aria-hidden="true" />

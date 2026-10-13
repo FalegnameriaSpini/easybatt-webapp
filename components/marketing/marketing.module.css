@@ -672,6 +672,29 @@
   fill: var(--muted);
   font-size: 15px;
 }
+.light .angleWall {
+  fill: #c9d1d3;
+}
+.light .angleBoard {
+  fill: #fff;
+  stroke: #222c2e;
+}
+.light .angleArc,
+.light .angleBisector {
+  stroke: #286a65;
+}
+.light .angleValue {
+  fill: var(--ink);
+}
+.light .angleHalf {
+  fill: #286a65;
+}
+.light .angleLabel {
+  fill: #505e60;
+}
+.technicalExplanation > .angleDiagram {
+  margin-bottom: 24px;
+}
 .supplyNote {
   margin-top: 36px !important;
   padding-top: 20px;

@@ -7,12 +7,13 @@ import {
   Tag,
   Map,
   Check,
-  PackageCheck,
+  Clock3,
 } from "lucide-react";
 import {
   MarketingShell,
   MarketingHero,
   SectionHeading,
+  AngleDiagram,
   FaqSection,
   ProjectContact,
 } from "@/components/marketing/site-sections";
@@ -27,59 +28,57 @@ const stages = [
   {
     id: "rilievo",
     Icon: ScanLine,
-    title: "Tutto parte dall'ambiente reale.",
+    title: "Tutto parte dalle stanze, come sono davvero.",
     label: "Rilievo laser",
-    text: "Ogni lavoro inizia dallo spazio nel quale il battiscopa dovrà essere installato. Il rilievo laser raccoglie le informazioni necessarie alle fasi successive.",
+    text: "Veniamo sul posto e misuriamo tutta la casa, stanza per stanza, con un misuratore laser robotico. Da queste misure partono tutte le fasi successive.",
     reason:
       "Non una misura standard: il laser rileva anche gli angoli come sono davvero, per esempio 93° invece di 90°. Il software calcola il taglio al decimo di grado.",
   },
   {
     id: "software",
     Icon: Workflow,
-    title: "Dal rilievo al progetto.",
+    title: "Dalle misure ai tagli.",
     label: "Software proprietario",
-    text: "Raccogliere le misure non basta. Il software proprietario EasyBatt elabora e organizza i dati per trasformarli nelle informazioni necessarie alla preparazione dei singoli elementi.",
-    reason:
-      "Il collegamento tra ambiente rilevato, lavorazione e identificazione dei pezzi.",
+    text: "Le misure da sole non bastano. Il nostro software le usa per calcolare il taglio di ogni pezzo e il punto esatto dove va.",
+    reason: "È il collegamento tra le stanze, il taglio e la posa.",
   },
   {
     id: "cnc",
     Icon: Settings2,
-    title: "Dal dato al battiscopa.",
+    title: "Dal calcolo al taglio.",
     label: "Troncatrice a controllo numerico",
     text: "Il progetto passa in laboratorio. La troncatrice a controllo numerico taglia ogni pezzo con le misure calcolate dal software.",
-    reason:
-      "L'informazione digitale diventa un elemento fisico destinato a quello specifico ambiente.",
+    reason: "Ogni pezzo è tagliato per un punto preciso della casa.",
   },
   {
     id: "codifica",
     Icon: Tag,
-    title: "Ogni pezzo ha il suo riferimento.",
+    title: "Ogni pezzo ha il suo codice.",
     label: "Codifica",
-    text: "Preparare su misura è solo una parte del lavoro. I singoli elementi vengono codificati per riconoscerli e collegarli alla posizione prevista.",
+    text: "Su ogni pezzo mettiamo un'etichetta con il suo codice. Così sai sempre qual è.",
     reason:
-      "Non una serie di battiscopa tagliati: un lavoro organizzato per chi dovrà montarlo.",
+      "Non ricevi un mucchio di pezzi tagliati, ma un lavoro già in ordine.",
   },
   {
     id: "planimetria",
     Icon: Map,
     title: "Dal codice alla posizione.",
     label: "Planimetria di posa",
-    text: "La planimetria accompagna i battiscopa e collega i pezzi codificati alla loro posizione nell'ambiente. Un riferimento concreto da consultare durante il montaggio.",
+    text: "Con i pezzi ricevi la planimetria di posa, su carta. Per ogni codice ti dice dove va il pezzo.",
     reason:
-      "Il punto di arrivo del sistema è lo stesso da cui siamo partiti: l'ambiente reale.",
+      "Si parte dalle stanze e si torna alle stanze: ogni pezzo al suo posto.",
   },
 ];
 const faqs = [
   {
     question: "Che cos'è il sistema EasyBatt?",
     answer:
-      "È il nostro modo di preparare il battiscopa. Misuriamo la stanza con un misuratore laser robotico, il software calcola i tagli e la troncatrice a controllo numerico taglia i pezzi. Ogni pezzo ha un codice e arriva con la planimetria di posa.",
+      "È il nostro modo di preparare il battiscopa. Misuriamo le stanze con un misuratore laser robotico, il software calcola i tagli e la troncatrice a controllo numerico taglia i pezzi. Ogni pezzo ha un codice e arriva con la planimetria di posa.",
   },
   {
     question: "Perché usate il laser?",
     answer:
-      "Perché misura la stanza com'è davvero, angoli compresi. Da queste misure partono tutti i tagli.",
+      "Perché misura ogni stanza com'è davvero, angoli compresi. Da queste misure partono tutti i tagli.",
   },
   {
     question: "Il software è vostro?",
@@ -127,9 +126,8 @@ export default function SystemPage() {
             eyebrow="Un unico processo"
             title="Ogni fase prepara quella successiva."
           >
-            Il rilievo raccoglie i dati, il software li elabora, la troncatrice
-            a controllo numerico taglia i pezzi. Codifica e planimetria
-            organizzano ciò che arriverà sul posto.
+            Il laser misura, il software calcola, la troncatrice taglia. Codici
+            e planimetria ti dicono dove va ogni pezzo.
           </SectionHeading>
           <nav className={styles.processIndex} aria-label="Fasi del sistema">
             {stages.map(({ id, label, Icon }, index) => (
@@ -160,15 +158,18 @@ export default function SystemPage() {
               </SectionHeading>
             </div>
             <div className={styles.technicalExplanation}>
-              <Icon size={38} strokeWidth={1.5} aria-hidden="true" />
+              {id === "rilievo" ? (
+                <AngleDiagram />
+              ) : (
+                <Icon size={38} strokeWidth={1.5} aria-hidden="true" />
+              )}
               <h3>Perché conta</h3>
               <p>{reason}</p>
               {id === "software" && (
                 <ul className={styles.plainList}>
-                  <li>Riceve i dati del rilievo.</li>
-                  <li>Li elabora per la preparazione.</li>
-                  <li>Organizza i singoli elementi.</li>
-                  <li>Collega lavorazione e identificazione.</li>
+                  <li>Calcola ogni taglio al decimo di grado.</li>
+                  <li>Dà un codice a ogni pezzo.</li>
+                  <li>Prepara la planimetria di posa.</li>
                 </ul>
               )}
             </div>
@@ -182,9 +183,8 @@ export default function SystemPage() {
             eyebrow="Il valore dell'insieme"
             title="Il battiscopa è ciò che ricevi. Il sistema è ciò che lo rende possibile."
           >
-            Rilievo, elaborazione, lavorazione e organizzazione trasformano il
-            materiale in elementi preparati per la posa. Il valore nasce da
-            tutto ciò che accade prima della consegna.
+            Misure, calcolo, taglio e codici: tutto questo succede prima che il
+            battiscopa arrivi in cantiere. È lì che nasce il valore.
           </SectionHeading>
         </div>
       </section>
@@ -197,9 +197,9 @@ export default function SystemPage() {
           />
           <div>
             <p className={styles.lead}>
-              Il sistema nasce dall&apos;esperienza di Falegnameria Spini nelle
-              lavorazioni su misura: osservare il lavoro sul campo, riconoscere
-              le attività migliorabili e prepararle prima della posa.
+              Il sistema nasce dall&apos;esperienza di Falegnameria Spini nel
+              lavoro su misura. Abbiamo guardato il lavoro in cantiere e ci siamo
+              chiesti cosa si poteva preparare prima.
             </p>
             <Link href="/chi-siamo" className={styles.sectionLink}>
               Le origini di EasyBatt <ArrowRight size={18} aria-hidden="true" />
@@ -219,22 +219,19 @@ export default function SystemPage() {
               <Check size={28} aria-hidden="true" />
               <h3>Niente taglio sul posto</h3>
               <p>
-                Il taglio avviene prima dell&apos;arrivo in cantiere: niente
-                polvere e rumore da questa lavorazione nell&apos;immobile.
+                Il taglio lo facciamo noi, in laboratorio. In casa niente
+                polvere e rumore del taglio.
               </p>
             </div>
             <div>
-              <PackageCheck size={28} aria-hidden="true" />
+              <Tag size={28} aria-hidden="true" />
               <h3>Pezzi organizzati</h3>
-              <p>Codifica e planimetria aiutano a individuare gli elementi.</p>
+              <p>Codice e planimetria ti dicono dove va ogni pezzo.</p>
             </div>
             <div>
-              <Map size={28} aria-hidden="true" />
+              <Clock3 size={28} aria-hidden="true" />
               <h3>Più tempo per la posa</h3>
-              <p>
-                La tua attenzione rimane sul montaggio e sulla qualità del
-                risultato.
-              </p>
+              <p>Pensi solo a montare, e a farlo bene.</p>
             </div>
           </div>
           <Link href="/per-professionisti" className={styles.sectionLink}>
@@ -246,7 +243,7 @@ export default function SystemPage() {
       <FaqSection items={faqs} title="Dentro il sistema EasyBatt." />
       <ProjectContact
         title="Dalla tecnologia al tuo prossimo lavoro."
-        lead="Il modo migliore per comprendere il sistema EasyBatt è vederlo applicato a un ambiente reale."
+        lead="Il modo migliore per capirlo è vederlo su un lavoro vero."
         text="Hai un lavoro in programma? Raccontacelo e vediamo insieme come preparare il battiscopa prima del cantiere."
         action="Prova il sistema EasyBatt"
       />
