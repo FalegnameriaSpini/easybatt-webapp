@@ -33,8 +33,14 @@ const photos = [
   { ...kit, name: "kit-codificato-v2" },
   // Opening image: the same masked photograph, cropped wide for the hero.
   { ...kit, name: "pezzi-codificati-apertura", crop: { left: 0, top: 230, width: 1600, height: 720 } },
-  // Close-up of the coded labels for the "Pronti da posare" step.
-  { ...kit, name: "kit-dettaglio-etichette", crop: { left: 640, top: 200, width: 800, height: 600 } },
+  {
+    // An EasyBatt job delivered on site, packed and labelled. The package
+    // labels are unreadable even in the original (checked on the closest
+    // one), so no mask is needed. The crop leaves out the third-party branded
+    // box on the left, the grey floor mat and the kitchen island.
+    file: "20251209_102446.jpg", name: "consegna-cantiere",
+    crop: { left: 267, top: 512, width: 1333, height: 811 },
+  },
   { file: "20261001_150246(3).jpg", name: "rilievo-laser" },
   {
     // Laser alone in the empty room; the bottom edge (an object near the

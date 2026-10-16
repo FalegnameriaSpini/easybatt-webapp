@@ -11,7 +11,7 @@ varianti ritoccate presenti nella cartella sorgente non sono state utilizzate.
 | --- | --- | --- |
 | `pezzi-codificati-apertura.webp` | `20261016_191511.jpg` | Apertura di Home, Per i professionisti, Chi siamo e Prova EasyBatt (ritaglio largo) |
 | `kit-codificato-v2.webp` | `20261016_191511.jpg` | Cosa ricevi in Come funziona |
-| `kit-dettaglio-etichette.webp` | `20261016_191511.jpg` | Passaggio "Pronti da posare" (primo piano delle etichette) |
+| `consegna-cantiere.webp` | `20251209_102446.jpg` | Blocco verde della Home e passaggio "Pronti da posare": lavoro EasyBatt arrivato in cantiere |
 | `rilievo-laser.webp` | `20261001_150246(3).jpg` | Apertura di Come funziona e Il sistema |
 | `rilievo-stanza.webp` | `20261001_150421.jpg` | Passaggio e fase del rilievo (laser da solo nella stanza) |
 | `software-planimetria-v2.webp` | `Screenshot 2026-10-14 090311.png` | Elaborazione e software |
@@ -22,7 +22,7 @@ varianti ritoccate presenti nella cartella sorgente non sono state utilizzate.
 | `ambiente-battiscopa-bianco-v2.webp` | `20251215_165216.jpg` | Fascia "Il taglio resta fuori" della Home (ritaglio in basso a sinistra) |
 
 I riferimenti al cliente sulle sette etichette e sul cartiglio della foto del
-kit (anche nei due ritagli che ne derivano), sull'etichetta D02, sull'etichetta
+kit (anche nel ritaglio d'apertura che ne deriva), sull'etichetta D02, sull'etichetta
 della macchina e sull'etichetta del pezzo F07 sono coperti da maschere opache
 incorporate nei pixel. Ogni maschera ha il colore della superficie che copre
 (etichetta o carta), cosi' la riga coperta appare vuota invece che come una
@@ -40,8 +40,12 @@ Il 16 ottobre, dopo la prima pubblicazione locale, sono state riviste le scelte:
 - il ritaglio del corridoio esclude la porta aperta, la scatola, il cartone a
   terra e il campione di carta da parati;
 - le schermate partono sotto la scheda "Pianta" del programma di disegno;
-- nella Home i pezzi codificati restano solo in apertura, non anche nel blocco
-  verde subito sotto.
+- nella Home i pezzi codificati restano solo in apertura; nel blocco verde c'e'
+  la consegna in cantiere, confermata dal titolare come lavoro EasyBatt;
+- nella foto della consegna le etichette dei pacchi non sono leggibili nemmeno
+  nell'originale (verificato ingrandendo la piu' vicina), quindi non servono
+  maschere; il ritaglio esclude una scatola con il marchio di un altro
+  produttore, il tappetino grigio e l'isola della cucina.
 
 Quando cambia il contenuto di un file gia' pubblicato, l'immagine prende un nome
 nuovo (per esempio `-v2`): l'ottimizzatore di Next.js e i browser conservano le

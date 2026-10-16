@@ -34,8 +34,6 @@ test("Public photos contain flattened opaque covers at the customer-reference lo
     // Same photograph cropped from top 230 for the opening image.
     ["hero", label, [[835, 52], [1120, 179], [1265, 267]]],
     ["hero", paper, [[288, 345]]],
-    // Same photograph cropped from 640,200 for the label close-up.
-    ["kitDettaglio", label, [[195, 82], [480, 209], [625, 297]]],
     ["lavorazione", [212, 212, 216], [[884, 240]]],
     ["codifica", [196, 222, 255], [[479, 129]]],
     ["troncatrice", [190, 194, 201], [[370, 335], [200, 318], [560, 350]]],

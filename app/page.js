@@ -7,6 +7,7 @@ import {
   SectionHeading,
   ProcessSteps,
   AngleSection,
+  PhotoFigure,
   FaqSection,
   ProjectContact,
 } from "@/components/marketing/site-sections";
@@ -117,6 +118,11 @@ export default function EasyBattHomePage() {
               </p>
             </div>
           </div>
+          <PhotoFigure
+            media={marketingMedia.consegna}
+            className={styles.blockPhoto}
+            sizes="(max-width: 767px) 100vw, 80vw"
+          />
         </div>
       </section>
 

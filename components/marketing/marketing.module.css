@@ -416,6 +416,10 @@
 .photoFigure a:hover .photoExpand {
   background: #286a65;
 }
+.blockPhoto {
+  max-width: 1000px;
+  margin: 48px auto 0;
+}
 .deliveryPhoto {
   max-width: 1000px;
   margin: 0 auto 40px;
