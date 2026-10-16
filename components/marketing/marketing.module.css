@@ -131,9 +131,16 @@
   background: #dedfdd;
 }
 .heroImage {
-  z-index: -1;
+  z-index: -2;
   object-fit: cover;
-  object-position: center;
+  object-position: center bottom;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, #f5f7f6ed 0%, #f5f7f6c9 40%, #f5f7f600 78%);
 }
 .heroContent {
   padding-top: 58px;
@@ -363,10 +370,67 @@
   color: #505e60;
   margin-top: 8px !important;
 }
-.processDetailed li > p:last-child {
+.processDetailed .stepText {
   font-size: 15px;
   color: #505e60;
   margin-top: 14px;
+}
+.photoFigure {
+  margin: 0;
+  min-width: 0;
+  align-self: start;
+}
+.photoFigure > a {
+  display: block;
+  position: relative;
+}
+.photoFigure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.photoFigure figcaption {
+  margin-top: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.light .photoFigure figcaption {
+  color: #505e60;
+}
+.brand .photoFigure figcaption {
+  color: var(--ink);
+}
+.photoExpand {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  color: #fff;
+  background: #17191de8;
+  border-radius: 4px;
+}
+.photoFigure a:hover .photoExpand {
+  background: #286a65;
+}
+.deliveryPhoto {
+  max-width: 1000px;
+  margin: 0 auto 40px;
+}
+.processDetailed .photoFigure {
+  margin-top: 22px;
+}
+/* Same 4:3 frame for every step: photos fill it instead of showing bands. */
+.processDetailed .photoFigure > a {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+.processDetailed .photoFigure img {
+  height: 100%;
+  object-fit: cover;
 }
 .processDetailed .stepSubtitle {
   color: #243f3b;
@@ -449,7 +513,7 @@
 }
 .imageBand img {
   object-fit: cover;
-  object-position: right;
+  object-position: center;
 }
 .imageBandText {
   padding: 65px;
@@ -629,6 +693,16 @@
 .angleFigure {
   margin: 0;
 }
+.angleProof {
+  margin-top: 64px;
+  align-items: center;
+}
+.angleProof h3 {
+  margin-bottom: 14px !important;
+}
+.angleProof p:not(.eyebrow) {
+  color: var(--muted);
+}
 .angleDiagram {
   display: block;
   width: 100%;
@@ -796,7 +870,7 @@
 }
 @media (min-width: 1500px) {
   .heroImage {
-    object-position: center 60%;
+    object-position: center bottom;
   }
 }
 @media (max-width: 1199px) {
@@ -902,7 +976,10 @@
     min-height: 620px;
   }
   .heroImage {
-    object-position: 58% center;
+    object-position: center bottom;
+  }
+  .hero::before {
+    background: linear-gradient(180deg, #f5f7f6ed 0%, #f5f7f6de 48%, #f5f7f600 85%);
   }
   .heroContent {
     padding-top: 36px;

@@ -10,6 +10,7 @@ import {
   Map,
   PackageCheck,
   Plus,
+  Maximize2,
 } from "lucide-react";
 import {
   marketingMedia,
@@ -60,6 +61,23 @@ export function SectionHeading({ eyebrow, title, children }) {
     </div>
   );
 }
+export function PhotoFigure({ media, className = "", sizes = "(max-width: 767px) 100vw, 50vw", caption = true }) {
+  return (
+    <figure className={`${styles.photoFigure} ${className}`}>
+      <a
+        href={media.src}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Apri immagine: ${media.alt} (nuova scheda)`}
+        title="Apri immagine a piena risoluzione"
+      >
+        <Image src={media.src} alt={media.alt} width={media.width} height={media.height} sizes={sizes} />
+        <span className={styles.photoExpand} aria-hidden="true"><Maximize2 size={19} /></span>
+      </a>
+      {caption && <figcaption>{media.caption}</figcaption>}
+    </figure>
+  );
+}
 // The H1 carries the promise of the page; yellow is reserved for the
 // conversion action, so the explore link always uses the secondary style.
 const homeHero = {
@@ -76,8 +94,8 @@ const homeHero = {
   action: "Scopri come funziona",
 };
 export function MarketingHero({ content }) {
-  const media = marketingMedia.hero;
   const copy = content ?? homeHero;
+  const media = copy.media ?? marketingMedia.hero;
   const explore = (
     <ActionLink href={copy.href} secondary>
       {copy.action}
@@ -100,6 +118,7 @@ export function MarketingHero({ content }) {
         priority
         sizes="100vw"
         className={styles.heroImage}
+        style={media.position ? { objectPosition: media.position } : undefined}
       />
       <div className={`${styles.container} ${styles.heroContent}`}>
         <p className={styles.eyebrow}>{copy.eyebrow}</p>
@@ -127,7 +146,12 @@ export function ProcessSteps({ detailed = false }) {
             </div>
             <h3>{step.title}</h3>
             <p className={styles.stepSubtitle}>{step.subtitle}</p>
-            {detailed && <p>{step.text}</p>}
+            {detailed && (
+              <>
+                <p className={styles.stepText}>{step.text}</p>
+                <PhotoFigure media={marketingMedia[step.media]} caption={false} sizes="(max-width: 767px) 100vw, 33vw" />
+              </>
+            )}
           </li>
         );
       })}
@@ -244,6 +268,20 @@ export function AngleSection() {
             Schema: angolo interno rilevato a 93°, taglio in bisettrice.
           </figcaption>
         </figure>
+      </div>
+      <div
+        className={`${styles.container} ${styles.systemLayout} ${styles.angleProof}`}
+      >
+        <PhotoFigure media={marketingMedia.troncatrice} caption={false} />
+        <div>
+          <p className={styles.eyebrow}>Nella realtà</p>
+          <h3>Lo stesso angolo, dal software alla macchina.</h3>
+          <p>
+            Sull&apos;etichetta del pezzo F07 c&apos;è l&apos;angolo calcolato
+            dal software: 42,5°. La troncatrice è impostata sullo stesso
+            valore. Nessun taglio di prova.
+          </p>
+        </div>
       </div>
     </section>
   );

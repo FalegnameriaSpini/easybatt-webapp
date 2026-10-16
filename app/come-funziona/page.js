@@ -8,8 +8,9 @@ import {
   Comparison,
   FaqSection,
   ProjectContact,
+  PhotoFigure,
 } from "@/components/marketing/site-sections";
-import { methodFaqs } from "@/lib/easybatt-marketing.mjs";
+import { methodFaqs, marketingMedia } from "@/lib/easybatt-marketing.mjs";
 import styles from "@/components/marketing/marketing.module.css";
 
 export const metadata = {
@@ -24,6 +25,7 @@ export function EasyBattComeFunzionaPage() {
       <MarketingHero
         content={{
           eyebrow: "Il metodo EasyBatt",
+          media: marketingMedia.rilievo,
           title:
             "Come funziona EasyBatt: dal rilievo al battiscopa pronto da posare.",
           description:
@@ -112,6 +114,7 @@ export function EasyBattComeFunzionaPage() {
             eyebrow="Cosa ricevi"
             title="Un lavoro preparato. Non soltanto pezzi tagliati."
           />
+          <PhotoFigure media={marketingMedia.kit} className={styles.deliveryPhoto} sizes="(max-width: 767px) 100vw, 80vw" />
           <div className={styles.benefits}>
             <div>
               <PackageCheck size={28} aria-hidden="true" />

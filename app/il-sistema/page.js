@@ -16,7 +16,9 @@ import {
   AngleDiagram,
   FaqSection,
   ProjectContact,
+  PhotoFigure,
 } from "@/components/marketing/site-sections";
+import { marketingMedia } from "@/lib/easybatt-marketing.mjs";
 import styles from "@/components/marketing/marketing.module.css";
 
 export const metadata = {
@@ -27,6 +29,7 @@ export const metadata = {
 const stages = [
   {
     id: "rilievo",
+    media: "rilievoStanza",
     Icon: ScanLine,
     title: "Tutto parte dalle stanze, come sono davvero.",
     label: "Rilievo laser",
@@ -44,6 +47,7 @@ const stages = [
   },
   {
     id: "cnc",
+    media: "troncatrice",
     Icon: Settings2,
     title: "Dal calcolo al taglio.",
     label: "Troncatrice a controllo numerico",
@@ -112,6 +116,7 @@ export default function SystemPage() {
       <MarketingHero
         content={{
           eyebrow: "Tecnologia al servizio del lavoro",
+          media: marketingMedia.rilievo,
           title:
             "Il sistema EasyBatt: dalla precisione del rilievo alla semplicità della posa.",
           description:
@@ -142,7 +147,7 @@ export default function SystemPage() {
         </div>
       </section>
 
-      {stages.map(({ id, Icon, title, label, text, reason }, index) => (
+      {stages.map(({ id, media, title, label, text, reason }, index) => (
         <section
           key={id}
           id={id}
@@ -156,23 +161,20 @@ export default function SystemPage() {
               >
                 {text}
               </SectionHeading>
+              <div className={styles.technicalExplanation}>
+                <h3>Perché conta</h3>
+                <p>{reason}</p>
+                {id === "software" && (
+                  <ul className={styles.plainList}>
+                    <li>Calcola ogni taglio al decimo di grado.</li>
+                    <li>Dà un codice a ogni pezzo.</li>
+                    <li>Prepara la planimetria di posa.</li>
+                  </ul>
+                )}
+                {id === "rilievo" && <AngleDiagram />}
+              </div>
             </div>
-            <div className={styles.technicalExplanation}>
-              {id === "rilievo" ? (
-                <AngleDiagram />
-              ) : (
-                <Icon size={38} strokeWidth={1.5} aria-hidden="true" />
-              )}
-              <h3>Perché conta</h3>
-              <p>{reason}</p>
-              {id === "software" && (
-                <ul className={styles.plainList}>
-                  <li>Calcola ogni taglio al decimo di grado.</li>
-                  <li>Dà un codice a ogni pezzo.</li>
-                  <li>Prepara la planimetria di posa.</li>
-                </ul>
-              )}
-            </div>
+            <PhotoFigure media={marketingMedia[media || id]} />
           </div>
         </section>
       ))}

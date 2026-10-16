@@ -164,13 +164,13 @@ export default function EasyBattHomePage() {
       <section className={styles.imageBand}>
         <figure>
           <Image
-            src={marketingMedia.hero.src}
-            alt={marketingMedia.hero.alt}
+            src={marketingMedia.ambiente.src}
+            alt={marketingMedia.ambiente.alt}
             fill
             sizes="(max-width: 767px) 100vw, 50vw"
           />
           <figcaption className={styles.mediaCaption}>
-            {marketingMedia.hero.caption}
+            {marketingMedia.ambiente.caption}
           </figcaption>
         </figure>
         <div className={styles.imageBandText}>
