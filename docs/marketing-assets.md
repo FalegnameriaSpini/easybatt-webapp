@@ -13,8 +13,10 @@ varianti ritoccate presenti nella cartella sorgente non sono state utilizzate.
 | `kit-codificato-v2.webp` | `20261016_191511.jpg` | Cosa ricevi in Come funziona |
 | `consegna-cantiere.webp` | `20251209_102446.jpg` | Blocco verde della Home e passaggio "Pronti da posare": lavoro EasyBatt arrivato in cantiere |
 | `rilievo-laser.webp` | `20261001_150246(3).jpg` | Apertura di Come funziona e Il sistema |
-| `rilievo-stanza.webp` | `20261001_150421.jpg` | Passaggio e fase del rilievo (laser da solo nella stanza) |
-| `software-planimetria-v2.webp` | `Screenshot 2026-10-14 090311.png` | Elaborazione e software |
+| `rilievo-stanza.webp` | `20261001_150421.jpg` | Fase del rilievo in Il sistema (laser da solo nella stanza vuota) |
+| `rilievo-ingresso.webp` | `20251129_104046.jpg` | Passaggio "Rilievo" in Come funziona: ingresso con pareti verdi, ritaglio 4:3 con laser e treppiede interi |
+| `software-calcolo-stanza-f.webp` | `Screenshot 2026-10-14 092843.png` | Passaggio "Calcolo" in Come funziona: stanza irregolare con codici F01-F15, ritaglio 4:3 completo |
+| `software-planimetria-v2.webp` | `Screenshot 2026-10-14 090311.png` | Fase software in Il sistema: pianta con codici C |
 | `software-dettaglio-codici-v2.webp` | `Screenshot 2026-10-14 102145.png` | Relazione codice-posizione |
 | `lavorazione-battiscopa-v2.webp` | `20261016_163433.jpg` | Passaggio "Taglio" in Come funziona |
 | `troncatrice-angolo.webp` | `20261016_193130.jpg` | Blocco sugli angoli e fase del taglio in Il sistema: etichetta e display a 42,5° |

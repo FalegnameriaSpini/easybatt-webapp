@@ -49,6 +49,10 @@ const photos = [
     crop: { left: 0, top: 0, width: 1600, height: 790 },
   },
   {
+    file: "20251129_104046.jpg", name: "rilievo-ingresso",
+    crop: { left: 0, top: 900, width: 1600, height: 1200 },
+  },
+  {
     file: "20261016_163433.jpg", name: "lavorazione-battiscopa-v2",
     sha256: "d05c890ceb5f3894f4480ef806f010297b5430f87f27a7f6cdfe1eb6a46b7641",
     masks: [{ points: "809,240 954,222 956,239 812,257", color: "#d4d4d8" }],
@@ -65,6 +69,10 @@ const photos = [
     masks: [{ points: "718,640 1207,635 1210,689 719,700", color: "#c4deff" }],
     rotate: 180,
     crop: { left: 220, top: 400, width: 1050, height: 640 },
+  },
+  {
+    file: "Screenshot 2026-10-14 092843.png", name: "software-calcolo-stanza-f",
+    crop: { left: 370, top: 110, width: 960, height: 720 },
   },
   {
     // The crop starts below the "Pianta" viewport tab of the drawing program.

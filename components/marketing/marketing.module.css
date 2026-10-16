@@ -130,8 +130,12 @@
   color: #172528;
   background: #dedfdd;
 }
-.heroImage {
+.heroMedia {
+  position: absolute;
+  inset: 0;
   z-index: -2;
+}
+.heroImage {
   object-fit: cover;
   object-position: center bottom;
 }
@@ -355,6 +359,10 @@
   border-top: 1px solid #ccd7d4;
   padding-top: 20px;
 }
+.processDetailed li {
+  display: flex;
+  flex-direction: column;
+}
 .stepTop {
   display: flex;
   justify-content: space-between;
@@ -371,6 +379,7 @@
   margin-top: 8px !important;
 }
 .processDetailed .stepText {
+  flex-grow: 1;
   font-size: 15px;
   color: #505e60;
   margin-top: 14px;
@@ -425,6 +434,7 @@
   margin: 0 auto 40px;
 }
 .processDetailed .photoFigure {
+  align-self: stretch;
   margin-top: 22px;
 }
 /* Same 4:3 frame for every step: photos fill it instead of showing bands. */
@@ -985,6 +995,22 @@
   .hero::before {
     background: linear-gradient(180deg, #f5f7f6ed 0%, #f5f7f6de 48%, #f5f7f600 85%);
   }
+  .mobileFramedHero {
+    background: #f5f7f6;
+  }
+  .mobileFramedHero .heroMedia,
+  .mobileFramedHero::before {
+    top: auto;
+    width: 100%;
+    aspect-ratio: var(--hero-mobile-aspect-ratio);
+    max-height: 360px;
+  }
+  .mobileFramedHero::before {
+    background: linear-gradient(180deg, #f5f7f6 0%, #f5f7f6e6 25%, #f5f7f600 65%);
+  }
+  .mobileFramedHero .mediaCaption {
+    display: none;
+  }
   .heroContent {
     padding-top: 36px;
     padding-bottom: 180px;
@@ -1156,6 +1182,15 @@
   }
   .hero .actions {
     margin-top: 18px;
+  }
+  .mobileFramedHero .heroMedia,
+  .mobileFramedHero::before {
+    aspect-ratio: 16 / 9;
+    max-height: none;
+  }
+  .mobileFramedHero .heroContent {
+    padding-top: 16px;
+    padding-bottom: calc(28vw + 4px);
   }
 }
 @media (prefers-reduced-motion: reduce) {

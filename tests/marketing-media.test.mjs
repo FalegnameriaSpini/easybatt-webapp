@@ -24,6 +24,20 @@ test("Every detailed process step references a prepared photograph", () => {
   for (const step of processSteps) assert.ok(marketingMedia[step.media], step.id);
 });
 
+test("Measurement shows a different site from the system and opening photographs", () => {
+  const measurement = marketingMedia[processSteps.find(step => step.id === "rilievo").media];
+  assert.notEqual(measurement.src, marketingMedia.rilievoStanza.src);
+  assert.notEqual(measurement.src, marketingMedia.rilievo.src);
+  assert.equal(measurement.width / measurement.height, 4 / 3);
+});
+
+test("Calculation shows a different complete plan from the software and placement views", () => {
+  const calculation = marketingMedia[processSteps.find(step => step.id === "elaborazione").media];
+  assert.notEqual(calculation.src, marketingMedia.software.src);
+  assert.notEqual(calculation.src, marketingMedia.planimetria.src);
+  assert.equal(calculation.width / calculation.height, 4 / 3);
+});
+
 test("Public photos contain flattened opaque covers at the customer-reference locations", async () => {
   // Covers take the colour of the label or paper they hide (see the script).
   const label = [205, 214, 226];

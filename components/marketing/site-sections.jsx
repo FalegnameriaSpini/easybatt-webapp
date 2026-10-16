@@ -108,18 +108,21 @@ export function MarketingHero({ content }) {
   );
   return (
     <section
-      className={`${styles.hero} ${content ? styles.pageHero : ""}`}
+      className={`${styles.hero} ${content ? styles.pageHero : ""} ${media.mobileAspectRatio ? styles.mobileFramedHero : ""}`}
       aria-labelledby="hero-title"
+      style={media.mobileAspectRatio ? { "--hero-mobile-aspect-ratio": media.mobileAspectRatio } : undefined}
     >
-      <Image
-        src={media.src}
-        alt={media.alt}
-        fill
-        priority
-        sizes="100vw"
-        className={styles.heroImage}
-        style={media.position ? { objectPosition: media.position } : undefined}
-      />
+      <div className={styles.heroMedia}>
+        <Image
+          src={media.src}
+          alt={media.alt}
+          fill
+          priority
+          sizes="100vw"
+          className={styles.heroImage}
+          style={media.position ? { objectPosition: media.position } : undefined}
+        />
+      </div>
       <div className={`${styles.container} ${styles.heroContent}`}>
         <p className={styles.eyebrow}>{copy.eyebrow}</p>
         <h1 id="hero-title">{copy.title}</h1>
