@@ -57,6 +57,21 @@ Non collegare Preview e prove locali al database reale se non vuoi che possano
 modificare il catalogo pubblico. Per lo sviluppo continuativo usa un progetto
 Supabase separato, oppure mantieni entrambe le variabili Supabase assenti in locale.
 
+### Pausa per inattivita' (piano gratuito)
+
+Sul piano gratuito Supabase mette in pausa il progetto dopo 7 giorni senza
+richieste: il preventivatore mostra "Database non disponibile" e l'indirizzo del
+progetto smette di rispondere. E' successo a novembre 2026.
+
+- Per riattivarlo: dashboard Supabase, progetto, **Restore project**. Dati,
+  indirizzo e chiavi restano gli stessi. Il ripristino dalla dashboard e'
+  possibile solo entro 90 giorni dalla pausa.
+- Prevenzione: `vercel.json` contiene un cron giornaliero (05:00 UTC) che apre
+  `/api/easybatt-config`; la rotta legge il catalogo da Supabase a ogni
+  richiesta, quindi il progetto risulta attivo. Esito delle esecuzioni:
+  Vercel, progetto, Settings, Cron Jobs.
+- Con il piano Supabase Pro la pausa non avviene e il cron diventa superfluo.
+
 ## Ambiente locale di prova
 
 `npm run dev:sandbox` avvia http://127.0.0.1:3001/admin senza usare Supabase,
