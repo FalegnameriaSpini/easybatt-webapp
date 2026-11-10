@@ -13,5 +13,5 @@ export function AccountLink() {
     return () => { active = false; };
   }, []);
   if (!enabled) return null;
-  return <Link href="/account" className="inline-flex min-h-11 w-fit items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-[#72E6E2] hover:bg-white/5"><UserRound size={18} />Account</Link>;
+  return <Link href="/account" className="inline-flex min-h-11 w-fit items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-[#74E2FA] hover:bg-white/5"><UserRound size={18} />Account</Link>;
 }

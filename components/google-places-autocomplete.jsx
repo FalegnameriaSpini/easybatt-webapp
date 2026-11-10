@@ -266,7 +266,7 @@ function GooglePlacesAutocomplete({
                   void selectSuggestion(suggestion);
                 }}
                 className={`flex w-full flex-col items-start gap-1 px-4 py-3 text-left transition-colors ${
-                  index === activeIndex ? "bg-[#10B7B3]/12 text-white" : "text-[#D7DCE2] hover:bg-white/5"
+                  index === activeIndex ? "bg-[#1DB3CD]/12 text-white" : "text-[#D7DCE2] hover:bg-white/5"
                 }`}
               >
                 <span className="text-sm font-medium">{suggestion.primaryText}</span>

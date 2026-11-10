@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button";
 import { MAX_PRICE_LISTS, newPriceList, PRICE_LIST_RATES, previewPriceList, validatePriceLists } from "@/lib/easybatt-price-lists.mjs";
 import { eb } from "@/app/easybatt-ui";
 
-const inputClass = "h-11 w-full min-w-0 rounded-lg border border-white/15 bg-[#11161C] px-3 text-sm text-white outline-none focus:border-[#10B7B3] focus:ring-2 focus:ring-[#10B7B3]/20";
-const iconClass = "flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-white/15 text-[#D9DDE2] hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-[#10B7B3] disabled:opacity-40";
+const inputClass = "h-11 w-full min-w-0 rounded-lg border border-white/15 bg-[#11161C] px-3 text-sm text-white outline-none focus:border-[#1DB3CD] focus:ring-2 focus:ring-[#1DB3CD]/20";
+const iconClass = "flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-white/15 text-[#D9DDE2] hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-[#1DB3CD] disabled:opacity-40";
 const euro = new Intl.NumberFormat("it-IT", { style: "currency", currency: "EUR" });
 
 function Field({ label, children }) {
@@ -117,7 +117,7 @@ export function AdminPriceLists({ config, onChange, disabled }) {
                 </div>
                 <dl className="grid grid-cols-2 gap-3 border-t border-white/10 pt-3 text-sm">
                   <div><dt className="text-[#8F98A3]">Pubblico / ml</dt><dd className="mt-1 font-semibold tabular-nums">{preview ? euro.format(preview.publicSupplyPrice) : "-"}</dd></div>
-                  <div><dt className="text-[#8F98A3]">Dedicato / ml</dt><dd className="mt-1 font-semibold tabular-nums text-[#F4CC18]">{preview && selected.supplyDiscountPercent !== null && selected.supplyDiscountPercent !== "" ? euro.format(preview.supplyPrice) : "Da definire"}</dd></div>
+                  <div><dt className="text-[#8F98A3]">Dedicato / ml</dt><dd className="mt-1 font-semibold tabular-nums text-[#F2C019]">{preview && selected.supplyDiscountPercent !== null && selected.supplyDiscountPercent !== "" ? euro.format(preview.supplyPrice) : "Da definire"}</dd></div>
                 </dl>
               </> : <p className="text-sm text-[#8F98A3]">Nessun prodotto attivo</p>}
             </div>

@@ -10,9 +10,9 @@ import {
 import styles from "@/components/marketing/marketing.module.css";
 
 export const metadata = {
-  title: "Chi siamo | EasyBatt e Falegnameria Spini a Gussago",
+  title: "Chi siamo | Easy-Batt e Falegnameria Spini a Gussago",
   description:
-    "EasyBatt nasce dall'esperienza di Falegnameria Spini a Gussago, Brescia. Tecnologia e conoscenza del lavoro su misura per preparare il battiscopa prima della posa.",
+    "Easy‑Batt nasce dall'esperienza di Falegnameria Spini a Gussago, Brescia. Tecnologia e conoscenza del lavoro su misura per preparare il battiscopa prima della posa.",
 };
 const values = [
   [
@@ -28,7 +28,7 @@ const values = [
   [
     "Collaborazione",
     "Lavorare insieme.",
-    "EasyBatt non sostituisce il professionista: lavora con lui. Ognuno fa la parte che sa fare meglio.",
+    "Easy‑Batt non sostituisce il professionista: lavora con lui. Ognuno fa la parte che sa fare meglio.",
   ],
   [
     "Rispetto",
@@ -43,14 +43,14 @@ const values = [
 ];
 const faqs = [
   {
-    question: "Chi è EasyBatt?",
+    question: "Chi è Easy‑Batt?",
     answer:
       "È un marchio che prepara battiscopa su misura: già tagliati, codificati e pronti da posare.",
   },
   {
     question: "Qual è il legame con Falegnameria Spini?",
     answer:
-      "EasyBatt è un marchio di Falegnameria Spini Gianluca e Marco snc. Nasce dall'esperienza della falegnameria nella progettazione e nelle lavorazioni su misura, e da quella maturata nell'uso delle tecnologie digitali.",
+      "Easy‑Batt è un marchio di Falegnameria Spini Gianluca e Marco snc. Nasce dall'esperienza della falegnameria nella progettazione e nelle lavorazioni su misura, e da quella maturata nell'uso delle tecnologie digitali.",
   },
   {
     question: "Dove nasce il progetto?",
@@ -58,12 +58,12 @@ const faqs = [
       "A Gussago, in provincia di Brescia. La sede di Falegnameria Spini è in Via Benedetto Castelli 40/42, 25064 Gussago (BS).",
   },
   {
-    question: "Perché è nato EasyBatt?",
+    question: "Perché è nato Easy‑Batt?",
     answer:
       "Dall'idea di usare tecnologie moderne in un lavoro tradizionale come la posa del battiscopa, per renderlo più efficiente e meno faticoso. Per questo abbiamo creato una filiera digitale: laser, software, troncatrice a controllo numerico, codici e planimetria di posa.",
   },
   {
-    question: "EasyBatt è una falegnameria?",
+    question: "Easy‑Batt è una falegnameria?",
     answer:
       "Nasce dall'esperienza di una falegnameria, ma ha una specializzazione precisa: il battiscopa. Dal rilievo dell'ambiente ai pezzi già tagliati e codificati, pronti da posare.",
   },
@@ -80,23 +80,23 @@ export default function AboutPage() {
       <MarketingHero
         content={{
           eyebrow: "Chi siamo / Falegnameria Spini, Gussago (BS)",
-          title: "EasyBatt nasce da un'esperienza reale nel lavoro su misura.",
+          title: "Easy‑Batt nasce da un'esperienza reale nel lavoro su misura.",
           description:
             "Un marchio nuovo, nato dall'esperienza di chi progetta e produce su misura ogni giorno. E da una convinzione: anche in un mestiere tradizionale c'è sempre un modo per lavorare meglio.",
           href: "#origine",
-          action: "Scopri da dove nasce EasyBatt",
+          action: "Scopri da dove nasce Easy‑Batt",
         }}
       />
 
       <section id="origine" className={styles.section}>
         <div className={`${styles.container} ${styles.sectionIntro}`}>
           <SectionHeading
-            eyebrow="Prima di EasyBatt"
+            eyebrow="Prima di Easy‑Batt"
             title="Una cultura del su misura costruita sul lavoro reale."
           />
           <div className={styles.storyBody}>
             <p>
-              EasyBatt è un marchio di{" "}
+              Easy‑Batt è un marchio di{" "}
               <strong>Falegnameria Spini Gianluca e Marco snc</strong>, a
               Gussago, in provincia di Brescia.
             </p>
@@ -105,7 +105,7 @@ export default function AboutPage() {
               dalle misure al lavoro finito. Al lavoro artigiano abbiamo unito
               misure digitali, progettazione al computer e macchine moderne.
             </p>
-            <p>Da qui nasce EasyBatt.</p>
+            <p>Da qui nasce Easy‑Batt.</p>
             <a
               href="https://www.falegnameriaspini.it"
               className={styles.sectionLink}
@@ -123,7 +123,7 @@ export default function AboutPage() {
             eyebrow="La domanda iniziale"
             title="Perché fare in cantiere quello che possiamo preparare prima?"
           >
-            EasyBatt nasce guardando il lavoro di tutti i giorni, e dalla voglia
+            Easy‑Batt nasce guardando il lavoro di tutti i giorni, e dalla voglia
             di non fermarsi a &quot;si è sempre fatto così&quot;.
           </SectionHeading>
           <p className={styles.keyLine}>
@@ -131,7 +131,7 @@ export default function AboutPage() {
             sguardo e chiedersi: possiamo farlo meglio?
           </p>
           <p>
-            Da questa domanda è nato EasyBatt: laser, software, troncatrice a
+            Da questa domanda è nato Easy‑Batt: laser, software, troncatrice a
             controllo numerico, codici e planimetria di posa, per portare in
             cantiere il battiscopa già pronto.
           </p>
@@ -155,7 +155,7 @@ export default function AboutPage() {
               </ul>
             </div>
             <div>
-              <h3>EasyBatt</h3>
+              <h3>Easy‑Batt</h3>
               <ul className={styles.plainList}>
                 <li>Rilievo laser di ogni stanza.</li>
                 <li>Software proprietario e troncatrice a controllo numerico.</li>
@@ -165,7 +165,7 @@ export default function AboutPage() {
             </div>
           </div>
           <Link href="/il-sistema" className={styles.sectionLink}>
-            Scopri il sistema EasyBatt{" "}
+            Scopri il sistema Easy‑Batt{" "}
             <ArrowRight size={18} aria-hidden="true" />
           </Link>
         </div>
@@ -191,7 +191,7 @@ export default function AboutPage() {
         <div className={styles.container}>
           <SectionHeading
             eyebrow="I nostri valori"
-            title="I principi con cui vogliamo costruire EasyBatt."
+            title="I principi con cui vogliamo costruire Easy‑Batt."
           />
           <div className={styles.valuesList}>
             {values.map(([title, statement, text], index) => (
@@ -237,7 +237,7 @@ export default function AboutPage() {
           />
           <div className={styles.storyBody}>
             <p>
-              Dietro EasyBatt ci sono persone che ogni giorno progettano,
+              Dietro Easy‑Batt ci sono persone che ogni giorno progettano,
               producono e risolvono problemi nei cantieri.
             </p>
             <p>
@@ -271,18 +271,18 @@ export default function AboutPage() {
               25064 Gussago (BS)
             </address>
             <Link href="/per-professionisti" className={styles.sectionLink}>
-              EasyBatt per il tuo lavoro{" "}
+              Easy‑Batt per il tuo lavoro{" "}
               <ArrowRight size={18} aria-hidden="true" />
             </Link>
           </div>
         </div>
       </section>
-      <FaqSection items={faqs} title="Conosciamo meglio EasyBatt." />
+      <FaqSection items={faqs} title="Conosciamo meglio Easy‑Batt." />
       <ProjectContact
         title="L'esperienza ci ha portati fin qui. Ora vogliamo portarla sul tuo prossimo lavoro."
         lead="Hai un lavoro in programma? Scopri cosa cambia quando il battiscopa arriva già preparato."
         text=""
-        action="Prova EasyBatt sul tuo prossimo lavoro"
+        action="Prova Easy‑Batt sul tuo prossimo lavoro"
       />
     </MarketingShell>
   );

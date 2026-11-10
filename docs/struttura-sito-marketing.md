@@ -1,6 +1,6 @@
-# Struttura del sito EasyBatt
+# Struttura del sito Easy-Batt
 
-Il sito presenta il servizio EasyBatt e accompagna il visitatore verso la valutazione di un lavoro concreto. La struttura segue le sei pagine preparate dall'agenzia e conserva il preventivatore, il catalogo, l'admin e la predisposizione per gli account. Foto e video definitivi possono essere aggiunti successivamente senza cambiare l'ordine delle pagine.
+Il sito presenta il servizio Easy-Batt e accompagna il visitatore verso la valutazione di un lavoro concreto. La struttura segue le sei pagine preparate dall'agenzia e conserva il preventivatore, il catalogo, l'admin e la predisposizione per gli account. Foto e video definitivi possono essere aggiunti successivamente senza cambiare l'ordine delle pagine.
 
 Questa e' la specifica per la realizzazione progressiva, non una conferma di pubblicazione online. Il primo pubblico e' costituito dai professionisti di Brescia e provincia; i privati possono continuare a consultare il sito e il preventivatore. Il servizio di rilievo e preparazione rimane centrale, con fornitura del battiscopa opzionale.
 
@@ -8,7 +8,7 @@ Questa e' la specifica per la realizzazione progressiva, non una conferma di pub
 
 Home, Come funziona, Per i professionisti, Il sistema e Chi siamo hanno ora un'intestazione e un footer condivisi, sezioni responsive, FAQ specifiche espandibili e un'ambientazione illustrativa dichiarata. Preventivatore, catalogo e admin non sono stati modificati da questo intervento.
 
-Il menu, il footer e gli approfondimenti collegano le pagine dedicate `/per-professionisti`, `/il-sistema` e `/chi-siamo`. La pagina professionisti comprende quattro ancore per mestiere e un invito al contatto sempre visibile nell'intestazione mobile. Prova EasyBatt raggiunge `/prova-easybatt`, con presentazione, FAQ e modulo predisposto. Finche' la ricezione non e' attivata, online viene proposto il contatto tramite `info@easy-batt.it`; nella sandbox locale compare il modulo in anteprima senza invio. I collegamenti del menu sono centralizzati in `lib/easybatt-marketing.mjs`.
+Il menu, il footer e gli approfondimenti collegano le pagine dedicate `/per-professionisti`, `/il-sistema` e `/chi-siamo`. La pagina professionisti comprende quattro ancore per mestiere e un invito al contatto sempre visibile nell'intestazione mobile. Prova Easy-Batt raggiunge `/prova-easybatt`, con presentazione, FAQ e modulo predisposto. Finche' la ricezione non e' attivata, online viene proposto il contatto tramite `info@easy-batt.it`; nella sandbox locale compare il modulo in anteprima senza invio. I collegamenti del menu sono centralizzati in `lib/easybatt-marketing.mjs`.
 
 L'immagine di apertura e' sostituibile tramite la stessa configurazione; provenienza e prompt sono in `docs/marketing-assets.md`. La gestione dei contenuti nell'admin, i filmati e il flusso CRM restano interventi successivi. Le sezioni di casi reali non sono pubblicate senza materiale autentico.
 
@@ -29,7 +29,7 @@ L'ordine narrativo dei documenti viene mantenuto. Le spiegazioni interne su pers
 
 ## Navigazione comune
 
-Il logo riporta alla Home. Nel menu principale compaiono, in questo ordine, Come funziona, Per i professionisti, Il sistema e Chi siamo. Seguono l'accesso a Quanto mi costa e il pulsante principale Prova EasyBatt. L'account resta un accesso secondario e compare solo quando il servizio e' effettivamente abilitato.
+Il logo riporta alla Home. Nel menu principale compaiono, in questo ordine, Come funziona, Per i professionisti, Il sistema e Chi siamo. Seguono l'accesso a Quanto mi costa e il pulsante principale Prova Easy-Batt. L'account resta un accesso secondario e compare solo quando il servizio e' effettivamente abilitato.
 
 Su schermi stretti i collegamenti passano in un menu apribile. Il pulsante di richiesta rimane facilmente raggiungibile; un eventuale comando fisso su mobile non deve coprire moduli, tastiera, contenuti o preferenze privacy.
 
@@ -40,7 +40,7 @@ Su schermi stretti i collegamenti passano in un menu apribile. Il pulsante di ri
 | Per i professionisti | `/per-professionisti` | Nuova pagina unica con sezioni per mestiere |
 | Il sistema | `/il-sistema` | Nuovo approfondimento tecnico |
 | Chi siamo | `/chi-siamo` | Nuova pagina sul marchio e sulla falegnameria |
-| Prova EasyBatt | `/prova-easybatt` | Nuova pagina di richiesta progetto |
+| Prova Easy-Batt | `/prova-easybatt` | Nuova pagina di richiesta progetto |
 | Quanto mi costa | `/quanto-mi-costa` | Conserva il preventivatore funzionante |
 | Conferma richiesta | `/grazie-prova-easybatt` | Accessibile dopo una richiesta ricevuta, non nel menu |
 | Account | `/account` | Servizio riservato distinto dalla prima richiesta |
@@ -50,21 +50,21 @@ Il footer raccoglie recapiti, dati aziendali, relazione con Falegnameria Spini, 
 
 ## Home
 
-Obiettivo: capire che cosa fa EasyBatt, riconoscerne il valore e scegliere l'approfondimento o la richiesta progetto. Fonte: documento 1, sezioni 1-11.
+Obiettivo: capire che cosa fa Easy-Batt, riconoscerne il valore e scegliere l'approfondimento o la richiesta progetto. Fonte: documento 1, sezioni 1-11.
 
 | Ordine | Sezione | Contenuto e collegamenti | Materiale previsto |
 | --- | --- | --- | --- |
-| 1 | Apertura | EasyBatt e battiscopa su misura pronti da posare; sintesi del risultato. Scopri come funziona e Prova EasyBatt | Video breve di pezzi numerati, planimetria e posa; immagine statica in alternativa |
+| 1 | Apertura | Easy-Batt e battiscopa su misura pronti da posare; sintesi del risultato. Scopri come funziona e Prova Easy-Batt | Video breve di pezzi numerati, planimetria e posa; immagine statica in alternativa |
 | 2 | Il lavoro prima della posa | Misurare, segnare, tagliare, organizzare. Vedi cosa cambia porta alla sezione benefici | Sequenza visiva delle attivita' |
 | 3 | Benefici | Preparazione anticipata, pezzi identificabili e meno lavorazioni in cantiere | Dettagli del materiale preparato |
 | 4 | Processo in sintesi | Rilievo, elaborazione, lavorazione, codifica, planimetria, posa. Collegamento al Sistema | Sequenza in sei passaggi |
-| 5 | Tecnologia al servizio del risultato | Laser, software proprietario e CNC collegati. Entra nel sistema EasyBatt | Foto reali di strumenti e lavorazione |
+| 5 | Tecnologia al servizio del risultato | Laser, software proprietario e CNC collegati. Entra nel sistema Easy-Batt | Foto reali di strumenti e lavorazione |
 | 6 | Professionisti | Posatori, falegnami, imprese, rivenditori | Collegamenti alle rispettive sezioni della pagina professionisti |
 | 7 | Beneficio nell'immobile | Meno lavorazioni sul posto; polvere e rumore riferiti specificamente al taglio | Confronto dimostrativo autentico, quando disponibile |
 | 8 | Lavori reali | Casi documentati e risultati verificabili | Sezione nascosta fino al primo caso utilizzabile |
 | 9 | Domande principali | Rilievo, codifica, pareti irregolari, cosa si riceve e primo contatto | Risposte brevi e rimandi alle FAQ pertinenti |
-| 10 | Origine | La domanda da cui nasce EasyBatt e l'esperienza di Falegnameria Spini. Collegamento a Chi siamo | Foto del titolare o del laboratorio |
-| 11 | Richiesta | Invito a raccontare il prossimo lavoro, con indicazione del territorio iniziale | Pulsante verso Prova EasyBatt |
+| 10 | Origine | La domanda da cui nasce Easy-Batt e l'esperienza di Falegnameria Spini. Collegamento a Chi siamo | Foto del titolare o del laboratorio |
+| 11 | Richiesta | Invito a raccontare il prossimo lavoro, con indicazione del territorio iniziale | Pulsante verso Prova Easy-Batt |
 
 Quanto mi costa resta disponibile nella navigazione e puo' essere richiamato nella risposta sui costi, senza aggiungere un catalogo commerciale alla Home.
 
@@ -78,9 +78,9 @@ Obiettivo: spiegare cosa accade dal rilievo alla consegna e cosa riceve il clien
 4. Ruolo del software proprietario come collegamento tra dati, produzione e organizzazione della posa. Rimando al Sistema per l'approfondimento.
 5. Esperienza di Falegnameria Spini e origine pratica del metodo, con rimando a Chi siamo.
 6. Cosa riceve il cliente: pezzi preparati, codici e planimetria. Precisare che la fornitura del materiale e' opzionale e che l'eventuale materiale del cliente va valutato.
-7. Confronto tra attivita' normalmente svolte in cantiere e identificazione/posa con EasyBatt, senza percentuali di risparmio non misurate.
+7. Confronto tra attivita' normalmente svolte in cantiere e identificazione/posa con Easy-Batt, senza percentuali di risparmio non misurate.
 8. FAQ sul metodo: chi rileva, come si identificano i pezzi, cosa fa il software e come viene gestita la posa.
-9. Invito a valutare il prossimo lavoro tramite Prova EasyBatt.
+9. Invito a valutare il prossimo lavoro tramite Prova Easy-Batt.
 
 Materiali: una foto o un breve filmato per fase, una planimetria dimostrativa priva di dati personali e dettagli dei codici. La prima versione puo' usare una sequenza grafica esplicativa al posto delle riprese mancanti.
 
@@ -89,7 +89,7 @@ Materiali: una foto o un breve filmato per fase, una planimetria dimostrativa pr
 Obiettivo: far riconoscere il servizio come pertinente al proprio mestiere. Fonte: documento 3, sezioni 1-11.
 
 1. Apertura rivolta a posatori, parquetisti, falegnami, imprese e rivenditori.
-2. Chiarimento: EasyBatt prepara il lavoro, non sostituisce la competenza di chi posa.
+2. Chiarimento: Easy-Batt prepara il lavoro, non sostituisce la competenza di chi posa.
 3. Confronto tra preparazione tradizionale e identificazione/posa.
 4. Quattro sezioni per mestiere: posatori e parquetisti, falegnami, imprese e ristrutturatori, rivenditori e showroom.
 5. Valore economico del tempo di preparazione, senza promesse numeriche non documentate. Accesso secondario a Quanto mi costa.
@@ -98,7 +98,7 @@ Obiettivo: far riconoscere il servizio come pertinente al proprio mestiere. Font
 8. Sintesi del sistema con rimandi a Come funziona e Il sistema.
 9. Lavori reali, visibili solo quando documentati.
 10. FAQ commerciali: destinatari, singolo lavoro, territorio, collaborazioni e condizioni da valutare.
-11. Prova EasyBatt sul tuo prossimo lavoro come azione principale.
+11. Prova Easy-Batt sul tuo prossimo lavoro come azione principale.
 
 Ancore previste: `#posatori`, `#falegnami`, `#imprese`, `#rivenditori`. I collegamenti dalla Home puntano qui. Si segue la scelta esplicita del documento 3 di una pagina unica al lancio, anche se Home e piano generale citano possibili pagine per ruolo.
 
@@ -127,10 +127,10 @@ Materiali: laser in uso, schermate del software produttivo, CNC realmente impieg
 
 Obiettivo: dare un volto e una provenienza credibile al nuovo marchio. Fonte: documento 5, sezioni 1-11.
 
-1. Apertura sull'esperienza reale da cui nasce EasyBatt.
+1. Apertura sull'esperienza reale da cui nasce Easy-Batt.
 2. Falegnameria Spini e cultura del lavoro su misura, con collegamento al sito della falegnameria.
 3. Domanda iniziale: perche' eseguire sul posto cio' che si puo' preparare prima?
-4. Passaggio dall'esperienza della falegnameria al metodo EasyBatt.
+4. Passaggio dall'esperienza della falegnameria al metodo Easy-Batt.
 5. Innovazione come semplificazione del lavoro, non tecnologia fine a se stessa.
 6. Valori spiegati attraverso comportamenti: onesta', miglioramento, collaborazione, rispetto e responsabilita'.
 7. Scopo del progetto.
@@ -139,13 +139,13 @@ Obiettivo: dare un volto e una provenienza credibile al nuovo marchio. Fonte: do
 10. FAQ su identita', provenienza e specializzazione.
 11. Invito a valutare il servizio sul prossimo lavoro.
 
-Materiali: persone al lavoro, laboratorio e immagini autentiche della falegnameria. Non usare ritratti di repertorio per rappresentare titolari o dipendenti. Nel testo usare la relazione gia' confermata dal titolare: EasyBatt e' un marchio di Falegnameria Spini Gianluca e Marco snc. Verificare la formulazione dell'agenzia "ramo d'azienda" prima di adottarla.
+Materiali: persone al lavoro, laboratorio e immagini autentiche della falegnameria. Non usare ritratti di repertorio per rappresentare titolari o dipendenti. Nel testo usare la relazione gia' confermata dal titolare: Easy-Batt e' un marchio di Falegnameria Spini Gianluca e Marco snc. Verificare la formulazione dell'agenzia "ramo d'azienda" prima di adottarla.
 
-## Prova EasyBatt
+## Prova Easy-Batt
 
 Obiettivo: raccogliere una richiesta concreta senza obbligare a registrarsi o acquistare. Fonte: documento 6, sezioni 1-8.
 
-1. Apertura: valutare EasyBatt sul prossimo lavoro.
+1. Apertura: valutare Easy-Batt sul prossimo lavoro.
 2. Benefici per chi posa.
 3. Breve spiegazione del sistema che rende possibile il risultato.
 4. Tre passaggi: raccontare il progetto, valutarlo insieme, organizzare il lavoro se adatto.
@@ -195,9 +195,9 @@ Conservare provenienza, professione, territorio, tempi, stato della richiesta e 
 ## Quanto mi costa
 
 Nella navigazione pubblica il comando e' **Calcola il prezzo**; l'indirizzo
-`/quanto-mi-costa` rimane invariato e il titolo e' **Quanto mi costa EasyBatt?**.
+`/quanto-mi-costa` rimane invariato e il titolo e' **Quanto mi costa Easy-Batt?**.
 Il risultato e' una stima indicativa autonoma, senza richiesta di contatto o ordine.
-**Prova EasyBatt** e' invece la valutazione di un lavoro concreto con ricontatto:
+**Prova Easy-Batt** e' invece la valutazione di un lavoro concreto con ricontatto:
 non e' una demo del calcolatore e non richiede una stima precedente. Il risultato
 collega al modulo con **Valutiamo il tuo progetto**, mentre WhatsApp resta un canale
 alternativo per condividere il riepilogo. Il collegamento al modulo registra solo
@@ -209,27 +209,27 @@ Il preventivatore rimane operativo e conserva calcoli, selezione dei modelli, im
 - Servizio prima della fornitura opzionale, mantenendo l'impostazione gia' concordata.
 - Per il materiale proprio del cliente non mostrare come certi costi logistici che richiedono ancora una valutazione.
 - Preventivo indicativo distinto dall'ordine e dalla conferma di fattibilita'.
-- Collegamento a Prova EasyBatt con possibilita' futura di riutilizzare il riepilogo, senza far reinserire dati gia' forniti.
+- Collegamento a Prova Easy-Batt con possibilita' futura di riutilizzare il riepilogo, senza far reinserire dati gia' forniti.
 - WhatsApp resta un canale disponibile, ma non l'unico modo di registrare una richiesta.
 
 Il calcolatore di risparmio citato nei magneti dell'agenzia e' un altro strumento: confronta tempo e costo del metodo tradizionale. Non viene introdotto senza dati attendibili e non sostituisce Quanto mi costa.
 
 ## Identita visiva e materiali mancanti
 
-Verde `#3A958E` e giallo `#FCC719` sono i riferimenti del marchio indicati dall'agenzia. Il logo e il payoff attuali restano riconoscibili. Le pagine informative possono alternare superfici neutre e scure senza trasformare tutto il sito in una successione di riquadri. Contrasto, leggibilita' e stati dei controlli vanno verificati: il colore del marchio non garantisce da solo la leggibilita' del testo.
+Azzurro `#0F9EB6`, giallo `#F2C019` e grigio `#E6E6E6` sono i colori del marchio dal logo del 31/10/2026 (file `public/logo-easybatt.png`, payoff "addio tagli sul posto"). Le sfumature del sito derivano dall'azzurro mantenendo la stessa luminosita' delle precedenti. Il nome si scrive Easy-Batt. Nel testo visibile delle pagine il trattino e' quello non divisibile (U+2011, identico a vista) per non andare a capo tra "Easy-" e "Batt"; titoli delle schede, descrizioni, testi alternativi e messaggi WhatsApp/email usano il trattino normale. Per cercarlo nel codice usa `Easy.Batt`. Le pagine informative possono alternare superfici neutre e scure senza trasformare tutto il sito in una successione di riquadri. Contrasto, leggibilita' e stati dei controlli vanno verificati: il colore del marchio non garantisce da solo la leggibilita' del testo.
 
 Il riferimento tipografico del PDF riporta "AROBOTO": confermare con l'agenzia il nome del carattere prima di sostituire quello esistente. Non e' un vincolo per definire la struttura.
 
 | Spazio | Formato di progetto | Anteprima senza materiale definitivo | Versione pubblica senza materiale definitivo |
 | --- | --- | --- | --- |
-| Apertura Home | Video orizzontale con immagine di copertina | Segnaposto o immagine dimostrativa identificata | Immagine pertinente autorizzata; nessun video di terzi presentato come EasyBatt |
+| Apertura Home | Video orizzontale con immagine di copertina | Segnaposto o immagine dimostrativa identificata | Immagine pertinente autorizzata; nessun video di terzi presentato come Easy-Batt |
 | Fasi del processo | Foto o brevi filmati con proporzioni stabili | Segnaposto nominati per fase | Sequenza grafica esplicativa o foto reali disponibili |
 | Software | Schermata leggibile | Area riservata alla schermata prevista | Spiegazione testuale finche' manca una schermata utilizzabile |
 | Codici e planimetria | Dettagli affiancati e ingrandibili | Esempio dimostrativo esplicitamente identificato | Esempio autentico e anonimizzato oppure omissione del visual |
 | Persone | Foto nel contesto di lavoro | Segnaposto della foto da produrre | Testo senza ritratti sostitutivi |
 | Casi e testimonianze | Schede di lavori documentati | Sezione predisposta ma non pubblicata | Sezione e relativi collegamenti nascosti |
 
-Gli spazi vengono riservati nel progetto e nell'anteprima: non si lasciano grandi vuoti o scritte "in arrivo" nel sito pubblico. I video alternativi possono servire a studiare il montaggio, ma non devono suggerire che macchinari, persone o cantieri di altre aziende appartengano a EasyBatt.
+Gli spazi vengono riservati nel progetto e nell'anteprima: non si lasciano grandi vuoti o scritte "in arrivo" nel sito pubblico. I video alternativi possono servire a studiare il montaggio, ma non devono suggerire che macchinari, persone o cantieri di altre aziende appartengano a Easy-Batt.
 
 Per l'implementazione prevedere immagini di copertina, comandi video accessibili, rispetto delle preferenze di movimento ridotto e proporzioni responsive senza tagliare i dettagli importanti. Gli eventuali video esterni richiedono una scelta di integrazione prima della pubblicazione.
 
@@ -252,7 +252,7 @@ Per ogni pagina predisporre titolo, descrizione, gerarchia delle intestazioni e 
 1. Struttura condivisa: navigazione, footer, colori e comportamento responsive.
 2. Home e Come funziona, con posizioni definite per i materiali ancora mancanti.
 3. Per i professionisti, Il sistema e Chi siamo, usando i testi dell'agenzia e gli adattamenti esplicitati qui.
-4. Presentazione di Prova EasyBatt e definizione finale del modulo; nessun modulo pubblico operativo prima di avere una ricezione affidabile.
+4. Presentazione di Prova Easy-Batt e definizione finale del modulo; nessun modulo pubblico operativo prima di avere una ricezione affidabile.
 5. Gestione contatti: ricezione persistente, conferme, notifiche e integrazione CRM concordata.
 6. Gestione dei contenuti nell'admin e sostituzione progressiva dei materiali provvisori.
 7. Verifica su desktop e mobile, controllo collegamenti e preventivatore, revisione dei contenuti e pubblicazione.

@@ -15,9 +15,9 @@ import { homeFaqs, marketingMedia } from "@/lib/easybatt-marketing.mjs";
 import styles from "@/components/marketing/marketing.module.css";
 
 export const metadata = {
-  title: "EasyBatt | Battiscopa su misura, pronti da posare",
+  title: "Easy-Batt | Battiscopa su misura, pronti da posare",
   description:
-    "Rilievo, taglio, codifica e planimetria: EasyBatt prepara il battiscopa prima del cantiere. Un servizio per professionisti con sede a Gussago (Brescia). Fornitura del battiscopa opzionale.",
+    "Rilievo, taglio, codifica e planimetria: Easy‑Batt prepara il battiscopa prima del cantiere. Un servizio per professionisti con sede a Gussago (Brescia). Fornitura del battiscopa opzionale.",
 };
 
 const professions = [
@@ -25,19 +25,19 @@ const professions = [
     "posatori",
     "Posatori e parquetisti",
     "Niente misure e tagli pezzo per pezzo: in cantiere pensi solo alla posa.",
-    "Scopri EasyBatt per posatori",
+    "Scopri Easy‑Batt per posatori",
   ],
   [
     "falegnami",
     "Falegnami",
     "Il battiscopa è solo una parte del tuo lavoro? Lo prepariamo noi, pronto da montare.",
-    "Scopri EasyBatt per falegnami",
+    "Scopri Easy‑Batt per falegnami",
   ],
   [
     "imprese",
     "Imprese e ristrutturatori",
     "Una finitura più semplice da organizzare. Meno lavori da fare dentro casa.",
-    "Scopri EasyBatt per le imprese",
+    "Scopri Easy‑Batt per le imprese",
   ],
   [
     "rivenditori",
@@ -79,7 +79,7 @@ export default function EasyBattHomePage() {
               <p className={styles.lead}>
                 Sono operazioni che conosci bene e che si ripetono fino
                 all&apos;ultimo angolo. Richiedono attrezzatura sul posto, tempo
-                e fatica. Con EasyBatt, questa parte del lavoro avviene prima
+                e fatica. Con Easy‑Batt, questa parte del lavoro avviene prima
                 del cantiere.
               </p>
               <Link href="#benefici" className={styles.sectionLink}>
@@ -93,7 +93,7 @@ export default function EasyBattHomePage() {
       <section id="benefici" className={`${styles.section} ${styles.brand}`}>
         <div className={styles.container}>
           <SectionHeading
-            eyebrow="Con EasyBatt"
+            eyebrow="Con Easy‑Batt"
             title="Preparato prima. Pronto da posare."
           />
           <div className={styles.benefits}>
@@ -198,7 +198,7 @@ export default function EasyBattHomePage() {
       <section id="chi-siamo" className={`${styles.section} ${styles.story}`}>
         <div className={`${styles.container} ${styles.sectionIntro}`}>
           <SectionHeading
-            eyebrow="Da Falegnameria Spini a EasyBatt"
+            eyebrow="Da Falegnameria Spini a Easy‑Batt"
             title="Un marchio nuovo. Un'esperienza concreta."
           />
           <div className={styles.storyBody}>
@@ -208,7 +208,7 @@ export default function EasyBattHomePage() {
               </strong>
             </p>
             <p>
-              EasyBatt nasce da Falegnameria Spini, a Gussago, e dall&apos;idea
+              Easy‑Batt nasce da Falegnameria Spini, a Gussago, e dall&apos;idea
               di usare tecnologie moderne in un lavoro tradizionale.
             </p>
             <p>
@@ -216,7 +216,7 @@ export default function EasyBattHomePage() {
               il lavoro di chi posa.
             </p>
             <Link href="/chi-siamo" className={styles.sectionLink}>
-              Scopri da dove nasce EasyBatt{" "}
+              Scopri da dove nasce Easy‑Batt{" "}
               <ArrowRight size={18} aria-hidden="true" />
             </Link>
           </div>

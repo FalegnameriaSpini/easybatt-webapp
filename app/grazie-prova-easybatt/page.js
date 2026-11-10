@@ -12,7 +12,7 @@ import styles from "@/components/marketing/marketing.module.css";
 import formStyles from "@/components/marketing/project-form.module.css";
 
 export const metadata = {
-  title: "Richiesta ricevuta | EasyBatt",
+  title: "Richiesta ricevuta | Easy-Batt",
   robots: { index: false, follow: false },
 };
 export const dynamic = "force-dynamic";
@@ -58,7 +58,7 @@ export default async function ProjectThanksPage() {
       </section>
       <section className={`${styles.section} ${styles.light}`}>
         <div className={styles.container}>
-          <h2>Nel frattempo, conosci meglio EasyBatt.</h2>
+          <h2>Nel frattempo, conosci meglio Easy‑Batt.</h2>
           <div className={styles.actions}>
             <ActionLink href="/il-sistema">Scopri il sistema</ActionLink>
             <ActionLink href="/come-funziona" secondary>
@@ -66,7 +66,7 @@ export default async function ProjectThanksPage() {
             </ActionLink>
           </div>
           <p className={styles.lead}>
-            A presto. EasyBatt: prepariamo prima, tu pensi alla posa.
+            A presto. Easy‑Batt: prepariamo prima, tu pensi alla posa.
           </p>
         </div>
       </section>

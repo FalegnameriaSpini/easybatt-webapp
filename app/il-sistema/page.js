@@ -22,9 +22,9 @@ import { marketingMedia } from "@/lib/easybatt-marketing.mjs";
 import styles from "@/components/marketing/marketing.module.css";
 
 export const metadata = {
-  title: "Il sistema EasyBatt | Rilievo laser, software e troncatrice CNC",
+  title: "Il sistema Easy-Batt | Rilievo laser, software e troncatrice CNC",
   description:
-    "Un sistema integrato: rilievo laser, software proprietario, troncatrice a controllo numerico (CNC), codifica e planimetria di posa. Scopri come EasyBatt prepara il battiscopa per il tuo ambiente.",
+    "Un sistema integrato: rilievo laser, software proprietario, troncatrice a controllo numerico (CNC), codifica e planimetria di posa. Scopri come Easy‑Batt prepara il battiscopa per il tuo ambiente.",
 };
 const stages = [
   {
@@ -75,7 +75,7 @@ const stages = [
 ];
 const faqs = [
   {
-    question: "Che cos'è il sistema EasyBatt?",
+    question: "Che cos'è il sistema Easy‑Batt?",
     answer:
       "È il nostro modo di preparare il battiscopa. Misuriamo le stanze con un misuratore laser robotico, il software calcola i tagli e la troncatrice a controllo numerico taglia i pezzi. Ogni pezzo ha un codice e arriva con la planimetria di posa.",
   },
@@ -87,7 +87,7 @@ const faqs = [
   {
     question: "Il software è vostro?",
     answer:
-      "Sì, l'abbiamo sviluppato noi, apposta per EasyBatt. Collega le misure, i tagli e i codici dei pezzi.",
+      "Sì, l'abbiamo sviluppato noi, apposta per Easy‑Batt. Collega le misure, i tagli e i codici dei pezzi.",
   },
   {
     question: "Devo imparare a usare il software?",
@@ -118,7 +118,7 @@ export default function SystemPage() {
           eyebrow: "Tecnologia al servizio del lavoro",
           media: marketingMedia.rilievo,
           title:
-            "Il sistema EasyBatt: dalla precisione del rilievo alla semplicità della posa.",
+            "Il sistema Easy‑Batt: dalla precisione del rilievo alla semplicità della posa.",
           description:
             "Rilievo laser, software proprietario, troncatrice a controllo numerico (CNC), codifica e planimetria. Non tecnologie isolate: un unico sistema per preparare il battiscopa prima che arrivi in cantiere.",
           href: "#processo",
@@ -204,7 +204,7 @@ export default function SystemPage() {
               chiesti cosa si poteva preparare prima.
             </p>
             <Link href="/chi-siamo" className={styles.sectionLink}>
-              Le origini di EasyBatt <ArrowRight size={18} aria-hidden="true" />
+              Le origini di Easy‑Batt <ArrowRight size={18} aria-hidden="true" />
             </Link>
           </div>
         </div>
@@ -237,17 +237,17 @@ export default function SystemPage() {
             </div>
           </div>
           <Link href="/per-professionisti" className={styles.sectionLink}>
-            EasyBatt per il tuo mestiere{" "}
+            Easy‑Batt per il tuo mestiere{" "}
             <ArrowRight size={18} aria-hidden="true" />
           </Link>
         </div>
       </section>
-      <FaqSection items={faqs} title="Dentro il sistema EasyBatt." />
+      <FaqSection items={faqs} title="Dentro il sistema Easy‑Batt." />
       <ProjectContact
         title="Dalla tecnologia al tuo prossimo lavoro."
         lead="Il modo migliore per capirlo è vederlo su un lavoro vero."
         text="Hai un lavoro in programma? Raccontacelo e vediamo insieme come preparare il battiscopa prima del cantiere."
-        action="Prova il sistema EasyBatt"
+        action="Prova il sistema Easy‑Batt"
       />
     </MarketingShell>
   );

@@ -85,7 +85,7 @@ const homeHero = {
   title: "Battiscopa su misura, già tagliati e pronti da posare.",
   description: (
     <>
-      EasyBatt rileva le stanze con il laser, taglia i battiscopa, li codifica
+      Easy‑Batt rileva le stanze con il laser, taglia i battiscopa, li codifica
       e te li consegna con la planimetria di posa: la pianta delle stanze con
       i codici dei pezzi. <strong>Tu ti occupi della posa.</strong>
     </>
@@ -103,7 +103,7 @@ export function MarketingHero({ content }) {
   );
   const cta = (
     <ActionLink href={copy.ctaHref || "/prova-easybatt"}>
-      {copy.ctaLabel || "Prova EasyBatt"}
+      {copy.ctaLabel || "Prova Easy‑Batt"}
     </ActionLink>
   );
   return (
@@ -176,7 +176,7 @@ export function Comparison() {
         <p>E poi si ricomincia con il pezzo successivo.</p>
       </div>
       <div>
-        <p className={styles.eyebrow}>Con EasyBatt, per ogni pezzo</p>
+        <p className={styles.eyebrow}>Con Easy‑Batt, per ogni pezzo</p>
         <p className={styles.comparisonFlow}>
           Identificare <ArrowRight aria-hidden="true" /> Posare
         </p>
@@ -261,7 +261,7 @@ export function AngleSection() {
             Angolo di 93°? Ogni pezzo viene tagliato in bisettrice a 46,5°.
           </p>
           <Link href="/il-sistema" className={styles.sectionLink}>
-            Entra nel sistema EasyBatt{" "}
+            Entra nel sistema Easy‑Batt{" "}
             <ArrowRight size={18} aria-hidden="true" />
           </Link>
         </div>
@@ -316,15 +316,15 @@ export function FaqSection({
 }
 export function ProjectContact({
   title = "Hai un lavoro in programma?",
-  lead = "Prova EasyBatt sul tuo prossimo battiscopa.",
-  text = "Raccontaci il lavoro e vediamo insieme se EasyBatt va bene. Non servono le misure.",
+  lead = "Prova Easy‑Batt sul tuo prossimo battiscopa.",
+  text = "Raccontaci il lavoro e vediamo insieme se Easy‑Batt va bene. Non servono le misure.",
   action = "Parlaci del tuo prossimo lavoro",
 }) {
   return (
     <section id="prova" className={`${styles.section} ${styles.contact}`}>
       <div className={`${styles.container} ${styles.contactLayout}`}>
         <div>
-          <p className={styles.eyebrow}>Prova EasyBatt</p>
+          <p className={styles.eyebrow}>Prova Easy‑Batt</p>
           <h2>{title}</h2>
           <p className={styles.lead}>{lead}</p>
           {text && <p>{text}</p>}
@@ -353,12 +353,12 @@ function SiteFooter() {
       <div className={`${styles.container} ${styles.footerGrid}`}>
         <div>
           <Link href="/" className={styles.footerBrand}>
-            Easy<span>Batt</span>
+            Easy‑<span>Batt</span>
           </Link>
           <p>
             Battiscopa pronti da posare.
             <br />
-            Senza tagli sul posto.
+            Addio tagli sul posto.
           </p>
         </div>
         <div>
@@ -372,12 +372,12 @@ function SiteFooter() {
         <div>
           <p className={styles.footerTitle}>Parliamone</p>
           <a href={`mailto:${projectEmail}`}>{projectEmail}</a>
-          <Link href="/prova-easybatt">Prova EasyBatt</Link>
+          <Link href="/prova-easybatt">Prova Easy‑Batt</Link>
           <p>Gussago, Brescia</p>
         </div>
       </div>
       <div className={`${styles.container} ${styles.footerLegal}`}>
-        <p>EasyBatt è un marchio di Falegnameria Spini Gianluca e Marco snc.</p>
+        <p>Easy‑Batt è un marchio di Falegnameria Spini Gianluca e Marco snc.</p>
         <p>
           Via Benedetto Castelli 40/42, 25064 Gussago (BS) / P. IVA 03098310984
         </p>

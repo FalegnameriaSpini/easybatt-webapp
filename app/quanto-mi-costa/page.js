@@ -61,7 +61,7 @@ function ModelImagePreview({ title, src, alt, contain = false }) {
 function StepHeading({ number, children }) {
   return (
     <div className="flex items-center gap-2.5">
-      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#10B7B3] text-xs font-bold text-[#11161C]">
+      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#1DB3CD] text-xs font-bold text-[#11161C]">
         {number}
       </span>
       <h3 className="text-base font-semibold text-white">{children}</h3>
@@ -72,9 +72,9 @@ function StepHeading({ number, children }) {
 function SummaryDisclosure({ title, children }) {
   return (
     <details className="group/disclosure border-t border-white/10">
-      <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 py-3 text-sm font-semibold text-[#E3E7EC] outline-none focus-visible:ring-2 focus-visible:ring-[#10B7B3] [&::-webkit-details-marker]:hidden">
+      <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 py-3 text-sm font-semibold text-[#E3E7EC] outline-none focus-visible:ring-2 focus-visible:ring-[#1DB3CD] [&::-webkit-details-marker]:hidden">
         {title}
-        <ChevronDown className="h-4 w-4 shrink-0 text-[#72E6E2] transition-transform group-open/disclosure:rotate-180" />
+        <ChevronDown className="h-4 w-4 shrink-0 text-[#74E2FA] transition-transform group-open/disclosure:rotate-180" />
       </summary>
       <div className="grid gap-3 pb-3">{children}</div>
     </details>
@@ -88,8 +88,8 @@ function ChoiceButton({ active, children, className = "", ...props }) {
       aria-pressed={active}
       className={`min-h-11 rounded-xl border px-3 py-2 text-sm font-semibold transition ${
         active
-          ? "border-[#10B7B3]/70 bg-[#10B7B3] text-[#11161C] shadow-[0_8px_24px_rgba(16,183,179,0.18)]"
-          : "border-white/10 bg-[#11161C] text-[#D9DDE2] hover:border-[#10B7B3]/35 hover:bg-white/[0.04]"
+          ? "border-[#1DB3CD]/70 bg-[#1DB3CD] text-[#11161C] shadow-[0_8px_24px_rgba(29,179,205,0.18)]"
+          : "border-white/10 bg-[#11161C] text-[#D9DDE2] hover:border-[#1DB3CD]/35 hover:bg-white/[0.04]"
       } ${className}`}
       {...props}
     >
@@ -99,29 +99,29 @@ function ChoiceButton({ active, children, className = "", ...props }) {
 }
 
 const inputClassName =
-  "h-12 rounded-2xl !border !border-white/20 !bg-[#10B7B3] !text-[#11161C] " +
+  "h-12 rounded-2xl !border !border-white/20 !bg-[#1DB3CD] !text-[#11161C] " +
   "shadow-[inset_0_1px_0_rgba(255,255,255,0.02)] transition-all duration-200 " +
-  "hover:!border-[#10B7B3]/45 hover:!bg-[#0A8B87] " +
-  "focus-visible:!border-[#10B7B3] focus-visible:!bg-[#0A8B87] focus-visible:!ring-2 focus-visible:!ring-[#10B7B3]/25 focus-visible:!outline-none " +
+  "hover:!border-[#1DB3CD]/45 hover:!bg-[#13879C] " +
+  "focus-visible:!border-[#1DB3CD] focus-visible:!bg-[#13879C] focus-visible:!ring-2 focus-visible:!ring-[#1DB3CD]/25 focus-visible:!outline-none " +
   "placeholder:!text-[#3A4147]";
 
 const estimateFieldLabelClassName = "text-base font-semibold leading-6 text-white";
 const neutralButtonClassName =
-  `${eb.outlineButton} active:bg-[#10B7B3] active:text-white active:border-[#0A8B87] focus-visible:bg-[#10B7B3] focus-visible:text-white focus-visible:border-[#0A8B87] hover:border-[#10B7B3]/35`;
+  `${eb.outlineButton} active:bg-[#1DB3CD] active:text-white active:border-[#13879C] focus-visible:bg-[#1DB3CD] focus-visible:text-white focus-visible:border-[#13879C] hover:border-[#1DB3CD]/35`;
 const finalSecondaryButtonClassName =
   "h-auto min-h-12 whitespace-normal rounded-2xl py-3 text-center text-base select-none touch-manipulation transition-all duration-150 active:scale-[0.98] focus-visible:scale-[0.98]";
 const finalNeutralButtonClassName =
-  `${eb.outlineButton} ${finalSecondaryButtonClassName} !border-white/10 !bg-transparent !text-white hover:!border-[#10B7B3]/35 hover:!bg-white/[0.06] active:!bg-[#10B7B3] active:!text-white active:!border-[#0A8B87] focus-visible:!bg-[#10B7B3] focus-visible:!text-white focus-visible:!border-[#0A8B87]`;
+  `${eb.outlineButton} ${finalSecondaryButtonClassName} !border-white/10 !bg-transparent !text-white hover:!border-[#1DB3CD]/35 hover:!bg-white/[0.06] active:!bg-[#1DB3CD] active:!text-white active:!border-[#13879C] focus-visible:!bg-[#1DB3CD] focus-visible:!text-white focus-visible:!border-[#13879C]`;
 const finalTealAccentButtonClassName =
-  `${finalSecondaryButtonClassName} !border-[#0A8B87] !bg-[#10B7B3] !text-white font-semibold hover:-translate-y-0.5 hover:!border-[#0A8B87] hover:!bg-[#22C7C2] hover:!text-white active:!bg-[#0A8B87] active:!text-white active:!border-[#08716E] focus-visible:!bg-[#10B7B3] focus-visible:!text-white focus-visible:!border-[#0A8B87]`;
+  `${finalSecondaryButtonClassName} !border-[#13879C] !bg-[#1DB3CD] !text-white font-semibold hover:-translate-y-0.5 hover:!border-[#13879C] hover:!bg-[#2BC2DE] hover:!text-white active:!bg-[#13879C] active:!text-white active:!border-[#0F6E7F] focus-visible:!bg-[#1DB3CD] focus-visible:!text-white focus-visible:!border-[#13879C]`;
 
 function BrandLockup() {
   return (
-    <div className="rounded-[20px] border border-white/10 bg-[radial-gradient(circle_at_top_left,_rgba(15,175,169,0.1),_transparent_32%),linear-gradient(135deg,_rgba(20,23,29,0.98),_rgba(29,32,38,0.98))] px-3 py-2 shadow-[0_18px_50px_rgba(0,0,0,0.28)] sm:px-4">
+    <div className="rounded-[20px] border border-white/10 bg-[radial-gradient(circle_at_top_left,_rgba(25,171,196,0.1),_transparent_32%),linear-gradient(135deg,_rgba(20,23,29,0.98),_rgba(29,32,38,0.98))] px-3 py-2 shadow-[0_18px_50px_rgba(0,0,0,0.28)] sm:px-4">
       <div className="flex items-center">
         <img
-          src="/Logo_easybatt_trasp.png"
-          alt="EasyBatt - Battiscopa pronti da posare senza tagli sul posto"
+          src="/logo-easybatt.png"
+          alt="Easy-Batt, addio tagli sul posto"
           className="h-auto max-h-[108px] w-full max-w-[300px] object-contain object-left sm:max-w-[328px] lg:max-w-[352px] xl:max-w-[368px]"
         />
       </div>
@@ -132,7 +132,7 @@ function BrandLockup() {
 function BrandHeader() {
   return (
     <header className="mb-6 flex flex-wrap items-center justify-between gap-3">
-      <Link href="/" aria-label="Torna alla home EasyBatt" className="block w-full max-w-[368px]">
+      <Link href="/" aria-label="Torna alla home Easy-Batt" className="block w-full max-w-[368px]">
         <BrandLockup />
       </Link>
       <AccountLink />
@@ -313,7 +313,7 @@ function QuoteConfigurator({ pricingConfig, pricing }) {
   };
 
   const switchClassName =
-    "data-[state=unchecked]:bg-[#2A2E34] data-[state=unchecked]:border-white/10 data-[state=checked]:bg-[#10B7B3] data-[state=checked]:border-[#10B7B3]/40";
+    "data-[state=unchecked]:bg-[#2A2E34] data-[state=unchecked]:border-white/10 data-[state=checked]:bg-[#1DB3CD] data-[state=checked]:border-[#1DB3CD]/40";
 
   const handleShippingChange = (checked) => {
     setIncludeShipping(checked);
@@ -458,7 +458,7 @@ function QuoteConfigurator({ pricingConfig, pricing }) {
     ].filter(Boolean);
 
     return [
-      "Ciao, ho configurato un progetto EasyBatt 👇",
+      "Ciao, ho configurato un progetto Easy-Batt 👇",
       "",
       `📐 Metri battiscopa: ${calculation.ml} ml`,
       ...(includeSupply
@@ -496,10 +496,10 @@ function QuoteConfigurator({ pricingConfig, pricing }) {
     <div className="min-h-screen bg-[#17191D] text-white">
       <div className={`${eb.pageShell} lg:max-w-[1800px]`}>
         <BrandHeader />
-        {pricing?.kind === "dedicated" && <p className="mb-5 text-sm text-[#72E6E2]">Listino applicato: <strong>{pricing.name}</strong></p>}
+        {pricing?.kind === "dedicated" && <p className="mb-5 text-sm text-[#74E2FA]">Listino applicato: <strong>{pricing.name}</strong></p>}
 
         <div className="mb-6 max-w-3xl">
-          <h1 className="text-2xl font-bold leading-tight sm:text-3xl">Quanto mi costa EasyBatt?</h1>
+          <h1 className="text-2xl font-bold leading-tight sm:text-3xl">Quanto mi costa Easy‑Batt?</h1>
           <p className="mt-3 text-base leading-relaxed text-[#B6BDC6]">
             Calcola una stima indicativa in autonomia, senza registrarti o lasciare contatti.
             Il calcolo non invia una richiesta e non conferma un ordine.
@@ -529,7 +529,7 @@ function QuoteConfigurator({ pricingConfig, pricing }) {
                     onBlur={() => setIsLinearMetersFocused(false)}
                   />
                   {isLinearMetersFocused && (
-                    <div className="rounded-[20px] border border-[#10B7B3]/20 bg-white/[0.04] px-4 py-3 text-sm text-[#D9E8E7] shadow-[0_14px_34px_rgba(0,0,0,0.16)]">
+                    <div className="rounded-[20px] border border-[#1DB3CD]/20 bg-white/[0.04] px-4 py-3 text-sm text-[#D9E7EB] shadow-[0_14px_34px_rgba(0,0,0,0.16)]">
                       <div className="font-semibold text-white">Non sai quanti metri inserire?</div>
                       <div className="mt-2 leading-6 text-[#C7CDD5]">
                         Per una prima valutazione puoi inserire i metri stimati aggiungendo circa un 10% di margine.
@@ -537,7 +537,7 @@ function QuoteConfigurator({ pricingConfig, pricing }) {
                       <div className="mt-2 leading-6 text-[#C7CDD5]">
                         Il prezzo verrà verificato sui metri reali prima della conferma dell&apos;ordine.
                       </div>
-                      <div className="mt-2 leading-6 text-[#A7F3F0]">
+                      <div className="mt-2 leading-6 text-[#ACEFFF]">
                         Se hai dubbi, contattaci usando il pulsante WhatsApp in fondo alla pagina.
                       </div>
                     </div>
@@ -590,7 +590,7 @@ function QuoteConfigurator({ pricingConfig, pricing }) {
                             ? "text-[#F8E58A]"
                             : distanceFeedback.tone === "pending"
                               ? "text-[#AEB6BF]"
-                              : "text-[#72E6E2]"
+                              : "text-[#74E2FA]"
                       }`}
                     >
                       {distanceFeedback.message}
@@ -667,7 +667,7 @@ function QuoteConfigurator({ pricingConfig, pricing }) {
               <CardComp id="battiscopa-selection" className={eb.cardInteractive}>
                 <CardHeaderComp>
                   <CardTitleComp role="heading" aria-level={2} className="flex items-center gap-2 text-xl text-white">
-                    <Layers3 className="h-5 w-5 text-[#72E6E2]" />
+                    <Layers3 className="h-5 w-5 text-[#74E2FA]" />
                     Scegli il battiscopa
                   </CardTitleComp>
                   <CardDescriptionComp className="text-base leading-7 text-[#B6BDC6]">
@@ -722,8 +722,8 @@ function QuoteConfigurator({ pricingConfig, pricing }) {
                             }}
                             className={`flex min-w-0 flex-col overflow-hidden rounded-xl border text-left transition ${
                               item.key === selectedFinishImage
-                                ? "border-[#10B7B3]/70 bg-[#10B7B3]/12 shadow-[0_8px_24px_rgba(16,183,179,0.14)]"
-                                : "border-white/10 bg-[#11161C] hover:border-[#10B7B3]/35"
+                                ? "border-[#1DB3CD]/70 bg-[#1DB3CD]/12 shadow-[0_8px_24px_rgba(29,179,205,0.14)]"
+                                : "border-white/10 bg-[#11161C] hover:border-[#1DB3CD]/35"
                             }`}
                           >
                             <span className="flex h-20 w-full shrink-0 items-center justify-center bg-white/[0.04]">
@@ -771,10 +771,10 @@ function QuoteConfigurator({ pricingConfig, pricing }) {
                             type="button"
                             aria-pressed={item.key === selectedMeasure}
                             onClick={() => setMeasureFilter(item.key)}
-                            className={`flex min-w-0 flex-col overflow-hidden rounded-xl border text-left transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#10B7B3] ${
+                            className={`flex min-w-0 flex-col overflow-hidden rounded-xl border text-left transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1DB3CD] ${
                               item.key === selectedMeasure
-                                ? "border-[#10B7B3]/70 bg-[#10B7B3]/12"
-                                : "border-white/10 bg-[#11161C] hover:border-[#10B7B3]/35"
+                                ? "border-[#1DB3CD]/70 bg-[#1DB3CD]/12"
+                                : "border-white/10 bg-[#11161C] hover:border-[#1DB3CD]/35"
                             }`}
                           >
                             <span className="flex h-28 w-full shrink-0 items-center justify-center bg-white p-2 sm:h-32">
@@ -844,30 +844,30 @@ function QuoteConfigurator({ pricingConfig, pricing }) {
               <CardContentComp className="grid min-w-0 gap-4 [overflow-wrap:anywhere] [&_svg]:shrink-0">
                 <div className="border-b border-white/10 pb-4">
                   <div className="text-sm text-[#B6BDC6]">Totale stimato, IVA inclusa</div>
-                  <div aria-live="polite" aria-atomic="true" className="mt-2 text-3xl font-bold text-[#F4CC18] xl:text-4xl">{euro.format(calculation.total)}</div>
+                  <div aria-live="polite" aria-atomic="true" className="mt-2 text-3xl font-bold text-[#F2C019] xl:text-4xl">{euro.format(calculation.total)}</div>
                   {calculation.shippingNeedsQuote && (
                     <div className="mt-2 text-sm font-semibold text-[#F8E58A]">Spedizione da quotare a parte, esclusa dal totale.</div>
                   )}
                   <div className="mt-2 text-sm leading-5 text-[#B6BDC6]">Non è un preventivo definitivo. Misure, fattibilità e costi vanno verificati prima dell&apos;ordine.</div>
                 </div>
 
-                <div className="grid gap-3 text-sm text-[#D9E8E7]">
+                <div className="grid gap-3 text-sm text-[#D9E7EB]">
                   <div className="flex items-start gap-3">
-                    <Ruler className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
+                    <Ruler className="mt-0.5 h-4 w-4 text-[#74E2FA]" />
                     <div className="min-w-0">
                       <div className="font-semibold text-white">Misurazione e taglio</div>
                       <div className="mt-1 text-[#B6BDC6]">{calculation.ml} metri lineari</div>
-                      {includeSupply && <div className="mt-2 text-[#D9E8E7]">{selectedModel?.description}</div>}
+                      {includeSupply && <div className="mt-2 text-[#D9E7EB]">{selectedModel?.description}</div>}
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <Wrench className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
+                    <Wrench className="mt-0.5 h-4 w-4 text-[#74E2FA]" />
                     <div>Fornitura {includeSupply ? "inclusa" : "esclusa"} · {includePickup ? "Ritiro in sede" : calculation.shippingNeedsQuote ? "Spedizione da quotare" : includeShipping ? "Spedizione inclusa" : "Consegna da concordare"}{includeInstallation ? " · Posa inclusa" : ""}</div>
                   </div>
                 </div>
 
                 <div className="grid gap-3 border-t border-white/10 pt-4">
-                  <p className="text-sm leading-6 text-[#B6BDC6]">Hai un lavoro concreto? Con Prova EasyBatt ne valutiamo insieme la fattibilità.</p>
+                  <p className="text-sm leading-6 text-[#B6BDC6]">Hai un lavoro concreto? Con Prova Easy‑Batt ne valutiamo insieme la fattibilità.</p>
                   <ButtonComp asChild className={finalTealAccentButtonClassName}>
                     <Link href="/prova-easybatt?from=%2Fquanto-mi-costa#progetto">
                       Valutiamo il tuo progetto
@@ -918,37 +918,37 @@ function QuoteConfigurator({ pricingConfig, pricing }) {
                   </SummaryDisclosure>
 
                   <SummaryDisclosure title={includeSupply ? "Consegna e pesi" : "Consegna"}>
-                    <div className="grid gap-3 text-sm text-[#D9E8E7]">
+                    <div className="grid gap-3 text-sm text-[#D9E7EB]">
                       {includeSupply && (
                         <>
                           <div className="flex items-start gap-3">
-                            <Package className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
+                            <Package className="mt-0.5 h-4 w-4 text-[#74E2FA]" />
                             <div>Peso battiscopa: <span className="font-semibold text-white">{calculation.baseWeight.toFixed(1)} kg</span></div>
                           </div>
                           <div className="flex items-start gap-3">
-                            <Truck className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
+                            <Truck className="mt-0.5 h-4 w-4 text-[#74E2FA]" />
                             <div>Peso totale con imballo: <span className="font-semibold text-white">{calculation.totalWeight.toFixed(1)} kg</span></div>
                           </div>
                         </>
                       )}
                       {!includePickup && (
                         <div className="flex items-start gap-3">
-                          <Truck className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
+                          <Truck className="mt-0.5 h-4 w-4 text-[#74E2FA]" />
                           <div>Modalità di consegna: <span className="font-semibold text-white">{calculation.shippingNeedsQuote ? "spedizione da quotare a parte" : includeShipping ? "spedizione inclusa" : "da concordare"}</span></div>
                         </div>
                       )}
                       {includePickup && (
                         <div className="flex items-start gap-3">
-                          <MapPin className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
+                          <MapPin className="mt-0.5 h-4 w-4 text-[#74E2FA]" />
                           <div>
-                            <div className="font-semibold text-white">Ritiro presso la sede EasyBatt</div>
+                            <div className="font-semibold text-white">Ritiro presso la sede Easy‑Batt</div>
                             <div>{pricingConfig.headquartersLabel}</div>
                           </div>
                         </div>
                       )}
                       {resolvedLocationLabel && (
                         <div className="flex items-start gap-3">
-                          <MapPin className="mt-0.5 h-4 w-4 text-[#72E6E2]" />
+                          <MapPin className="mt-0.5 h-4 w-4 text-[#74E2FA]" />
                           <div>Località: <span className="font-semibold text-white">{resolvedLocationLabel}</span></div>
                         </div>
                       )}
@@ -958,11 +958,11 @@ function QuoteConfigurator({ pricingConfig, pricing }) {
                   <SummaryDisclosure title="Dalla stima alla valutazione">
                     <div>
                       <div className="mb-3 flex items-center gap-2 text-white">
-                        <CheckCircleIcon className="h-4 w-4 text-[#F4CC18]" />
+                        <CheckCircleIcon className="h-4 w-4 text-[#F2C019]" />
                         <span className="font-semibold">Verifichiamo insieme il progetto</span>
                       </div>
                       <div className="grid gap-3 text-sm text-[#AAB2BB]">
-                        <div>1. Raccontaci il lavoro con Prova EasyBatt, anche se non hai ancora tutte le misure.</div>
+                        <div>1. Raccontaci il lavoro con Prova Easy‑Batt, anche se non hai ancora tutte le misure.</div>
                         <div>2. Ti ricontattiamo per valutare il progetto e concordare come procedere, senza impegno di acquisto.</div>
                       </div>
                     </div>

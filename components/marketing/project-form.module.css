@@ -35,7 +35,7 @@
   width: 100%;
   min-width: 0;
   min-height: 48px;
-  border: 1px solid #708080;
+  border: 1px solid #707f83;
   border-radius: 4px;
   background: #22282a;
   color: #f6f7f7;
@@ -48,7 +48,7 @@
 .form input:focus-visible,
 .form select:focus-visible,
 .form textarea:focus-visible {
-  outline: 3px solid #83cdc6;
+  outline: 3px solid #83cada;
   outline-offset: 3px;
 }
 .field [aria-invalid="true"] {
@@ -61,7 +61,7 @@
 .notice,
 .error {
   padding: 16px;
-  border-left: 3px solid #fcc719;
+  border-left: 3px solid #f2c019;
   background: #242a2c;
   margin-bottom: 28px !important;
 }
@@ -86,7 +86,7 @@
   width: 20px;
   height: 20px;
   margin-top: 3px;
-  accent-color: #3a958e;
+  accent-color: #0f9eb6;
 }
 .checkbox a {
   text-decoration: underline;
@@ -143,12 +143,12 @@
   gap: 32px;
 }
 .steps li {
-  border-top: 1px solid #77868670;
+  border-top: 1px solid #77858970;
   padding-top: 22px;
 }
 .steps span {
   display: block;
-  color: #83cdc6;
+  color: #83cada;
   margin-bottom: 16px;
 }
 .steps p {

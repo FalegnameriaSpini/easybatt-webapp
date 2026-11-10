@@ -147,7 +147,7 @@ export function AdminProjects({ password }) {
       className="min-w-0 border-t border-white/20 px-5 py-6"
     >
       <div className="mb-4 flex items-center justify-between gap-4">
-        <h2 className="text-xl font-bold">Richieste Prova EasyBatt</h2>
+        <h2 className="text-xl font-bold">Richieste Prova Easy‑Batt</h2>
         <button
           type="button"
           title="Aggiorna richieste"
@@ -169,7 +169,7 @@ export function AdminProjects({ password }) {
         </p>
       )}
       {message && (
-        <p role="status" className="mb-4 text-sm text-[#83cdc6]">
+        <p role="status" className="mb-4 text-sm text-[#83cada]">
           {message}
         </p>
       )}
@@ -186,7 +186,7 @@ export function AdminProjects({ password }) {
       {data?.available && (
         <>
           {!data.accepting && (
-            <p className="mb-4 text-sm text-[#fcc719]">
+            <p className="mb-4 text-sm text-[#f2c019]">
               Ricezione pubblica disattivata. Le richieste esistenti restano
               consultabili.
             </p>
@@ -289,7 +289,7 @@ export function AdminProjects({ password }) {
                           <span
                             className={
                               projectCanExpire(item, data.today)
-                                ? "text-[#fcc719]"
+                                ? "text-[#f2c019]"
                                 : "text-[#bbc2c6]"
                             }
                           >
@@ -520,7 +520,7 @@ function ProjectReview({ project, busy, onSave, onClose, onRemove, today }) {
         />
       </label>
       <button
-        className={`${button} w-fit bg-[#fcc719] font-semibold text-[#17191d]`}
+        className={`${button} w-fit bg-[#f2c019] font-semibold text-[#17191d]`}
         disabled={busy}
         onClick={() =>
           onSave(project, {
@@ -538,13 +538,13 @@ function ProjectReview({ project, busy, onSave, onClose, onRemove, today }) {
       </button>
       {projectCanExpire(project, today) && (
         <div className="grid gap-4 border-t border-white/20 pt-5">
-          <h4 className="font-semibold text-[#fcc719]">
+          <h4 className="font-semibold text-[#f2c019]">
             Richiesta oltre il termine di conservazione
           </h4>
           <label className="flex items-start gap-3 text-sm">
             <input
               type="checkbox"
-              className="mt-1 size-5 shrink-0 accent-[#3a958e]"
+              className="mt-1 size-5 shrink-0 accent-[#0f9eb6]"
               checked={confirmed}
               disabled={busy || dirty}
               onChange={(event) => setConfirmed(event.target.checked)}
@@ -560,7 +560,7 @@ function ProjectReview({ project, busy, onSave, onClose, onRemove, today }) {
             gestione separata.
           </p>
           {dirty && (
-            <p className="text-sm text-[#fcc719]">
+            <p className="text-sm text-[#f2c019]">
               Sono presenti modifiche non salvate.
             </p>
           )}

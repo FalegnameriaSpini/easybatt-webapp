@@ -11,7 +11,7 @@ import styles from "@/components/marketing/marketing.module.css";
 import formStyles from "@/components/marketing/project-form.module.css";
 
 export const metadata = {
-  title: "Prova EasyBatt | Raccontaci il tuo progetto",
+  title: "Prova Easy-Batt | Raccontaci il tuo progetto",
   description:
     "Un lavoro concreto da valutare insieme: rilievo e preparazione del battiscopa per professionisti e privati, con fornitura opzionale. Sede a Gussago (Brescia).",
 };
@@ -19,7 +19,7 @@ const faqs = [
   {
     question: "Se vi scrivo, devo comprare per forza?",
     answer:
-      "No. Prima guardiamo insieme il tuo lavoro e vediamo se EasyBatt va bene. Prova non vuol dire gratis: prezzo e condizioni li decidiamo insieme prima di iniziare.",
+      "No. Prima guardiamo insieme il tuo lavoro e vediamo se Easy‑Batt va bene. Prova non vuol dire gratis: prezzo e condizioni li decidiamo insieme prima di iniziare.",
   },
   {
     question: "Devo sapere già i metri esatti?",
@@ -33,7 +33,7 @@ const faqs = [
   {
     question: "Posso provarlo su un solo lavoro?",
     answer:
-      "Sì. Raccontaci il lavoro e vediamo insieme se va bene per EasyBatt.",
+      "Sì. Raccontaci il lavoro e vediamo insieme se va bene per Easy‑Batt.",
   },
   {
     question: "In quali zone lavorate?",
@@ -48,7 +48,7 @@ const faqs = [
   {
     question: "Che differenza c'è con Calcola il prezzo?",
     answer:
-      "Calcola il prezzo ti dà un prezzo indicativo, da solo, senza lasciare i tuoi dati. Con Prova EasyBatt ci racconti un lavoro vero e ti ricontattiamo noi. Non serve aver calcolato il prezzo prima.",
+      "Calcola il prezzo ti dà un prezzo indicativo, da solo, senza lasciare i tuoi dati. Con Prova Easy‑Batt ci racconti un lavoro vero e ti ricontattiamo noi. Non serve aver calcolato il prezzo prima.",
   },
 ];
 export default function ProjectPage() {
@@ -57,9 +57,9 @@ export default function ProjectPage() {
       <MarketingHero
         content={{
           eyebrow: "Parti da un lavoro reale",
-          title: "Prova EasyBatt sul tuo prossimo lavoro.",
+          title: "Prova Easy‑Batt sul tuo prossimo lavoro.",
           description:
-            "Raccontaci il lavoro e vediamo insieme se EasyBatt va bene. Non devi cambiare il tuo modo di lavorare: parti da un lavoro e giudica il risultato.",
+            "Raccontaci il lavoro e vediamo insieme se Easy‑Batt va bene. Non devi cambiare il tuo modo di lavorare: parti da un lavoro e giudica il risultato.",
           href: "/come-funziona",
           action: "Come funziona",
           ctaHref: "#progetto",
@@ -70,7 +70,7 @@ export default function ProjectPage() {
       <section className={`${styles.section} ${styles.brand}`}>
         <div className={styles.container}>
           <SectionHeading
-            eyebrow="Con EasyBatt"
+            eyebrow="Con Easy‑Batt"
             title="Preparato prima. Pronto da posare."
           >
             Il taglio lo facciamo noi, in laboratorio. Tu ricevi i battiscopa
@@ -111,7 +111,7 @@ export default function ProjectPage() {
               di posa.
             </p>
             <Link href="/il-sistema" className={styles.textLink}>
-              Entra nel sistema EasyBatt{" "}
+              Entra nel sistema Easy‑Batt{" "}
               <ArrowRight size={16} aria-hidden="true" />
             </Link>
           </div>
@@ -132,7 +132,7 @@ export default function ProjectPage() {
             <li>
               <span>02</span>
               <h3>Lo valutiamo insieme</h3>
-              <p>Ti ricontattiamo e vediamo se il lavoro va bene per EasyBatt.</p>
+              <p>Ti ricontattiamo e vediamo se il lavoro va bene per Easy‑Batt.</p>
             </li>
             <li>
               <span>03</span>
@@ -159,18 +159,18 @@ export default function ProjectPage() {
         <div className={`${styles.container} ${styles.sectionIntro}`}>
           <SectionHeading
             eyebrow="Chi segue la tua richiesta"
-            title="Parlerai con chi EasyBatt lo ha costruito."
+            title="Parlerai con chi Easy‑Batt lo ha costruito."
           />
           <div>
             <p>
               Nella fase di lancio le richieste sono seguite direttamente dal
-              titolare, <strong>Gianluca Spini</strong>. EasyBatt nasce
+              titolare, <strong>Gianluca Spini</strong>. Easy‑Batt nasce
               dall&apos;esperienza di Falegnameria
               Spini: il tuo progetto viene valutato da chi conosce il sistema e
               il lavoro sul campo.
             </p>
             <Link href="/chi-siamo" className={styles.textLink}>
-              Conosci EasyBatt <ArrowRight size={16} aria-hidden="true" />
+              Conosci Easy‑Batt <ArrowRight size={16} aria-hidden="true" />
             </Link>
           </div>
         </div>

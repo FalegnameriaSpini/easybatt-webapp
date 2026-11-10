@@ -27,15 +27,15 @@ export function SiteHeader({ mobileContact = false }) {
       <div className={`${styles.container} ${styles.headerInner}`}>
         <Link
           href="/"
-          aria-label="EasyBatt, home"
+          aria-label="Easy-Batt, home"
           className={styles.logo}
           onClick={() => setOpen(false)}
         >
           <Image
-            src="/Logo_easybatt_trasp.png"
-            alt="EasyBatt - Battiscopa pronti da posare. Senza tagli sul posto"
-            width={1331}
-            height={401}
+            src="/logo-easybatt.png"
+            alt="Easy-Batt, addio tagli sul posto"
+            width={1400}
+            height={282}
             priority
           />
         </Link>
@@ -71,7 +71,7 @@ export function SiteHeader({ mobileContact = false }) {
             href={`/prova-easybatt?from=${encodeURIComponent(pathname)}`}
             className={styles.headerCta}
           >
-            Prova EasyBatt <ArrowUpRight size={16} aria-hidden="true" />
+            Prova Easy‑Batt <ArrowUpRight size={16} aria-hidden="true" />
           </Link>
         </nav>
       </div>
@@ -81,7 +81,7 @@ export function SiteHeader({ mobileContact = false }) {
           className={styles.mobileContact}
           onClick={() => setOpen(false)}
         >
-          Hai un lavoro? Prova EasyBatt{" "}
+          Hai un lavoro? Prova Easy‑Batt{" "}
           <ArrowUpRight size={16} aria-hidden="true" />
         </Link>
       )}

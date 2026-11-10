@@ -14,7 +14,7 @@ for (const size of [180, 192, 512]) {
     : path.join(iconDir, `easybatt-${size}.png`);
   await sharp(symbol, { density: 600 })
     .resize(size, size)
-    .flatten({ background: "#FFFFFF" })
+    .flatten({ background: "#17191D" })
     .png()
     .toFile(target);
 }
@@ -39,4 +39,4 @@ images.forEach((image, index) => {
   offset += image.length;
 });
 await fs.writeFile(path.join(root, "app/favicon.ico"), Buffer.concat([directory, ...images]));
-console.log("Generated EasyBatt favicon, Apple icon and home-screen icons.");
+console.log("Generated Easy-Batt favicon, Apple icon and home-screen icons.");

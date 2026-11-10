@@ -12,10 +12,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  applicationName: "EasyBatt",
-  appleWebApp: { title: "EasyBatt" },
-  title: "EasyBatt - Battiscopa pronti da posare",
-  description: "Preventivatore EasyBatt per battiscopa preparati e pronti da posare, senza tagli sul posto.",
+  applicationName: "Easy-Batt",
+  appleWebApp: { title: "Easy-Batt" },
+  title: "Easy-Batt | Battiscopa pronti da posare",
+  description: "Preventivatore Easy-Batt per battiscopa preparati e pronti da posare, senza tagli sul posto.",
 };
 
 export default function RootLayout({ children }) {

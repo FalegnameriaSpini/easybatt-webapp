@@ -55,7 +55,7 @@ export async function GET(request) {
       .range(page * 20, page * 20 + 19);
     if (error)
       throw new PersistenceError(
-        "Elenco richieste non disponibile. Verifica le migrazioni Prova EasyBatt, inclusa la gestione dei 12 mesi.",
+        "Elenco richieste non disponibile. Verifica le migrazioni Prova Easy-Batt, inclusa la gestione dei 12 mesi.",
       );
     return NextResponse.json(
       {

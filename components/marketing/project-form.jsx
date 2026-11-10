@@ -314,7 +314,7 @@ export function ProjectForm() {
           {busy ? "Invio in corso..." : "Valuta il mio progetto"}
         </button>
         <p>
-          Compilare il modulo non ti impegna ad acquistare EasyBatt. Serve a
+          Compilare il modulo non ti impegna ad acquistare Easy‑Batt. Serve a
           capire se il servizio è adatto al tuo lavoro.
         </p>
       </div>

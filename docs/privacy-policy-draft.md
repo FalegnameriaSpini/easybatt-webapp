@@ -1,21 +1,21 @@
-# Bozza informativa privacy EasyBatt
+# Bozza informativa privacy Easy-Batt
 
 **Bozza interna del 6 ottobre 2026. Non pubblicare e non collegare ai moduli.**
 
 Testo da completare e sottoporre a un consulente privacy prima dell'uso.
 I punti contrassegnati **DA DEFINIRE** impediscono di considerarlo definitivo.
 La data della bozza non e' la versione dell'informativa accettata dagli utenti.
-Account, modulo Prova EasyBatt e consenso marketing descritti sotto sono
+Account, modulo Prova Easy-Batt e consenso marketing descritti sotto sono
 predisposti nel codice, ma non sono ancora attivati online. Nessuna campagna
 email e' collegata. Le tabelle del modulo sono presenti nel progetto Supabase
-EasyBatt secondo la conferma del titolare, che ha eseguito anche la migrazione
+Easy-Batt secondo la conferma del titolare, che ha eseguito anche la migrazione
 dei 12 mesi e verificato il caricamento dell'elenco richieste online. Questo
 non costituisce un collaudo completo dei permessi o dell'invio pubblico.
 
 ## Ambito della prima attivazione
 
 La prima fase riguarda il sito pubblico, il preventivatore e l'apertura del
-modulo Prova EasyBatt per ricevere richieste e ricontattare gli interessati.
+modulo Prova Easy-Batt per ricevere richieste e ricontattare gli interessati.
 La bozza distingue questo percorso da registrazione account, listini riservati
 e marketing: le relative parti sono una preparazione per una fase successiva,
 non la descrizione di servizi gia' attivi.
@@ -42,8 +42,8 @@ verifiche che riguardano il sito e il modulo della prima fase.
 
 ## Titolare e contatti
 
-EasyBatt e' un marchio di **Falegnameria Spini Gianluca e Marco snc**, titolare
-del trattamento dei dati personali per le attivita' EasyBatt descritte qui.
+Easy-Batt e' un marchio di **Falegnameria Spini Gianluca e Marco snc**, titolare
+del trattamento dei dati personali per le attivita' Easy-Batt descritte qui.
 
 Sede: Via Benedetto Castelli 40/42, 25064 Gussago (BS), Italia.
 
@@ -69,7 +69,7 @@ attuale non e' previsto il salvataggio automatico del progetto nel profilo.
 Restano distinti i dati trasmessi ai servizi tecnici e quelli che decidi di
 condividere contattandoci.
 
-### Richieste Prova EasyBatt
+### Richieste Prova Easy-Batt
 
 Il modulo serve a raccontare un lavoro e chiedere una valutazione con ricontatto.
 Non richiede un account, non conferma un ordine e non implica una lavorazione
@@ -136,13 +136,13 @@ nel contesto complessivo dell'informativa, non un termine prescritto per legge.
 
 Questa sezione non deve essere presentata come un servizio attivo nella prima
 versione pubblica dell'informativa. La sua approvazione e' separata dall'apertura
-del solo modulo Prova EasyBatt.
+del solo modulo Prova Easy-Batt.
 
 Con l'attivazione degli account saranno trattati:
 
 - Nome e cognome, email, identificativo account e informazioni di autenticazione
   gestite tramite Supabase Auth; la password non compare nell'elenco clienti
-  dell'admin EasyBatt.
+  dell'admin Easy-Batt.
 - Per i professionisti, ragione sociale e partita IVA italiana, stato della
   richiesta e listino assegnato. La verifica dell'azienda e l'approvazione sono
   manuali; il controllo automatico della partita IVA riguarda solo il formato.
@@ -201,7 +201,7 @@ della loro introduzione.
 
 ## Dati necessari e scelte facoltative
 
-Nel modulo Prova EasyBatt i campi obbligatori sono indicati prima dell'invio:
+Nel modulo Prova Easy-Batt i campi obbligatori sono indicati prima dell'invio:
 senza compilarli non e' possibile inoltrare la richiesta tramite il modulo.
 Azienda e note sono facoltative; per metri e tempi e' disponibile l'opzione
 di dato non ancora noto. Non fornire dati particolari o informazioni di terzi
@@ -219,7 +219,7 @@ dati restano disponibili le funzioni pubbliche; senza approvazione si applica
 il listino pubblico. L'indirizzo serve al calcolo automatico della trasferta;
 il preventivatore consente anche l'inserimento manuale dei chilometri.
 
-Per il modulo Prova EasyBatt, nella prima fase, sono raccolte soltanto richieste
+Per il modulo Prova Easy-Batt, nella prima fase, sono raccolte soltanto richieste
 di progetto: nessuna casella per novita' e offerte e nessuna iscrizione a campagne.
 I campi tecnici del database restano predisposti, ma i nuovi invii registrano
 `marketing_consent=false` e nessun testo di consenso. Non e' una revoca di eventuali
@@ -275,7 +275,7 @@ ancora stabilite scadenze automatiche di cancellazione nel codice dell'app.
 | Account attivi o inattivi | Durata del rapporto, criterio di inattivita' e gestione della chiusura. |
 | Richieste professionali e storico approvazioni | Termine per richieste non approvate e durata dello storico necessario. |
 | Richieste di preventivo e messaggi email o WhatsApp | Periodo dalla conclusione del contatto e distinzione dai rapporti divenuti contrattuali. |
-| Richieste Prova EasyBatt che non diventano lavori | 12 mesi dall'ultimo contatto effettivo, poi cancellazione: scelta confermata; strumenti manuali installati secondo conferma del titolare, da collaudare e presidiare insieme alla gestione delle copie. |
+| Richieste Prova Easy-Batt che non diventano lavori | 12 mesi dall'ultimo contatto effettivo, poi cancellazione: scelta confermata; strumenti manuali installati secondo conferma del titolare, da collaudare e presidiare insieme alla gestione delle copie. |
 | Marketing e prove del consenso | Durata massima dell'uso promozionale, stop alla revoca, durata e base della conservazione delle prove. |
 | Log e backup | Tempi effettivi per ciascun fornitore, rotazione e trattamento delle copie. |
 
@@ -285,7 +285,7 @@ deve indicare periodi o criteri di conservazione. [Garante, informazioni agli in
 
 ## Sessioni e strumenti di tracciamento
 
-Il modulo Prova EasyBatt predisposto imposta, solo dopo un invio ricevuto,
+Il modulo Prova Easy-Batt predisposto imposta, solo dopo un invio ricevuto,
 il cookie `easybatt-project-receipt`, valido per 30 minuti e limitato alla pagina
 `/grazie-prova-easybatt`. Contiene identificativo, scadenza e firma della
 ricevuta, non nome, email o telefono. Serve a mostrare una conferma soltanto
@@ -373,7 +373,7 @@ Questa sezione non va inclusa nel testo pubblico.
 
 ### Attivazione tecnica
 
-Aggiornamento tecnico: e' ora predisposto anche il modulo Prova EasyBatt, disattivato
+Aggiornamento tecnico: e' ora predisposto anche il modulo Prova Easy-Batt, disattivato
 per impostazione predefinita. Integrare la bozza per nome, azienda facoltativa, email,
 telefono, professione, comune/provincia, intervento, metri indicativi, tempi e note.
 La richiesta conserva versione/URL dell'informativa e data di presa visione. Per

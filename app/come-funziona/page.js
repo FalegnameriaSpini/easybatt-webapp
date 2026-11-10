@@ -14,9 +14,9 @@ import { methodFaqs, marketingMedia } from "@/lib/easybatt-marketing.mjs";
 import styles from "@/components/marketing/marketing.module.css";
 
 export const metadata = {
-  title: "Come funziona EasyBatt | Dal rilievo alla posa",
+  title: "Come funziona Easy-Batt | Dal rilievo alla posa",
   description:
-    "Scopri il metodo EasyBatt: rilievo laser, software proprietario, troncatrice a controllo numerico (CNC), codifica e planimetria. Battiscopa preparati prima del cantiere e pronti da posare.",
+    "Scopri il metodo Easy‑Batt: rilievo laser, software proprietario, troncatrice a controllo numerico (CNC), codifica e planimetria. Battiscopa preparati prima del cantiere e pronti da posare.",
 };
 
 export function EasyBattComeFunzionaPage() {
@@ -24,10 +24,10 @@ export function EasyBattComeFunzionaPage() {
     <MarketingShell>
       <MarketingHero
         content={{
-          eyebrow: "Il metodo EasyBatt",
+          eyebrow: "Il metodo Easy‑Batt",
           media: marketingMedia.rilievo,
           title:
-            "Come funziona EasyBatt: dal rilievo al battiscopa pronto da posare.",
+            "Come funziona Easy‑Batt: dal rilievo al battiscopa pronto da posare.",
           description:
             "Rileviamo le stanze con il laser, il nostro software calcola i tagli e una troncatrice a controllo numerico taglia i battiscopa. Te li consegniamo codificati, con la planimetria di posa: la pianta delle stanze con i codici dei pezzi. Tu ti occupi della posa.",
           href: "#metodo",
@@ -41,7 +41,7 @@ export function EasyBattComeFunzionaPage() {
             title="Il tuo mestiere non cambia. La parte più lunga e faticosa la facciamo noi."
           >
             Misurare, segnare, tagliare, verificare, ritoccare: oggi lo fai in
-            cantiere, un pezzo alla volta. Con EasyBatt lo facciamo noi, prima,
+            cantiere, un pezzo alla volta. Con Easy‑Batt lo facciamo noi, prima,
             in laboratorio. A te resta la posa.
           </SectionHeading>
           <Comparison />
@@ -64,7 +64,7 @@ export function EasyBattComeFunzionaPage() {
       <section id="sistema" className={styles.section}>
         <div className={`${styles.container} ${styles.sectionIntro}`}>
           <SectionHeading
-            eyebrow="Il sistema EasyBatt"
+            eyebrow="Il sistema Easy‑Batt"
             title="Il cuore del metodo è il software."
           />
           <div>
@@ -78,7 +78,7 @@ export function EasyBattComeFunzionaPage() {
               delle stanze su carta.
             </p>
             <Link href="/il-sistema" className={styles.sectionLink}>
-              Approfondisci il sistema EasyBatt{" "}
+              Approfondisci il sistema Easy‑Batt{" "}
               <ArrowRight size={18} aria-hidden="true" />
             </Link>
           </div>
@@ -89,7 +89,7 @@ export function EasyBattComeFunzionaPage() {
         <div className={`${styles.container} ${styles.sectionIntro}`}>
           <SectionHeading
             eyebrow="Esperienza e metodo"
-            title="EasyBatt nasce dal lavoro, prima ancora che dalla tecnologia."
+            title="Easy‑Batt nasce dal lavoro, prima ancora che dalla tecnologia."
           />
           <div>
             <p className={styles.lead}>
@@ -102,7 +102,7 @@ export function EasyBattComeFunzionaPage() {
               troncatrice a controllo numerico.
             </p>
             <Link href="/chi-siamo" className={styles.sectionLink}>
-              Da dove nasce EasyBatt <ArrowRight size={18} aria-hidden="true" />
+              Da dove nasce Easy‑Batt <ArrowRight size={18} aria-hidden="true" />
             </Link>
           </div>
         </div>
@@ -159,8 +159,8 @@ export function EasyBattComeFunzionaPage() {
       <ProjectContact
         title="Ora che sai come funziona, vediamolo sul tuo lavoro."
         lead="Hai un cantiere o una ristrutturazione in programma?"
-        text="Raccontaci il progetto e verifichiamo insieme come applicare il metodo EasyBatt al battiscopa del tuo ambiente."
-        action="Prova EasyBatt sul tuo prossimo lavoro"
+        text="Raccontaci il progetto e verifichiamo insieme come applicare il metodo Easy‑Batt al battiscopa del tuo ambiente."
+        action="Prova Easy‑Batt sul tuo prossimo lavoro"
       />
     </MarketingShell>
   );

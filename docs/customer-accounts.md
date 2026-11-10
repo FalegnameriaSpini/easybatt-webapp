@@ -1,4 +1,4 @@
-# Account EasyBatt: attivazione controllata
+# Account Easy-Batt: attivazione controllata
 
 ## Stato
 
@@ -13,7 +13,7 @@ Per prove complete con vere email usare un progetto Supabase di sviluppo separat
    `supabase/migrations/202610050002_customers.sql`, una sola volta, dopo quella
    del catalogo. Non modifica prodotti o prezzi. Crea profili, storico consensi,
    storico approvazioni e trigger su `auth.users`. I vecchi utenti Auth non sono
-   importati automaticamente: la registrazione EasyBatt parte da questa versione.
+   importati automaticamente: la registrazione Easy-Batt parte da questa versione.
 2. In Supabase Authentication abilitare email/password e **Confirm email**.
    Impostare password di almeno 12 caratteri e rivedere rate limits e protezione
    anti-abuso; per apertura al pubblico valutare CAPTCHA (integrazione non inclusa).
@@ -26,11 +26,11 @@ Per prove complete con vere email usare un progetto Supabase di sviluppo separat
    Nel progetto di sviluppo aggiungere l'origine locale effettiva, non wildcard
    per domini esterni. L'app usa il flusso browser standard Supabase (implicit).
 5. Predisporre un'informativa privacy definitiva con titolare, finalita', tempi di
-   conservazione e contatti corretti. La [bozza interna EasyBatt](privacy-policy-draft.md)
+   conservazione e contatti corretti. La [bozza interna Easy-Batt](privacy-policy-draft.md)
    contiene i dati aziendali forniti e i punti ancora da completare; non pubblicarla
    e non collegarla alla registrazione finche' non e' approvata.
    Il testo marketing mostrato e' in `lib/easybatt-customers.mjs`:
-   "Desidero ricevere via email novita e offerte EasyBatt. Posso revocare il
+   "Desidero ricevere via email novita e offerte Easy-Batt. Posso revocare il
    consenso in qualsiasi momento." Versione iniziale `2026-10-05-v1`.
    Prima dell'apertura verificare testo e informativa con chi segue la privacy.
    Ogni futura revisione richiede versionamento coerente di codice e migrazione,

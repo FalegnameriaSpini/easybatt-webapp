@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 export async function GET(request) {
   try {
     const { customer } = await authenticatedCustomer(request);
-    if (!customer) throw new PersistenceError("Profilo cliente non disponibile. Contatta EasyBatt.", 404);
+    if (!customer) throw new PersistenceError("Profilo cliente non disponibile. Contatta Easy-Batt.", 404);
     const { pricing } = customerPricing(await getEasyBattConfig(), customer);
     return NextResponse.json({ customer, pricing }, { headers: privateHeaders });
   } catch (error) { return customerFailure(error); }

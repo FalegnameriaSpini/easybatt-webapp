@@ -34,7 +34,7 @@ const photos = [
   // Opening image: the same masked photograph, cropped wide for the hero.
   { ...kit, name: "pezzi-codificati-apertura", crop: { left: 0, top: 230, width: 1600, height: 720 } },
   {
-    // An EasyBatt job delivered on site, packed and labelled. The package
+    // An Easy-Batt job delivered on site, packed and labelled. The package
     // labels are unreadable even in the original (checked on the closest
     // one), so no mask is needed. The crop leaves out the third-party branded
     // box on the left, the grey floor mat and the kitchen island.

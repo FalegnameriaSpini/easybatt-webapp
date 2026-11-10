@@ -1,4 +1,4 @@
-# EasyBatt revisione Privacy e Cookie
+# Easy-Batt revisione Privacy e Cookie
 
 Scheda per agenzia e consulente privacy - 6 ottobre 2026
 
@@ -10,7 +10,7 @@ scelte aziendali; non e' un'informativa da pubblicare o un'attestazione di confo
 
 ## Azienda e contatti
 
-EasyBatt e' un marchio di **Falegnameria Spini Gianluca e Marco snc**.
+Easy-Batt e' un marchio di **Falegnameria Spini Gianluca e Marco snc**.
 
 - Sede: Via Benedetto Castelli 40/42, 25064 Gussago (BS).
 - Partita IVA: 03098310984.
@@ -32,7 +32,7 @@ della distanza. E' possibile inserire i chilometri manualmente senza attivare
 Google. La scelta non viene conservata dopo la ricarica. Non si tratta ancora
 di un sistema completo per raccogliere e revocare eventuali consensi.
 
-**Prossima apertura:** il modulo Prova EasyBatt, ancora disattivato, permettera'
+**Prossima apertura:** il modulo Prova Easy-Batt, ancora disattivato, permettera'
 di descrivere un lavoro e chiedere un ricontatto. Le richieste saranno salvate
 in Supabase e consultate nell'area amministrativa, senza email automatiche.
 
@@ -122,7 +122,7 @@ La verifica richiesta deve riguardare anche le procedure reali, non solo il test
 
 ## Materiale disponibile
 
-Sono disponibili la [bozza tecnica EasyBatt](privacy-policy-draft.md), una
+Sono disponibili la [bozza tecnica Easy-Batt](privacy-policy-draft.md), una
 [prima versione pubblica dell'informativa](informativa-privacy-pubblica.md) da
 correggere, con i punti aperti segnati "DA CONFERMARE", e le
 informative Word del sito Falegnameria Spini. Queste ultime riguardano un sito
@@ -132,9 +132,9 @@ non condividere password, chiavi API o il file `.env.local`.
 
 ## Messaggio di accompagnamento
 
-Oggetto: Revisione Privacy e Cookie del sito EasyBatt
+Oggetto: Revisione Privacy e Cookie del sito Easy-Batt
 
-Buongiorno, stiamo preparando EasyBatt, marchio della Falegnameria Spini, per
+Buongiorno, stiamo preparando Easy-Batt, marchio della Falegnameria Spini, per
 l'avvio a inizio 2027. Il sito e il preventivatore sono gia' online; prima di
 aprire il modulo di richiesta progetto desideriamo completare la revisione
 Privacy e Cookie. Allego il riepilogo del funzionamento e delle scelte gia'

@@ -1,4 +1,4 @@
-# Informativa privacy EasyBatt
+# Informativa privacy Easy-Batt
 
 **Bozza della versione pubblica, preparata per la revisione del consulente privacy. Non pubblicare finché non è approvata.**
 
@@ -6,7 +6,7 @@
 
 ## Nota per il consulente (da togliere prima della pubblicazione)
 
-Questo testo è ricavato dalla bozza tecnica interna ([privacy-policy-draft.md](privacy-policy-draft.md)) e dalla scheda di revisione ([riepilogo-revisione-privacy-cookie.md](riepilogo-revisione-privacy-cookie.md)). Descrive solo i servizi della prima fase: sito, calcolatore del prezzo, modulo "Prova EasyBatt", contatti via email e WhatsApp. Account clienti e newsletter **non sono attivi** e sono stati lasciati fuori di proposito.
+Questo testo è ricavato dalla bozza tecnica interna ([privacy-policy-draft.md](privacy-policy-draft.md)) e dalla scheda di revisione ([riepilogo-revisione-privacy-cookie.md](riepilogo-revisione-privacy-cookie.md)). Descrive solo i servizi della prima fase: sito, calcolatore del prezzo, modulo "Prova Easy-Batt", contatti via email e WhatsApp. Account clienti e newsletter **non sono attivi** e sono stati lasciati fuori di proposito.
 
 Il linguaggio è volutamente semplice, perché molti lettori sono posatori e artigiani, spesso non madrelingua italiani.
 
@@ -25,7 +25,7 @@ I punti segnati **[DA CONFERMARE]** sono decisioni o verifiche ancora aperte. In
 
 ## Chi tratta i tuoi dati
 
-Il titolare del trattamento è **Falegnameria Spini Gianluca e Marco snc**, che gestisce il marchio EasyBatt.
+Il titolare del trattamento è **Falegnameria Spini Gianluca e Marco snc**, che gestisce il marchio Easy-Batt.
 
 - Sede: Via Benedetto Castelli 40/42, 25064 Gussago (BS), Italia
 - Partita IVA: 03098310984
@@ -41,7 +41,7 @@ Questa informativa riguarda il sito **www.easy-batt.it** e in particolare:
 
 - la navigazione nelle pagine del sito;
 - il calcolatore **Calcola il prezzo**;
-- il modulo **Prova EasyBatt**, con cui ci racconti un lavoro e chiedi di essere ricontattato;
+- il modulo **Prova Easy-Batt**, con cui ci racconti un lavoro e chiedi di essere ricontattato;
 - i contatti via **email** e **WhatsApp**.
 
 Sul sito oggi **non** ci sono account clienti né iscrizioni a newsletter. Se li attiveremo, aggiorneremo questa informativa prima di farlo.
@@ -65,7 +65,7 @@ Per calcolare il costo della trasferta puoi:
 
 La ricerca con Google parte solo se la attivi tu, e a ogni ricarica della pagina torna disattivata.
 
-### Quando compili il modulo "Prova EasyBatt"
+### Quando compili il modulo "Prova Easy-Batt"
 
 **Dati che ci chiedi di trattare:**
 
@@ -81,7 +81,7 @@ La ricerca con Google parte solo se la attivi tu, e a ogni ricarica della pagina
 - la pagina del sito da cui sei arrivato al modulo e, solo se presenti nel link, tre etichette sulla provenienza (fonte, mezzo, campagna). Non salviamo l'indirizzo completo della pagina né identificativi pubblicitari;
 - dopo il contatto: lo stato della richiesta, le nostre note interne e le date dei contatti.
 
-**Perché li usiamo:** per leggere la tua richiesta, ricontattarti e capire insieme se EasyBatt è adatto al tuo lavoro. **Non** usiamo questi dati per pubblicità o newsletter, e il modulo non contiene nessuna casella di consenso marketing.
+**Perché li usiamo:** per leggere la tua richiesta, ricontattarti e capire insieme se Easy-Batt è adatto al tuo lavoro. **Non** usiamo questi dati per pubblicità o newsletter, e il modulo non contiene nessuna casella di consenso marketing.
 
 **Se non compili i campi obbligatori**, il modulo non parte. Puoi comunque scriverci a info@easy-batt.it.
 
@@ -148,7 +148,7 @@ Il sito **non usa cookie pubblicitari né strumenti di statistica** come Google 
 
 | Nome | Chi lo imposta | A cosa serve | Durata |
 | --- | --- | --- | --- |
-| `easybatt-project-receipt` | EasyBatt | Mostrare la pagina di conferma solo dopo che la tua richiesta è stata salvata. Contiene un codice firmato, non i tuoi recapiti. Viene creato solo dopo l'invio del modulo e vale solo per la pagina di conferma. | 30 minuti |
+| `easybatt-project-receipt` | Easy-Batt | Mostrare la pagina di conferma solo dopo che la tua richiesta è stata salvata. Contiene un codice firmato, non i tuoi recapiti. Viene creato solo dopo l'invio del modulo e vale solo per la pagina di conferma. | 30 minuti |
 | `__cf_bm` | Cloudflare, tramite il servizio che ospita le immagini (Supabase) | Protezione da accessi automatici. **[DA CONFERMARE]** Nella prova tecnica il browser non lo ha salvato. | **[DA CONFERMARE]** |
 | Strumenti di Google Maps | Google | Suggerimento degli indirizzi nel calcolatore. Si caricano solo se premi "Attiva ricerca indirizzo con Google". | **[DA CONFERMARE]** |
 

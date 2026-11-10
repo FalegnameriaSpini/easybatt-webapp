@@ -12,7 +12,7 @@ import {
 import styles from "@/components/marketing/marketing.module.css";
 
 export const metadata = {
-  title: "EasyBatt per professionisti | Battiscopa pronti da posare",
+  title: "Easy-Batt per professionisti | Battiscopa pronti da posare",
   description:
     "Per posatori, parquetisti, falegnami, imprese e rivenditori. Rilievo e preparazione del battiscopa prima del cantiere, con fornitura opzionale. Sede a Gussago (Brescia).",
 };
@@ -45,7 +45,7 @@ const professions = [
 ];
 const faqs = [
   {
-    question: "EasyBatt è solo per i posatori?",
+    question: "Easy‑Batt è solo per i posatori?",
     answer:
       "No. È anche per parquetisti, falegnami, imprese di ristrutturazione, rivenditori e showroom: per chi posa il battiscopa e per chi lo vende.",
   },
@@ -57,7 +57,7 @@ const faqs = [
   {
     question: "Mi conviene?",
     answer:
-      "Dipende dal lavoro. Quando fai i conti, non guardare solo il prezzo del battiscopa: conta anche il tempo per misurare, tagliare e ritoccare in cantiere. Con EasyBatt quel tempo lo usi per posare.",
+      "Dipende dal lavoro. Quando fai i conti, non guardare solo il prezzo del battiscopa: conta anche il tempo per misurare, tagliare e ritoccare in cantiere. Con Easy‑Batt quel tempo lo usi per posare.",
   },
   {
     question: "Posso usare il mio battiscopa?",
@@ -65,7 +65,7 @@ const faqs = [
       "Sì. Prima controlliamo insieme che vada bene e come farlo arrivare da noi. Ti diciamo anche se ci sono costi di trasporto.",
   },
   {
-    question: "Sono un rivenditore: posso proporre EasyBatt ai miei clienti?",
+    question: "Sono un rivenditore: posso proporre Easy‑Batt ai miei clienti?",
     answer:
       "Sì. Puoi offrire ai tuoi clienti il battiscopa già tagliato e pronto da posare. Come collaborare lo decidiamo insieme.",
   },
@@ -77,7 +77,7 @@ const faqs = [
   {
     question: "Posso provarlo su un solo lavoro?",
     answer:
-      "Sì. Raccontaci il lavoro e vediamo insieme se va bene per EasyBatt. Scriverci non ti impegna ad acquistare e non serve registrarti. Prima valutiamo il lavoro e concordiamo il prezzo.",
+      "Sì. Raccontaci il lavoro e vediamo insieme se va bene per Easy‑Batt. Scriverci non ti impegna ad acquistare e non serve registrarti. Prima valutiamo il lavoro e concordiamo il prezzo.",
   },
 ];
 
@@ -93,7 +93,7 @@ export default function ProfessionalsPage() {
             "Rileviamo le stanze con il laser, tagliamo i battiscopa, li codifichiamo e te li consegniamo con la planimetria di posa. In cantiere pensi solo a quello che sai fare meglio: posare.",
           href: "#benefici",
           action: "Scopri cosa cambia",
-          ctaLabel: "Prova EasyBatt sul tuo prossimo lavoro",
+          ctaLabel: "Prova Easy‑Batt sul tuo prossimo lavoro",
           ctaFirst: true,
         }}
       />
@@ -163,7 +163,7 @@ export default function ProfessionalsPage() {
               ci vuole tempo. E il tempo è un costo.
             </p>
             <p>
-              Quando confronti i prezzi, conta anche il tempo che con EasyBatt
+              Quando confronti i prezzi, conta anche il tempo che con Easy‑Batt
               non passi più a tagliare in cantiere.
             </p>
             <Link href="/prova-easybatt" className={styles.sectionLink}>
@@ -224,10 +224,10 @@ export default function ProfessionalsPage() {
       <AngleSection />
       <FaqSection items={faqs} title="Le domande dei professionisti." />
       <ProjectContact
-        title="Il modo migliore per capire EasyBatt? Provarlo sul tuo lavoro."
+        title="Il modo migliore per capire Easy‑Batt? Provarlo sul tuo lavoro."
         lead="Hai un lavoro in programma? Raccontacelo."
-        text="Vediamo insieme se EasyBatt va bene per il tuo lavoro. Non servono le misure."
-        action="Prova EasyBatt sul tuo prossimo lavoro"
+        text="Vediamo insieme se Easy‑Batt va bene per il tuo lavoro. Non servono le misure."
+        action="Prova Easy‑Batt sul tuo prossimo lavoro"
       />
     </MarketingShell>
   );

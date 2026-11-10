@@ -25,7 +25,7 @@ function getMapsConfig() {
     apiKey,
     originLat: getRequiredNumberEnv("EASYBATT_ORIGIN_LAT"),
     originLng: getRequiredNumberEnv("EASYBATT_ORIGIN_LNG"),
-    originLabel: process.env.EASYBATT_ORIGIN_LABEL || "sede EasyBatt",
+    originLabel: process.env.EASYBATT_ORIGIN_LABEL || "sede Easy-Batt",
   };
 }
 

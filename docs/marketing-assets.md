@@ -1,4 +1,4 @@
-# Materiali visivi delle pagine EasyBatt
+# Materiali visivi delle pagine Easy-Batt
 
 ## Fotografie originali inserite il 16 ottobre 2026
 
@@ -9,9 +9,9 @@ varianti ritoccate presenti nella cartella sorgente non sono state utilizzate.
 
 | File pubblico in `public/marketing/originali` | Sorgente | Uso |
 | --- | --- | --- |
-| `pezzi-codificati-apertura.webp` | `20261016_191511.jpg` | Apertura di Home, Per i professionisti, Chi siamo e Prova EasyBatt (ritaglio largo) |
+| `pezzi-codificati-apertura.webp` | `20261016_191511.jpg` | Apertura di Home, Per i professionisti, Chi siamo e Prova Easy-Batt (ritaglio largo) |
 | `kit-codificato-v2.webp` | `20261016_191511.jpg` | Cosa ricevi in Come funziona |
-| `consegna-cantiere.webp` | `20251209_102446.jpg` | Blocco verde della Home e passaggio "Pronti da posare": lavoro EasyBatt arrivato in cantiere |
+| `consegna-cantiere.webp` | `20251209_102446.jpg` | Blocco verde della Home e passaggio "Pronti da posare": lavoro Easy-Batt arrivato in cantiere |
 | `rilievo-laser.webp` | `20261001_150246(3).jpg` | Apertura di Come funziona e Il sistema |
 | `rilievo-stanza.webp` | `20261001_150421.jpg` | Fase del rilievo in Il sistema (laser da solo nella stanza vuota) |
 | `rilievo-ingresso.webp` | `20251129_104046.jpg` | Passaggio "Rilievo" in Come funziona: ingresso con pareti verdi, ritaglio 4:3 con laser e treppiede interi |
@@ -38,12 +38,12 @@ Il 16 ottobre, dopo la prima pubblicazione locale, sono state riviste le scelte:
 
 - la vecchia apertura (`20251215_165113.jpg`) e' stata tolta perche' sfocata gia'
   nello scatto originale; il battiscopa curvo (`20251217_180600.jpg`) non si usa
-  perche' EasyBatt per ora non gestisce i tratti curvi;
+  perche' Easy-Batt per ora non gestisce i tratti curvi;
 - il ritaglio del corridoio esclude la porta aperta, la scatola, il cartone a
   terra e il campione di carta da parati;
 - le schermate partono sotto la scheda "Pianta" del programma di disegno;
 - nella Home i pezzi codificati restano solo in apertura; nel blocco verde c'e'
-  la consegna in cantiere, confermata dal titolare come lavoro EasyBatt;
+  la consegna in cantiere, confermata dal titolare come lavoro Easy-Batt;
 - nella foto della consegna le etichette dei pacchi non sono leggibili nemmeno
   nell'originale (verificato ingrandendo la piu' vicina), quindi non servono
   maschere; il ritaglio esclude una scatola con il marchio di un altro
@@ -76,13 +76,13 @@ della planimetria durante la posa. Nessun video e' stato aggiunto.
 
 ## Ambientazione provvisoria precedente (non piu' utilizzata)
 
-File precedente: `public/marketing/battiscopa-ambientazione.webp` (1672 x 941 pixel). Conservato per tracciabilita', ma non piu' referenziato dalle pagine. La didascalia precedente lo identificava come ambientazione illustrativa generata con AI, non come cantiere o dimostrazione EasyBatt.
+File precedente: `public/marketing/battiscopa-ambientazione.webp` (1672 x 941 pixel). Conservato per tracciabilita', ma non piu' referenziato dalle pagine. La didascalia precedente lo identificava come ambientazione illustrativa generata con AI, non come cantiere o dimostrazione Easy-Batt.
 
 Generata con lo strumento integrato image_gen, non tramite API o script CLI. L'originale PNG resta nella cartella delle immagini generate di Codex; la copia WebP ottimizzata e' inclusa nel progetto. Non sono stati utilizzati video di terzi.
 
 Prompt di generazione:
 
-> Create a single wide 16:9 high resolution photorealistic architectural product illustration for EasyBatt skirting board service website. NOT a documented real installation: generic illustrative interior only. Low camera 20cm above pale neutral oak parquet, looking along a crisp matte white straight skirting board approx 8cm tall, professionally flush installed along a quiet light warm-grey plaster wall with a visible precise 90 degree internal corner on the right. The actual white skirting board and precise joint are the subject and must be sharply and clearly inspectable, with natural material texture, natural daylight from the right, no blur, no furniture covering the skirting. Composition: upper left two thirds empty grey plaster wall available for dark headline overlay, skirting and floor occupy bottom third, corner and brighter wall on right. Refined architectural editorial photograph, neutral white/grey with restrained pale wood, not beige overall. No people, no machines, no lettering, no logo, no tools, no plants, no watermarks. Avoid exaggerated tall molding, ornamental molding, shadows obscuring board.
+> Create a single wide 16:9 high resolution photorealistic architectural product illustration for Easy-Batt skirting board service website. NOT a documented real installation: generic illustrative interior only. Low camera 20cm above pale neutral oak parquet, looking along a crisp matte white straight skirting board approx 8cm tall, professionally flush installed along a quiet light warm-grey plaster wall with a visible precise 90 degree internal corner on the right. The actual white skirting board and precise joint are the subject and must be sharply and clearly inspectable, with natural material texture, natural daylight from the right, no blur, no furniture covering the skirting. Composition: upper left two thirds empty grey plaster wall available for dark headline overlay, skirting and floor occupy bottom third, corner and brighter wall on right. Refined architectural editorial photograph, neutral white/grey with restrained pale wood, not beige overall. No people, no machines, no lettering, no logo, no tools, no plants, no watermarks. Avoid exaggerated tall molding, ornamental molding, shadows obscuring board.
 
 ## Sostituzione con materiale originale
 

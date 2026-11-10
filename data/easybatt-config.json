@@ -8,9 +8,9 @@
   "vat": 0.22,
   "headquartersLabel": "Via Benedetto Castelli,40/42 - Gussago - BS",
   "whatsappNumber": "393445677063",
-  "whatsappVerifyMessage": "Ciao, ho visto il prezzo per il mio progetto EasyBatt e vorrei prenotare la verifica.",
-  "whatsappRecapMessage": "Ciao, vorrei inviare il riepilogo del mio progetto EasyBatt.",
-  "whatsappMessage": "Ciao, ho visto EasyBatt e vorrei un chiarimento.",
+  "whatsappVerifyMessage": "Ciao, ho visto il prezzo per il mio progetto Easy-Batt e vorrei prenotare la verifica.",
+  "whatsappRecapMessage": "Ciao, vorrei inviare il riepilogo del mio progetto Easy-Batt.",
+  "whatsappMessage": "Ciao, ho visto Easy-Batt e vorrei un chiarimento.",
   "shippingBands": [
     {
       "maxKg": 50,

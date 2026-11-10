@@ -1,4 +1,4 @@
-# EasyBatt: attivazione Supabase
+# Easy-Batt: attivazione Supabase
 
 ## Prima fase: catalogo e immagini
 

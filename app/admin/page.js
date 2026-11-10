@@ -32,7 +32,7 @@ function Field({ label, children, help, className = "" }) {
 }
 
 const inputClass =
-  "h-11 rounded-xl border border-white/10 bg-[#11161C] px-3 text-sm text-white outline-none transition focus:border-[#10B7B3]/50 focus:ring-2 focus:ring-[#10B7B3]/20 lg:min-w-0 lg:w-full";
+  "h-11 rounded-xl border border-white/10 bg-[#11161C] px-3 text-sm text-white outline-none transition focus:border-[#1DB3CD]/50 focus:ring-2 focus:ring-[#1DB3CD]/20 lg:min-w-0 lg:w-full";
 
 export default function EasyBattAdminPage() {
   const [password, setPassword] = useState("");
@@ -65,7 +65,7 @@ export default function EasyBattAdminPage() {
   return (
     <main className="min-h-screen bg-[#17191D] px-5 py-12 text-white">
       <form onSubmit={login} className="mx-auto grid w-full max-w-sm gap-5">
-        <Link href="/"><img src="/Logo_easybatt_trasp.png" alt="EasyBatt" className="h-auto w-64 max-w-full" /></Link>
+        <Link href="/"><img src="/logo-easybatt.png" alt="Easy-Batt" className="h-auto w-64 max-w-full" /></Link>
         <h1 className="text-2xl font-bold">Accesso admin</h1>
         <Field label="Password admin">
           <input className={inputClass} type="password" autoComplete="current-password" required value={password} onChange={(event) => setPassword(event.target.value)} />
@@ -306,10 +306,10 @@ function AdminEditor({ initialRecord, password, onLogout }) {
       <div className={`${eb.pageShell} lg:max-w-[1800px]`}>
         <header className="mb-5 flex flex-col gap-3 rounded-[24px] border border-white/10 bg-[#1C1F24] p-4 shadow-[0_18px_50px_rgba(0,0,0,0.2)] sm:flex-row sm:items-center sm:justify-between">
           <div className="flex min-w-0 flex-wrap items-center gap-3">
-            <img src="/Logo_easybatt_trasp.png" alt="EasyBatt" className="h-auto w-52 max-w-full" />
+            <img src="/logo-easybatt.png" alt="Easy-Batt" className="h-auto w-52 max-w-full" />
             <div className="min-w-0">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#72E6E2]">Area riservata</p>
-              <h1 className="text-2xl font-bold">Gestione EasyBatt</h1>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#74E2FA]">Area riservata</p>
+              <h1 className="text-2xl font-bold">Gestione Easy‑Batt</h1>
             </div>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -331,7 +331,7 @@ function AdminEditor({ initialRecord, password, onLogout }) {
         <div className="grid gap-5 lg:grid-cols-[260px_minmax(0,1fr)]">
           <aside className="h-fit rounded-[24px] border border-white/10 bg-[#1C1F24] p-4">
             <nav className="grid gap-2 text-sm">
-              <a className="rounded-xl bg-[#10B7B3]/12 px-3 py-2 font-semibold text-[#A7F3F0]" href="#accesso">Accesso</a>
+              <a className="rounded-xl bg-[#1DB3CD]/12 px-3 py-2 font-semibold text-[#ACEFFF]" href="#accesso">Accesso</a>
               <a className="rounded-xl px-3 py-2 text-[#B9C1CA] hover:bg-white/[0.06]" href="#tariffe">Tariffe</a>
               <a className="rounded-xl px-3 py-2 text-[#B9C1CA] hover:bg-white/[0.06]" href="#listini">Listini dedicati</a>
               <a className="rounded-xl px-3 py-2 text-[#B9C1CA] hover:bg-white/[0.06]" href="#clienti">Clienti</a>
@@ -347,7 +347,7 @@ function AdminEditor({ initialRecord, password, onLogout }) {
               <div className="grid gap-4 p-5">
                 <div>
                   <h2 className="text-xl font-bold">Accesso admin</h2>
-                  <p className={`mt-1 text-sm ${initialRecord.storage === "sandbox" ? "text-[#F4CC18]" : "text-[#B6BDC6]"}`}>{initialRecord.storage === "supabase" ? "Database e immagini: Supabase" : initialRecord.storage === "sandbox" ? "Ambiente di prova - dati locali separati" : "Archivio locale"}</p>
+                  <p className={`mt-1 text-sm ${initialRecord.storage === "sandbox" ? "text-[#F2C019]" : "text-[#B6BDC6]"}`}>{initialRecord.storage === "supabase" ? "Database e immagini: Supabase" : initialRecord.storage === "sandbox" ? "Ambiente di prova - dati locali separati" : "Archivio locale"}</p>
                   {!initialRecord.writable && <p role="alert" className="mt-2 text-sm text-[#F2A3A3]">Salvataggio online non configurato. Collega Supabase.</p>}
                 </div>
                 <Button type="button" variant="outline" className={`${eb.outlineButton} w-fit`} onClick={onLogout}><LogOut className="mr-2 h-4 w-4" />Esci</Button>
@@ -438,7 +438,7 @@ function AdminEditor({ initialRecord, password, onLogout }) {
                 </div>
 
                 {catalogImportSummary && (
-                  <div className="grid gap-2 rounded-[18px] border border-[#10B7B3]/25 bg-[#10B7B3]/8 p-4 text-sm text-[#C8FAF8] sm:grid-cols-4">
+                  <div className="grid gap-2 rounded-[18px] border border-[#1DB3CD]/25 bg-[#1DB3CD]/8 p-4 text-sm text-[#D0F6FF] sm:grid-cols-4">
                     <span><strong>{catalogImportSummary.total}</strong> totali</span>
                     <span><strong>{catalogImportSummary.added}</strong> nuovi</span>
                     <span><strong>{catalogImportSummary.updated}</strong> aggiornati</span>
@@ -459,7 +459,7 @@ function AdminEditor({ initialRecord, password, onLogout }) {
                           key={`${model.code}-${index}`}
                           onClick={() => setSelectedModelCode(model.code)}
                           className={`grid w-full gap-0.5 rounded-xl px-3 py-2.5 text-left transition ${
-                            index === activeModelIndex ? "bg-[#10B7B3]/14 text-white" : "text-[#C6CCD4] hover:bg-white/[0.05]"
+                            index === activeModelIndex ? "bg-[#1DB3CD]/14 text-white" : "text-[#C6CCD4] hover:bg-white/[0.05]"
                           }`}
                         >
                           <span className="text-sm font-semibold">{model.code}</span>
@@ -473,7 +473,7 @@ function AdminEditor({ initialRecord, password, onLogout }) {
                     <article className="grid gap-4 rounded-[20px] border border-white/10 bg-[#17191D] p-4 lg:min-w-0">
                       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                         <div>
-                          <strong className="text-[#F4CC18]">{adminModel.code}</strong>
+                          <strong className="text-[#F2C019]">{adminModel.code}</strong>
                           <div className="mt-1 text-sm text-[#8F98A3]">{adminModel.description}</div>
                         </div>
                         <div className="flex flex-wrap items-center gap-3">
@@ -569,7 +569,7 @@ function AdminEditor({ initialRecord, password, onLogout }) {
 
         <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-[#11161C]/95 px-4 py-3 backdrop-blur">
           <div className="mx-auto flex max-w-7xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between lg:max-w-[1752px]">
-            <div className={`text-sm ${status === "error" ? "text-[#F2A3A3]" : status === "saved" ? "text-[#72E6E2]" : "text-[#B6BDC6]"}`}>
+            <div className={`text-sm ${status === "error" ? "text-[#F2A3A3]" : status === "saved" ? "text-[#74E2FA]" : "text-[#B6BDC6]"}`}>
               {message || (changed ? "Hai modifiche non ancora pubblicate." : "Tutto salvato.")}
             </div>
             <div className="flex gap-2">

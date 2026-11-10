@@ -58,7 +58,7 @@ export function AdminCustomers({ password }) {
   return <section id="clienti" aria-labelledby="customers-title" className="min-w-0 scroll-mt-5 border-y border-white/15 px-4 py-6 sm:px-5">
     <div className="mb-5 flex flex-wrap items-center justify-between gap-3"><h2 id="customers-title" className="text-xl font-bold">Clienti</h2><button type="button" title="Aggiorna clienti e listini salvati" aria-label="Aggiorna clienti" className={button} disabled={busy} onClick={() => setRefresh((n) => n + 1)}><RefreshCw size={16} /></button></div>
     {error && <p role="alert" className="mb-4 text-sm text-[#F2A3A3]">{error}</p>}
-    {message && <p role="status" className="mb-4 text-sm text-[#72E6E2]">{message}</p>}
+    {message && <p role="status" className="mb-4 text-sm text-[#74E2FA]">{message}</p>}
     {enabled === false ? <p className="text-sm text-[#B6BDC6]">Gestione clienti non ancora attiva in questo ambiente.</p> : <>
       <label className="mb-4 grid max-w-sm gap-2 text-sm"><span>Stato clienti</span><select aria-label="Stato clienti" className={input} value={status} disabled={busy} onChange={(e) => { setStatus(e.target.value); setPage(0); setSelectedId(""); }}><option value="">Tutti</option>{Object.entries(CUSTOMER_STATES).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>
       {busy && <p role="status" className="mb-3 text-sm text-[#B6BDC6]">Caricamento...</p>}
@@ -87,8 +87,8 @@ function CustomerReview({ customer, priceLists, busy, onSave }) {
         <label className="grid min-w-0 gap-2 text-sm"><span>Approvazione</span><select aria-label="Approvazione" className={input} value={status} disabled={busy} onChange={(e) => setStatus(e.target.value)}>{["pending", "approved", "rejected"].map((state) => <option key={state} value={state}>{CUSTOMER_STATES[state]}</option>)}</select></label>
         <label className="grid min-w-0 gap-2 text-sm"><span>Listino assegnato</span><select aria-label="Listino assegnato" className={input} value={status === "approved" ? listId : ""} disabled={busy || status !== "approved"} onChange={(e) => setListId(e.target.value)}><option value="">Listino pubblico</option>{listId && !priceLists.some((list) => list.id === listId) && <option value={listId} disabled>Listino non piu pubblicato</option>}{priceLists.map((list) => <option key={list.id} value={list.id}>{list.name}</option>)}</select></label>
       </div>
-      {!customer.email_confirmed_at && <p className="text-sm text-[#F4CC18]">Approvazione disponibile dopo la conferma dell&apos;email.</p>}
-      <button type="button" disabled={busy || (status === "approved" && !customer.email_confirmed_at)} className={`${button} w-fit bg-[#10B7B3] font-semibold text-[#11161C]`} onClick={() => onSave(customer, { status, price_list_id: status === "approved" ? listId || null : null })}><Save size={16} />Salva cliente</button>
+      {!customer.email_confirmed_at && <p className="text-sm text-[#F2C019]">Approvazione disponibile dopo la conferma dell&apos;email.</p>}
+      <button type="button" disabled={busy || (status === "approved" && !customer.email_confirmed_at)} className={`${button} w-fit bg-[#1DB3CD] font-semibold text-[#11161C]`} onClick={() => onSave(customer, { status, price_list_id: status === "approved" ? listId || null : null })}><Save size={16} />Salva cliente</button>
     </>}
   </div>;
 }

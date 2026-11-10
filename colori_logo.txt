@@ -1,0 +1,3 @@
+azzurro;#0F9EB6
+giallo;#F2C019
+grigio;#E6E6E6
