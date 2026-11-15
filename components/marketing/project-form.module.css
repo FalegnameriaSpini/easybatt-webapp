@@ -36,7 +36,7 @@
   min-width: 0;
   min-height: 48px;
   border: 1px solid #707f83;
-  border-radius: 4px;
+  border-radius: var(--radius-control, 8px);
   background: #22282a;
   color: #f6f7f7;
   padding: 11px 12px;
@@ -142,6 +142,8 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 32px;
 }
+/* Simple numbered steps: open, on hairlines (panels are kept for benefits
+   and comparisons). */
 .steps li {
   border-top: 1px solid #77858970;
   padding-top: 22px;
@@ -149,6 +151,7 @@
 .steps span {
   display: block;
   color: #83cada;
+  font-weight: 650;
   margin-bottom: 16px;
 }
 .steps p {

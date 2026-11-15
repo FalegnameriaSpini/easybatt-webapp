@@ -1,6 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Check, Tag, PackageCheck, MapPin } from "lucide-react";
+import {
+  ArrowRight,
+  Check,
+  Tag,
+  PackageCheck,
+  MapPin,
+  Ruler,
+  PencilLine,
+  Scissors,
+  SearchCheck,
+  RotateCcw,
+} from "lucide-react";
 import {
   MarketingShell,
   MarketingHero,
@@ -65,28 +76,28 @@ export default function EasyBattHomePage() {
         </div>
       </div>
 
-      <section className={styles.section}>
+      <section className={`${styles.section} ${styles.traditional}`}>
         <div className={styles.container}>
-          <div className={styles.sectionIntro}>
-            <SectionHeading
-              eyebrow="Il metodo tradizionale"
-              title="Oggi si lavora un pezzo alla volta. E per ogni pezzo, si ricomincia."
-            />
-            <div>
-              <p className={styles.lead}>
-                Misurare. Segnare. Tagliare. Verificare. Ritoccare.
-              </p>
-              <p className={styles.lead}>
-                Sono operazioni che conosci bene e che si ripetono fino
-                all&apos;ultimo angolo. Richiedono attrezzatura sul posto, tempo
-                e fatica. Con Easy‑Batt, questa parte del lavoro avviene prima
-                del cantiere.
-              </p>
-              <Link href="#benefici" className={styles.sectionLink}>
-                Vedi cosa cambia <ArrowRight size={18} aria-hidden="true" />
-              </Link>
-            </div>
-          </div>
+          <SectionHeading
+            eyebrow="Il metodo tradizionale"
+            title={<>Oggi si lavora un pezzo alla volta. <span className={styles.titleMuted}>E per ogni pezzo, si ricomincia.</span></>}
+          />
+          <ol className={styles.manualSteps} aria-label="Operazioni ripetute per ogni pezzo">
+            <li><Ruler size={28} aria-hidden="true" /><span>Misurare</span></li>
+            <li><PencilLine size={28} aria-hidden="true" /><span>Segnare</span></li>
+            <li><Scissors size={28} aria-hidden="true" /><span>Tagliare</span></li>
+            <li><SearchCheck size={28} aria-hidden="true" /><span>Verificare</span></li>
+            <li><RotateCcw size={28} aria-hidden="true" /><span>Ritoccare</span></li>
+          </ol>
+          <p className={`${styles.lead} ${styles.traditionalText}`}>
+            Sono operazioni che conosci bene e che si ripetono fino
+            all&apos;ultimo angolo. Richiedono attrezzatura sul posto, tempo e
+            fatica. Con Easy‑Batt, questa parte del lavoro avviene prima del
+            cantiere.
+          </p>
+          <Link href="#benefici" className={styles.sectionLink}>
+            Vedi cosa cambia <ArrowRight size={18} aria-hidden="true" />
+          </Link>
         </div>
       </section>
 
@@ -94,7 +105,7 @@ export default function EasyBattHomePage() {
         <div className={styles.container}>
           <SectionHeading
             eyebrow="Con Easy‑Batt"
-            title="Preparato prima. Pronto da posare."
+            title={<>Preparato prima. <span className={styles.titleAccent}>Pronto da posare.</span></>}
           />
           <div className={styles.benefits}>
             <div>

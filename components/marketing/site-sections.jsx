@@ -165,7 +165,7 @@ export function Comparison() {
   return (
     <div className={`${styles.comparison} ${styles.comparisonSteps}`}>
       <div>
-        <p className={styles.eyebrow}>Oggi, per ogni pezzo</p>
+        <p className={`${styles.eyebrow} ${styles.tagMuted}`}>Oggi, per ogni pezzo</p>
         <p className={styles.comparisonFlow}>
           Misurare <ArrowRight aria-hidden="true" /> Segnare{" "}
           <ArrowRight aria-hidden="true" /> Tagliare{" "}

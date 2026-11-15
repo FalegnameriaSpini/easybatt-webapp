@@ -263,7 +263,7 @@ export default function AboutPage() {
             i lavori più grandi, anche più lontano.
           </SectionHeading>
           <div>
-            <MapPin size={28} aria-hidden="true" />
+            <MapPin size={28} aria-hidden="true" className={styles.iconTile} />
             <h3>Falegnameria Spini</h3>
             <address className={styles.address}>
               Via Benedetto Castelli 40/42

@@ -3,6 +3,8 @@
   --yellow: #f2c019;
   --ink: #17191d;
   --muted: #bbc2c6;
+  --radius-panel: 12px;
+  --radius-control: 8px;
   background: var(--ink);
   color: #f6f7f7;
   font-size: 16px;
@@ -93,7 +95,7 @@
   background: var(--yellow);
   color: var(--ink);
   padding: 11px 16px !important;
-  border-radius: 4px;
+  border-radius: var(--radius-control);
 }
 .navigation .headerCta:hover {
   color: var(--ink);
@@ -106,7 +108,7 @@
   align-items: center;
   justify-content: center;
   border: 1px solid #ffffff40;
-  border-radius: 4px;
+  border-radius: var(--radius-control);
   background: transparent;
   color: white;
   cursor: pointer;
@@ -150,16 +152,29 @@
   padding-top: 58px;
   padding-bottom: 205px;
 }
+/* Eyebrow as a tag on every surface. Colours per surface: teal tint on dark
+   (default), teal tint on light, white on the hero photo, dark and yellow on
+   the teal brand surface, grey for "the traditional way" (tagMuted). */
 .eyebrow {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: var(--radius-control);
   font-size: 12px;
   line-height: 1.6;
   font-weight: 650;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #83cada;
+  background: #0f9eb629;
   margin-bottom: 18px !important;
 }
 .hero .eyebrow {
   color: #244a52;
+  background: #ffffffcc;
+}
+.tagMuted {
+  color: var(--muted);
+  background: #ffffff14;
 }
 .hero h1 {
   max-width: 780px;
@@ -189,7 +204,7 @@
   justify-content: center;
   align-items: center;
   gap: 14px;
-  border-radius: 4px;
+  border-radius: var(--radius-control);
   padding: 12px 20px;
   font-size: 14px;
   font-weight: 650;
@@ -220,7 +235,7 @@
   padding: 4px 8px;
   color: #333e40;
   background: #ffffffdf;
-  border-radius: 2px;
+  border-radius: var(--radius-control);
   font-size: 11px;
 }
 .promiseStrip {
@@ -265,6 +280,7 @@
 }
 .light .eyebrow {
   color: #296875;
+  background: #0f9eb61f;
 }
 .light .lead {
   color: #505e60;
@@ -275,31 +291,46 @@
   gap: 80px;
   align-items: start;
 }
+/* Panels emphasize benefits and comparisons; photo-led sections stay open. */
 .benefits {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
+  gap: 24px;
 }
 .benefits > div {
-  padding-top: 24px;
-  border-top: 1px solid #ffffff33;
-}
-.benefits svg {
-  color: #83cada;
-  margin-bottom: 20px;
+  padding: 28px;
+  border: 1px solid #ffffff1a;
+  border-radius: var(--radius-panel);
+  background: #ffffff0a;
 }
 .benefits p {
   margin-top: 14px;
   color: var(--muted);
 }
 .light .benefits > div {
-  border-color: #cbd6d9;
-}
-.light .benefits svg {
-  color: #296875;
+  border: 0;
+  background: #fff;
+  box-shadow: 0 8px 24px #17191d14;
 }
 .light .benefits p {
   color: #505e60;
+}
+/* Icon tiles: rounded square with a yellow icon (logo colours). On dark
+   surfaces the tile is a lighter panel; on light and teal surfaces it is
+   ink. The radius stays below the card's so the two shapes nest. */
+.benefits svg,
+.iconTile {
+  box-sizing: content-box;
+  padding: 14px;
+  border-radius: var(--radius-control);
+  background: #ffffff14;
+  color: var(--yellow);
+  margin-bottom: 20px;
+}
+.light .benefits svg,
+.light .iconTile,
+.brand .benefits svg {
+  background: var(--ink);
 }
 /* Brand teal surface for the core message. Body text stays ink:
    white on #0f9eb6 is below 4.5:1, ink is about 5.5:1. */
@@ -312,14 +343,75 @@
   font-size: 52px;
   line-height: 1.08;
 }
-.brand .eyebrow,
-.brand .lead,
-.brand .benefits p,
-.brand .benefits svg {
+.brand .lead {
   color: var(--ink);
 }
+/* The two halves of the home comparison: muted grey for the traditional
+   method, dark and yellow for Easy-Batt. */
+.traditional .eyebrow {
+  background: #ffffff14;
+  color: var(--muted);
+}
+.brand .eyebrow {
+  background: var(--ink);
+  color: var(--yellow);
+}
+/* Second half of the title in white: 3.2:1 on teal, allowed only for
+   large text (the title is 52px, 36px on phones). */
+.brand .titleAccent {
+  display: block;
+  color: #fff;
+}
+/* Traditional method: same structure as the Easy-Batt section, in muted
+   greys on the dark surface so the comparison reads at a glance. */
+.traditional .sectionHeading {
+  max-width: 1000px;
+}
+.traditional h2 {
+  font-size: 52px;
+  line-height: 1.08;
+}
+.titleMuted {
+  display: block;
+  color: #8f98a3;
+}
+.manualSteps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+}
+.manualSteps li {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 22px 0;
+  border-top: 1px solid #ffffff26;
+  font-size: 17px;
+  font-weight: 600;
+}
+.manualSteps svg {
+  color: var(--muted);
+}
+.traditionalText {
+  max-width: 720px;
+  margin-top: 40px !important;
+}
+/* Benefits as white cards on the teal surface. */
 .brand .benefits > div {
-  border-color: #17191d4d;
+  border: 0;
+  background: #fff;
+  box-shadow: 0 12px 32px #17191d26;
+}
+.brand .benefits p {
+  color: #505e60;
+}
+.brand .blockPhoto > a {
+  border-radius: var(--radius-panel);
+  overflow: hidden;
 }
 .brand a:focus-visible {
   outline-color: var(--ink);
@@ -352,16 +444,19 @@
   margin: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
+  gap: 24px;
 }
+/* Steps stay open on hairlines: panels are kept for benefits and
+   comparisons, and the detailed steps let the photographs lead. */
 .processGrid li,
 .processDetailed li {
+  padding-top: 24px;
   border-top: 1px solid #cbd6d9;
-  padding-top: 20px;
 }
 .processDetailed li {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 .stepTop {
   display: flex;
@@ -392,6 +487,8 @@
 .photoFigure > a {
   display: block;
   position: relative;
+  border-radius: var(--radius-panel);
+  overflow: hidden;
 }
 .photoFigure img {
   display: block;
@@ -420,7 +517,7 @@
   height: 40px;
   color: #fff;
   background: #17191de8;
-  border-radius: 4px;
+  border-radius: var(--radius-control);
 }
 .photoFigure a:hover .photoExpand {
   background: #296875;
@@ -496,7 +593,7 @@
 .professionGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0 55px;
+  gap: 0 48px;
 }
 .professionGrid article {
   padding: 28px 0;
@@ -679,12 +776,20 @@
 .comparisonSteps {
   grid-template-columns: 1.4fr 1fr;
 }
+/* Before / after: the first card is the neutral panel, the second carries
+   the teal of Easy-Batt. */
 .comparison > div {
-  border-top: 1px solid #ffffff33;
-  padding-top: 25px;
+  padding: 28px;
+  border: 1px solid #ffffff1a;
+  border-radius: var(--radius-panel);
+  background: #ffffff0a;
 }
 .comparison > div:last-child {
-  border-top-color: var(--teal);
+  border-color: #0f9eb666;
+  background: #0f9eb61a;
+}
+.comparison > div:first-child .comparisonFlow svg {
+  color: var(--muted);
 }
 .comparison > div > p:last-child:not(.comparisonFlow) {
   color: var(--muted);
@@ -809,6 +914,7 @@
   text-underline-offset: 5px;
   font-size: 14px;
 }
+/* Stage index is navigation, not a benefit: open, on hairlines. */
 .processIndex {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -896,6 +1002,10 @@
   }
   .logo {
     width: 232px;
+  }
+  .manualSteps li {
+    padding: 18px 0;
+    font-size: 15px;
   }
   .menuButton {
     display: inline-flex;
@@ -1068,12 +1178,13 @@
   }
   .benefits {
     grid-template-columns: 1fr;
-    gap: 26px;
+    gap: 16px;
   }
   .benefits > div {
     display: grid;
-    grid-template-columns: 30px 1fr;
+    grid-template-columns: 56px 1fr;
     column-gap: 18px;
+    padding: 22px;
   }
   .benefits svg {
     grid-row: span 2;
@@ -1082,10 +1193,23 @@
   .benefits p {
     grid-column: 2;
   }
+  .traditional h2 {
+    font-size: 30px;
+  }
+  .manualSteps {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .manualSteps li {
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 16px;
+    font-size: 16px;
+  }
   .processGrid,
   .processDetailed {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 28px 22px;
+    gap: 16px;
   }
   .processDetailed {
     grid-template-columns: 1fr;
@@ -1095,6 +1219,10 @@
   }
   .professionGrid {
     grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .professionGrid article {
+    padding: 24px 0;
   }
   .imageBand {
     grid-template-columns: 1fr;

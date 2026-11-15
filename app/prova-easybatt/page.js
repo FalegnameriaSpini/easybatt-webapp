@@ -71,7 +71,7 @@ export default function ProjectPage() {
         <div className={styles.container}>
           <SectionHeading
             eyebrow="Con Easy‑Batt"
-            title="Preparato prima. Pronto da posare."
+            title={<>Preparato prima. <span className={styles.titleAccent}>Pronto da posare.</span></>}
           >
             Il taglio lo facciamo noi, in laboratorio. Tu ricevi i battiscopa
             pronti per le tue stanze.
