@@ -62,3 +62,27 @@ test("Public photos contain flattened opaque covers at the customer-reference lo
     }
   }
 });
+
+test("Placement photos show blank paper where customer references were", async () => {
+  // These covers are rebuilt from the surrounding paper (see
+  // scripts/prepare-placement-photos.mjs), so there is no single colour to
+  // check. Any text left would show dark strokes and a large spread.
+  const checks = [
+    ["primaPosa", [[634, 688, 4], [770, 936, 15], [972, 1017, 15]]],
+    ["dopoPosa", [[422, 419, 3], [810, 908, 15], [971, 1032, 12]]],
+  ];
+  for (const [key, areas] of checks) {
+    for (const [x, y, r] of areas) {
+      const data = await sharp(localFile(marketingMedia[key]))
+        .extract({ left: x - r, top: y - r, width: 2 * r + 1, height: 2 * r + 1 })
+        .removeAlpha().raw().toBuffer();
+      const values = [];
+      for (let i = 0; i < data.length; i += 3)
+        values.push(0.2126 * data[i] + 0.7152 * data[i + 1] + 0.0722 * data[i + 2]);
+      const mean = values.reduce((sum, v) => sum + v, 0) / values.length;
+      const spread = Math.sqrt(values.reduce((sum, v) => sum + (v - mean) ** 2, 0) / values.length);
+      assert.ok(Math.min(...values) > 160, `${key}: dark marks at ${x},${y}`);
+      assert.ok(spread < 5, `${key}: cover not uniform at ${x},${y}`);
+    }
+  }
+});

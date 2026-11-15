@@ -522,6 +522,22 @@
 .photoFigure a:hover .photoExpand {
   background: #296875;
 }
+/* Short label on the photo itself (e.g. before / after), in the tag style
+   and the same dark as the expand button. */
+.photoLabel {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 6px 12px;
+  border-radius: var(--radius-control);
+  background: #17191de8;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.6;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
 .blockPhoto {
   max-width: 1000px;
   margin: 48px auto 0;
@@ -529,6 +545,26 @@
 .deliveryPhoto {
   max-width: 1000px;
   margin: 0 auto 40px;
+}
+.placementProof {
+  max-width: 1000px;
+  margin: 56px auto 0;
+}
+.placementProof > h3 {
+  margin-bottom: 24px;
+}
+.placementPhotos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+@media (max-width: 767px) {
+  .placementProof {
+    margin-top: 40px;
+  }
+  .placementPhotos {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 .processDetailed .photoFigure {
   align-self: stretch;

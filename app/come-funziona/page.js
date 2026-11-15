@@ -148,6 +148,11 @@ export function EasyBattComeFunzionaPage() {
             Ricevi i pezzi già tagliati: leggi il codice, guardi la planimetria e
             posi. Meno tagli in cantiere, meno polvere e meno rumore.
           </SectionHeading>
+          <PhotoFigure
+            media={marketingMedia.consegna}
+            className={styles.deliveryPhoto}
+            sizes="(max-width: 767px) 100vw, 80vw"
+          />
           <Link href="/quanto-mi-costa" className={styles.sectionLink}>
             Calcola una stima per il tuo lavoro{" "}
             <ArrowRight size={18} aria-hidden="true" />

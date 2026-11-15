@@ -115,25 +115,37 @@ export default function EasyBattHomePage() {
             </div>
             <div>
               <Tag size={28} aria-hidden="true" />
-              <h3>Tutto al suo posto</h3>
+              <h3>Codice e planimetria</h3>
               <p>
                 Ogni pezzo ha un codice. La planimetria che ti forniamo ti dice dove va posizionato.
               </p>
             </div>
             <div>
               <Check size={28} aria-hidden="true" />
-              <h3>Niente taglio sul posto</h3>
+              <h3>Niente tagli in cantiere</h3>
               <p>
                 Il taglio lo facciamo noi, in laboratorio. Meno attrezzi da
-                portare in cantiere.
+                portare con te.
               </p>
             </div>
           </div>
-          <PhotoFigure
-            media={marketingMedia.consegna}
-            className={styles.blockPhoto}
-            sizes="(max-width: 767px) 100vw, 80vw"
-          />
+          <div className={styles.placementProof}>
+            <h3>Ogni pezzo al suo posto.</h3>
+            <div className={styles.placementPhotos}>
+              <PhotoFigure
+                media={marketingMedia.primaPosa}
+                caption={false}
+                label="Prima della posa"
+                sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1199px) 45vw, 488px"
+              />
+              <PhotoFigure
+                media={marketingMedia.dopoPosa}
+                caption={false}
+                label="Dopo la posa"
+                sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1199px) 45vw, 488px"
+              />
+            </div>
+          </div>
         </div>
       </section>
 

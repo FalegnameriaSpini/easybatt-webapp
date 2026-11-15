@@ -11,7 +11,9 @@ varianti ritoccate presenti nella cartella sorgente non sono state utilizzate.
 | --- | --- | --- |
 | `pezzi-codificati-apertura.webp` | `20261016_191511.jpg` | Apertura di Home, Per i professionisti, Chi siamo e Prova Easy-Batt (ritaglio largo) |
 | `kit-codificato-v2.webp` | `20261016_191511.jpg` | Cosa ricevi in Come funziona |
-| `consegna-cantiere.webp` | `20251209_102446.jpg` | Blocco verde della Home e passaggio "Pronti da posare": lavoro Easy-Batt arrivato in cantiere |
+| `consegna-cantiere.webp` | `20251209_102446.jpg` | "Il risultato sul posto" in Come funziona: lavoro Easy-Batt arrivato in cantiere |
+| `battiscopa-prima-posa.webp` | `Nuova cartella/20261020_171435_edited.jpg` | Sezione azzurra della Home, "Ogni pezzo al suo posto": targhetta "Prima della posa" |
+| `battiscopa-dopo-posa.webp` | `Nuova cartella/20261020_171328.jpg` | Sezione azzurra della Home, accanto alla precedente: targhetta "Dopo la posa" |
 | `rilievo-laser.webp` | `20261001_150246(3).jpg` | Apertura di Come funziona e Il sistema |
 | `rilievo-stanza.webp` | `20261001_150421.jpg` | Fase del rilievo in Il sistema (laser da solo nella stanza vuota) |
 | `rilievo-ingresso.webp` | `20251129_104046.jpg` | Passaggio "Rilievo" in Come funziona: ingresso con pareti verdi, ritaglio 4:3 con laser e treppiede interi |
@@ -33,6 +35,23 @@ coperture CSS o immagini originali nascoste: anche aprendo il file pubblico si
 vede la copia oscurata. Le fotografie della stampante di etichette e le altre
 foto delle etichette nella cartella sorgente mostrano il nome del cliente: non
 vanno pubblicate senza aggiungere le relative maschere.
+
+Nelle foto prima e dopo la posa (novembre 2026) i riferimenti al cliente sulle
+etichette e nell'intestazione della planimetria non sono coperti da un colore
+unico: ogni pixel della zona viene sostituito con la carta o l'etichetta che
+la circonda (stessa sfumatura, grana leggera, bordo sfumato solo verso la carta),
+cosi' il foglio appare senza intestazione invece che con un rettangolo grigio.
+Non e' una sfocatura: del testo non resta nulla. Lo script e'
+`scripts/prepare-placement-photos.mjs`; il test verifica che in quelle zone
+ci sia solo carta uniforme, senza segni scuri.
+
+```powershell
+node scripts/prepare-placement-photos.mjs "C:\Users\giasp\Pictures\Immagini_per_webapp\Nuova cartella"
+```
+
+La foto di apertura e il ritaglio del kit mostrano sulla planimetria il vecchio
+logo "EasyBatt": restano cosi' finche' il titolare non scatta una foto nuova
+(orizzontale, pezzi a destra, planimetria con il nuovo logo).
 
 Il 16 ottobre, dopo la prima pubblicazione locale, sono state riviste le scelte:
 

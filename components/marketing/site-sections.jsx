@@ -61,7 +61,7 @@ export function SectionHeading({ eyebrow, title, children }) {
     </div>
   );
 }
-export function PhotoFigure({ media, className = "", sizes = "(max-width: 767px) 100vw, 50vw", caption = true }) {
+export function PhotoFigure({ media, className = "", sizes = "(max-width: 767px) 100vw, 50vw", caption = true, label }) {
   return (
     <figure className={`${styles.photoFigure} ${className}`}>
       <a
@@ -72,6 +72,7 @@ export function PhotoFigure({ media, className = "", sizes = "(max-width: 767px)
         title="Apri immagine a piena risoluzione"
       >
         <Image src={media.src} alt={media.alt} width={media.width} height={media.height} sizes={sizes} />
+        {label && <span className={styles.photoLabel}>{label}</span>}
         <span className={styles.photoExpand} aria-hidden="true"><Maximize2 size={19} /></span>
       </a>
       {caption && <figcaption>{media.caption}</figcaption>}
